@@ -3,7 +3,7 @@
   <div class="container mx-auto px-6 py-3 md:flex md:justify-between md:items-center">
     <div class="flex justify-between items-center">
       <div>
-        <a class="text-xl font-bold text-white" href="/">My Website</a>
+        <a class="text-xl font-bold text-white" href="/">skillzaa.com</a>
       </div>
 
       <div class="md:hidden">

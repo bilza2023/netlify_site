@@ -1,6 +1,7 @@
 <script>
 	// import Header from './Header.svelte';
 		import MainNav from '$lib/cmp/MainNav.svelte';
+		import Footer from '$lib/cmp/Footer.svelte';
 	// import './styles.css';
 
 </script>
@@ -13,11 +14,9 @@
 	<main class="text-white">
 		<slot />
 	</main>
+<Footer />
 
-	<footer class="bg-gray-700">
-		<p>visit <a href="/">pichub.com</a> Created By Bilal Tariq</p>
-	</footer>
-	
+
 </div>
 
 <style>
