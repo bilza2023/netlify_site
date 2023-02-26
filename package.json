@@ -16,6 +16,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/adapter-static": "^2.0.1"
+		"@sveltejs/adapter-static": "^2.0.1",
+		"embla-carousel-svelte": "^7.0.9",
+		"flowbite-svelte": "^0.30.4"
 	}
 }

@@ -11,7 +11,7 @@
         />
       </svg>
     </a>
-    <a href="https://www.youtube.com/YOUR_CHANNEL" class="text-gray-400 hover:text-gray-300">
+    <a href="https://www.youtube.com/channel/UCQtpL0SQwuT9vKaEBZOqfHw" class="text-gray-400 hover:text-gray-300">
       <span class="sr-only">YouTube</span>
       <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
         <path
@@ -19,7 +19,7 @@
         />
       </svg>
     </a>
-    <a href="https://github.com/YOUR_GITHUB_USERNAME" class="text-gray
+    <a href="https://github.com/bilza2023" class="text-gray
 -400 hover:text-gray-300">
 <span class="sr-only">GitHub</span>
 <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -32,6 +32,6 @@
 </a>
 
   </div>
-<div class="text-gray-200">&nbsp;&nbsp; Created by Bilal Tariq</div>
+<div class="text-gray-200 text-sm">&nbsp;&nbsp; Created by Bilal Tariq</div>
 
 </footer>

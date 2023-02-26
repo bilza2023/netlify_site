@@ -10,7 +10,7 @@ export async function load({ params }) {
 // const { dynamic } = params;
  const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
     const item = await res.json();
-            console.log("item : ",item);
-            console.log("dynamic : ",params);
+            // console.log("item : ",item);
+            // console.log("dynamic : ",params);
   return {item};
 }

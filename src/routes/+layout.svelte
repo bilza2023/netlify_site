@@ -2,12 +2,13 @@
 	// import Header from './Header.svelte';
 		import MainNav from '$lib/cmp/MainNav.svelte';
 		import Footer from '$lib/cmp/Footer.svelte';
+		import Underconstruction from '$lib/cmp/Underconstruction.svelte';
 	// import './styles.css';
 
 </script>
 
 <div class="app bg-gray-800">
-
+<Underconstruction />
 <MainNav />
 
 
