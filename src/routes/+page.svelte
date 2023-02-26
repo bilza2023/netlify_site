@@ -4,11 +4,9 @@ export let data;
 
 
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<h1>Welcome to LearnHub</h1>
 
-<a href="/about">About</a>
-
+<h1>Interactive Educational Tools for Learners</h1>
 
 <h1>id</h1>
 {data.item.id}
