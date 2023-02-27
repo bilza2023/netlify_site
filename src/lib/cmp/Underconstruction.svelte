@@ -1,3 +1,3 @@
-<div class="m2 p-3 bg-red-600 text-white flex justify-center">
+<div class="m-1 p-2   bg-red-900 text-gray-300 flex justify-center">
 <p>This website is Undercontruction please</p>
 </div>

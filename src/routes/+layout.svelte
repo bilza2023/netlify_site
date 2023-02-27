@@ -7,16 +7,11 @@
 
 </script>
 
-<div class="app bg-gray-800">
+<div class="app bg-gray-800 text-white m-0 p-6 pt-0">
 <Underconstruction />
 <MainNav />
-
-
-	<main class="text-white">
 		<slot />
-	</main>
 <Footer />
-
 
 </div>
 
@@ -38,18 +33,7 @@
 		box-sizing: border-box;
 	}
 
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
+	
 	@media (min-width: 480px) {
 		footer {
 			padding: 12px 0;
