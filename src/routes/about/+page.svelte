@@ -37,7 +37,6 @@
 
 </div>
 
-<hr>
 
 <style>
 .grid-container {
