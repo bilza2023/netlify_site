@@ -43,4 +43,20 @@
   display: grid;
     grid-template-columns: 4fr 2fr;
 }
+@media screen and (max-width: 1000px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+  
+}
+/* 
+@media screen and (max-width: 640px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+  .grid-container > div:last-child {
+    display: none;
+  }
+} */
+
 </style>
