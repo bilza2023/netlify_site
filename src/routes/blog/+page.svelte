@@ -5,7 +5,6 @@
 
 <HdgMain>Welcome To Blog Home</HdgMain>
 <br>
-<br>
 <ol class="flex justify-center">
 <li><a class="bg-gray-900 p-2 m-4"  href="/blog/grid_template_area">Grid Template Area Example</a></li>
 </ol>

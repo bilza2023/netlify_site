@@ -1,6 +1,3 @@
-<br/>
-<br/>
-<br/>
 <footer class="bg-gray-900 py-4">
   <div class="flex justify-center space-x-4">
     <a href="https://twitter.com/YOUR_TWITTER_HANDLE" class="text-gray-400 hover:text-gray-300">

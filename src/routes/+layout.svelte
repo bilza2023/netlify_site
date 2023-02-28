@@ -8,14 +8,14 @@
 </script>
 
 <MainNav />
-<div class="app bg-gray-800 text-white m-0 p-6 pt-0 pl-1% pr-1%">
+
+<div class="app bg-gray-800 text-white m-0 pb-0 pt-0 pl-1% pr-1%">
 <Underconstruction />
 <br/>
-<br/>
 		<slot />
-<Footer />
-
 </div>
+
+<Footer />
 
 <style>
 	.app {

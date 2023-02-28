@@ -30,9 +30,11 @@
 	display:grid;
   	grid-template-columns: 2fr 4fr 4fr;
   	grid-template-rows: auto 1fr auto;
-	grid-template-areas:	 "nav 	 	nav 	nav "
-							 "sidebar 	article 	article"
-							 "sidebar 	footer 	footer";
+	grid-template-areas:	
+	 		"nav 	 	nav 	nav "
+			"sidebar 	article 	article"
+			"sidebar 	footer 	footer";
+			
 	padding : 4px;
 	background-color: pink;
 
@@ -58,43 +60,6 @@ grid-area: article;
 
 <Hdg2>Result</Hdg2>
 
-<div class="grid_container">
-	<div class="grid_item nav">Nav</div>
-	<div class="grid_item sidebar">SideBar</div>
-	<div class="grid_item article">Main Article</div>
-	<div class="grid_item footer">Footer</div>
+<img src="/images/grid_template_area_result.png" alt="result image">
 
 
-</div>
-
-
-
-<style>
-.grid_container {
-	display:grid;
-  	grid-template-columns: 2fr 4fr 4fr;
-  	grid-template-rows: auto 1fr auto;
-	grid-template-areas:	 "nav 	 	nav 	nav "
-							 "sidebar 	article 	article"
-							 "sidebar 	footer 	footer";
-	padding : 4px;
-	background-color: pink;
-
-}
-
-.grid_item {
-padding: 5px;
-margin :5px;
-background-color: beige;
-color:red;
-border: 2px solid black;
-}
-
-.nav {	grid-area: nav;	}
-.sidebar {	grid-area: sidebar;	}
-.article {	
-grid-area: article;	
-  height: 80vh;
-}
-.footer {	grid-area: footer;	}
-</style>
