@@ -1,6 +1,7 @@
 
 import adapter from '@sveltejs/adapter-static';
 import { mdsvex } from 'mdsvex'
+import { vitePreprocess } from '@sveltejs/kit/vite';
  
 export default {
   kit: {
@@ -12,13 +13,14 @@ export default {
       fallback: null,
       precompress: false,
       strict: true
-    })
+    }),
   },
    extensions: ['.svelte', '.md'],
 
   preprocess: [
     mdsvex({
       extensions: ['.md']
-    })
+    }),
+    vitePreprocess()
   ]
 };
