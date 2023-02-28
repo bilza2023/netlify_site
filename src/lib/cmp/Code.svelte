@@ -10,3 +10,11 @@
 </code>
 </pre>
 
+
+<style>
+pre {
+  overflow-x: auto;
+}
+
+</style>
+
