@@ -1,7 +1,5 @@
 <script>
-
 let isVisible = false;
-
 </script>
 
 <nav class="bg-gray-700 shadow-lg">

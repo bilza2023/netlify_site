@@ -9,7 +9,7 @@
 
 <MainNav />
 <div class="app bg-gray-800 text-white m-0 p-6 pt-0 pl-1% pr-1%">
-<!-- <Underconstruction /> -->
+<Underconstruction />
 <br/>
 <br/>
 		<slot />
