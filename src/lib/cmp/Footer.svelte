@@ -1,6 +1,6 @@
 <footer class="bg-gray-900 py-4">
   <div class="flex justify-center space-x-4">
-    <a href="https://twitter.com/YOUR_TWITTER_HANDLE" class="text-gray-400 hover:text-gray-300">
+    <a href="https://patreon.com/user?u=89606049" class="text-gray-400 hover:text-gray-300">
       <span class="sr-only">Twitter</span>
       <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
         <path

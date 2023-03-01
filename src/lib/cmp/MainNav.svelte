@@ -29,7 +29,7 @@ let isVisible = false;
           <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/">Home</a></li>
           <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/blog">Blog</a></li>
           <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/about">About</a></li>
-          <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/labs">Labs</a></li>
+          <!-- <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/labs">Labs</a></li> -->
         </ul>
       </nav>
     </div>
@@ -42,7 +42,7 @@ let isVisible = false;
       <a class="text-white hover:text-gray-300 py-2 block" href="/">Home</a>
       <a class="text-white hover:text-gray-300 py-2 block" href="/blog">Blog</a>
       <a class="text-white hover:text-gray-300 py-2 block" href="/about">About</a>
-      <a class="text-white hover:text-gray-300 py-2 block" href="/labs">Labs</a>
+      <!-- <a class="text-white hover:text-gray-300 py-2 block" href="/labs">Labs</a> -->
     </div>
   </div>
 {/if}
