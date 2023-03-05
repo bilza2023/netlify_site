@@ -5,6 +5,7 @@ const items = [
 {name:"CSS", href :"/content/css/"},
 {name:"Javascript", href :"/content/javascript/"},
 {name:"Svelte", href :"/content/svelte/"},
+{name:"MongoDB", href :"/content/mongodb/"},
 {name:"Node.js", href :"/content/node/"},
 {name:"General", href :"/content/general/"},
 ]; 
@@ -26,8 +27,10 @@ const items = [
 <a class="item" href={item.href}><span >{item.name}</span></a>  
 {/each}
 
-</div>  
+</div>
 
+<br>
+<br>
 
 <style>
   .item { 
