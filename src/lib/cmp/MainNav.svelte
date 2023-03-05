@@ -27,7 +27,7 @@ let isVisible = false;
       <nav>
         <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
           <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/">Home</a></li>
-          <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/blog">Blog</a></li>
+          <!-- <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/blog">Blog</a></li> -->
           <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/about">About</a></li>
           <!-- <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/labs">Labs</a></li> -->
         </ul>
@@ -40,7 +40,7 @@ let isVisible = false;
   <div id="mobile-menu" class="">
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
       <a class="text-white hover:text-gray-300 py-2 block" href="/">Home</a>
-      <a class="text-white hover:text-gray-300 py-2 block" href="/blog">Blog</a>
+      <!-- <a class="text-white hover:text-gray-300 py-2 block" href="/blog">Blog</a> -->
       <a class="text-white hover:text-gray-300 py-2 block" href="/about">About</a>
       <!-- <a class="text-white hover:text-gray-300 py-2 block" href="/labs">Labs</a> -->
     </div>

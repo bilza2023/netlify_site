@@ -22,6 +22,7 @@
 		"@fontsource/fira-mono": "^4.5.10",
 		"@sveltejs/adapter-static": "^2.0.1",
 		"embla-carousel-svelte": "^7.0.9",
-		"flowbite-svelte": "^0.30.4"
+		"flowbite-svelte": "^0.30.4",
+		"mongoose": "^7.0.0"
 	}
 }

@@ -1,71 +1,63 @@
 <script>
 let data;
- import { Carousel, CarouselTransition } from 'flowbite-svelte'
-  // ./imageData/+server.js has the following
-  export const images = [
-  {
-    id: 0,
-    name: "Cosmic timetraveler",
-    imgurl: "/images/001.webp",
-    attribution: "cosmic-timetraveler-pYyOZ8q7AII-unsplash.com",
-  },
-  {
-    id: 1,
-    name: "Cristina Gottardi",
-    imgurl: "/images/002.webp",
-    attribution: "cristina-gottardi-CSpjU6hYo_0-unsplash.com",
-  },
-  {
-    id: 2,
-    name: "Johannes Plenio",
-    imgurl: "/images/003.webp",
-    attribution: "johannes-plenio-RwHv7LgeC7s-unsplash.com",
-  },
-  {
-    id: 3,
-    name: "Jonatan Pie",
-    imgurl: "/images/004.webp",
-    attribution: "jonatan-pie-3l3RwQdHRHg-unsplash.com",
-  },
-  {
-    id: 4,
-    name: "Mark Harpur",
-    imgurl: "/images/005.webp",
-    attribution: "mark-harpur-K2s_YE031CA-unsplash",
-  },
-  {
-    id: 5,
-    name: "Pietro De Grandi",
-    imgurl: "/images/006.webp",
-    attribution: "pietro-de-grandi-T7K4aEPoGGk-unsplash",
-  },
-  {
-    id: 6,
-    name: "Sergey Pesterev",
-    imgurl: "/images/007.webp",
-    attribution: "sergey-pesterev-tMvuB9se2uQ-unsplash",
-  },
-  {
-    id: 7,
-    name: "Solo travel goals",
-    imgurl: "/images/008.webp",
-    attribution: "solotravelgoals-7kLufxYoqWk-unsplash",
-  },
-];
-
+const items = [
+{name:"HTML", href :"/content/html/"},
+{name:"CSS", href :"/content/css/"},
+{name:"Javascript", href :"/content/javascript/"},
+{name:"Svelte", href :"/content/svelte/"},
+{name:"Node.js", href :"/content/node/"},
+{name:"General", href :"/content/general/"},
+]; 
 </script>
 
 
 
 
-<div class="max-w-4xl">
-  <Carousel {images} />
-</div>
+<img  class="max-w-4xl mx-auto" src="/images/hero.png" alt="skillzaa.com Banner">
+  
+  <br>
+<hr/>
+  <br>
 
-<!-- 
-<h1>id</h1>
-{data.item.id}
-<h1>user id</h1>
-{data.item.userId}
-<h1>Title</h1>
-{data.item.title} -->
+
+<div class="container">
+
+{#each items as item }
+<a class="item" href={item.href}><span >{item.name}</span></a>  
+{/each}
+
+</div>  
+
+
+<style>
+  .item { 
+    padding: 4px; 
+    margin: 8px; 
+    background-color: bisque; 
+    color: black;
+    text-align: center;
+    flex-basis: 20%;
+    min-height: 70px;
+    border-radius: 5px;
+    border:4px solid gray;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    
+    justify-content:center;
+  }
+  
+  @media (max-width: 1024px) {
+    .item {
+      flex-basis: 32%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .item {
+      flex-basis: 100%;
+    }
+  }
+</style>
