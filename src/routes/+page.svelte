@@ -14,7 +14,7 @@ const items = [
 
 
 
-<img  class="max-w-4xl mx-auto" src="/images/hero.png" alt="skillzaa.com Banner">
+<img  class="max-w-4xl mx-auto w-full h-auto" src="/images/hero.png" alt="skillzaa.com Banner">
   
   <br>
 <hr/>
