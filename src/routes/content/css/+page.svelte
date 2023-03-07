@@ -11,4 +11,4 @@
 <li><a class="bg-gray-900 p-2 m-4"  href="/content/css/grid_template_area">Grid Template Area Example</a></li>
 </ol>
 
-<ContentCard />
+<!-- <ContentCard /> -->
