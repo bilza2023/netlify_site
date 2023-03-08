@@ -1,12 +1,12 @@
 <script>
 import check from "./result";
-import H1 from "$lib/cmp/H1.svelte";
+// import H1 from "$lib/cmp/H1.svelte";
 import HdgMain from "$lib/cmp/HdgMain.svelte";
 import QuizResult from "$lib/cmp/QuizResult.svelte";
 import MsgnCall2Action from "$lib/cmp/MsgnCall2Action.svelte";
 let resultArray = [];
 let quizState = 0; //0=intro; 1=questions ,2 =result
-let currectQuestion = 0;
+let currentQuestion = 0;
 let introScreen = "A small Quiz about interesting global facts. answer these questions and see the datails at the end";
 const title = "Interesting Global Facts";
 const data = [
@@ -29,22 +29,22 @@ explanation : "This is the explanation of the answer to the first question",
     ]
     }
 ];
+
 const nxt = ()=>{
-    if (currectQuestion >= data.length-1){
-    currectQuestion = 0;
+    if (currentQuestion >= data.length-1){
+    currentQuestion = 0;
     }else {
-    currectQuestion += 1;
+    currentQuestion += 1;
     }
-    // console.log("currectQuestion",currectQuestion);
-    // console.log("data.length",data.length);
 }
+
 const prev = ()=>{
-    if (currectQuestion <= 0){
-    currectQuestion = data.length -1 ;
+    if (currentQuestion <= 0){
+    currentQuestion = data.length -1 ;
     }else {
-    currectQuestion -= 1;
+    currentQuestion -= 1;
     }
-    console.log("currectQuestion",currectQuestion);
+    console.log("currentQuestion",currentQuestion);
     console.log("data.length",data.length);
 }
 const checkProcess = ()=>{
@@ -59,13 +59,15 @@ const checkProcess = ()=>{
 {title}
 </HdgMain>
 <br/>
-{#if quizState==1}
-<div class="bg-gray-700 p-4 rounded-lg shadow shadow-gray-400">
-  <h3 class="text-lg font-medium bg-pink-900 p-2 m-2 rounded-md">{data[currectQuestion].question}</h3>
 
-  {#each data[currectQuestion].answers as answer}
+{#if quizState==1}
+{currentQuestion}
+<div class="bg-gray-700 p-4 rounded-lg shadow shadow-gray-400">
+  <h3 class="text-lg font-medium bg-pink-900 p-2 m-2 rounded-md">{data[currentQuestion].question}</h3>
+
+  {#each data[currentQuestion].answers as answer}
     <div class="flex items-center mt-2">
-      <input type="radio" name="foo" bind:group={data[currectQuestion].selectedAnswer} value={answer.id}>
+      <input type="radio" name="foo" bind:group={data[currentQuestion].selectedAnswer} value={answer.id}>
       <p class="ml-2 text-white bg-gray-900 p-1 m-1 rounded-md">{answer.content}</p>
     </div>
   {/each}
@@ -76,8 +78,9 @@ const checkProcess = ()=>{
     <button class="bg-gray-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-gray-500 transition-colors duration-300" on:click={prev}>Previous</button>
     <div class="flex space-x-4">
       <button class="bg-gray-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-gray-500 transition-colors duration-300" on:click={nxt}>Next</button>
+      {#if currentQuestion == (data.length - 1)}
       <button class="bg-gray-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-gray-500 transition-colors duration-300" on:click={checkProcess}>Result</button>
-    
+    {/if}    
     </div>
   </div>
 </div>
