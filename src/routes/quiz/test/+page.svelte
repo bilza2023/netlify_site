@@ -9,30 +9,66 @@ let quizState = 0; //0=intro; 1=questions ,2 =result
 let currentQuestion = 0;
 let introScreen = "A small Quiz about interesting global facts. answer these questions and see the datails at the end";
 const title = "Interesting Global Facts";
+
+/////////////////////////////////////////////////
 const data = [
-{id:1 , question : "First Question" , selectedAnswer:0 ,correctAnswer:1, 
-explanation : "This is the explanation of the answer to the first question",
-    answers : [ 
-    {id:1,content:"q1 Answer"},
-    {id:2,content:"q1 Second Answer"},
-    {id:3,content:"q1 Third Answer"},
-    {id:4,content:"q1 Fourth Answer"},
-    ]
-    },
-{id:2 , question : "Second Question" ,selectedAnswer:0 ,correctAnswer:1, 
-explanation : "This is the explanation of the answer to the first question", 
-    answers : [ 
-    {id:1,content:"q2 First Answer"},
-    {id:2,content:"q2 Second Answer"},
-    {id:3,content:"q2 Third Answer"},
-    {id:4,content:"q2 Fourth Answer"},
-    ]
-    }
+{
+id: 1,
+question: "What is the highest mountain in the world?",
+selectedAnswer: 0,
+correctAnswer: 3,
+explanation: "Mount Everest is the highest mountain above sea level.",
+answers: [
+{ id: 1, content: "K2" },
+{ id: 2, content: "Kangchenjunga" },
+{ id: 3, content: "Mount Everest" },
+{ id: 4, content: "Lhotse" },
+],
+},
+{
+id: 2,
+question: "Which is the largest desert in the world?",
+selectedAnswer: 0,
+correctAnswer: 4,
+explanation: "The Sahara Desert is the largest hot desert in the world.",
+answers: [
+{ id: 1, content: "Mojave Desert" },
+{ id: 2, content: "Gobi Desert" },
+{ id: 3, content: "Atacama Desert" },
+{ id: 4, content: "Sahara Desert" },
+],
+},
+{
+id: 3,
+question: "What is the capital of Australia?",
+selectedAnswer: 0,
+correctAnswer: 2,
+explanation: "Canberra is the capital city of Australia.",
+answers: [
+{ id: 1, content: "Sydney" },
+{ id: 2, content: "Canberra" },
+{ id: 3, content: "Melbourne" },
+{ id: 4, content: "Perth" },
+],
+},
+{
+id: 4,
+question: "Which is the longest river in Africa?",
+selectedAnswer: 0,
+correctAnswer: 1,
+explanation: "The Nile is the longest river in Africa.",
+answers: [
+{ id: 1, content: "Nile" },
+{ id: 2, content: "Congo" },
+{ id: 3, content: "Niger" },
+{ id: 4, content: "Zambezi" },
+],
+}
 ];
 
 const nxt = ()=>{
     if (currentQuestion >= data.length-1){
-    currentQuestion = 0;
+    // currentQuestion = 0;
     }else {
     currentQuestion += 1;
     }
@@ -40,7 +76,7 @@ const nxt = ()=>{
 
 const prev = ()=>{
     if (currentQuestion <= 0){
-    currentQuestion = data.length -1 ;
+    // currentQuestion = data.length -1 ;
     }else {
     currentQuestion -= 1;
     }
@@ -60,8 +96,8 @@ const checkProcess = ()=>{
 </HdgMain>
 <br/>
 
-{#if quizState==1}
-{currentQuestion}
+{#if quizState==1
+}
 <div class="bg-gray-700 p-4 rounded-lg shadow shadow-gray-400">
   <h3 class="text-lg font-medium bg-pink-900 p-2 m-2 rounded-md">{data[currentQuestion].question}</h3>
 
@@ -77,10 +113,12 @@ const checkProcess = ()=>{
   <div class="flex justify-between">
     <button class="bg-gray-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-gray-500 transition-colors duration-300" on:click={prev}>Previous</button>
     <div class="flex space-x-4">
-      <button class="bg-gray-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-gray-500 transition-colors duration-300" on:click={nxt}>Next</button>
+      
       {#if currentQuestion == (data.length - 1)}
       <button class="bg-gray-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-gray-500 transition-colors duration-300" on:click={checkProcess}>Result</button>
-    {/if}    
+    {/if}
+
+    <button class="bg-gray-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-gray-500 transition-colors duration-300" on:click={nxt}>Next</button>    
     </div>
   </div>
 </div>
