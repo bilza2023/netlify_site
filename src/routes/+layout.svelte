@@ -2,7 +2,7 @@
 	// import Header from './Header.svelte';
 		import MainNav from '$lib/cmp/MainNav.svelte';
 		import Footer from '$lib/cmp/Footer.svelte';
-		import Underconstruction from '$lib/cmp/Underconstruction.svelte';
+		// import Underconstruction from '$lib/cmp/Underconstruction.svelte';
 	import './styles.css';
 //   import "../app.css";
 </script>
@@ -10,7 +10,7 @@
 <MainNav />
 
 <div class="app bg-gray-800 text-white m-0 pb-0 pt-0 pl-6 pr-6 ">
-<Underconstruction />
+<!-- <Underconstruction /> -->
 <br/>
 		<slot />
 </div>
