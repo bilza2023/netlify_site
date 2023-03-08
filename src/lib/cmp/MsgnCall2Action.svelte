@@ -1,6 +1,6 @@
 <script>
   
-  export let background_color = "bg-gray-700";
+  export let background_color = "bg-gray-600";
   export let text_color = "text-white";
   export let button_content = "Call To Action";
   export let button_color = "bg-red-500";

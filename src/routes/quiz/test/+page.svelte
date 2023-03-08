@@ -58,25 +58,32 @@ const checkProcess = ()=>{
 <HdgMain background_color="bg-green-900" >
 {title}
 </HdgMain>
-
+<br/>
 {#if quizState==1}
+<div class="bg-gray-700 p-4 rounded-lg shadow shadow-gray-400">
+  <h3 class="text-lg font-medium bg-pink-900 p-2 m-2 rounded-md">{data[currectQuestion].question}</h3>
 
-<h1>Question</h1>
+  {#each data[currectQuestion].answers as answer}
+    <div class="flex items-center mt-2">
+      <input type="radio" name="foo" bind:group={data[currectQuestion].selectedAnswer} value={answer.id}>
+      <p class="ml-2 text-white bg-gray-900 p-1 m-1 rounded-md">{answer.content}</p>
+    </div>
+  {/each}
 
-<h3>Current Question : {currectQuestion+1}</h3>
-<h3>{data[currectQuestion].question}</h3>
+  <hr class="my-4">
+
+  <div class="flex justify-between">
+    <button class="bg-gray-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-gray-500 transition-colors duration-300" on:click={prev}>Previous</button>
+    <div class="flex space-x-4">
+      <button class="bg-gray-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-gray-500 transition-colors duration-300" on:click={nxt}>Next</button>
+      <button class="bg-gray-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-gray-500 transition-colors duration-300" on:click={checkProcess}>Result</button>
+    
+    </div>
+  </div>
+</div>
 
 
-{#each  data[currectQuestion].answers as answer }
-<p>Option: {answer.content}</p>
-<input type="radio" name="foo" bind:group={data[currectQuestion].selectedAnswer} value={answer.id}>
-{/each}
 
-<hr/>
-<button on:click={nxt}>Next</button>
-<button on:click={prev }>Previous</button>
-<button on:click={console.log(data) }>Print</button>
-<button on:click={()=>checkProcess() }>Check</button>
 {/if}
 
 {#if quizState==3}
