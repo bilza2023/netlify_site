@@ -19,7 +19,7 @@
   }
 </style>
 
-<div class="flex flex-col justify-center items-center mt-1 flex-col">
+<div class="flex flex-col justify-center items-center mt-1 ">
   <div class="text-xl p-8 font-bold text-center mb-4 {text_color} w-1/2 md:w-3/4 rounded-lg p-2 {background_color} ">
     <slot></slot>
     <hr class="pb-2" />

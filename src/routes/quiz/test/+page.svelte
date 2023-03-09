@@ -96,8 +96,8 @@ const checkProcess = ()=>{
 </HdgMain>
 <br/>
 
-{#if quizState==1
-}
+{#if quizState==1}
+
 <div class="bg-gray-700 p-4 rounded-lg shadow shadow-gray-400">
   <h3 class="text-lg font-medium bg-pink-900 p-2 m-2 rounded-md">{data[currentQuestion].question}</h3>
 

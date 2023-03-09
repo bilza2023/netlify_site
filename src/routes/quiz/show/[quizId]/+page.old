@@ -1,0 +1,26 @@
+<script>
+  import { onMount } from 'svelte';
+  import { page } from '$app/stores';
+  import { writable } from 'svelte/store';
+
+  let quizId = $page.params.quizId;
+  let quiz = writable(undefined);
+
+  onMount(async () => {
+    const res = await fetch(`http://localhost/quiz/${quizId}`);
+    const data = await res.json();
+    quiz.set(data.quiz);
+  });
+</script>
+
+<p>Quiz ID: {quizId}</p>
+{#if $quiz !== undefined}
+    {#each  $quiz.questions as question }
+        {question.content}
+
+        {#each  question.answers as answer }
+            {answer.content}
+            <br>
+        {/each}
+    {/each}
+{/if}
