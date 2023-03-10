@@ -18,6 +18,9 @@ onMount(async () => {
 
 
 {#each quizes as quiz }
-<a class ="bg-gray-900 p-2 m-2 border-2 border-white" href={`/quiz/show/${quiz._id}`}>{quiz.title}</a>
-
+<div class ="bg-gray-900 p-2 m-2 border-2 border-white">
+<a  class="text-white" href={`/quiz/show/${quiz._id}`}>{quiz.title}</a>
+<hr>
+<a class="text-white" href = {`/quiz/analytics/${quiz._id}`}>Analytics</a>
+</div>
 {/each}

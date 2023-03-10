@@ -2,12 +2,12 @@
 import { onMount } from 'svelte';
   import { page } from '$app/stores';
 let results=[];
-
+ 
 onMount(async () => {
  try {
   //  console.log("page",page);
-  // let { quizId } = $page.params;
-    const response = await fetch(`http://localhost/responses`);
+  let { quizId } = $page.params;
+    const response = await fetch(`http://localhost/responses/${quizId}`);
     const data = await response.json();
     results = data.results;
     console.log("results",results);
@@ -27,9 +27,9 @@ onMount(async () => {
 <ul>
   {#each results as result}
     <li>
-      <p>Quiz ID: {result.quizId}</p>
-      <p>Correct Answers: {result.correctAnswers}</p>
-      <p>Wrong Answers: {result.wrongAnswers}</p>
+      <p>Title: {result.quizId}</p>
+      <p>Correct Answers: {result.correctAnswers.length}</p>
+      <p>Wrong Answers: {result.wrongAnswers.length}</p>
       <p>Total Questions: {result.totalQuestions}</p>
     </li>
   {/each}

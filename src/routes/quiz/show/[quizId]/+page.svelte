@@ -40,8 +40,15 @@ onMount(async () => {
     const data = await response.json();
     quiz = data.quiz;
     questions = quiz.questions;
-    console.log("questions",questions);
-    console.log("quiz",quiz);
+    
+    
+  // for (let qq = 0; qq < questions.length; qq++) {
+  //   const ques = questions[qq];
+  //   ques.selectedOption = null;
+  // }
+
+    // console.log("questions",questions);
+    // console.log("quiz",quiz);
   // showQuestionCard(0);  
   } catch (error) {
     console.error(error);
