@@ -5,8 +5,8 @@ const resultArray = [];
 for (let i = 0; i < data.length; i++) {
     const ques = data[i];
     if (ques.selectedAnswer === ques.correctAnswer){
-        //---
-    }else {  
+        //--- 
+    }else {   
     const r = {};
     r.question = ques.question;
     r.explanation = ques.explanation;

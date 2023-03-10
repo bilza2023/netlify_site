@@ -1,11 +1,13 @@
 <script>
 import { onMount } from 'svelte';
   import { page } from '$app/stores';
+import saveResponse from "./saveResponse.js";
   // console.log($page.params)
 
   let currentQuestionIndex = 0;
 let quiz;
 let questions =[];
+let quizId;
 
   function showQuestionCard(index) {
     const questionCards = document.querySelectorAll(".questionCard");
@@ -31,8 +33,8 @@ let questions =[];
 
 onMount(async () => {
  try {
- console.log("page",page);
-  const { quizId } = $page.params;
+  //  console.log("page",page);
+  let { quizId } = $page.params;
 
     const response = await fetch(`http://localhost/quiz/${quizId}`);
     const data = await response.json();
@@ -45,6 +47,8 @@ onMount(async () => {
     console.error(error);
   }
 }); 
+
+
 </script>
 
 
@@ -84,8 +88,8 @@ onMount(async () => {
   &nbsp;
   <button 
     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center focus:outline-none focus:shadow-outline"
-    on:click={()=>console.log(questions)}
-  >
+    on:click={()=>saveResponse(quiz)}
+  > 
     <svg class="w-6 h-6 fill-current mr-2" viewBox="0 0 24 24">
       <path d="M16.59 6l-5.3-5.3C11.16.21 10.91 0 10.59 0H3C1.9 0 1.01.9 1.01 2L1 22c0 1.1.89 2 1.99 2H19c1.1 0 2-.9 2-2V8c0-.31-.21-.56-.5-.66L16.59 6zM5 18V9h2v9H5zm3 0V9h2v9H8zm3 0V9h2v9h-2zm3 0V9h2v9h-2z"/>
     </svg>
