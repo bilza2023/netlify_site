@@ -23,6 +23,7 @@
 		"@sveltejs/adapter-static": "^2.0.1",
 		"embla-carousel-svelte": "^7.0.9",
 		"flowbite-svelte": "^0.30.4",
-		"mongoose": "^7.0.0"
+		"mongoose": "^7.0.0",
+		"uuid": "^9.0.0"
 	}
 }

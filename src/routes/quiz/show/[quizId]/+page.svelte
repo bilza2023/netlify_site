@@ -1,29 +1,11 @@
 <script>
 import { onMount } from 'svelte';
-  let currentQuestionIndex = 0;
+  import { page } from '$app/stores';
+  // console.log($page.params)
 
-  const questions = [
-    {
-      content: "11111111111111111111111111",
-      correctOptionId: "kqa2z9",
-      selectedOptionId: null,
-      options: [
-        { _id: "jud3ng", content: "111111111111111111" },
-        { _id: "kqa2z9", content: "2222222222222" },
-        { _id: "v87hjyxds", content: "33333333333333" },
-      ],
-    },
-    {
-      content: "222222222222222222222222222222",
-      correctOptionId: "234234df",
-      selectedOptionId: null,
-      options: [
-        { _id: "234234df", content: "44444444444444444444" },
-        { _id: "nht67df4", content: "555555555ption" },
-        { _id: "6jkp4", content: "666666" },
-      ],
-    },
-  ];
+  let currentQuestionIndex = 0;
+let quiz;
+let questions =[];
 
   function showQuestionCard(index) {
     const questionCards = document.querySelectorAll(".questionCard");
@@ -46,7 +28,23 @@ import { onMount } from 'svelte';
       showQuestionCard(currentQuestionIndex);
     }
   }
-onMount(async () => {showQuestionCard(0) });
+
+onMount(async () => {
+ try {
+ console.log("page",page);
+  const { quizId } = $page.params;
+
+    const response = await fetch(`http://localhost/quiz/${quizId}`);
+    const data = await response.json();
+    quiz = data.quiz;
+    questions = quiz.questions;
+    console.log("questions",questions);
+    console.log("quiz",quiz);
+  // showQuestionCard(0);  
+  } catch (error) {
+    console.error(error);
+  }
+}); 
 </script>
 
 
@@ -61,7 +59,7 @@ onMount(async () => {showQuestionCard(0) });
  <ol>
   {#each question.options as option }
     <button 
-      on:click={()=>question.selectedOptionId = option._id}
+      on:click={()=>question.selectedOptionId = option.id}
       class="block w-full py-2 px-4 text-left bg-gray-800 hover:bg-green-800 focus:bg-green-800 text-red-200 focus:outline-none rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 active:translate-y-0"
     >{option.content}</button>
     <br/>

@@ -1,71 +1,73 @@
-<script>
+<script> 
+import saveQuiz from "./saveQuiz.js";
+import { v4 as uuidv4 } from 'uuid';
 let data = [
 {
-id: 1,
-question: "What is the highest mountain in the world?",
+id: uuidv4(),
+content: "What is the highest mountain in the world?",
 selectedAnswer: 0,
 correctAnswer: 3,
 explanation: "Mount Everest is the highest mountain above sea level.",
-answers: [
-{ id: 1, content: "K2" },
-{ id: 2, content: "Kangchenjunga" },
-{ id: 3, content: "Mount Everest" },
-{ id: 4, content: "Lhotse" },
+options: [
+{ id: uuidv4(), content: "K2" },
+{ id: uuidv4(), content: "Kangchenjunga" },
+{ id: uuidv4(), content: "Mount Everest" },
+{ id: uuidv4(), content: "Lhotse" },
 ],
 },
 {
-id: 2,
-question: "Which is the largest desert in the world?",
+id: uuidv4(),
+content: "Which is the largest desert in the world?",
 selectedAnswer: 0,
 correctAnswer: 4,
 explanation: "The Sahara Desert is the largest hot desert in the world.",
-answers: [
-{ id: 1, content: "Mojave Desert" },
-{ id: 2, content: "Gobi Desert" },
-{ id: 3, content: "Atacama Desert" },
-{ id: 4, content: "Sahara Desert" },
+options: [
+{ id: uuidv4(), content: "Mojave Desert" },
+{ id: uuidv4(), content: "Gobi Desert" },
+{ id: uuidv4(), content: "Atacama Desert" },
+{ id: uuidv4(), content: "Sahara Desert" },
 ],
 },
 {
-id: 3,
-question: "What is the capital of Australia?",
+id: uuidv4(),
+content: "What is the capital of Australia?",
 selectedAnswer: 0,
 correctAnswer: 2,
 explanation: "Canberra is the capital city of Australia.",
-answers: [
-{ id: 1, content: "Sydney" },
-{ id: 2, content: "Canberra" },
-{ id: 3, content: "Melbourne" },
-{ id: 4, content: "Perth" },
+options: [
+{ id: uuidv4(), content: "Sydney" },
+{ id: uuidv4(), content: "Canberra" },
+{ id: uuidv4(), content: "Melbourne" },
+{ id: uuidv4(), content: "Perth" },
 ],
 },
 {
-id: 4,
-question: "Which is the longest river in Africa?",
+id: uuidv4(),
+content: "Which is the longest river in Africa?",
 selectedAnswer: 0,
 correctAnswer: 1,
 explanation: "The Nile is the longest river in Africa.",
-answers: [
-{ id: 1, content: "Nile" },
-{ id: 2, content: "Congo" },
-{ id: 3, content: "Niger" },
-{ id: 4, content: "Zambezi" },
+options: [
+{ id: uuidv4(), content: "Nile" },
+{ id: uuidv4(), content: "Congo" },
+{ id: uuidv4(), content: "Niger" },
+{ id: uuidv4(), content: "Zambezi" },
 ],
 }
 ];
 
 const addQuestion = ()=>{
 const q = {
-    id: (Math.random()* 990000),
-    question: "Add your question",
-    selectedAnswer: 0,
-    correctAnswer: 1,
+    id: uuidv4(),
+    content: "Add your question",
+    selectedAnswer: null,
+    correctAnswer: null,
     explanation: "Add your explanation",
-    answers: [
-    { id: 1, content: "option--1" },
-    { id: 2, content: "option--2" },
-    { id: 3, content: "option--3" },
-    { id: 4, content: "option--4" },
+    options: [
+    { id: uuidv4(), content: "option--1" },
+    { id: uuidv4(), content: "option--2" },
+    { id: uuidv4(), content: "option--3" },
+    { id: uuidv4(), content: "option--4" },
     ],
 }
 data = [...data,q];
@@ -75,24 +77,38 @@ data = [...data,q];
 </script>
 
 
-
 <h1>Create Quiz</h1>
-<button on:click={addQuestion}>Add Question</button>
-<br>
-<hr>
 <br>
 
 {#each data as q }
-    <h1><input class="text-black" type="text" bind:value={q.question}></h1>
+<div class="bg-gray-500 rounded-sm m-2 p-2 border-2 border-white mx-auto quiz-question">
+    <h1><input class="bg-gray-800" type="text" bind:value={q.question}></h1>
 <hr>
     <ol>
-    {#each q.answers as answer }
-    <br>
-        <li><input class="text-black" type="text" bind:value= {answer.content} ></li>
+    {#each q.options as option }
+        <li class="flex items-center">
+  <input class="text-black border-2 border-red-400 m-2" type="text" bind:value={option.content}>
+
+  <button class="ml-2 py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" on:click={()=>q.correctAnswer = option.id}>
+    Mark Correct
+  </button>
+    </li>
+
     {/each}
     </ol>
-<hr>    
+<br>
+</div>
 {/each}
 
+<button on:click={addQuestion}>Add Question</button>
 <button on:click={()=>console.log(data)}>Print</button>
-<button on:click={()=>console.log(data)}>Save</button>
+<button on:click={()=>saveQuiz(data)}>Save</button>
+
+
+
+<style>
+.quiz-question {
+  width: 80%;
+}
+
+</style>
