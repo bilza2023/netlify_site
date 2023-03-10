@@ -1,7 +1,7 @@
 
-export default function saveQuiz(data){
+export default function saveQuiz(data,title="Quiz.."){
 // console.log(data);
-const quiz = {questions : []};
+const quiz = {questions : [],title};
 const questions = [];
 
 for (let i = 0; i < data.length; i++) {
@@ -11,13 +11,12 @@ const question = {
 id : q.id,
 content: q.content,
 correctAnswer : q.correctAnswer,
-selectedAnswer : null,
 options : []       
 };
 
 //--loop over options
         for (let j = 0; j < q.options.length; j++) {
-                const o = q.options[i];
+                const o = q.options[j];
                 const option = {
                 id : o.id,
                 content : o.content,
@@ -30,6 +29,9 @@ questions.push(question);
 //----
 quiz.questions = questions;
 //----
+console.log(quiz);
+// return;
+//////////////////////////////////////
  fetch('http://localhost/save_quiz', {
     method: 'POST',
     body: JSON.stringify(quiz),

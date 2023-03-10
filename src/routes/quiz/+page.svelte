@@ -18,6 +18,6 @@ onMount(async () => {
 
 
 {#each quizes as quiz }
-<a href={`/quiz/show/${quiz._id}`}>{quiz._id}</a>
+<a class ="bg-gray-900 p-2 m-2 border-2 border-white" href={`/quiz/show/${quiz._id}`}>{quiz.title}</a>
 
 {/each}
