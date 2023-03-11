@@ -5,7 +5,7 @@
     const email = document.querySelector('input[name="email"]').value;
     const password = document.querySelector('input[name="password"]').value;
     const data = { email, password };
-    fetch('https://skillzaa.cyclic.app/user/login', {
+    fetch('http://localhost/user/login', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -19,7 +19,7 @@
         return response.json();
       })
       .then(data => {
-        localStorage.setItem('jwtToken', data.token);
+        // localStorage.setItem('jwtToken', data.token);
         console.log(data);
       })
       .catch(error => {

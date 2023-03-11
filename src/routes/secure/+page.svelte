@@ -2,10 +2,10 @@
 import {onMount} from "svelte";
 
 onMount(async () => {
-	const token = localStorage.getItem('jwtToken');
+	// const token = localStorage.getItem('jwtToken');
 
-    const response = await fetch("https://skillzaa.cyclic.app/user/secure", {
-      headers: {Authorization: `Bearer ${token}`}
+    const response = await fetch("http://localhost/user/secure", {
+      // headers: {Authorization: `Bearer ${token}`}
     });
     
     if (!response.ok) {
