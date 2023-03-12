@@ -31,10 +31,11 @@ quiz.questions = questions;
 //----
 console.log(quiz);
 // return;
+const token = localStorage.getItem('token');
 //////////////////////////////////////
  fetch('http://localhost/save_quiz', {
     method: 'POST',
-    body: JSON.stringify(quiz),
+    body: JSON.stringify({quiz,token}),
     headers: {
       'Content-Type': 'application/json'
     }

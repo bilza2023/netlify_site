@@ -4,7 +4,15 @@ let quizes = [];
 
 onMount(async () => {
  try {
-    const response = await fetch('http://localhost/quizlist');
+    const token = localStorage.getItem("token");
+    const response = await fetch('http://localhost/user_quiz',{
+      method: 'POST',
+      body: JSON.stringify({token}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
     const data = await response.json();
     quizes = data.quizes;
     console.log("quizes", quizes);

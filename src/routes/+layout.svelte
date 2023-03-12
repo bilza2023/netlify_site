@@ -1,18 +1,32 @@
 <script>
-	// import Header from './Header.svelte';
-		import MainNav from '$lib/cmp/MainNav.svelte';
-		import Footer from '$lib/cmp/Footer.svelte';
-		// import Underconstruction from '$lib/cmp/Underconstruction.svelte';
-	import './styles.css';
-//   import "../app.css";
-</script>
+import { onMount } from 'svelte';
+import MainNav from '$lib/cmp/MainNav.svelte';
+import Footer from '$lib/cmp/Footer.svelte';
+// import Underconstruction from '$lib/cmp/Underconstruction.svelte';
+import './styles.css';
+let isLogin;
 
-<MainNav />
+ onMount(async ()=>{
+try {
+    const token = await localStorage.getItem("token");
+        if (token == null || token.length == 0) {
+            isLogin = false;
+        }else {
+            isLogin = true;
+        }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+</script>
+<MainNav isLogin={isLogin}/>
 
 <div class="app bg-gray-800 text-white m-0 pb-0 pt-0 pl-6 pr-6 ">
 <!-- <Underconstruction /> -->
 <br/>
-		<slot />
+		<slot isLogin={isLogin}/>
+		 
 </div>
 
 <Footer />

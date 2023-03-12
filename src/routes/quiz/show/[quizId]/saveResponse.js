@@ -23,7 +23,7 @@ const quizResponse = {
     }
   })
   .then(response => response.json())
-  .then(result => console.log(result))
+  .then(result => true)
   .catch(error => console.error(error));
 
 }

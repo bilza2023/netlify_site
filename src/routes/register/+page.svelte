@@ -1,4 +1,6 @@
 <script>
+import { goto } from '$app/navigation';
+
   function handleSubmit(event) {
     event.preventDefault();
     const name = document.querySelector('input[name="name"]').value;
@@ -19,7 +21,8 @@
         return response.json();
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
+        goto("/");
       })
       .catch(error => {
         console.error(error);
@@ -74,5 +77,5 @@
     Password:
     <input type="password" name="password" required>
   </label>
-  <button type="submit">Submit</button>
+  <button   type="submit">Submit</button>
 </form>

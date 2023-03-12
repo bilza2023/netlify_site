@@ -1,4 +1,5 @@
 <script> 
+let pageState = 1;
 import saveQuiz from "./saveQuiz.js";
 import Question from "./Question.svelte";
 import { v4 as uuidv4 } from 'uuid';
@@ -29,6 +30,7 @@ data = [...data,q];
 
 <h1>Create Quiz</h1>
 <br>
+
 <input class="bg-gray-800 border-2 border-white" type="text" bind:value={title} >
 <br>
 {#each data as q }

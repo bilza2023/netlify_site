@@ -1,30 +1,26 @@
 <script>
-  function handleSubmit(event) {
-    event.preventDefault();
-    // const name = document.querySelector('input[name="name"]').value;
-    const email = document.querySelector('input[name="email"]').value;
-    const password = document.querySelector('input[name="password"]').value;
-    const data = { email, password };
-    fetch('http://localhost/user/login', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        // if (!response.ok) {
-        //   throw new Error(response.statusText);
-        // }
-        return response.json();
-      })
-      .then(data => {
-        // localStorage.setItem('jwtToken', data.token);
-        console.log(data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+import { goto } from '$app/navigation';
+import {is_login} from "$lib/stores/appStore.js";
+
+async function handleSubmit(event) {
+  event.preventDefault();
+  // const name = document.querySelector('input[name="name"]').value;
+  const email = document.querySelector('input[name="email"]').value;
+  const password = document.querySelector('input[name="password"]').value;
+  const data = { email, password };
+
+  const response = await fetch('http://localhost/user/login', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  const RespData = await response.json();
+  localStorage.setItem('token', RespData.token);
+   is_login.set(true);
+        goto('/');
+  
   }
 </script>
 
@@ -62,14 +58,14 @@
   }
 </style>
 
-<form class="w-3/5 sm:w-4/5 mx-auto bg-gray-600" on:submit={handleSubmit}>
+<form class="w-3/5 sm:w-4/5 mx-auto bg-gray-600 rounded-md">
   <label>
     Email:
-    <input type="email" name="email" required value="admin@admin.com">
+    <input type="email" name="email" required value="bilza2023@gmail.com">
   </label>
   <label>
     Password:
-    <input type="password" name="password" required value="admin">
+    <input type="password" name="password" required value="123456">
   </label>
-  <button type="submit">Submit</button>
+  <button class="bg-white text-black rounded-md p-2 pl-4 pr-6 m-6"  on:click={handleSubmit}>Submit</button>
 </form>

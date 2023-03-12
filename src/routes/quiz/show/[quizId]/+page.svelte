@@ -1,4 +1,6 @@
 <script>
+let pageState = 1;
+
 import { onMount } from 'svelte';
   import { page } from '$app/stores';
 import saveResponse from "./saveResponse.js";
@@ -36,10 +38,10 @@ onMount(async () => {
   //  console.log("page",page);
   let { quizId } = $page.params;
 
-    const response = await fetch(`http://localhost/quiz/${quizId}`);
-    const data = await response.json();
-    quiz = data.quiz;
-    questions = quiz.questions;
+  const response = await fetch(`http://localhost/quiz/${quizId}`);
+  const data = await response.json();
+  quiz = data.quiz;
+  questions = quiz.questions;
     
     
   // for (let qq = 0; qq < questions.length; qq++) {
@@ -58,6 +60,10 @@ onMount(async () => {
 
 </script>
 
+
+
+{#if pageState==1}
+  
 
 <div id="card" class="flex flex-col items-center justify-center rounded-lg shadow-lg bg-green-100  p-6 mx-auto sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2">
 
@@ -95,7 +101,7 @@ onMount(async () => {
   &nbsp;
   <button 
     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center focus:outline-none focus:shadow-outline"
-    on:click={()=>saveResponse(quiz)}
+    on:click={()=>{pageState=2; saveResponse(quiz)}}
   > 
     <svg class="w-6 h-6 fill-current mr-2" viewBox="0 0 24 24">
       <path d="M16.59 6l-5.3-5.3C11.16.21 10.91 0 10.59 0H3C1.9 0 1.01.9 1.01 2L1 22c0 1.1.89 2 1.99 2H19c1.1 0 2-.9 2-2V8c0-.31-.21-.56-.5-.66L16.59 6zM5 18V9h2v9H5zm3 0V9h2v9H8zm3 0V9h2v9h-2zm3 0V9h2v9h-2z"/>
@@ -118,3 +124,9 @@ onMount(async () => {
 
 
 </div>
+{/if}
+
+
+{#if pageState==2}
+<div>Thanks for your attempt</div>
+{/if}
