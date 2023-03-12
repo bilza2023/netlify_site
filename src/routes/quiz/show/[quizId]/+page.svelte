@@ -51,20 +51,26 @@ questions = QuizJson.questions;
   }
 }); 
 
-
 </script>
 
 
 
 {#if pageStateVar==0}
-<Intro  />
+  {#if QuizJson.showIntro == true}
+  <Intro
+    title= {QuizJson.title}
+    description= {QuizJson.description}
+    callToAction="Sign up now!"
+  />
+  {:else}
+  {pageState.set(1)}
+  {/if}
 {/if}
 
 
 
 {#if pageStateVar==1}
 <QuizComp {questions} />  
-
 {/if}
 
 

@@ -2,14 +2,17 @@
 
 
 export const QuizJson = {
-"title": "Quiz By bilza2023 --no 2",
+"title": "The Most Comprehensive Quiz Test",
+"description" : "This quiz test is made about how to create a new quiz test. As usual we will use question to explain each and every point on the way. Thanks for your patience",
+"showIntro" : true,
 "userId": "640c60780a87835ced6122af",
 
   "questions": [
     {
       "content": "aaaaaaaaaaaaaaaaa",
       "id": "6a1ca9f9-f592-4a20-bdc9-0b2e1c90e58a",
-      "correctAnswer": "bc32734b-2d87-47cd-98f1-8d0a4786fb08",
+      "correctOption"  : "bc32734b-2d87-47cd-98f1-8d0a4786fb08",
+      "selectedOption" : null,
       "options": [
         {
           "id": "bc32734b-2d87-47cd-98f1-8d0a4786fb08",
@@ -33,7 +36,8 @@ export const QuizJson = {
     {
       "content": "bbbbbbbbbbbbbbbb",
       "id": "d9f7c597-4950-4d4f-9499-de70a8bcbaba",
-      "correctAnswer": "5954af8a-6d7d-4010-b2e6-52f0f895b81c",
+      "correctOption": "690766a5-c418-4dd4-95ab-ef43e549c6ee",
+      "selectedOption" : null,
       "options": [
         {
           "id": "690766a5-c418-4dd4-95ab-ef43e549c6ee",

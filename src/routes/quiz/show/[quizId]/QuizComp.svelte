@@ -1,24 +1,44 @@
 <script>
 import {pageState} from "./showQuizStore";
 export let questions = [];
+let cq = 0;
+const next = ()=>{
+  if (cq >= questions.length){
+    cq= questions.length;
+  }else {
+  cq+=1;
+  }
+}
+const prev = ()=>{
+  if (cq <= 0){
+    cq= 0;
+  }else {
+  cq -=1;
+  }
+}
 </script>
 
 
 
 
-<div id="card" class="flex flex-col items-center justify-center rounded-lg shadow-lg bg-green-100  p-6 mx-auto sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2">
+<div id="card" class="flex flex-col items-center justify-center rounded-lg  bg-gray-600  p-2 mx-auto sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2">
 
 
-{#each questions  as question, qIndex }
-    
-<div class="questionCard"   id={qIndex}>
-  <h1 class="bg-red-900 rounded-sm p-2 m-2">{question.content}</h1>
+
+
+<div class="questionCard"   id={cq}>
+  <h1 class="bg-red-900 rounded-sm p-2 m-1">{questions[cq].content}</h1>
   <br />
  <ol>
-  {#each question.options as option }
+  {#each questions[cq].options as option }
     <button 
-      on:click={()=>question.selectedOptionId = option.id}
-      class="block w-full py-2 px-4 text-left bg-gray-800 hover:bg-green-800 focus:bg-green-800 text-red-200 focus:outline-none rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 active:translate-y-0"
+      on:click={()=>questions[cq].selectedOption = option.id}
+      class="block w-full p-1 px-4 text-left
+       bg-gray-800
+       hover:bg-blue-400  
+        focus:outline-none rounded-md 
+        {questions[cq].selectedOption == option.id  ? "bg-green-500" : ""}
+        transition duration-300 ease-in-out transform hover:-translate-y-1 active:translate-y-0"
     >{option.content}</button>
     <br/>
   {/each}
@@ -26,13 +46,10 @@ export let questions = [];
 
 </div>
 
-{/each}
-
-
-<div class="flex justify-between py-4">
+<div class="flex justify-between">
   <button 
-    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center focus:outline-none focus:shadow-outline"
-    on:click={console.log(">>>>")}
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded flex items-center focus:outline-none focus:shadow-outline"
+    on:click={prev}
   >
     <svg class="w-6 h-6 fill-current mr-2" viewBox="0 0 24 24">
       <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12H20V10H10.83l4.58-4.59z" />
@@ -41,7 +58,7 @@ export let questions = [];
   </button>
   &nbsp;
   <button 
-    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center focus:outline-none focus:shadow-outline"
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded flex items-center focus:outline-none focus:shadow-outline"
     on:click={ ()=> pageState.set(2)  }
   > 
     <svg class="w-6 h-6 fill-current mr-2" viewBox="0 0 24 24">
@@ -54,7 +71,7 @@ export let questions = [];
 
   <button 
     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center focus:outline-none focus:shadow-outline"
-    on:click={console.log(">>>>")}
+    on:click={next}
   >
     <span>Next</span>
     <svg class="w-6 h-6 fill-current ml-2" viewBox="0 0 24 24">
