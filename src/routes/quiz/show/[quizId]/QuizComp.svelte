@@ -24,12 +24,6 @@ const prev = ()=>{
 
 
 
-<div class="container">
-  <div class="box1 text-white">fffffff</div>
-  <div class="box2 text-white">fffffff</div>
-  <div class="box3 text-white">fffffff</div>
-</div>
-
 <ProgressBar total={questions.length} current={cq}/>
 
   <h1 
@@ -90,20 +84,6 @@ const prev = ()=>{
 </div>
 
 <style>
-.container {
-  display: grid;
-  grid-template-columns: 5% 90% 5%;
-}
 
-.box1 {
-  background-color: red;
-}
 
-.box2 {
-  background-color: green;
-}
-
-.box3 {
-  background-color: blue;
-}
 </style>
