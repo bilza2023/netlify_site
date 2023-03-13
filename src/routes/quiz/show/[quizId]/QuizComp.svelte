@@ -20,45 +20,93 @@ const prev = ()=>{
 }
 </script>
 
-<div class="flex justify-center flex-col items-center  rounded-lg  bg-gray-600  p-2 mx-auto w-4/5 ">
+<div class="grid-container bg-blue-900 text-white">
+  
+  <button 
+    class="grid-item third-column btnCol bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  flex items-center focus:outline-none focus:shadow-outline"
+    on:click={next}  >
+    <span>Next</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <path fill="#fff" d="M10.667 6.667v18.666l12-9.333z"/>
+    </svg>
+  </button>
 
 
+<div class="grid-item   flex flex-col justify-center">
 
 <ProgressBar total={questions.length} current={cq}/>
 
   <h1 
-    class="bg-blue-800 rounded-md p-4 m-3 w-full text-center">
+    class="bg-red-900 rounded-md p-4 m-3  text-center">
     {questions[cq].content}
   </h1>
 
- <ol>
+ <div class=" flex justify-center flex-col text-center  ">
   {#each questions[cq].options as option }
-    <button 
+  <div>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div 
       on:click={()=>questions[cq].selectedOption = option.id}
-      class="block w-full p-2 m-2 px-4 text-left
-       bg-gray-800
-       hover:bg-blue-400  
+      class=" p-2 m-2 bg-gray-300
+       hover:bg-blue-600  
         focus:outline-none rounded-md 
         {questions[cq].selectedOption == option.id  ? "bg-green-500" : ""}
         transition duration-300 ease-in-out transform hover:-translate-y-1 active:translate-y-0"
-    >{option.content}</button>
+      >
+      {option.content}
+    </div>
+  </div>  
   {/each}
-</ol>
+</div>
+
+
+</div><!--grid middle column ends-->
+
+
+<button class="grid-item first-column btnCol bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4  flex items-center focus:outline-none focus:shadow-outline" on:click={prev}  >
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <path fill="#fff" d="M21.333 25.333v-18.666l-12 9.333z"/>
+  </svg>
+  <span>Prev</span>
+</button>
+
+
+</div><!-- grid ends !-->
+
+<style>
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 5% 90% 5%;
+  grid-template-rows: repeat(3, auto);
+  grid-gap: 5px;
+  margin :5%;
+  margin-top: 0;
+  
+}
+
+.grid-item {
+
+  padding: 5px;
+}
+
+.first-column {
+  grid-row: 1 / 4;
+}
+
+.third-column {
+  grid-row: 1 / 4;
+  grid-column: 3;
+}
+.btnCol {
+background-color: blue;
+}
+</style>
 
 
 
+<!-- {#if (cq == questions.length-1)}
 <div class="flex justify-between">
-  <button 
-    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded flex items-center focus:outline-none focus:shadow-outline"
-    on:click={prev}  >
-   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <path fill="#fff" d="M21.333 25.333v-18.666l-12 9.333z"/>
-</svg>
-    <span>Prev</span>
-  </button>
-
-  &nbsp;
-  {#if (cq == questions.length-1)}
   <button 
     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded flex items-center focus:outline-none focus:shadow-outline"
     on:click={ ()=> pageState.set(2)  }   > 
@@ -67,23 +115,5 @@ const prev = ()=>{
     </svg>
     <span>Submit</span>
   </button>
-{/if}
-  &nbsp;
-
-  <button 
-    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center focus:outline-none focus:shadow-outline"
-    on:click={next}  >
-    <span>Next</span>
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-    <path fill="#fff" d="M10.667 6.667v18.666l12-9.333z"/>
-    </svg>
-  </button>
 </div>
-
-
-</div>
-
-<style>
-
-
-</style>
+{/if} -->

@@ -56,7 +56,7 @@ questions = QuizJson.questions;
 <!-- Quiz Title -->
 {#if pageStateVar !=0}
 <div class="flex justify-center">
-<h1 class="bg-blue-700 rounded-md p-2 m-2 w-full text-center">{QuizJson.title}</h1></div>
+<h1 class="bg-blue-900  p-3 m-4  mt-0  w-full text-center text-2xl">{QuizJson.title}</h1></div>
 {/if}
 
 {#if pageStateVar==0}
