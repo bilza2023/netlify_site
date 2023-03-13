@@ -1,30 +1,35 @@
 
-export default function saveResponse(quiz){
-// console.log("quiz",quiz);
-// const quiz_id= quiz._id;
-// console.log(quiz._id);
-// return;
-const {correctAnswers,wrongAnswers} = check(quiz.questions);
+export default async function saveResponse(quiz){
+try{
+
+const {correctAnswers,wrongAnswers,skippedAnswers} = check(quiz.questions);
+
 const quizResponse = {
       quizId : quiz._id,
-      correctAnswers : correctAnswers,
-      wrongAnswers : wrongAnswers,
+      correctAnswers ,
+      wrongAnswers ,
+      skippedAnswers,
       totalQuestions : quiz.questions.length,
 }; 
+// console.log("quizResponse",quizResponse);
+if  (quiz.saveResponse==false){
+return {correctAnswers,wrongAnswers,skippedAnswers};
+}
 
-// console.log(quizResponse);
 
-
- fetch('http://localhost/save_response', {
+ const response = await fetch('http://localhost/save_response', {
     method: 'POST',
     body: JSON.stringify(quizResponse),
     headers: {
       'Content-Type': 'application/json'
     }
-  })
-  .then(response => response.json())
-  .then(result => true)
-  .catch(error => console.error(error));
+  });
+
+  const data = await response.json();
+  return quizResponse;
+}catch (e) {
+return false;
+}
 
 }
 /////////////////////////////////////////////////////////
@@ -33,16 +38,21 @@ function check(questions){
 
 const correctAnswers = [];
 const wrongAnswers = [];
+const skippedAnswers = [];
 
 for (let i = 0; i < questions.length; i++) {
     const ques = questions[i];
-    if (ques.selectedOptionId === ques.correctAnswer){
-        correctAnswers.push(ques._id);
-    }else {   
-    wrongAnswers.push(ques._id);
+    if (ques.selectedOption == null){
+      skippedAnswers.push(ques._id);
+    }else {
+          if (ques.selectedOption === ques.correctOption){
+            correctAnswers.push(ques._id);
+          }else {   
+            wrongAnswers.push(ques._id);
+          }
     }
+    
 }
 
-// console.log("resultArray" , resultArray);    
-return {correctAnswers,wrongAnswers};    
+return {correctAnswers,wrongAnswers,skippedAnswers};    
 }

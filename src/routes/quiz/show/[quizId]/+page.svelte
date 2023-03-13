@@ -1,6 +1,8 @@
 <script>
-let pageStateVar = 0;
 import {pageState} from "./showQuizStore";
+
+
+let pageStateVar = 0;
 pageState.subscribe( (p)=> pageStateVar=p);
 
 
@@ -10,12 +12,12 @@ import { page } from '$app/stores';
 import Intro from "./Intro.svelte";
 import Outro from "./Outro.svelte";
 import QuizComp from "./QuizComp.svelte";
-import saveResponse from "./saveResponse.js";
+
 
 
 let currentQuestionIndex = 0;
 let quiz;
-let questions =[];
+// let questions =[];
 let quizId;
 
   function showQuestionCard(index) {
@@ -44,7 +46,6 @@ onMount(async () => {
  try {
  console.log("QuizJson", QuizJson);
 quiz = QuizJson;
-questions = QuizJson.questions;
 
  } catch (error) {
     console.error(error);
@@ -56,7 +57,9 @@ questions = QuizJson.questions;
 <!-- Quiz Title -->
 {#if pageStateVar !=0}
 <div class="flex justify-center">
-<h1 class="bg-blue-900  p-3 m-4  mt-0  w-full text-center text-2xl">{QuizJson.title}</h1></div>
+  <h1 class="bg-blue-900  p-3 m-4  mt-0  w-full text-center text-2xl">         {QuizJson.title}
+  </h1>
+</div>
 {/if}
 
 {#if pageStateVar==0}
@@ -74,10 +77,10 @@ questions = QuizJson.questions;
 
 
 {#if pageStateVar==1}
-<QuizComp {questions} />  
+<QuizComp {quiz} />  
 {/if}
 
 
 {#if pageStateVar==2}
-<Outro />
+<Outro {quiz}/>
 {/if}
