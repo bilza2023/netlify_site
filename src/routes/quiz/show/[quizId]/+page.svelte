@@ -53,7 +53,11 @@ questions = QuizJson.questions;
 
 </script>
 
-
+<!-- Quiz Title -->
+{#if pageStateVar !=0}
+<div class="flex justify-center">
+<h1 class="bg-blue-700 rounded-md p-2 m-2 w-full text-center">{QuizJson.title}</h1></div>
+{/if}
 
 {#if pageStateVar==0}
   {#if QuizJson.showIntro == true}
