@@ -1,4 +1,5 @@
 <script>
+ export const prerender = false;
 import {pageState} from "./showQuizStore";
 
 
@@ -28,24 +29,12 @@ let quizId;
     questionCards[index].style.display = "block";
   }
 
-  function showNextQuestion() {
-    if (currentQuestionIndex < questions.length - 1) {
-      currentQuestionIndex++;
-      showQuestionCard(currentQuestionIndex);
-    }
-  }
-
-  function showPreviousQuestion() {
-    if (currentQuestionIndex > 0) {
-      currentQuestionIndex--;
-      showQuestionCard(currentQuestionIndex);
-    }
-  }
-
 onMount(async () => {
  try {
- console.log("QuizJson", QuizJson);
-quiz = QuizJson;
+  quizId = new URLSearchParams(location.search).get("quizId");
+    console.log(quizId);
+
+  quiz = QuizJson;
 
  } catch (error) {
     console.error(error);
