@@ -5,8 +5,10 @@ export const QuizJson = {
 "_id" : "123dse754hk234567gfgj8",
 "title": "The Most Comprehensive Quiz Test",
 "saveResponse" : true,
-"description" : "This quiz test is made about how to create a new quiz test. As usual we will use question to explain each and every point on the way. Thanks for your patience",
+"introText" : "introText introText introText introText introText introText inText introText introText introText ",
+"farewellText" : "farewellText farewellText farewellText farewellText farewellText farewellText farewellText farewellText ",
 "showIntro" : true,
+"showResult" : true,
 "userId": "640c60780a87835ced6122af",
 
   "questions": [
@@ -16,6 +18,7 @@ export const QuizJson = {
       "id": "6a1ca9f9-f592-4a20-bdc9-0b2e1c90e58a",
       "correctOption"  : "bc32734b-2d87-47cd-98f1-8d0a4786fb08",
       "selectedOption" : null,
+      "explanation" : "explanation explanation explanation explanation explanation explanation ",
       "options": [
         {
           "id": "bc32734b-2d87-47cd-98f1-8d0a4786fb08",
@@ -42,6 +45,7 @@ export const QuizJson = {
       "id": "d9f7c597-4950-4d4f-9499-de70a8bcbaba",
       "correctOption": "5954af8a-6d7d-4010-b2e6-52f0f895b81c",
       "selectedOption" : null,
+      "explanation" : "explanation explanation explanation explanation explanation explanation ",
       "options": [
         {
           "id": "690766a5-c418-4dd4-95ab-ef43e549c6ee",
@@ -67,6 +71,7 @@ export const QuizJson = {
       "id": "6a1ca9f9-f592-4a20-bdc9-0b2e1c90e58a",
       "correctOption"  : "bc32734b-2d87-47cd-98f1-8d0a4786fb08",
       "selectedOption" : null,
+      "explanation" : "explanation explanation explanation explanation explanation explanation ",
       "options": [
         {
           "id": "bc32734b-2d87-47cd-98f1-8d0a4786fb08",

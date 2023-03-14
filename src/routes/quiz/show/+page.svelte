@@ -1,33 +1,19 @@
 <script>
  export const prerender = false;
 import {pageState} from "./showQuizStore";
-
-
+//-----
 let pageStateVar = 0;
 pageState.subscribe( (p)=> pageStateVar=p);
-
-
+//-----
 import {QuizJson} from "./quizJson.js"
 import { onMount } from 'svelte';
-import { page } from '$app/stores';
+// import { page } from '$app/stores';
 import Intro from "./Intro.svelte";
 import Outro from "./Outro.svelte";
 import QuizComp from "./QuizComp.svelte";
 
-
-
-let currentQuestionIndex = 0;
 let quiz;
-// let questions =[];
 let quizId;
-
-  function showQuestionCard(index) {
-    const questionCards = document.querySelectorAll(".questionCard");
-    questionCards.forEach((card) => {
-      card.style.display = "none";
-    });
-    questionCards[index].style.display = "block";
-  }
 
 onMount(async () => {
  try {
@@ -51,11 +37,12 @@ onMount(async () => {
 </div>
 {/if}
 
+<!--Intro-->
 {#if pageStateVar==0}
   {#if QuizJson.showIntro == true}
   <Intro
     title= {QuizJson.title}
-    description= {QuizJson.description}
+    description= {QuizJson.introText}
     callToAction="Sign up now!"
   />
   {:else}
@@ -64,12 +51,12 @@ onMount(async () => {
 {/if}
 
 
-
+<!--Quiz-->
 {#if pageStateVar==1}
 <QuizComp {quiz} />  
 {/if}
 
-
+<!--Outro-->
 {#if pageStateVar==2}
 <Outro {quiz}/>
 {/if}
