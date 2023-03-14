@@ -1,6 +1,8 @@
 <script>
 import { onMount } from 'svelte';
+import { goto } from '$app/navigation';
 import saveResponse from "./saveResponse.js";
+import ReportPart from "./ReportPart.svelte";
 export let quiz;
 let resp;
 onMount(async () => {
@@ -19,48 +21,22 @@ onMount(async () => {
 
 
 {#if resp}
+<div class="bg-gray-750 rounded-lg p-2 text-gray-100">
 <!--=================================-->
-<h1 class="m-1 p-1 bg-gray-900 border-2 border-white">Questions that were answered  wrong:</h1>
-{#each resp.wrongAnswers as wrongAnswer}
-<div class="bg-red-100 p-2 m-2 mb-5">
-    <h1>{wrongAnswer}</h1>
+<ReportPart answersArray={resp.wrongAnswers} {quiz} title="Questions that were Wrong:" background_color="#602222"/>
+
+<!--=================================-->
+<ReportPart answersArray={resp.skippedAnswers} {quiz} title="Questions that were Skipped:"  background_color="#0d2560"/>
+
+<!--=================================-->
+<ReportPart answersArray={resp.correctAnswers} {quiz} title="Questions that were Correct:" background_color="#0f3813" />
+<!--=================================-->
 </div>
-{/each} 
-
-<!--=================================-->
-<h1 class="m-1 p-1 bg-gray-900 border-2 border-white">Questions that were skipped:</h1>
-{#each resp.skippedAnswers as skippedAnswer}
-
-    {#each quiz.questions as question}
-        {#if question._id == skippedAnswer}
-            <div class="wrong rounded-md p-2 m-2 mb-4 ">
-            <p><span class="bg-gray-700 border-2 border-white m-1 p-1 rounded-lg">Question:</span> {question.content}</p>
-            <br>
-                {#each question.options as option}
-                    {#if option.id == question.correctOption}
-                       <p><span class="bg-gray-700 border-2 border-white m-1 p-1 rounded-lg">Correct Answer:</span> {option.content}</p>
-                    {/if}
-                {/each}
-            <br/>
-            <p class="border-2 border-white m-2 p-2 rounded-lg">{question.explanation}</p>    
-            </div>
-        {/if}
-    {/each}
-{/each}
-
-<!--=================================-->
-<h1 class="m-1 p-1 bg-gray-900 border-2 border-white">Questions that were answered correctly:</h1>
-<div class="bg-red-100 p-2 m-2 mb-5">
-{#each resp.correctAnswers as correctAnswer}
-    <h1>{correctAnswer}</h1>
-{/each}
-</div>
-
-
-<!--=================================-->
 {/if}
 
-
-<style>
-.wrong {background-color: #512424;}
-</style>
+<div class="flex justify-center">
+<button class="bg-blue-600 text-white m-3 p-3 rounded-lg"
+on:click={ ()=> goto('/') }>
+Home
+</button>
+</div>
