@@ -1,5 +1,7 @@
 <script>
 import MainFlex from "$lib/MainFlex.svelte";
+import {mainQuizList} from "./main_quiz_list.js";
+console.log("QuizList" , mainQuizList);
 
 // import {is_login} from "$lib/stores/appStore.js";
 // let isLogin =false;
@@ -15,8 +17,8 @@ import MainFlex from "$lib/MainFlex.svelte";
 
 <img src="./images/heroBanner.png" alt="">
 
-
-<MainFlex/>
+<br/>
+<MainFlex list={mainQuizList}/>
 
 
 
