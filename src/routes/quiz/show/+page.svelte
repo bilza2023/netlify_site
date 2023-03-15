@@ -18,12 +18,14 @@ let quizId;
 onMount(async () => {
 try {
   quizId = new URLSearchParams(location.search).get("quizId");
-  const resp = await fetch("http://localhost/quiz/6411609828a369b541fcd7d7");
+  const url = `http://localhost/quiz/${quizId}`;
+  console.log(url);
+  const resp = await fetch(url);
   const data = await resp.json();
-  // console.log(data.quiz);
 
   // quiz = QuizJson;
   quiz = data.quiz;
+  console.log(quiz._id);
 } catch (error) {
     console.error(error);
 }
