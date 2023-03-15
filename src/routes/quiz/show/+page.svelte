@@ -1,10 +1,10 @@
 <script>
- export const prerender = false;
+export const prerender = false;
 import {pageState} from "./showQuizStore";
-//-----
+//--------
 let pageStateVar = 0;
 pageState.subscribe( (p)=> pageStateVar=p);
-//-----
+//--------
 import {QuizJson} from "./quizJson.js"
 import { onMount } from 'svelte';
 // import { page } from '$app/stores';
@@ -16,15 +16,17 @@ let quiz;
 let quizId;
 
 onMount(async () => {
- try {
+try {
   quizId = new URLSearchParams(location.search).get("quizId");
-    console.log(quizId);
+  const resp = await fetch("http://localhost/quiz/6411609828a369b541fcd7d7");
+  const data = await resp.json();
+  // console.log(data.quiz);
 
-  quiz = QuizJson;
-
- } catch (error) {
+  // quiz = QuizJson;
+  quiz = data.quiz;
+} catch (error) {
     console.error(error);
-  }
+}
 }); 
 
 </script>

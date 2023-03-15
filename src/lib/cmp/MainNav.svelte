@@ -37,7 +37,7 @@ is_login.set(false);
             <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/register">register</a></li>
             <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/login">login</a></li>
           {/if}
-          <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/about">About</a></li>
+          <!-- <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/about">About</a></li> -->
         </ul>
       </nav>
     </div>
@@ -55,7 +55,7 @@ is_login.set(false);
         
           <li class="ml-4"><a class="text-white hover:text-gray-300 py-2 block" href="/login">login</a></li>
         {/if}
-        <a class="text-white hover:text-gray-300 py-2 block" href="/about">About</a>
+        <!-- <a class="text-white hover:text-gray-300 py-2 block" href="/about">About</a> -->
       </div>
     </div>
   {/if}

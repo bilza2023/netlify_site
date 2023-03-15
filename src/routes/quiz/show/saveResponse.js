@@ -3,30 +3,32 @@ export default async function saveResponse(quiz){
 try{
 
 const {correctAnswers,wrongAnswers,skippedAnswers} = check(quiz.questions);
-
-const quizResponse = {
-      quizId : quiz._id,
-      correctAnswers ,
-      wrongAnswers ,
-      skippedAnswers,
-      totalQuestions : quiz.questions.length,
-}; 
-// console.log("quizResponse",quizResponse);
-if  (quiz.saveResponse==false){
 return {correctAnswers,wrongAnswers,skippedAnswers};
-}
+
+// const quizResponse = {
+//       quizId : quiz._id,
+//       correctAnswers ,
+//       wrongAnswers ,
+//       skippedAnswers,
+//       totalQuestions : quiz.questions.length,
+// };
+
+// console.log("quizResponse",quizResponse);
+// if  (quiz.saveResponse==false){
+// return {correctAnswers,wrongAnswers,skippedAnswers};
+// }
 
 
- const response = await fetch('http://localhost/save_response', {
-    method: 'POST',
-    body: JSON.stringify(quizResponse),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
+//  const response = await fetch('http://localhost/save_response', {
+//     method: 'POST',
+//     body: JSON.stringify(quizResponse),
+//     headers: {
+//       'Content-Type': 'application/json'
+//     }
+//   });
 
-  const data = await response.json();
-  return quizResponse;
+//   const data = await response.json();
+//   return quizResponse;
 }catch (e) {
 return false;
 }
