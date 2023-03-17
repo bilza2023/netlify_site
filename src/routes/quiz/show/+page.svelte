@@ -30,10 +30,18 @@ try {
 }
 }); 
 //--------
-$:pageStateVar = 0;
-pageState.subscribe( (p)=> pageStateVar=p);
+let isLoading = true;
+$: pageStateVar = 0;
+pageState.subscribe((p) => pageStateVar = p);
+$: isLoading = !quiz && pageStateVar !== 0;
 
 </script>
+
+
+{#if !quiz}
+  <p>Loading quiz...</p>
+{:else}
+
 
 <!-- Quiz Title -->
 {#if pageStateVar !=0}
@@ -65,4 +73,8 @@ pageState.subscribe( (p)=> pageStateVar=p);
 <!--Outro-->
 {#if pageStateVar==2}
 <Outro {quiz}/>
+{/if}
+
+
+
 {/if}
