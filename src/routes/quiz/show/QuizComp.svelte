@@ -3,7 +3,7 @@ import {pageState} from "./showQuizStore";
 import ProgressBar from "$lib/cmp/ProgressBar.svelte";
 
 export let quiz = {};
-const questions = quiz.questions;
+$: questions = quiz.questions;
 let cq = 0;
 
 const next = ()=>{
@@ -20,6 +20,7 @@ const prev = ()=>{
     cq= 0;
   }
 }
+
 </script>
 
 <div class="grid-container bg-gray-700 text-white">

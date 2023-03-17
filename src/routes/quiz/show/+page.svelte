@@ -1,5 +1,4 @@
 <script>
-export const prerender = true;
 import {pageState} from "./showQuizStore";
 //--------
 let pageStateVar = 0;
@@ -17,15 +16,19 @@ let quizId;
 
 onMount(async () => {
 try {
+//http://localhost:5173/quiz/show?quizId=6411609828a369b541fcd7d7
   quizId = new URLSearchParams(location.search).get("quizId");
-  const url = `http://localhost/quiz/${quizId}`;
-  console.log(url);
+  const url = `https://skillzaa.cyclic.app/quiz/${quizId}`;
+  // quizId = "6411609828a369b541fcd7d7";
+  // const url = `https://skillzaa.cyclic.app/quiz/6411609828a369b541fcd7d7`;
+  // console.log(url);
   const resp = await fetch(url);
   const data = await resp.json();
+  quiz = data.quiz;
+  // console.log(data);
 
   // quiz = QuizJson;
-  quiz = data.quiz;
-  console.log(quiz._id);
+  // console.log(quiz._id);
 } catch (error) {
     console.error(error);
 }
