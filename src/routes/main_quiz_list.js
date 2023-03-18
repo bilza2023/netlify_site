@@ -9,7 +9,7 @@ export const  mainQuizList = [
   title : "Interesting Geographical Facts",
   imageSrc : "./images/thumb02.jpeg",
   },
-{ link : "/quiz/show?quizId=6415762588cddb0a53a975f6",
+{ link : "/quiz/show?quizId=6415772266667a9dcfbf72bf",
   title : "Junior Front End Web Developer",
   imageSrc : "./images/thumb03.jpeg",
   },
