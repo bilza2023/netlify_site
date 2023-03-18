@@ -1,8 +1,8 @@
 
 
 export const  mainQuizList = [
-{ link : "/quiz/show?quizId=6411609828a369b541fcd7d7",
-  title : "Mongodb Introduction",
+{ link : "/quiz/show?quizId=64156540037fdafee50af10b",
+  title : "Interesting Facts about Global Economy",
   imageSrc : "./images/thumb01.jpeg",
   },
 { link : "/quiz/show?quizId=6414ec4fa19c446f0e6d2b53",
