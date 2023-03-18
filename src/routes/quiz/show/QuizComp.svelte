@@ -92,17 +92,17 @@ const prev = ()=>{
 
 .grid-container {
   display: grid;
-  grid-template-columns: 5% 90% 5%;
+  grid-template-columns: 2% 96% 2%;
   grid-template-rows: repeat(3, auto);
   grid-gap: 5px;
-  margin :5%;
+  margin :1%;
   margin-top: 0;
   
 }
 
 .grid-item {
 
-  padding: 5px;
+  padding: 1px;
 }
 
 .first-column {

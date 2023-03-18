@@ -2,7 +2,7 @@
 
 export const  mainQuizList = [
 { link : "/quiz/show?quizId=64156540037fdafee50af10b",
-  title : "Interesting Facts about Global Economy",
+  title : "Interesting Global Economy Facts",
   imageSrc : "./images/thumb01.jpeg",
   },
 { link : "/quiz/show?quizId=6414ec4fa19c446f0e6d2b53",
