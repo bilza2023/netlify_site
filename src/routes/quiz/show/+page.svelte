@@ -46,7 +46,7 @@ $: isLoading = !quiz && pageStateVar !== 0;
 <!-- Quiz Title -->
 {#if pageStateVar !=0}
 <div class="flex justify-center">
-  <h1 class="bg-blue-900  p-3 m-4  mt-0  w-full text-center text-2xl">         {quiz.title}
+  <h1 class="bg-blue-900  p-2 m-1  mt-0  w-full text-center text-2xl">         {quiz.title}
   </h1>
 </div>
 {/if}
