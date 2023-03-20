@@ -24,7 +24,7 @@ function checkQCorrectOptionExists(questions,errorsArray){
 
 for (let i = 0; i < questions.length; i++) {
     const q = questions[i];
-    const exists = false;
+    let exists = false;
     
     for (let j = 0; j < q.options.length; j++) {
     if ( q.options[j].id == q.correctOption ) {
