@@ -1,8 +1,9 @@
 <script>
-import FormRow from "./FormRow.svelte";
 import Tf from "./Tf.svelte";
-export let quiz;
+import Th from "./Th.svelte";
+import FormRow from "./FormRow.svelte";
  import { fade } from 'svelte/transition';
+export let quiz;
   let visible = true;
 
   function toggleVisibility() {
@@ -10,33 +11,18 @@ export let quiz;
   }
 </script>
 
+<Th title={quiz.title}>
 
-
-<!-- /////////////////////////// -->
-<div class="flex   rounded-t-lg border border-gray-400 p-0">
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="rounded-t-lg border border-gray-400 p-2 
-    hover:cursor-pointer"
-    on:click={toggleVisibility}    
-    >
-        {visible == true ? "Hide" : "Show" }
-    </div>
-    
-    <div class="  text-center w-full p-2">
-        {quiz.title} 
-    </div>
-</div>
-
-<!-- ///////////////////////////////////// -->
-{#if visible == true}
-    
 <div in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} 
  class="border-2 border-gray-500 p-1 m-0 mt-0" >
+
+
 <FormRow title="Quiz Title">
 <input type="text" class="w-full bg-gray-700 color-white"
 bind:value={quiz.title} 
 >
 </FormRow>
+
 
 <FormRow title="Save Responses">
 <Tf />
@@ -49,4 +35,5 @@ bind:value={quiz.title}
 </div>
 
 
-{/if}
+
+</Th>

@@ -19,23 +19,39 @@ questions = quiz.questions;
 
 const addQuestion = ()=>{
 const q = getQuestion( uuidv4());
-// console.log("addQuestion",q);
+const op1 = getOption( uuidv4());
+const op2 = getOption( uuidv4());
+q.options.push(op1);
+q.options.push(op2);
 quiz.questions.push(q);
+quiz = quiz;
+}
+const addOption = (qId)=>{
+const op = getOption( uuidv4());
+quiz.questions[qId].options.push(op);
+quiz = quiz;
+}
+const deleteOption = (q_index,option_index)=>{
+quiz.questions[q_index].options.splice(option_index, 1);
 quiz = quiz;
 }
 </script>
 
-<br/>
+<p class="underline">Quiz</p>
+<br>
 <!-- <Tf /> -->
 {#if quiz}
 <QuizBlock {quiz}/>
 {/if}
 
 <br>
+<p class="underline">Questions</p>
+<br>
 {#if quiz && quiz.questions && quiz.questions.length > 0}
     
-{#each quiz.questions as question }
-<Question {question} />
+{#each quiz.questions as question, qIndex }
+<Question {question} {addOption} {qIndex} {deleteOption}/>
+<br>
 {/each}
 {/if}
 

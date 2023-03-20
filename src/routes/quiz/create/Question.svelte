@@ -1,35 +1,74 @@
 <script>
+import Th from "./Th.svelte";
+import FormRow from "./FormRow.svelte";
+ import { fade } from 'svelte/transition';
 export let question;
+export let addOption;
+export let deleteOption;
+export let qIndex;
+
+const mark_correct = (option_id)=>{
+question.correctOption = option_id;
+}
 
 </script>
 
+<Th title={question.content}>
+
+<div in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} 
+ class="border-2 border-gray-500 p-1 m-0 mt-0" >
 
 
-<div class="bg-gray-500 rounded-sm m-2 p-2 border-2 border-white mx-auto quiz-question">
+<FormRow title="Question">
+<input type="text" class="w-full bg-gray-700 color-white"
+bind:value={question.content} 
+>
+</FormRow>
 
-<h1><input class="bg-gray-800" type="text" bind:value={question.content}></h1>
-<hr>
-    <ol>
-    {#each question.options as option, optionIndex }
-        <li class="flex items-center">
-            <input class= "bg-gray-500 text-white border-2 border-red-400 m-2"
-             type="text" 
-             bind:value={question.options[optionIndex].content}>
-
-  <button class="ml-2 py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" on:click={()=>question.correctAnswer = question.options[optionIndex].id}>
-    Mark Correct
-  </button>
-    </li>
-
-    {/each}
-    </ol>
-<br>
+<br/>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="flex bg-green-600 m-2 p-2 w-2/12 rounded-sm focus:outline-none active:bg-green-400 hover:bg-green-500 hover:cursor-pointer"
+on:click={()=>addOption(qIndex)}
+>
+<span class="">Options</span> &nbsp;&nbsp;&nbsp;&nbsp;
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+    <path d="M12 2v20m10-10H2" stroke="white" stroke-width="3" fill="none"/>
+</svg>
 </div>
 
+<br/>
 
-<style>
-.quiz-question {
-  width: 80%;
-}
+    <div class="text-center">
+    {#each question.options as option , option_index }
+      <div class="flex mb-1 border-2 border-gray-400 mx-10">    
+          
+          <input
+          class="bg-gray-500 text-white w-8/12 " 
+          type="text" value={option.content} 
+          />
+          
+          {#if question.correctOption==option.id}
+          <button class="w-2/12 bg-green-600 rounded-sm focus:outline-none active:bg-green-400 hover:bg-green-500 hover:cursor-pointer mx-2 my-1"
+          on:click={mark_correct(option.id)}>
+          Mark Correct
+          </button>
+          {:else}
+          <button class="w-2/12 bg-gray-600 rounded-sm focus:outline-none active:bg-gray-400 hover:bg-gray-500 hover:cursor-pointer mx-2 my-1"
+          on:click={mark_correct(option.id)}>
+          Mark Correct
+          </button>
+          {/if}
+          
 
-</style>
+
+          <button class="w-2/12 bg-red-600 rounded-sm focus:outline-none active:bg-red-400 hover:bg-red-500 hover:cursor-pointer mx-2 my-1"
+          on:click={()=>deleteOption(qIndex,option_index)}>
+          Delete
+          </button>
+      </div>
+    {/each}
+    </div>
+
+</div>
+
+</Th>
