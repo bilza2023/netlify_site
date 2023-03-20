@@ -1,13 +1,13 @@
 
 export function getQuiz(){
 const quiz = {
-  title: "Quiz Title",
+  title: "",
   userId: "",
   saveResponse: false,
   showIntro: true,
-  introText: "Intro Text",
-  showResult: "true",
-  farewellText: "Farewell Text",
+  introText: "",
+  showResult: true,
+  farewellText: "",
   
   questions: [],
 }
@@ -16,10 +16,10 @@ return quiz;
 ///////////////////////////////////////////////////
 export function getQuestion(id){
 const question = {
-    content: "Question Statement ?",
+    content: "",
     id: id,
     correctOption : "",
-    explanation: "explanation",
+    explanation: "",
     options: [ ]
 }
 return question;
@@ -28,7 +28,7 @@ return question;
 export function getOption(id){
 const option = {
      id: id,
-    content: "The Option"
+    content: ""
 }
 return option;
 }

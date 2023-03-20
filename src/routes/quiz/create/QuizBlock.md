@@ -33,8 +33,10 @@ export let quiz;
 <div in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} 
  class="border-2 border-gray-500 p-1 m-0 mt-0" >
 <FormRow title="Quiz Title">
+
 <input type="text" class="w-full bg-gray-700 color-white"
 bind:value={quiz.title} 
+placeholder = "Title Of the Quiz Test"
 >
 </FormRow>
 

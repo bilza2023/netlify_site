@@ -44,7 +44,7 @@ on:click={()=>addOption(qIndex)}
           
           <input
           class="bg-gray-500 text-white w-8/12 " 
-          type="text" value={option.content} 
+          type="text" bind:value={option.content} 
           />
           
           {#if question.correctOption==option.id}
