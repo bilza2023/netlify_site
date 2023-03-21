@@ -1,9 +1,11 @@
 <script>
 import { onMount } from 'svelte';
+
 import save from "./save.js";
 import { v4 as uuidv4 } from 'uuid';
 import Question from './Question.svelte';
 import Errors from './Errors.svelte';
+
 import {getQuiz, getQuestion , getOption} from "./new_quiz.js";
 import QuizBlock from "./QuizBlock.svelte";
 // import Tf from "./Tf.svelte";
@@ -13,42 +15,34 @@ let questions;
 let errors_Array = [];
 let showErrors = false;
 
-
 onMount(async () => {
-quiz = getQuiz();
-questions = quiz.questions;
-// console.log(quiz);
-
+  quiz = getQuiz();
+  questions = quiz.questions;
+  // console.log(quiz);
 });
 
 const addQuestion = ()=>{
-const q = getQuestion( uuidv4());
-const op1 = getOption( uuidv4());
-const op2 = getOption( uuidv4());
-q.options.push(op1);
-q.options.push(op2);
-quiz.questions.push(q);
-quiz = quiz;
-}
-const addOption = (qId)=>{
-const op = getOption( uuidv4());
-quiz.questions[qId].options.push(op);
-quiz = quiz;
-}
-const deleteOption = (q_index,option_index)=>{
-quiz.questions[q_index].options.splice(option_index, 1);
-quiz = quiz;
+    const q = getQuestion( uuidv4());
+    const op1 = getOption( uuidv4());
+    const op2 = getOption( uuidv4());
+    q.options.push(op1);
+    q.options.push(op2);
+    quiz.questions.push(q);
+    quiz = quiz;
 }
 
-const saveMain = ()=>{
-const r = save(quiz);
-  if (r.length > 0){
-  errors_Array = r;
-  showErrors = true;
-  }else {
-    console.log("success",quiz);
-  }
+const addOption = (qId)=>{
+  const op = getOption( uuidv4());
+  quiz.questions[qId].options.push(op);
+  quiz = quiz;
 }
+
+const deleteOption = (q_index,option_index)=>{
+  quiz.questions[q_index].options.splice(option_index, 1);
+  quiz = quiz;
+}
+
+
 </script>
 
 <p class="underline">Quiz</p>
@@ -95,7 +89,7 @@ on:click={()=>showErrors = false}>Hide</button>
 
 
 <button class="flex items-center bg-blue-700 rounded-sm m-2 p-2 border-blue-300 border-2 hover:bg-blue-600 active:bg-blue-800"
-   on:click={saveMain} 
+   on:click={save} 
 >
   <span class="text-white mr-2">Save</span>
 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">

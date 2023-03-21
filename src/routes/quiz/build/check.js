@@ -1,4 +1,4 @@
-export default function save(quiz){
+export default function check(quiz){
 const errorsArray = [];
 
 if (quiz.title == ""){
@@ -27,7 +27,8 @@ for (let i = 0; i < questions.length; i++) {
     let exists = false;
     
     for (let j = 0; j < q.options.length; j++) {
-    if ( q.options[j].id == q.correctOption ) {
+    if ( q.options[j].id == q.correctOption ) 
+            {
             exists = true;
             }
     }
@@ -90,3 +91,6 @@ for (let i = 0; i < questions.length; i++) {
 }
 
 }
+
+
+
