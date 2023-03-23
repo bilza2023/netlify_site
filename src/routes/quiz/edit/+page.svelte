@@ -1,22 +1,36 @@
 <script>
 import { onMount } from 'svelte';
-
 import save from "./save.js";
+import update from "./update.js";
 import { v4 as uuidv4 } from 'uuid';
 import Question from './Question.svelte';
 import Errors from './Errors.svelte';
-
 import {getQuiz, getQuestion , getOption} from "./new_quiz.js";
 import QuizBlock from "./QuizBlock.svelte";
-// import Tf from "./Tf.svelte";
-
+import check from "./check.js";
+import { page } from '$app/stores';
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
 let quiz;
 let questions;
 let errors_Array = [];
 let showErrors = false;
 
+
 onMount(async () => {
-  quiz = getQuiz();
+//http://localhost:5173/quiz/show?quizId=6411609828a369b541fcd7d7
+const  quizId = new URLSearchParams(location.search).get("quizId");
+// const href= `http://localhost/quiz/${quizId}`;
+// console.log(href);
+const resp = await fetch( "http://localhost/quiz/find" , {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify( {token : "fdee087980kjk" ,quizId} )
+    });
+    const incommingQuiz = await resp.json();
+  quiz = incommingQuiz.quiz;
   questions = quiz.questions;
   // console.log(quiz);
 });
@@ -41,13 +55,36 @@ const deleteOption = (q_index,option_index)=>{
   quiz.questions[q_index].options.splice(option_index, 1);
   quiz = quiz;
 }
-
+const saveMain = async ()=>{
+errors_Array = check(quiz);
+// console.log("fireOnce.fired()" , fireOnce.fired())
+    if ( errors_Array.length > 0){
+        showErrors = true;
+      return;
+    }
+//----------
+const resp = await fetch('http://localhost/quiz/update',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify( {quiz} )
+    });
+      const {updatedQuiz, status} = await resp.json();
+        if (status == "ok") { 
+            // console.log(newQuiz ,newQuizId, status);       
+            return {updatedQuiz , status}
+        }else {
+            return {status:"failed"}
+        }
+}//main save ends
 
 </script>
 
 <p class="underline">Quiz</p>
 <br>
-<!-- <Tf /> -->
+
+
 {#if quiz}
 <QuizBlock {quiz}/>
 {/if}
@@ -62,9 +99,6 @@ const deleteOption = (q_index,option_index)=>{
 <br>
 {/each}
 {/if}
-
-
-
 
 
 <br>
@@ -89,7 +123,7 @@ on:click={()=>showErrors = false}>Hide</button>
 
 
 <button class="flex items-center bg-blue-700 rounded-sm m-2 p-2 border-blue-300 border-2 hover:bg-blue-600 active:bg-blue-800"
-   on:click={save} 
+   on:click={saveMain} 
 >
   <span class="text-white mr-2">Save</span>
 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">

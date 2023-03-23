@@ -18,7 +18,7 @@ fire(){
         }
 }
 
-fired(){
+isFired(){
 return this.fired;
 }
 
