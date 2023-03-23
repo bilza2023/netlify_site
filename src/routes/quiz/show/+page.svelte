@@ -9,22 +9,19 @@ import QuizComp from "./QuizComp.svelte";
 
 let quiz;
 let quizId;
-
+let state = "loading";
 onMount(async () => {
 try {
 //http://localhost:5173/quiz/show?quizId=6411609828a369b541fcd7d7
-  quizId = new URLSearchParams(location.search).get("quizId");
-  const url = `https://skillzaa.cyclic.app/quiz/${quizId}`;
-  // quizId = "6411609828a369b541fcd7d7";
-  // const url = `https://skillzaa.cyclic.app/quiz/6411609828a369b541fcd7d7`;
-  // console.log(url);
+  quizId = new URLSearchParams(location.search).get("quizId"); 
+  // const url = `https://skillzaa.cyclic.app/quiz/${quizId}`;
+  const url = `http://localhost/quiz/show/${quizId}`;
   const resp = await fetch(url);
   const data = await resp.json();
   quiz = data.quiz;
-  // console.log(data);
+  console.log("quiz",quiz);
 
-  // quiz = QuizJson;
-  // console.log(quiz._id);
+
 } catch (error) {
     console.error(error);
 }

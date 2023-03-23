@@ -29,7 +29,7 @@ is_login.set(false);
     <div class="hidden md:flex md:items-center md:w-auto">
       <nav>
         <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-          <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/">Home</a></li>
+          <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/forms">Forms</a></li>
           {#if isLogin}
             <li><a class="text-white hover:text-gray-300 py-2 px-4" href="#"
             on:click={logoutFn} >logout</a></li>
