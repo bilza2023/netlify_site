@@ -22,7 +22,7 @@ onMount(async () => {
 const  quizId = new URLSearchParams(location.search).get("quizId");
 // const href= `http://localhost/quiz/${quizId}`;
 // console.log(href);
-const resp = await fetch( "http://localhost/quiz/find" , {
+const resp = await fetch( "https://skillzaa.cyclic.app/quiz/find" , {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
