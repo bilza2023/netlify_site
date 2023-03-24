@@ -15,9 +15,10 @@ const removeIntro = ()=>{ state="showQuiz"; console.log("showQuiz");}
 
 onMount(async () => {
 try {
+
 //http://localhost:5173/quiz/show?quizId=6411609828a369b541fcd7d7
   quizId = new URLSearchParams(location.search).get("quizId"); 
-  const url = `https://skillzaa.cyclic.app/quiz/${quizId}`;
+  const url = `https://skillzaa.cyclic.app/quiz/show/${quizId}`;
   // const url = `http://localhost/quiz/show/${quizId}`;
   const resp = await fetch(url);
   const data = await resp.json();

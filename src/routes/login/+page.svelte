@@ -17,11 +17,10 @@ async function handleSubmit(event) {
       'Content-Type': 'application/json'
     }
   });
-  const RespData = await response.json();
-  localStorage.setItem('token', RespData.token);
-   is_login.set(true);
-        goto('/');
-  
+      const RespData = await response.json();
+      localStorage.setItem('token', RespData.token);
+      is_login.set(true);
+      goto('/');
   }
 </script>
 
