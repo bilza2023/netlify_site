@@ -3,7 +3,7 @@ import { goto } from '$app/navigation';
 import {pageState} from "./showQuizStore";
 export let title = "Welcome to our website!";
 export let description = "Discover the best deals today!";
-
+export let callToAction;
 </script>
 
 
@@ -33,7 +33,7 @@ export let description = "Discover the best deals today!";
     </button>
 
     <button class="bg-green-500 text-white m-3 p-3 rounded-lg"
-    on:click={ ()=> pageState.set(1) }>
+    on:click={ callToAction }>
     Quiz
     </button>
 

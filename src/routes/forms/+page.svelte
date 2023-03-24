@@ -1,4 +1,8 @@
 <script>
+import {is_login} from "$lib/stores/appStore.js";
+let isLogin =false;
+is_login.subscribe( (p)=> isLogin=p);
+
 import { onMount } from 'svelte';
 let newPRojectName = "";
 $: quizzes = [];
@@ -20,18 +24,21 @@ const resp = await fetch( "http://localhost/quiz/new" , {
 }
 
 onMount(async () => {
-populate();
+  if (isLogin == true){
+      populate();
+  }
 }); 
 const populate = async () =>{
 try {
 //http://localhost:5173/quiz/show?quizId=6411609828a369b541fcd7d7
 //   quizId = new URLSearchParams(location.search).get("quizId");
-  const url = `http://localhost/quiz/page/10/0`;
+  // const url = `http://localhost/quiz/page/10/0`;
+  const url = `https://skillzaa.cyclic.app/quiz/page/10/0`;
 // debugger;
   const resp = await fetch(url);
   const data = await resp.json();
 //   console.log(data);
-  quizzes = data.quizzes;
+  quizzes = data.quizzes; 
   console.log("quizzes",quizzes);
 
 } catch (error) {
@@ -39,16 +46,22 @@ try {
 }
 }
 </script>
+{#if isLogin == false}
+<h1><a href="/login">Please login</a></h1>
+{/if}
+
+
+{#if isLogin == true}
 <input class="bg-gray-700 text-white"  type="text" bind:value={newPRojectName} >
 <button on:click={newQuiz}>New Project</button>
 
 
 
-<div class="p-4 m-4 rounded-md ">
+<div class="p-4 m-4">
   {#if quizzes}
     <table class="w-full border-collapse border-white">
       <thead class="">
-        <tr class="bg-gray-700 text-white">
+        <tr class="bg-gray-900 text-white">
           <th class="py-2 px-4 border">Ser</th>
           <th class="py-2 px-4 border">Title</th>
           <th class="py-2 px-4 border">Edit</th>
@@ -57,7 +70,7 @@ try {
       </thead>
       <tbody>
         {#each quizzes as quiz,index }
-          <tr class="text-white bg-gray-700">
+          <tr class="text-white bg-gray-900">
             <td class="py-2 px-4 border">{index+1}</td>
             <td class="py-2 px-4 border">{quiz.title}</td>
 
@@ -84,3 +97,5 @@ try {
     </table>
   {/if}
 </div>
+
+{/if} 

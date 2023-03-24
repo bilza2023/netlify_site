@@ -1,8 +1,8 @@
 <script>
   let isVisible = false;
+
 import {is_login} from "$lib/stores/appStore.js";
 let isLogin =false;
-
 is_login.subscribe( (p)=> isLogin=p);
 
 const logoutFn = ()=>{
