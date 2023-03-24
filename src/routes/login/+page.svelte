@@ -9,7 +9,8 @@ async function handleSubmit(event) {
   const password = document.querySelector('input[name="password"]').value;
   const data = { email, password };
 
-  const response = await fetch('http://localhost/user/login', {
+  // const response = await fetch('http://localhost/user/login', {
+  const response = await fetch('https://skillzaa.cyclic.app/user/login', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
