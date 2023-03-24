@@ -1,6 +1,8 @@
 <script>
 import { goto } from '$app/navigation';
 import {is_login} from "$lib/stores/appStore.js";
+ import { toast } from '@zerodevx/svelte-toast';
+
 
 import LoadBtn from '$lib/cmp/LoadBtn.svelte';
 let isLoading = false;
@@ -29,6 +31,14 @@ isLoading = true;
       goto('/');
   }
 </script>
+
+<button on:click={() => toast.push('Some Damn Error!',{
+ theme: {
+    '--toastBackground': 'red',
+    '--toastColor': 'white'
+  }
+
+})}>SHOW TOAST</button>
 
 <style>
   form {

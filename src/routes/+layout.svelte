@@ -4,6 +4,11 @@ import MainNav from '$lib/cmp/MainNav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 // import Underconstruction from '$lib/cmp/Underconstruction.svelte';
 import './styles.css';
+import { SvelteToast } from '@zerodevx/svelte-toast'
+
+
+
+
 let isLogin;
 
  onMount(async ()=>{
@@ -20,6 +25,8 @@ try {
 });
 
 </script>
+<SvelteToast />
+
 <MainNav isLogin={isLogin}/>
 
 <div class="app bg-gray-800 text-white m-0 pb-0 pt-0 pl-6 pr-6 ">
