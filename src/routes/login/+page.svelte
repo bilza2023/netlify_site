@@ -2,7 +2,12 @@
 import { goto } from '$app/navigation';
 import {is_login} from "$lib/stores/appStore.js";
 
+import LoadBtn from '$lib/cmp/LoadBtn.svelte';
+let isLoading = true;
+
 async function handleSubmit(event) {
+isLoading = false;
+// return;
   event.preventDefault();
   // const name = document.querySelector('input[name="name"]').value;
   const email = document.querySelector('input[name="email"]').value;
@@ -58,6 +63,7 @@ async function handleSubmit(event) {
   }
 </style>
 
+
 <form class="w-3/5 sm:w-4/5 mx-auto bg-gray-600 rounded-md">
   <label>
     Email:
@@ -67,5 +73,12 @@ async function handleSubmit(event) {
     Password:
     <input type="password" name="password" required value="123456">
   </label>
+  
+<LoadBtn showFirst={isLoading}>
   <button class="bg-white text-black rounded-md p-2 pl-4 pr-6 m-6"  on:click={handleSubmit}>Submit</button>
+  <div slot="alternate" class="border-white broder-2">
+  <div  class= "animate-spin w-8 h-8 border-white rounded-full border-b-8"></div>
+  </div>
+</LoadBtn>
+  
 </form>
