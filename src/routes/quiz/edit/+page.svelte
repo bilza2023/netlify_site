@@ -63,7 +63,7 @@ errors_Array = check(quiz);
       return;
     }
 //----------
-const resp = await fetch('http://localhost/quiz/update',{
+const resp = await fetch('https://skillzaa.cyclic.app/quiz/update',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
