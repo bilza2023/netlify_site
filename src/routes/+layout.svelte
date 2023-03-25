@@ -6,9 +6,6 @@ import Footer from '$lib/cmp/Footer.svelte';
 import './styles.css';
 import { SvelteToast } from '@zerodevx/svelte-toast'
 
-
-
-
 let isLogin;
 
  onMount(async ()=>{
