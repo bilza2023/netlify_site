@@ -40,13 +40,13 @@ const passwordError = validateString(password,6,30);
 isLoading = true;
   
   // const response = await fetch('http://localhost/user/login', {
-  const response = await fetch('https://skillzaa.cyclic.app/user/login', {
+const response = await fetch('https://skillzaa.cyclic.app/user/login', {
     method: 'POST',
     body: JSON.stringify( {email,password} ),
     headers: {
       'Content-Type': 'application/json'
     }
-  });
+});
       const RespData = await response.json();
       localStorage.setItem('token', RespData.token);
       is_login.set(true);
@@ -90,7 +90,7 @@ isLoading = true;
 
 <br>
 <form id="my-form" class="w-3/5 sm:w-4/5 mx-auto bg-gray-600 rounded-md">
-<h1 class=" p-2 text-3xl mt-2">Login</h1>
+<h1 class=" p-2 text-xl mt-2">Login</h1>
   <label>
     Email:
     <input type="email" name="email" required  bind:value={email}>
