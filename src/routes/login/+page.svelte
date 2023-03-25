@@ -18,23 +18,13 @@ event.preventDefault();
 
 const emailError = validateEmail(email);
     if (emailError.status !== "ok"){
-          toast.push('Not a valid email',{
-      theme: {
-          '--toastBackground': 'brown',
-          '--toastColor': 'white'
-        }
-      });  
+          toast.push('Not a valid email');  
       return;
     }
 
 const passwordError = validateString(password,6,30);
     if (passwordError.status !== "ok"){
-          toast.push('Not a valid password',{
-      theme: {
-          '--toastBackground': 'brown',
-          '--toastColor': 'white'
-        }
-      });  
+          toast.push('Not a valid password');  
       return;
     }
 
