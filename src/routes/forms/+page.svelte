@@ -54,8 +54,9 @@ const token = localStorage.getItem('token');
         <tr class="bg-gray-900 text-white">
           <th class="py-2 px-4 border">Ser</th>
           <th class="py-2 px-4 border">Title</th>
-          <th class="py-2 px-4 border">Edit</th>
           <th class="py-2 px-4 border">Show</th>
+          <th class="py-2 px-4 border">Edit</th>
+          <th class="py-2 px-4 border">Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -71,9 +72,15 @@ const token = localStorage.getItem('token');
   </a>
 </td>
 
-<td class="py-2 px-4 border bg-red-900 text-center text-white hover:bg-red-700 active:bg-red-800 rounded-md transition duration-200">
+<td class="py-2 px-4 border bg-green-900 text-center text-white hover:bg-green-700 active:bg-green-800 rounded-md transition duration-200">
   <a href={`/quiz/edit?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
     edit
+  </a>
+</td>
+
+<td class="py-2 px-4 border bg-red-900 text-center text-white hover:bg-red-700 active:bg-red-800 rounded-md transition duration-200">
+  <a href={`/quiz/edit?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
+    delete
   </a>
 </td>
             
