@@ -4,6 +4,7 @@ import {is_login} from "$lib/stores/appStore.js";
 import { toast } from '@zerodevx/svelte-toast';
 import validateEmail from "$lib/js/validateEmail.js";
 import validateString from "$lib/js/validateString.js";
+import { BASE_URL } from '$lib/js/config.js';
 
 let email ="";
 let password =""; 
@@ -28,7 +29,7 @@ const passwordError = validateString(password,6,30);
 
 isLoading = true; 
   
-const response = await fetch('https://skillzaa.cyclic.app/user/login', {
+const response = await fetch( `${BASE_URL}/user/login` , {
 // const response = await fetch('http://localhost/user/login', {
     method: 'POST',
     body: JSON.stringify( {email,password} ),

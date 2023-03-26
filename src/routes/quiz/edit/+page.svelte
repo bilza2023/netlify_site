@@ -9,6 +9,7 @@ import {getQuiz, getQuestion , getOption} from "./new_quiz.js";
 import QuizBlock from "./QuizBlock.svelte";
 import check from "./check.js";
 import { page } from '$app/stores';
+import { BASE_URL } from '$lib/js/config.js';
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 let quiz;
@@ -18,11 +19,12 @@ let showErrors = false;
 
 
 onMount(async () => {
+console.log(BASE_URL);
 //http://localhost:5173/quiz/show?quizId=6411609828a369b541fcd7d7
 const  quizId = new URLSearchParams(location.search).get("quizId");
 // const href= `http://localhost/quiz/${quizId}`;
 // console.log(href);
-const resp = await fetch( "https://skillzaa.cyclic.app/quiz/find" , {
+const resp = await fetch( `${BASE_URL}/quiz/find` , {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -63,7 +65,8 @@ errors_Array = check(quiz);
       return;
     }
 //----------
-const resp = await fetch('https://skillzaa.cyclic.app/quiz/update',{
+// const resp = await fetch('https://skillzaa.cyclic.app/quiz/update',{
+const resp = await fetch( `${BASE_URL}/quiz/update` ,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

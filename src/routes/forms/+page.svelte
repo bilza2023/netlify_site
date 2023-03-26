@@ -4,24 +4,11 @@ let isLogin =false;
 is_login.subscribe( (p)=> isLogin=p);
 
 import { onMount } from 'svelte';
-let newPRojectName = "";
+import NewQuizComp  from "./NewQuizComp.svelte";
+import { BASE_URL } from '$lib/js/config.js';
+
 $: quizzes = [];
 
-const newQuiz = async()=>{
-const resp = await fetch( "http://localhost/quiz/new" , {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify( {token : "fdee087980kjk" ,title :newPRojectName} )
-    });
-     newPRojectName = "";
-  const data = await resp.json();
-
-//   console.log(data);
-  populate();
-  // console.log("quizzes",quizzes);
-}
 
 onMount(async () => {
   if (isLogin == true){
@@ -30,12 +17,19 @@ onMount(async () => {
 }); 
 const populate = async () =>{
 try {
+const token = localStorage.getItem('token');
 //http://localhost:5173/quiz/show?quizId=6411609828a369b541fcd7d7
 //   quizId = new URLSearchParams(location.search).get("quizId");
-  // const url = `http://localhost/quiz/page/10/0`;
-  const url = `https://skillzaa.cyclic.app/quiz/page/10/0`;
+  // const url = `https://skillzaa.cyclic.app/quiz/page/10/0`;
 // debugger;
-  const resp = await fetch(url);
+  const resp = await fetch( `${BASE_URL}/quiz/page/10/0` ,{
+  method: 'GET',
+  headers: {
+    // 'Authorization': `Bearer ${token}`,
+    'Authorization': `${token}`
+  }
+  });
+
   const data = await resp.json();
 //   console.log(data);
   quizzes = data.quizzes; 
@@ -52,11 +46,14 @@ try {
 
 
 {#if isLogin == true}
-<input class="bg-gray-700 text-white"  type="text" bind:value={newPRojectName} >
-<button on:click={newQuiz}>New Project</button>
-
-
-
+<!-- <div class=" border-2 border-white p-2 m-2  text-center ">
+<h1 class="m-1 text-slate-200 text-3xl ">New Quiz</h1>
+<input class="bg-gray-700 text-white  w-10/12 m-1"  type="text" bind:value={newPRojectName} >
+<button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={newQuiz}>Create</button> 
+</div>-->
+<NewQuizComp callback={populate} />
+<br>
+<h1 class="m-1 text-slate-200 text-2xl mt-2 underline text-center">Quizzes</h1>
 <div class="p-4 m-4">
   {#if quizzes}
     <table class="w-full border-collapse border-white">
