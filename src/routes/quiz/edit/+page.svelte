@@ -10,6 +10,9 @@ import QuizBlock from "./QuizBlock.svelte";
 import check from "./check.js";
 import { page } from '$app/stores';
 import { BASE_URL } from '$lib/js/config.js';
+import { toast } from '@zerodevx/svelte-toast';
+import LoadBtn from '$lib/cmp/LoadBtn.svelte';
+let isLoading = false;
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 let quiz;
@@ -19,11 +22,9 @@ let showErrors = false;
 
 
 onMount(async () => {
-console.log(BASE_URL);
-//http://localhost:5173/quiz/show?quizId=6411609828a369b541fcd7d7
+// console.log(BASE_URL);
 const  quizId = new URLSearchParams(location.search).get("quizId");
-// const href= `http://localhost/quiz/${quizId}`;
-// console.log(href);
+
 const resp = await fetch( `${BASE_URL}/quiz/find` , {
       method: 'POST',
       headers: {
@@ -53,19 +54,23 @@ const addOption = (qId)=>{
   quiz = quiz;
 }
 
+const deleteQuestion = (q_index)=>{
+  quiz.questions.splice( q_index , 1 );
+  quiz = quiz;
+}
 const deleteOption = (q_index,option_index)=>{
   quiz.questions[q_index].options.splice(option_index, 1);
   quiz = quiz;
 }
 const saveMain = async ()=>{
 errors_Array = check(quiz);
-// console.log("fireOnce.fired()" , fireOnce.fired())
     if ( errors_Array.length > 0){
         showErrors = true;
       return;
     }
 //----------
-// const resp = await fetch('https://skillzaa.cyclic.app/quiz/update',{
+isLoading = true; 
+
 const resp = await fetch( `${BASE_URL}/quiz/update` ,{
       method: 'POST',
       headers: {
@@ -75,36 +80,44 @@ const resp = await fetch( `${BASE_URL}/quiz/update` ,{
     });
       const {updatedQuiz, status} = await resp.json();
         if (status == "ok") { 
-            // console.log(newQuiz ,newQuizId, status);       
-            return {updatedQuiz , status}
+            isLoading = false; 
+            toast.push('saved...'); 
         }else {
-            return {status:"failed"}
+            isLoading = false;
+            toast.push('failed to save!');
         }
 }//main save ends
 
 </script>
 
-<p class="underline">Quiz</p>
-<br>
 
+
+{#if !quiz}
+<h1>Loading...</h1>
+{/if}
 
 {#if quiz}
+<br>
+<p class="underline">Quiz</p>
+<br>
 <QuizBlock {quiz}/>
 {/if}
 
 <br>
-<p class="underline">Questions</p>
-<br>
 {#if quiz && quiz.questions && quiz.questions.length > 0}
+<br>
+<p class="underline">Questions</p>
     
-{#each quiz.questions as question, qIndex }
-<Question {question} {addOption} {qIndex} {deleteOption}/>
+{#each quiz.questions as question, index }
+<Question {question} {addOption} {index} {deleteOption} {deleteQuestion}/>
 <br>
 {/each}
 {/if}
 
 
 <br>
+{#if quiz}
+
 <button class="flex items-center bg-green-700 rounded-sm m-2 p-2 border-green-300 border-2 hover:bg-green-600 active:bg-green-800"
    on:click={addQuestion} 
 >
@@ -124,14 +137,6 @@ on:click={()=>showErrors = false}>Hide</button>
 </div>
 {/if}
 
+<LoadBtn {isLoading} eventHandler={saveMain} title="Save"  class="w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 mx-auto" />
 
-<button class="flex items-center bg-blue-700 rounded-sm m-2 p-2 border-blue-300 border-2 hover:bg-blue-600 active:bg-blue-800"
-   on:click={saveMain} 
->
-  <span class="text-white mr-2">Save</span>
-<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-  <path d="M21.49 5.5H2.51C1.673 5.5 1 6.173 1 7v10c0 .827.673 1.5 1.51 1.5h18.98c.837 0 1.51-.673 1.51-1.5V7c0-.827-.673-1.5-1.51-1.5zM12 16L6 12v4h6v-3h2v3h6v-4l-6 4z" stroke="white" stroke-width="3" fill="none"/>
-</svg>
-
-</button>
-
+{/if}

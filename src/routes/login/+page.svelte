@@ -5,7 +5,7 @@ import { toast } from '@zerodevx/svelte-toast';
 import validateEmail from "$lib/js/validateEmail.js";
 import validateString from "$lib/js/validateString.js";
 import { BASE_URL } from '$lib/js/config.js';
-
+ 
 let email ="";
 let password =""; 
 

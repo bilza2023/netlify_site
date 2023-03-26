@@ -18,10 +18,7 @@ onMount(async () => {
 const populate = async () =>{
 try {
 const token = localStorage.getItem('token');
-//http://localhost:5173/quiz/show?quizId=6411609828a369b541fcd7d7
-//   quizId = new URLSearchParams(location.search).get("quizId");
-  // const url = `https://skillzaa.cyclic.app/quiz/page/10/0`;
-// debugger;
+
   const resp = await fetch( `${BASE_URL}/quiz/page/10/0` ,{
   method: 'GET',
   headers: {
@@ -33,7 +30,7 @@ const token = localStorage.getItem('token');
   const data = await resp.json();
 //   console.log(data);
   quizzes = data.quizzes; 
-  console.log("quizzes",quizzes);
+  // console.log("quizzes",quizzes);
 
 } catch (error) {
     console.error(error);
@@ -46,11 +43,7 @@ const token = localStorage.getItem('token');
 
 
 {#if isLogin == true}
-<!-- <div class=" border-2 border-white p-2 m-2  text-center ">
-<h1 class="m-1 text-slate-200 text-3xl ">New Quiz</h1>
-<input class="bg-gray-700 text-white  w-10/12 m-1"  type="text" bind:value={newPRojectName} >
-<button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={newQuiz}>Create</button> 
-</div>-->
+
 <NewQuizComp callback={populate} />
 <br>
 <h1 class="m-1 text-slate-200 text-2xl mt-2 underline text-center">Quizzes</h1>
