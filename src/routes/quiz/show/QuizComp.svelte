@@ -1,7 +1,7 @@
 <script>
 import {pageState} from "./showQuizStore";
 import ProgressBar from "$lib/cmp/ProgressBar.svelte";
-
+export let setPageState;
 export let quiz = {};
 $: questions = quiz.questions;
 let cq = 0;
@@ -72,7 +72,7 @@ const prev = ()=>{
 <br>
   <button 
     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded flex items-center focus:outline-none focus:shadow-outline"
-    on:click={ ()=> pageState.set(2)  }   > 
+    on:click={ ()=> setPageState("outro")  }   > 
     <svg class="w-6 h-6 fill-current mr-2" viewBox="0 0 24 24">
       <path d="M16.59 6l-5.3-5.3C11.16.21 10.91 0 10.59 0H3C1.9 0 1.01.9 1.01 2L1 22c0 1.1.89 2 1.99 2H19c1.1 0 2-.9 2-2V8c0-.31-.21-.56-.5-.66L16.59 6zM5 18V9h2v9H5zm3 0V9h2v9H8zm3 0V9h2v9h-2zm3 0V9h2v9h-2z"/>
     </svg>

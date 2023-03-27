@@ -1,9 +1,8 @@
 <script>
 import { goto } from '$app/navigation';
-import {pageState} from "./showQuizStore";
 export let title = "Welcome to our website!";
 export let description = "Discover the best deals today!";
-export let callToAction;
+export let setPageState;
 </script>
 
 
@@ -33,7 +32,7 @@ export let callToAction;
     </button>
 
     <button class="bg-green-500 text-white m-3 p-3 rounded-lg"
-    on:click={ callToAction }>
+    on:click={ ()=>setPageState("showQuiz") }>
     Quiz
     </button>
 

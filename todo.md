@@ -7,17 +7,15 @@ Mid-Term
 
 27-match-2023
 1. Remove Navbar from the quiz/show/page
-2. Remove personal links from footer.
+2. XX Remove personal links from footer.
 3. XX-Show -> move Buttons below
-4. Show -> Hide quiz when show result.
-5. Show -> improve results page
-6. Square Question Delete and Hide/Show Button
-7. show farewell text.
+4. -- Show -> Hide quiz when show result.
+5. -- Show -> improve results page
+7. -- show farewell text.
 8. no login in mobile.
 9. in mobile navbar does not close.
 10. mobile remove navbar li dots
 11. on small screens larger quiz size.
--. dont have saving responses yet.
 
 26-march-2023
 1. Register page :  Complete as login was done.

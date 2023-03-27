@@ -1,5 +1,5 @@
 <script>
-import {pageState} from "./showQuizStore";
+// import {pageState} from "./showQuizStore";
 //--------
 import { onMount } from 'svelte';
 // import { page } from '$app/stores';
@@ -7,14 +7,12 @@ import Intro from "./Intro.svelte";
 import Outro from "./Outro.svelte";
 import QuizComp from "./QuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
- export const metadata = {
-    layout: null
-  };
+
 let quiz;
 let quizId;
-let state = "loading";
+let pageState = "loading";
 
-const removeIntro = ()=>{ state="showQuiz"}
+const setPageState = (st)=>{ pageState= st;}
 
 onMount(async () => {
 try {
@@ -25,28 +23,28 @@ try {
   const data = await resp.json();
   quiz = data.quiz;
   
-state = "loaded";
+pageState = "loaded"; //change it to setPageState()
 
 } catch (error) {
     console.error(error);
 }
 }); 
 //--------
-let isLoading = true;
-$: pageStateVar = 0;
-pageState.subscribe((p) => pageStateVar = p);
-$: isLoading = !quiz && pageStateVar !== 0;
+// let isLoading = true;
+// $: pageStateVar = 0;
+// pageState.subscribe((p) => pageStateVar = p);
+// $: isLoading = !quiz && pageStateVar !== 0;
 
 </script>
 
 
-{#if state == "loading"}
-  <p>Loading quiz...</p>
+{#if pageState == "loading"}
+  <p class="p-4 m-4 w-full bg-gray-500 border-2 border-gray-200 text-2xl">Loading...</p>
 {:else}
 
 
 <!-- Quiz Title Always Except When Loading-->
-{#if state !== "loading"}
+{#if pageState !== "loading" && pageState !== "loaded"}
 <div class="flex justify-center">
   <h1 class="bg-blue-900  p-2 m-1  mt-0  w-full text-center text-2xl rounded-md">{quiz.title}
   </h1>
@@ -55,26 +53,26 @@ $: isLoading = !quiz && pageStateVar !== 0;
 {/if}
 
 <!--Intro-->
-{#if state == "loaded"}
+{#if pageState == "loaded"}
   {#if quiz.showIntro == true}
   <Intro
     title= {quiz.title}
     description= {quiz.introText}
-    callToAction = {removeIntro}
+    {setPageState}
   />
   {:else}
-  {state="showQuiz"}
+  {pageState="showQuiz"}
   {/if}
 {/if}
 
 
 <!--Quiz-->
-{#if state == "showQuiz"}
-<QuizComp {quiz} />  
+{#if pageState == "showQuiz"}
+<QuizComp {quiz} {setPageState} />  
 {/if}
 
 <!--Outro-->
-{#if pageStateVar==2}
+{#if pageState == "outro"}
 <Outro {quiz}/>
 {/if}
 
