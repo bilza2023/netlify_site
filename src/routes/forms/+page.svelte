@@ -60,7 +60,7 @@ const token = localStorage.getItem('token');
 }
 </script>
 <!--page div-->
-<div class="w-full bg-red-300">
+<div class="w-ful">
 
 {#if isLogin == false}
 <h1><a href="/login">Please login</a></h1>
@@ -102,7 +102,7 @@ const token = localStorage.getItem('token');
   </a>
 </td>
 
-<td class="border bg-gray-900 text-center text-white hover:bg-gray-700 active:bg-gray-800 rounded-md transition duration-200">
+<td class="border bg-red-900 text-center text-white hover:bg-gray-700 active:bg-gray-800 rounded-md transition duration-200">
   
   <AreYouSure deleteFn={deleteQuiz} {index}/>
 </td>
