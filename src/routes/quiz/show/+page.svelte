@@ -7,7 +7,9 @@ import Intro from "./Intro.svelte";
 import Outro from "./Outro.svelte";
 import QuizComp from "./QuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
-
+ export const metadata = {
+    layout: null
+  };
 let quiz;
 let quizId;
 let state = "loading";
@@ -46,9 +48,10 @@ $: isLoading = !quiz && pageStateVar !== 0;
 <!-- Quiz Title Always Except When Loading-->
 {#if state !== "loading"}
 <div class="flex justify-center">
-  <h1 class="bg-blue-900  p-2 m-1  mt-0  w-full text-center text-2xl">         {quiz.title}
+  <h1 class="bg-blue-900  p-2 m-1  mt-0  w-full text-center text-2xl rounded-md">{quiz.title}
   </h1>
 </div>
+  <br>
 {/if}
 
 <!--Intro-->
@@ -78,3 +81,8 @@ $: isLoading = !quiz && pageStateVar !== 0;
 
 
 {/if}
+
+
+<br>
+<br>
+<br>
