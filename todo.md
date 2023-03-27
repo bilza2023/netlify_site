@@ -6,13 +6,17 @@ Mid-Term
     4. 27-match-2023 :Email Integration.
 
 27-match-2023
-3. Remove Navbar from the quiz/show/page
-4. Remove personal links from footer.
-6. Show -> move Buttons below
-7. Show -> Hide quiz when show result.
-8. Show -> improve results page
-2. Square Question Delete and Hide/Show Button
-1. show farewell text.
+1. Remove Navbar from the quiz/show/page
+2. Remove personal links from footer.
+3. XX-Show -> move Buttons below
+4. Show -> Hide quiz when show result.
+5. Show -> improve results page
+6. Square Question Delete and Hide/Show Button
+7. show farewell text.
+8. no login in mobile.
+9. in mobile navbar does not close.
+10. mobile remove navbar li dots
+11. on small screens larger quiz size.
 -. dont have saving responses yet.
 
 26-march-2023

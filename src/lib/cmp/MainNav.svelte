@@ -47,9 +47,12 @@ is_login.set(false);
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
         <a class="text-white hover:text-gray-300 py-2 block" href="/">Home</a>
         {#if isLogin}
+        <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/forms">Forms</a></li>
+
+          <!-- svelte-ignore a11y-missing-attribute -->
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
           <li><a class="text-white hover:text-gray-300 py-2 block"
-          on:click={logoutFn}>
-          logout</a></li>
+          on:click={logoutFn}>logout</a></li>
         {:else}
           <li><a class="text-white hover:text-gray-300 py-2 block" href="/register">register</a></li>
         
