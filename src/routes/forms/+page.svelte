@@ -59,7 +59,8 @@ const token = localStorage.getItem('token');
 }
 }
 </script>
-
+<!--page div-->
+<div class="w-full bg-red-300">
 
 {#if isLogin == false}
 <h1><a href="/login">Please login</a></h1>
@@ -67,55 +68,52 @@ const token = localStorage.getItem('token');
 
 
 {#if isLogin == true}
-
 <NewQuizComp callback={populate} />
 <br>
+
 <h1 class="m-1 text-slate-200 text-2xl mt-2 underline text-center">Quizzes</h1>
-<div class="p-4 m-4">
   {#if quizzes}
-    <table class="w-full border-collapse border-white">
+    <table class="w-full border-collapse table-responsive border-white">
       <thead class="">
-        <tr class="bg-gray-900 text-white">
-          <th class="py-2 px-4 border">Ser</th>
-          <th class="py-2 px-4 border">Title</th>
-          <th class="py-2 px-4 border">Show</th>
-          <th class="py-2 px-4 border">Edit</th>
-          <th class="py-2 px-4 border">Delete</th>
+        <tr class="bg-gray-900 text-white border-2 border-gray-200">
+          <th class="">Ser</th>
+          <th class="">Title</th>
+          <th class="">Show</th>
+          <th class="">Edit</th>
+          <th class="">Delete</th>
         </tr>
       </thead> 
       <tbody>
         {#each quizzes as quiz,index }
-          <tr class="text-white bg-gray-900">
-            <td class="py-2 px-4 border">{index+1}</td>
-            <td class="py-2 px-4 border">{quiz.title}</td>
+          <tr class="text-white bg-gray-900 border-2 border-gray-200">
+            <td class="">{index+1}</td>
+            <td class="">{quiz.title}</td>
 
 
-<td class="py-2 px-4 border bg-blue-900 text-center text-white hover:bg-blue-700 active:bg-blue-800 rounded-md transition duration-200">
+<td class="border bg-blue-900 text-center text-white hover:bg-blue-700 active:bg-blue-800 rounded-md transition duration-200">
   <a href= {`/quiz/show?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
     show
   </a>
 </td>
 
-<td class="py-2 px-4 border bg-green-900 text-center text-white hover:bg-green-700 active:bg-green-800 rounded-md transition duration-200">
+<td class=" border bg-green-900 text-center text-white hover:bg-green-700 active:bg-green-800 rounded-md transition duration-200">
   <a href={`/quiz/edit?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
     edit
   </a>
 </td>
 
-<td class="py-2 px-4 border bg-gray-900 text-center text-white hover:bg-gray-700 active:bg-gray-800 rounded-md transition duration-200">
+<td class="border bg-gray-900 text-center text-white hover:bg-gray-700 active:bg-gray-800 rounded-md transition duration-200">
   
   <AreYouSure deleteFn={deleteQuiz} {index}/>
 </td>
             
-         
-          
-          
-          
-          </tr>
+         </tr>
         {/each}
       </tbody>
     </table>
   {/if}
-</div>
 
 {/if} 
+
+
+</div><!--page div ends-->
