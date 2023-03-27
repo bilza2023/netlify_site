@@ -31,6 +31,7 @@ const response = await fetch( `${BASE_URL}/quiz/del` , {
         toast.push( data.msg );
       }
 }//del fn
+
 onMount(async () => {
   if (isLogin == true){
       populate();
@@ -58,6 +59,8 @@ const token = localStorage.getItem('token');
 }
 }
 </script>
+
+
 {#if isLogin == false}
 <h1><a href="/login">Please login</a></h1>
 {/if}

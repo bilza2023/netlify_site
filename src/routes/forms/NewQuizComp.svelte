@@ -1,5 +1,6 @@
 <script>
 import { toast } from '@zerodevx/svelte-toast';
+import { BASE_URL } from '$lib/js/config.js';
 export let callback;
 let newPRojectName = "";
 
@@ -7,7 +8,7 @@ const handler = async()=>{
 // debugger;
 const token = localStorage.getItem('token');
 //const resp = await fetch( "http://skillzaa.cyclic.app/quiz/new" , {
-const resp = await fetch( "http://localhost/quiz/new" , {
+const resp = await fetch( `${BASE_URL}/quiz/new` , {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
