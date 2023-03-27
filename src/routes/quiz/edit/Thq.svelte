@@ -20,7 +20,7 @@ export let deleteQuestion;
         {visible == true ? "Hide" : "Show" }
     </div>
     
-    <AreYouSure {deleteQuestion} {index}/>
+    <AreYouSure deleteFn={deleteQuestion} {index}/>
     
 </div>
 

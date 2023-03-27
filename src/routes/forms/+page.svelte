@@ -1,5 +1,7 @@
 <script>
 import {is_login} from "$lib/stores/appStore.js";
+import AreYouSure from "$lib/cmp/AreYouSure.svelte";
+import { toast } from '@zerodevx/svelte-toast';
 let isLogin =false;
 is_login.subscribe( (p)=> isLogin=p);
 
@@ -9,7 +11,26 @@ import { BASE_URL } from '$lib/js/config.js';
 
 $: quizzes = [];
 
-
+const deleteQuiz = async (index)=>{
+// debugger;
+const token = localStorage.getItem('token');
+const q = quizzes[index];
+const response = await fetch( `${BASE_URL}/quiz/del` , {
+// const response = await fetch('http://localhost/user/login', {
+    method: 'POST',
+    body: JSON.stringify( {id : q._id,token} ),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+});
+      const data = await response.json();
+      if (data.status == "ok"){
+        toast.push('deleted'); 
+        populate();
+      }else {
+        toast.push( data.msg );
+      }
+}//del fn
 onMount(async () => {
   if (isLogin == true){
       populate();
@@ -58,7 +79,7 @@ const token = localStorage.getItem('token');
           <th class="py-2 px-4 border">Edit</th>
           <th class="py-2 px-4 border">Delete</th>
         </tr>
-      </thead>
+      </thead> 
       <tbody>
         {#each quizzes as quiz,index }
           <tr class="text-white bg-gray-900">
@@ -78,10 +99,9 @@ const token = localStorage.getItem('token');
   </a>
 </td>
 
-<td class="py-2 px-4 border bg-red-900 text-center text-white hover:bg-red-700 active:bg-red-800 rounded-md transition duration-200">
-  <a href={`/quiz/edit?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
-    delete
-  </a>
+<td class="py-2 px-4 border bg-gray-900 text-center text-white hover:bg-gray-700 active:bg-gray-800 rounded-md transition duration-200">
+  
+  <AreYouSure deleteFn={deleteQuiz} {index}/>
 </td>
             
          
