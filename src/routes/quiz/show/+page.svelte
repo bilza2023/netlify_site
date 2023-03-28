@@ -11,7 +11,7 @@ let pageState = "loading";
 const setPageState = (st)=>{ pageState= st;}
 //...
 onMount(async () => {
-// try {
+try {
   quizId = new URLSearchParams(location.search).get("quizId"); 
   const url = `${BASE_URL}/quiz/show/${quizId}`;
   const resp = await fetch(url);
@@ -30,9 +30,10 @@ onMount(async () => {
     
     // }else {
     // }
-// } catch (error) {
-//     console.error(error);
-// }
+} catch (error) {
+    // console.error(error);
+    pageState = "notfound";
+}
 }); 
 
 </script>

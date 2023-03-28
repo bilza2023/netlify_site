@@ -7,7 +7,7 @@ import Question from './Question.svelte';
 import Errors from './Errors.svelte';
 import {getQuiz, getQuestion , getOption} from "./new_quiz.js";
 import QuizBlock from "./QuizBlock.svelte";
-import check from "./check.js";
+
 import { page } from '$app/stores';
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
@@ -20,7 +20,7 @@ let questions;
 let errors_Array = [];
 let showErrors = false;
 
-
+const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
 onMount(async () => {
 // console.log(BASE_URL);
 const  quizId = new URLSearchParams(location.search).get("quizId");
@@ -63,11 +63,7 @@ const deleteOption = (q_index,option_index)=>{
   quiz = quiz;
 }
 const saveMain = async ()=>{
-errors_Array = check(quiz);
-    if ( errors_Array.length > 0){
-        showErrors = true;
-      return;
-    }
+
 //----------
 isLoading = true; 
 
@@ -100,8 +96,22 @@ const resp = await fetch( `${BASE_URL}/quiz/update` ,{
 <br>
 <p class="underline">Quiz</p>
 <br>
-<QuizBlock {quiz}/>
+<QuizBlock {quiz} {set_errors_Array}/>
 {/if}
+
+
+
+{#if showErrors==true}
+<div class="p-2 m-2 bg-gray-600 border-white border-2 rounded-md">
+<Errors {errors_Array}/>
+<button 
+class="bg-gray-700 rounded-md m-1 p-1  hover:bg-gray-600 active:bg-gray-800"
+on:click={()=>showErrors = false}>Hide</button>
+</div>
+{/if}
+
+
+
 
 <br>
 {#if quiz && quiz.questions && quiz.questions.length > 0}
@@ -128,14 +138,6 @@ const resp = await fetch( `${BASE_URL}/quiz/update` ,{
 </button>
 <br>
 
-{#if showErrors==true}
-<div class="p-2 m-2 bg-gray-600 border-white border-2 rounded-md">
-<Errors {errors_Array}/>
-<button 
-class="bg-gray-700 rounded-md m-1 p-1  hover:bg-gray-600 active:bg-gray-800"
-on:click={()=>showErrors = false}>Hide</button>
-</div>
-{/if}
 
 <LoadBtn {isLoading} eventHandler={saveMain} title="Save"  class="w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 mx-auto" />
 

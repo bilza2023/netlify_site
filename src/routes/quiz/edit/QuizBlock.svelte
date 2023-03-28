@@ -1,15 +1,35 @@
 <script>
 import Tf from "./Tf.svelte";
+import Toggle from "./Toggle.svelte";
 import Th from "./Th.svelte";
 import FormRow from "./FormRow.svelte";
 import { fade } from 'svelte/transition';
+import check from "./check.js";
 
 export let quiz;
+export let set_errors_Array;
 let visible = true;
 
   function toggleVisibility() {
     visible = !visible;
   }
+
+const tooglePublish = (tf)=>{
+if (tf==true){
+  const errors_Array = check(quiz);
+    if ( errors_Array.length > 0){
+        set_errors_Array(errors_Array)
+        quiz.publish = false;
+      return false; //keep it false
+    }else {
+    quiz.publish = true;
+    return true; //set it true i.e correct
+    }
+}else {
+  quiz.publish = false;
+  return false; //keep it false
+}    
+}  
 </script>
 
 <Th title={quiz.title}>
@@ -42,7 +62,7 @@ bind:value={quiz.introText}></textarea>
 </FormRow>
 
 <FormRow title="Published"  >
-<Tf obj={quiz} bool_prop="published" />
+<Toggle toggle= {tooglePublish}/>
 </FormRow>
 
 
