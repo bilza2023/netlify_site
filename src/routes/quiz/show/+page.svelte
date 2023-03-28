@@ -21,11 +21,11 @@ onMount(async () => {
   // debugger;
     if (x === 2) {
       pageState = "notfound";
-      console.log("notfound");
+      // console.log("notfound");
     } else {
       quiz = data.quiz; 
       pageState = "loaded"; //change it to setPageState()
-      console.log("loaded");
+      // console.log("loaded");
     }
     
     // }else {

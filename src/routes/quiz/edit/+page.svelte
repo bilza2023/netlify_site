@@ -78,8 +78,8 @@ const resp = await fetch( `${BASE_URL}/quiz/update` ,{
       },
       body: JSON.stringify( {quiz} )
     });
-      const {updatedQuiz, status} = await resp.json();
-        if (status == "ok") { 
+      const {updatedQuiz, code} = await resp.json();
+        if (code == 0) { 
             isLoading = false; 
             toast.push('saved...'); 
         }else {
@@ -106,9 +106,9 @@ const resp = await fetch( `${BASE_URL}/quiz/update` ,{
 <br>
 {#if quiz && quiz.questions && quiz.questions.length > 0}
 <br>
-<p class="underline">Questions</p>
     
 {#each quiz.questions as question, index }
+<p class="underline">Question : {`${index + 1}`}</p>
 <Question {question} {addOption} {index} {deleteOption} {deleteQuestion}/>
 <br>
 {/each}
