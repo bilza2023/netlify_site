@@ -24,15 +24,6 @@ bind:value={quiz.title}
 >
 </FormRow>
 
-
-<FormRow title="Save Responses">
-<Tf />
-</FormRow>
-
-<FormRow title="Show Intro">
-<Tf />
-</FormRow>
-
 <FormRow title="Intro Text">
 <textarea class="w-full bg-gray-700 color-white"
 bind:value={quiz.introText}></textarea>
@@ -41,6 +32,19 @@ bind:value={quiz.introText}></textarea>
 <FormRow title="Farewell Text">
 <textarea class="w-full bg-gray-700 color-white" bind:value={quiz.farewellText}></textarea>
 </FormRow>
+
+<FormRow title="Save Responses">
+<Tf obj={quiz} bool_prop="saveResponse" />
+</FormRow>
+
+<FormRow title="Show Intro">
+<Tf obj={quiz} bool_prop="showIntro" />
+</FormRow>
+
+<FormRow title="Published"  >
+<Tf obj={quiz} bool_prop="published" />
+</FormRow>
+
 
 </div>
 

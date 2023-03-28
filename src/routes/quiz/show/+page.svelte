@@ -1,8 +1,5 @@
 <script>
-// import {pageState} from "./showQuizStore";
-//--------
 import { onMount } from 'svelte';
-// import { page } from '$app/stores';
 import Intro from "./Intro.svelte";
 import Outro from "./Outro.svelte";
 import QuizComp from "./QuizComp.svelte";
@@ -11,32 +8,38 @@ import { BASE_URL } from '$lib/js/config.js';
 let quiz;
 let quizId;
 let pageState = "loading";
-
 const setPageState = (st)=>{ pageState= st;}
-
+//...
 onMount(async () => {
-try {
-
+// try {
   quizId = new URLSearchParams(location.search).get("quizId"); 
   const url = `${BASE_URL}/quiz/show/${quizId}`;
   const resp = await fetch(url);
   const data = await resp.json();
-  quiz = data.quiz;
-  
-pageState = "loaded"; //change it to setPageState()
-
-} catch (error) {
-    console.error(error);
-}
+  const x = data.code;
+  // console.log(data);
+  // debugger;
+    if (x === 2) {
+      pageState = "notfound";
+      console.log("notfound");
+    } else {
+      quiz = data.quiz; 
+      pageState = "loaded"; //change it to setPageState()
+      console.log("loaded");
+    }
+    
+    // }else {
+    // }
+// } catch (error) {
+//     console.error(error);
+// }
 }); 
-//--------
-// let isLoading = true;
-// $: pageStateVar = 0;
-// pageState.subscribe((p) => pageStateVar = p);
-// $: isLoading = !quiz && pageStateVar !== 0;
 
 </script>
 
+{#if pageState == "notfound"}
+  <p class="p-4 m-4 w-full bg-gray-500 border-2 border-gray-200 text-2xl">Not Found...</p>
+{/if}
 
 {#if pageState == "loading"}
   <p class="p-4 m-4 w-full bg-gray-500 border-2 border-gray-200 text-2xl">Loading...</p>
@@ -44,7 +47,7 @@ pageState = "loaded"; //change it to setPageState()
 
 
 <!-- Quiz Title Always Except When Loading-->
-{#if pageState !== "loading" && pageState !== "loaded"}
+{#if pageState !== "loading" && pageState !== "loaded" && pageState !== "notfound"}
 <div class="flex justify-center">
   <h1 class="bg-blue-900  p-2 m-1  mt-0  w-full text-center text-2xl rounded-md">{quiz.title}
   </h1>
@@ -76,11 +79,10 @@ pageState = "loaded"; //change it to setPageState()
 <Outro {quiz}/>
 {/if}
 
+<br>
+<br>
+<br>
 
 
 {/if}
 
-
-<br>
-<br>
-<br>

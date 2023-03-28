@@ -1,7 +1,7 @@
 <script>
 // import MainFlex from "$lib/cmp/MainFlex.svelte";
 import Underconstruction from "$lib/cmp/Underconstruction.svelte";
-import  generateRandomGradient  from "$lib/js/gradiant.js";
+import  generateRandomGradient  from "$lib/js/gradiant_dark.js";
 // import DivCard from "$lib/cmp/DivCard.svelte";
 // import {mainQuizList} from "./main_quiz_list.js";
 import { BASE_URL } from '$lib/js/config.js';
@@ -38,7 +38,7 @@ quizzes = q.quizzes;
 <div class="flex flex-wrap  justify-center gap-2">
 
 {#each quizzes as item}
-  <a href={`${BASE_URL}/quiz/show?quizId=${item._id}`} 
+  <a href={`/quiz/show?quizId=${item._id}`} 
   class="flex-shrink-0   w-full md:w-1/2 lg:w-1/5  ">
     <div class=" rounded-lg cursor-pointer border-2 border-white text-center">
       
