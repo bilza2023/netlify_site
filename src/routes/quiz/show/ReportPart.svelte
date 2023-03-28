@@ -18,15 +18,15 @@ export let background_color ="#512424";
         {#if question._id == ans}
             <div style= {`background-color: ${background_color};`}  
             class= " rounded-md p-4 m-2 mb-4">
-            <p><span class=" border-2 bg-gray-600 m-1 p-1 rounded-lg">Question</span> {question.content}</p>
+            <p><span class=" border-2  m-1 p-1 rounded-lg">Question</span> {question.content}</p>
             <br>
                 {#each question.options as option}
                     {#if option.id == question.correctOption}
-                       <p><span class=" border-2 bg-gray-600 m-1 p-1 rounded-lg">Correct Answer</span> {option.content}</p>
+                       <p><span class=" border-2  m-1 p-1 rounded-lg">Correct Answer</span> {option.content}</p>
                     {/if}
                 {/each}
             <br/>
-            <p class="border-2 bg-gray-600 m-2 p-2 rounded-lg">{question.explanation}</p>    
+            <p class="border-2  m-2 p-2 rounded-lg">{question.explanation}</p>    
             </div>
         {/if}
     {/each}
