@@ -16,6 +16,7 @@ is_login.set(false);
     <div class="flex justify-between items-center">
       <div>
         <a class="text-xl font-bold text-white" href="/">skillzaa.com</a>
+        <span class="text-xs text-white">(Underconstruction)</span>
       </div>
       <div class="md:hidden">
         <button type="button" class="block text-gray-500 hover:text-white focus:text-white focus:outline-none" on:click={() => isVisible = !isVisible }>

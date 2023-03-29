@@ -1,5 +1,6 @@
 <script>
 // import MainFlex from "$lib/cmp/MainFlex.svelte";
+import Hero from "$lib/containers/hero/Hero.svelte";
 import Underconstruction from "$lib/cmp/Underconstruction.svelte";
 import  generateRandomGradient  from "$lib/js/gradiant_dark.js";
 // import DivCard from "$lib/cmp/DivCard.svelte";
@@ -24,15 +25,15 @@ quizzes = q.quizzes;
 }); 
 </script>
 
-<!-- <h1>{isLogin}</h1> -->
 
-<!-- <h1><a href="/quiz/create">New Quiz</a></h1> -->
-<!-- <h1><a href="/quiz">Quizzes</h1> -->
-<!-- <button on:click={add}>Add</button> -->
-<Underconstruction  />
-<img src="./images/heroBanner.png" alt="">
+<!-- <Underconstruction  /> -->
+<br>
+
+<Hero />
 <br>
 <br>
+
+
 {#if quizzes}
 
 <div class="flex flex-wrap  justify-center gap-2">
@@ -53,5 +54,7 @@ quizzes = q.quizzes;
 
 </div>
 
+{:else}
+  <p class="p-4 m-4 w-full bg-gray-500 border-2 border-gray-200 text-2xl text-center rounded-md">Loading...</p>
 {/if}
 

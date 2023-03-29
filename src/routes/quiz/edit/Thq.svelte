@@ -12,6 +12,9 @@ export let deleteQuestion;
      <div class="  text-center w-full p-2">
         {title} 
     </div>
+    
+    <AreYouSure deleteFn={deleteQuestion} {index}/>
+    
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="rounded-t-lg border border-gray-400 p-2 
     hover:cursor-pointer"
@@ -19,8 +22,6 @@ export let deleteQuestion;
     >
         {visible == true ? "Hide" : "Show" }
     </div>
-    
-    <AreYouSure deleteFn={deleteQuestion} {index}/>
     
 </div>
 
