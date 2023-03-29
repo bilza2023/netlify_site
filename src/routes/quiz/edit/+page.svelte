@@ -63,10 +63,8 @@ const deleteOption = (q_index,option_index)=>{
   quiz = quiz;
 }
 const saveMain = async ()=>{
-
-//----------
 isLoading = true; 
-
+// debugger;
 const resp = await fetch( `${BASE_URL}/quiz/update` ,{
       method: 'POST',
       headers: {

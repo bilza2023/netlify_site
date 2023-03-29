@@ -5,7 +5,7 @@ import Th from "./Th.svelte";
 import FormRow from "./FormRow.svelte";
 import { fade } from 'svelte/transition';
 import check from "./check.js";
-
+// import tooglePublishFn from "./tooglePublish.js";
 export let quiz;
 export let set_errors_Array;
 let visible = true;
@@ -14,22 +14,24 @@ let visible = true;
     visible = !visible;
   }
 
-const tooglePublish = (tf)=>{
-if (tf==true){
-  const errors_Array = check(quiz);
-    if ( errors_Array.length > 0){
-        set_errors_Array(errors_Array)
-        quiz.publish = false;
-      return false; //keep it false
-    }else {
-    quiz.publish = true;
-    return true; //set it true i.e correct
-    }
-}else {
-  quiz.publish = false;
-  return false; //keep it false
-}    
-}  
+function tooglePublish(tf){
+
+if (tf == false){
+    quiz.published = false;
+    return;
+}
+if (tf == true){
+    const errors_Array =  check(quiz);
+  if (errors_Array.length !==0) {
+    set_errors_Array(errors_Array);
+    quiz.published = false;
+  }else {
+    quiz.published = true;
+  }
+}
+// debugger;  
+}
+
 </script>
 
 <Th title={quiz.title}>
@@ -62,7 +64,13 @@ bind:value={quiz.introText}></textarea>
 </FormRow>
 
 <FormRow title="Published"  >
-<Toggle toggle= {tooglePublish}/>
+
+{#if  quiz.published == true}
+<button class="w-full bg-green-500 hover:bg-green-700 active:bg-green-900 text-white font-bold py-2 px-4  focus:outline-none focus:shadow-outline"  on:click={()=>{tooglePublish(false)}}>True</button>
+{:else}
+<button class="w-full bg-red-500 hover:bg-red-700 active:bg-red-900 text-white font-bold py-2 px-4  focus:outline-none focus:shadow-outline" 
+on:click={()=>{tooglePublish(true)}}>False</button>
+{/if}
 </FormRow>
 
 
