@@ -11,7 +11,8 @@ const quizzes = [
 { _id : "64234b9db5d31dab8acf14bb" , title : "World Geography Facts"},
 { _id : "6424bc4cc51d2f76484c3ff7" , title : "World War II Facts"},
 { _id : "6424018be683525d966ea647" , title : "Our Solar System"},
-{ _id : "6424018be683525d966ea649" , title : "Global Economy 101"}
+{ _id : "6424018be683525d966ea649" , title : "Global Economy 101"},
+{ _id : "64234b9db5d31dab8acf14bc" , title : "Everyday Science"}
 
 ];
 //...
