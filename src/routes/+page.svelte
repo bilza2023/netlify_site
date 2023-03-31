@@ -2,6 +2,7 @@
 // import MainFlex from "$lib/cmp/MainFlex.svelte";
 import Hero from "$lib/containers/hero/Hero.svelte";
 import Underconstruction from "$lib/cmp/Underconstruction.svelte";
+import ThreeCards from "$lib/cmp/ThreeCards.svelte";
 import  generateRandomGradient  from "$lib/js/gradiant_dark.js";
 // import DivCard from "$lib/cmp/DivCard.svelte";
 // import {mainQuizList} from "./main_quiz_list.js";
@@ -27,11 +28,14 @@ const skrink = (txt)=>{
 </script>
 
 
-<!-- <Underconstruction  /> -->
+<Underconstruction  />
 <br>
 
-<Hero />
+<ThreeCards />
+
+
 <br>
+<h1 class="p-2 m-2 bg-gray-900 text-center text-2xl ">Try Quiz Tests</h1>
 <br>
 
 <div class="flex flex-wrap  justify-center gap-2">
@@ -53,5 +57,8 @@ const skrink = (txt)=>{
 
 </div>
 
-  <!-- <p class="p-4 m-4 w-full bg-gray-500 border-2 border-gray-200 text-2xl text-center rounded-md">Loading...</p> -->
-
+<br>
+<br>
+<br>
+<br>
+<br>
