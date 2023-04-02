@@ -32,12 +32,12 @@ is_login.set(false);
         <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
         
           {#if isLogin}
-          <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/forms">Forms</a></li>
+          <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/dashboard">Create</a></li>
             <li><a class="text-white hover:text-gray-300 py-2 px-4" href="#"
-            on:click={logoutFn} >logout</a></li>
+            on:click={logoutFn} >Logout</a></li>
           {:else}
-            <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/register">register</a></li>
-            <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/login">login</a></li>
+            <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/register">Register</a></li>
+            <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/login">Login</a></li>
           {/if}
           <!-- <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/about">About</a></li> -->
         </ul>
@@ -49,16 +49,16 @@ is_login.set(false);
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
         <a class="text-white hover:text-gray-300 py-2 block" href="/">Home</a>
         {#if isLogin}
-        <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/forms">Forms</a></li>
+        <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/dashboard">Create</a></li>
 
           <!-- svelte-ignore a11y-missing-attribute -->
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <li><a class="text-white hover:text-gray-300 py-2 block"
-          on:click={logoutFn}>logout</a></li>
+          on:click={logoutFn}>Logout</a></li>
         {:else}
-          <li><a class="text-white hover:text-gray-300 py-2 block" href="/register">register</a></li>
+          <li><a class="text-white hover:text-gray-300 py-2 block" href="/register">Register</a></li>
         
-          <li class="ml-4"><a class="text-white hover:text-gray-300 py-2 block" href="/login">login</a></li>
+          <li class="ml-4"><a class="text-white hover:text-gray-300 py-2 block" href="/login">Login</a></li>
         {/if}
         <!-- <a class="text-white hover:text-gray-300 py-2 block" href="/about">About</a> -->
       </div>
