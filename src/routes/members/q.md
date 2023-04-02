@@ -1,10 +1,12 @@
+this is svelte component. there is some problem in the input -> disabled dont know what ? ==>
+
 <script>
 import AreYouSure from "$lib/cmp/AreYouSure.svelte";
 export let member;
 export let index;
 let editable = false;
 
-const saveEmail = (index,email) =>{
+const save = () =>{
 
 editable = false;
 }
@@ -14,42 +16,28 @@ const deleteMember = () =>{
 </script>
 
 
-<tr class="text-white bg-gray-900 border-2 border-gray-200">
+  <tr class="text-white bg-gray-900 border-2 border-gray-200">
     <td class="border text-center">{index+1}</td>
     
-    {#if editable == false}
-    <td class="border text-center">
-      <input 
-        disabled="disabled"
-        class="bg-gray-600 text-white p-0 m-0 text-center rounded-md"
-        type="email"   value="{member.email}"
-      >
-    </td>
-
+    {#if editable == true}
     <td class="border text-center">
     <input 
-    disabled="disabled"
+    { editable == true ? "disabled" : " " }
     class="bg-gray-600 text-white p-0 m-0 text-center rounded-md"
-    type="email"   value="{member.password}"
-    >
-    </td>
-{:else}    
-    <td class="border text-center">
-      <input 
-        on:change={()=>saveEmail(index,member.email)}
-        class="bg-green-600 text-white p-0 m-0 text-center rounded-md"
-        type="email"   bind:value="{member.email}"
-      >
+    type="email"   value="{member.email}">
     </td>
 
     <td class="border text-center">
     <input 
-    class="bg-green-600 text-white p-0 m-0 text-center rounded-md"
-    type="email"   value="{member.password}"
-    >
+    class="bg-gray-600 text-white p-0 m-0 text-center rounded-md"
+    type="email"   value="{member.password}">
     </td>
+    
+    {:else}
+    <td class="border text-center">{member.email}</td>    
+    <td class="border text-center text-gray-500">xxx-xxx-xxx</td>
+    {/if}
 
-{/if}
 
 <td class="p-1 border bg-blue-900 text-center text-white hover:bg-blue-700 active:bg-blue-800 rounded-md transition duration-200" >
 <button on:click={()=>editable = true}>Edit</button>
@@ -66,6 +54,7 @@ const deleteMember = () =>{
 </td>
             
 </tr>
+
 
 <style>
 *{
