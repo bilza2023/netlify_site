@@ -1,6 +1,6 @@
 <script>
 import Tf from "./Tf.svelte";
-import Toggle from "./Toggle.svelte";
+import Dispatch from "./Dispatch.svelte";
 import Th from "./Th.svelte";
 import FormRow from "./FormRow.svelte";
 import { fade } from 'svelte/transition';
@@ -72,6 +72,12 @@ bind:value={quiz.introText}></textarea>
 on:click={()=>{tooglePublish(true)}}>False</button>
 {/if}
 </FormRow>
+
+<FormRow title="Users"  >
+<Dispatch />
+</FormRow>
+
+
 
 
 </div>
