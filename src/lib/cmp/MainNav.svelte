@@ -60,7 +60,6 @@ is_login.set(false);
         
           <li class="ml-4"><a class="text-white hover:text-gray-300 py-2 block" href="/login">Login</a></li>
         {/if}
-        <!-- <a class="text-white hover:text-gray-300 py-2 block" href="/about">About</a> -->
       </div>
     </div>
   {/if}

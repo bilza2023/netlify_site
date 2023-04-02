@@ -1,6 +1,6 @@
 <script>
 import { onMount } from 'svelte';
-import MainNav from '$lib/cmp/MainNav.svelte';
+import NavMain from '$lib/containers/nav/NavMain.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 // import Underconstruction from '$lib/cmp/Underconstruction.svelte';
 import './styles.css';
@@ -24,7 +24,7 @@ try {
 </script>
 <SvelteToast />
 
-<MainNav isLogin={isLogin}/>
+<NavMain isLogin={isLogin}/>
 
 <div class="app bg-gray-800 text-white m-0 pb-0 pt-0 pl-6 pr-6 ">
 <!-- <Underconstruction /> -->
