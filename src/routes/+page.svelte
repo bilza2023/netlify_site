@@ -3,6 +3,7 @@
 import Hero from "$lib/containers/hero/Hero.svelte";
 import Underconstruction from "$lib/cmp/Underconstruction.svelte";
 import ThreeCards from "$lib/cmp/ThreeCards.svelte";
+// import ThreeCards2 from "$lib/cmp/ThreeCards2.svelte";
 import  generateRandomGradient  from "$lib/js/gradiant_dark.js";
 // import DivCard from "$lib/cmp/DivCard.svelte";
 // import {mainQuizList} from "./main_quiz_list.js";
@@ -31,6 +32,7 @@ const skrink = (txt)=>{
 <Underconstruction  />
 <br>
 
+<!-- <ThreeCards2 /> -->
 <ThreeCards />
 
 
