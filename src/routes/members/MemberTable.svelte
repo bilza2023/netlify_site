@@ -12,7 +12,7 @@ editable = false;
 
 </script>
 
-{#each members as member,index }   
+{#each $members as member,index }   
 <tr class="text-white bg-gray-900 border-2 border-gray-200">
     <MemberRow {member}{index} {deleteFn} />
 </tr>

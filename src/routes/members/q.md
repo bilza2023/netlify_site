@@ -1,6 +1,6 @@
-I have a +page.svelte component . code is here==>
+I have a svelte component +page.svelte here is the code ==>
 <script>
- 
+import { writable } from 'svelte/store'; 
 import {is_login} from "$lib/stores/appStore.js";
 import { browser } from '$app/environment';
 import MemberTable from "./MemberTable.svelte";
@@ -10,7 +10,9 @@ import { onMount } from 'svelte';
 import NewQuizComp  from "./NewQuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 
-$: members = [];
+// $: members = [];
+const members = writable([]);
+
 // let members = [];
 
 let preventClose = true;
@@ -26,16 +28,17 @@ let preventClose = true;
   }
 
 const deleteFn = (index) =>{
-members = members.filter((_, i) => i !== index);
+members.update(arr => arr.filter((_, i) => i !== index));
 // console.log(members);
 } 
 const saveAll = async ()=>{
 const token = localStorage.getItem('token');
 // debugger;
+const mm = get(members);
 const response = await fetch( `${BASE_URL}/user/members/save` , {
 // const response = await fetch('http://localhost/user/login', {
     method: 'POST',
-    body: JSON.stringify( {members,token} ),
+    body: JSON.stringify( {members :mm ,token} ),
     headers: { 'Content-Type': 'application/json' }
 });
       const data = await response.json();
@@ -73,9 +76,9 @@ onMount(async () => {
   });
 
   const data = await resp.json();
-  // console.log(data);
-  members = data.members.members; 
-  // console.log("quizzes",quizzes);
+  console.log(data);
+  members.update(_ => data.members.members);
+  // console.log($members);
 }); 
 
 
@@ -102,7 +105,7 @@ onMount(async () => {
 </div>
 
 <br />
-  {#if members}
+  {#if $members.length}
     <table class="w-full border-collapse table-responsive border-white">
       <thead class="">
         <tr class="bg-gray-900 text-white border-2 border-gray-200">
@@ -124,36 +127,36 @@ onMount(async () => {
 
 </div><!--page div ends-->
 
-ALso i have NewQuizComp.svelte
-
+Here is the code for MemberTable.svelte ==>
 <script>
-import { toast } from '@zerodevx/svelte-toast';
-import { BASE_URL } from '$lib/js/config.js';
-let newPRojectName = "";
-let email = "";
-let password = "";
+import AreYouSure from "$lib/cmp/AreYouSure.svelte";
+import MemberRow from "./MemberRow.svelte";
 export let members;
-export let saveAll;
+export let deleteFn;
+let editable = false;
 
-const create = async () =>{
-  members.push({email,password});
-  members = members;
-  await saveAll();
-};
+const saveEmail = (index,email) =>{
+
+editable = false;
+}
 
 </script>
 
-
-<div class=" border-2 border-white p-2 m-2  text-center rounded-lg ">
-<h1 class="m-1 text-slate-200 text-2xl underline">New Member</h1>
-<h3 class="text-left ml-2 underline">Member`s Email</h3>
-<input class="bg-gray-700 text-white  w-10/12 m-1 rounded-lg"  type="email" bind:value={email} >
-<h3 class="text-left ml-2 underline">Assign Password</h3>
-<input class="bg-gray-700 text-white  w-10/12 m-1 rounded-lg"  type="text" bind:value={password} >
-
-<button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={create}>Create</button>
-
-</div>
+{#each $members as member,index }   
+<tr class="text-white bg-gray-900 border-2 border-gray-200">
+    <MemberRow {member}{index} {deleteFn} />
+</tr>
+{/each}
 
 
-Problem: I want that when a new item is added into memebrs array in NewQuizComp create function the table at the page.svelt should re-draw but it does not 
+
+<style>
+*{
+padding:0;
+margin:0;
+}
+
+</style>
+
+
+Question: How do i send and use members from page to MemberTable and use it ?

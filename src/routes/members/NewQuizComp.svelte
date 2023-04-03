@@ -8,8 +8,11 @@ export let members;
 export let saveAll;
 
 const create = async () =>{
-  members.push({email,password});
-  members = members;
+  // members.push({email,password});
+  //  members.update(arr => [...arr, { email, password }]);
+  members.update(arr => [{ email, password }, ...arr]);
+ email = "";
+password = "";
   await saveAll();
 };
 

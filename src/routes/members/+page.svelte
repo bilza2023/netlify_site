@@ -1,5 +1,5 @@
 <script>
- 
+import { writable,get } from 'svelte/store'; 
 import {is_login} from "$lib/stores/appStore.js";
 import { browser } from '$app/environment';
 import MemberTable from "./MemberTable.svelte";
@@ -9,7 +9,9 @@ import { onMount } from 'svelte';
 import NewQuizComp  from "./NewQuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 
-$: members = [];
+// $: members = [];
+const members = writable([]);
+
 // let members = [];
 
 let preventClose = true;
@@ -25,16 +27,17 @@ let preventClose = true;
   }
 
 const deleteFn = (index) =>{
-members = members.filter((_, i) => i !== index);
+members.update(arr => arr.filter((_, i) => i !== index));
 // console.log(members);
 } 
 const saveAll = async ()=>{
 const token = localStorage.getItem('token');
 // debugger;
+const mm = get(members);
 const response = await fetch( `${BASE_URL}/user/members/save` , {
 // const response = await fetch('http://localhost/user/login', {
     method: 'POST',
-    body: JSON.stringify( {members,token} ),
+    body: JSON.stringify( {members :mm ,token} ),
     headers: { 'Content-Type': 'application/json' }
 });
       const data = await response.json();
@@ -72,9 +75,9 @@ onMount(async () => {
   });
 
   const data = await resp.json();
-  // console.log(data);
-  members = data.members.members; 
-  // console.log("quizzes",quizzes);
+  console.log(data);
+  members.update(_ => data.members.members);
+  // console.log($members);
 }); 
 
 
@@ -101,7 +104,7 @@ onMount(async () => {
 </div>
 
 <br />
-  {#if members}
+  {#if $members.length}
     <table class="w-full border-collapse table-responsive border-white">
       <thead class="">
         <tr class="bg-gray-900 text-white border-2 border-gray-200">
