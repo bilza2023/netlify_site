@@ -1,32 +1,17 @@
 <script>
 import { toast } from '@zerodevx/svelte-toast';
 import { BASE_URL } from '$lib/js/config.js';
-export let callback;
 let newPRojectName = "";
 let email = "";
 let password = "";
+export let members;
+export let saveAll;
 
-const handler = async()=>{
-// debugger;
-const token = localStorage.getItem('token');
-//const resp = await fetch( "http://skillzaa.cyclic.app/quiz/new" , {
-const resp = await fetch( `${BASE_URL}/quiz/new` , {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify( {token ,title :newPRojectName} )
-    });
-    newPRojectName = "";
-  const data = await resp.json();
-    if (data.status == "ok"){
-        callback();
-    }else {
-        toast.push( data.msg );
-    }
-//   console.log(data);
-  // console.log("quizzes",quizzes);
-}
+const create = async () =>{
+  members.push({email,password});
+  members = members;
+  await saveAll();
+};
 
 </script>
 
@@ -38,6 +23,6 @@ const resp = await fetch( `${BASE_URL}/quiz/new` , {
 <h3 class="text-left ml-2 underline">Assign Password</h3>
 <input class="bg-gray-700 text-white  w-10/12 m-1 rounded-lg"  type="text" bind:value={password} >
 
-<button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={handler}>Create</button>
+<button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={create}>Create</button>
 
 </div>
