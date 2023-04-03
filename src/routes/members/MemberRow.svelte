@@ -1,7 +1,9 @@
 <script>
+import { get } from 'svelte/store'; 
 import AreYouSure from "$lib/cmp/AreYouSure.svelte";
 export let member = {};
 export let index;
+export let dirty;
 // export let saveEdit;
 export let deleteFn;
 let disabledVar = true;
@@ -33,7 +35,7 @@ let disabledVar = true;
     </td>
 
 <td class="p-1 border bg-gray-700 text-center text-white hover:bg-gray-700 active:bg-gray-800 rounded-md transition duration-200" >
-<button on:click={()=>disabledVar = !disabledVar}>
+<button on:click={()=>{disabledVar = !disabledVar; dirty.set(true);console.log(get(dirty))}}>
 
 {#if disabledVar == true}
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">

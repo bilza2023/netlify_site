@@ -2,6 +2,7 @@
 import AreYouSure from "$lib/cmp/AreYouSure.svelte";
 import MemberRow from "./MemberRow.svelte";
 export let members;
+export let dirty;
 export let deleteFn;
 let editable = false;
 
@@ -14,7 +15,7 @@ editable = false;
 
 {#each $members as member,index }   
 <tr class="text-white bg-gray-900 border-2 border-gray-200">
-    <MemberRow {member}{index} {deleteFn} />
+    <MemberRow {member}{index} {deleteFn} {dirty} />
 </tr>
 {/each}
 

@@ -9,44 +9,44 @@ import { onMount } from 'svelte';
 import NewQuizComp  from "./NewQuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 
-// $: members = [];
+//-- store inside the file
 const members = writable([]);
+const dirty = writable(false);
 
-// let members = [];
+$: isDirty = get(dirty);
 
-let preventClose = true;
-  
-  function handleBeforeUnload(event) {
-    if (preventClose) {
-      event.preventDefault();
-      event.returnValue = '';
-      // if (browser){
-      // window.alert("cant stop");
-      // }
-    }
+function handleBeforeUnload(event) {
+  if ( get(dirty) ) {
+    event.preventDefault();
+    event.returnValue = '';
   }
+}
 
 const deleteFn = (index) =>{
-members.update(arr => arr.filter((_, i) => i !== index));
-// console.log(members);
+  members.update(arr => arr.filter((_, i) => i !== index));
+  dirty.set(true);
+  // console.log(members);
 } 
+
 const saveAll = async ()=>{
-const token = localStorage.getItem('token');
-// debugger;
-const mm = get(members);
-const response = await fetch( `${BASE_URL}/user/members/save` , {
-// const response = await fetch('http://localhost/user/login', {
+  const token = localStorage.getItem('token');
+  // debugger;
+  const mm = get(members);
+  const response = await fetch( `${BASE_URL}/user/members/save` , {
+  // const response = await fetch('http://localhost/user/login', {
     method: 'POST',
     body: JSON.stringify( {members :mm ,token} ),
     headers: { 'Content-Type': 'application/json' }
-});
+  });
       const data = await response.json();
       if (data.status == "ok"){
         toast.push('saved'); 
         // populate();
       }else {
-        toast.push( data.msg );
+      dirty.set(false);
+      toast.push( data.msg );
       }
+
 
 }  
 
@@ -92,15 +92,17 @@ onMount(async () => {
 {/if}
 
 
+
 {#if isLogin == true}
-<NewQuizComp {members}  {saveAll}/>
+<h1 class="w-full text-white  text-2xl underline text-center">Members</h1>
 <br>
 
-<div class="flex w-full p-2 m-2 bg-gray-400 rounded-md justify-between">
-  <h1 class="w-1/4 text-black  text-2xl underline">Members</h1>
-  <button class="w-3/4 bg-green-600 hover:bg-green-700 active:bg-green-900 text-white rounded-md p-1 m-1"
-  on:click={saveAll}
-  >Save All</button>
+<div class="p-2 m-2 bg-gray-300 rounded-lg">  
+<button class="w-full bg-green-600 hover:bg-green-700 active:bg-green-900 text-white rounded-md p-1 m-1"
+  on:click={saveAll}>Save All</button>
+  {#if isDirty}
+  <h1 class="bg-red-900 text-white">dirty</h1>
+  {/if}
 </div>
 
 <br />
@@ -116,12 +118,17 @@ onMount(async () => {
         </tr>
       </thead> 
       <tbody>
-          <MemberTable   {members} {deleteFn}  />
+          <MemberTable   {members} {deleteFn} {dirty} />
       </tbody>
     </table>
+    <br>
+    <NewQuizComp {members}  {saveAll} />
   {/if}
 
 {/if} 
 
-
+<br>
+<br>
+<br>
+<br>
 </div><!--page div ends-->
