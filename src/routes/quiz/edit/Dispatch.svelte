@@ -1,8 +1,9 @@
 <script>
 export let dispatchToAnyOne = true;
+export let members;
+
 </script>
 <!--------------------------------------->
-
 
 <div class="flex w-full">
 
@@ -24,8 +25,9 @@ on:click={()=> dispatchToAnyOne=false}
 {#if dispatchToAnyOne == false}
 <div>
 <h1>Add Members:</h1>
-
-
+{#each members as member}
+<div>{member.email}</div>
+{/each}
 
 </div>
 {/if}

@@ -7,6 +7,7 @@ import { fade } from 'svelte/transition';
 import check from "./check.js";
 // import tooglePublishFn from "./tooglePublish.js";
 export let quiz;
+export let members;
 export let set_errors_Array;
 let visible = true;
 
@@ -72,9 +73,9 @@ bind:value={quiz.introText}></textarea>
 on:click={()=>{tooglePublish(true)}}>False</button>
 {/if}
 </FormRow>
-
+ 
 <FormRow title="Users"  >
-<Dispatch />
+<Dispatch  {members}/>
 </FormRow>
 
 

@@ -37,7 +37,7 @@ const skrink = (txt)=>{
 
 
 <br>
-<h1 class="p-2 m-2 bg-gray-900 text-center text-2xl ">Try Quiz Tests</h1>
+<h1 class="p-2 m-2 bg-gray-900 text-center text-2xl rounded-lg border border-gray-500">Try Quiz Tests</h1>
 <br>
 
 <div class="flex flex-wrap  justify-center gap-2">

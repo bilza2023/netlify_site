@@ -17,26 +17,28 @@ let isLoading = false;
 ///////////////////////////////////////////////////
 let quiz;
 let questions;
+let members;
 let errors_Array = [];
 let showErrors = false;
 
 const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
+
 onMount(async () => {
 // console.log(BASE_URL);
 const  quizId = new URLSearchParams(location.search).get("quizId");
 
-const resp = await fetch( `${BASE_URL}/quiz/find` , {
+  const resp = await fetch( `${BASE_URL}/quiz/find` , {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify( {token : "fdee087980kjk" ,quizId} )
     });
-    const incommingQuiz = await resp.json();
+  const incommingQuiz = await resp.json();
   quiz = incommingQuiz.quiz;
   questions = quiz.questions;
-  // console.log(quiz);
-});
+  members = quiz.members;
+}); //onMount
 
 const addQuestion = ()=>{
     const q = getQuestion( uuidv4());
@@ -82,6 +84,7 @@ const resp = await fetch( `${BASE_URL}/quiz/update` ,{
         }
 }//main save ends
 
+
 </script>
 
 
@@ -94,7 +97,7 @@ const resp = await fetch( `${BASE_URL}/quiz/update` ,{
 <br>
 <p class="underline">Quiz</p>
 <br>
-<QuizBlock {quiz} {set_errors_Array}/>
+<QuizBlock {quiz} {set_errors_Array} {members}/>
 {/if}
 
 
