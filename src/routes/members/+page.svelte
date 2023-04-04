@@ -26,23 +26,22 @@ const deleteFn = (index) =>{
   // console.log(members);
 } 
 
-const saveAll = async ()=>{
+const saveAll = async ()=>{ 
   const token = localStorage.getItem('token');
   // debugger;
   const mm = get(members);
   const response = await fetch( `${BASE_URL}/user/members/save` , {
-  // const response = await fetch('http://localhost/user/login', {
     method: 'POST',
     body: JSON.stringify( {members :mm ,token} ),
     headers: { 'Content-Type': 'application/json' }
   });
       const data = await response.json();
-      if (data.status == "ok"){
+      // debugger;
+      if (data.success == true){
         toast.push('saved'); 
-        // populate();
       }else {
       dirty.set(false);
-      toast.push( data.msg );
+      toast.push( data.message );
       }
 
 
@@ -93,6 +92,8 @@ onMount(async () => {
 {#if isLogin == true}
 <h1 class="w-full text-white  text-2xl underline text-center">Members</h1>
 <br>
+   <NewQuizComp {members}  {saveAll} />
+<br>
 
 <div class="p-2 m-2 bg-gray-300 rounded-lg">  
 <button class="w-full 
@@ -118,8 +119,6 @@ onMount(async () => {
           <MemberTable    {deleteFn}  />
       </tbody>
     </table>
-    <br>
-    <NewQuizComp {members}  {saveAll} />
   {/if}
 
 {/if} 

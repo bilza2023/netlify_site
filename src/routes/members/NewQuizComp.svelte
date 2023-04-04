@@ -1,16 +1,29 @@
 <script>
 import { toast } from '@zerodevx/svelte-toast';
+import validateEmail from "$lib/js/validateEmail.js";
+import validateString from "$lib/js/validateString.js";
+
 import { BASE_URL } from '$lib/js/config.js';
-let newPRojectName = "";
 let email = "";
 let password = "";
 export let members;
 export let saveAll;
 
-const create = async () =>{
-  // members.push({email,password});
-   members.update(arr => [...arr, { email, password }]);
-  // members.update(arr => [{ email, password }, ...arr]);
+const create = async (event) =>{
+event.preventDefault();
+const emailError = validateEmail(email);
+    if (emailError.status !== "ok"){
+          toast.push('Not a valid email');  
+      return;
+    }
+
+const passwordError = validateString(password,4,30);
+    if (passwordError.status !== "ok"){
+          toast.push('Not a valid password');  
+      return;
+    }
+  //  members.update(arr => [...arr, { email, password }]);
+  members.update(arr => [{ email, password }, ...arr]);
  email = "";
 password = "";
   await saveAll();
@@ -28,12 +41,12 @@ password = "";
 
 </div>
 
-<div class="flex">
+<div class="flex ">
 <input class="w-4/12 bg-gray-700 text-white   m-1 rounded-lg"  type="email" bind:value={email} >
 <input class="w-4/12 bg-gray-700 text-white   m-1 rounded-lg"  type="text" bind:value={password} >
 
 <div class="w-4/12" >
-<button class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={create}>New</button>
+<button class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={create}><span class="text-xs">Add New</span></button>
 
 </div>
 </div>
