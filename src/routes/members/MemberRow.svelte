@@ -2,8 +2,9 @@
 import { get } from 'svelte/store'; 
 import AreYouSure from "$lib/cmp/AreYouSure.svelte";
 export let member = {};
+import {  dirty } from "./store.js";
 export let index;
-export let dirty;
+// export let dirty;
 // export let saveEdit;
 export let deleteFn;
 let disabledVar = true;

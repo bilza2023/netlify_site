@@ -8,12 +8,10 @@ import { onDestroy } from 'svelte';
 import { onMount } from 'svelte';
 import NewQuizComp  from "./NewQuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
-
+import { members, dirty } from "./store.js";
 //-- store inside the file
-const members = writable([]);
-const dirty = writable(false);
 
-$: isDirty = get(dirty);
+$: isDirty = $dirty;
 
 function handleBeforeUnload(event) {
   if ( get(dirty) ) {
@@ -84,7 +82,6 @@ onMount(async () => {
 </script>
 <!--page div-->
 
-
 <div class="w-ful">
 
 {#if isLogin == false}
@@ -98,11 +95,11 @@ onMount(async () => {
 <br>
 
 <div class="p-2 m-2 bg-gray-300 rounded-lg">  
-<button class="w-full bg-green-600 hover:bg-green-700 active:bg-green-900 text-white rounded-md p-1 m-1"
+<button class="w-full 
+{isDirty ? "bg-green-600 hover:bg-green-700" : "bg-gray-600 hover:bg-gray-700" }
+  active:bg-green-900 text-white rounded-md p-1 m-1"
   on:click={saveAll}>Save All</button>
-  {#if isDirty}
-  <h1 class="bg-red-900 text-white">dirty</h1>
-  {/if}
+ 
 </div>
 
 <br />
@@ -118,7 +115,7 @@ onMount(async () => {
         </tr>
       </thead> 
       <tbody>
-          <MemberTable   {members} {deleteFn} {dirty} />
+          <MemberTable    {deleteFn}  />
       </tbody>
     </table>
     <br>

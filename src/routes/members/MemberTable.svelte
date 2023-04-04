@@ -1,8 +1,8 @@
 <script>
 import AreYouSure from "$lib/cmp/AreYouSure.svelte";
 import MemberRow from "./MemberRow.svelte";
-export let members;
-export let dirty;
+import { members, dirty } from "./store.js";
+
 export let deleteFn;
 let editable = false;
 
