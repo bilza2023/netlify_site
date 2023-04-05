@@ -1,11 +1,12 @@
 <script>
 import { onMount } from 'svelte';
+import { BASE_URL } from '$lib/js/config.js';
 let quizes = [];
 
 onMount(async () => {
  try {
     const token = localStorage.getItem("token");
-    const response = await fetch('http://localhost/user_quiz',{
+    const response = await fetch(`${BASE_URL}/user_quiz`,{
       method: 'POST',
       body: JSON.stringify({token}),
       headers: {

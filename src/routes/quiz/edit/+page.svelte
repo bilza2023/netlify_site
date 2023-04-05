@@ -24,8 +24,7 @@ let showErrors = false;
 const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
 
 onMount(async () => {
-// console.log(BASE_URL);
-const  quizId = new URLSearchParams(location.search).get("quizId");
+  const  quizId = new URLSearchParams(location.search).get("quizId");
 
   const resp = await fetch( `${BASE_URL}/quiz/find` , {
       method: 'POST',
@@ -34,10 +33,11 @@ const  quizId = new URLSearchParams(location.search).get("quizId");
       },
       body: JSON.stringify( {token : "fdee087980kjk" ,quizId} )
     });
-  const incommingQuiz = await resp.json();
-  quiz = incommingQuiz.quiz;
-  questions = quiz.questions;
-  members = quiz.members;
+  const {incommingQuiz, incommingMembers, status } = await resp.json();
+  // debugger;
+  quiz = incommingQuiz;
+  questions = incommingQuiz.questions;
+  members = incommingMembers;
 }); //onMount
 
 const addQuestion = ()=>{
@@ -64,23 +64,25 @@ const deleteOption = (q_index,option_index)=>{
   quiz.questions[q_index].options.splice(option_index, 1);
   quiz = quiz;
 }
+
 const saveMain = async ()=>{
-isLoading = true; 
-// debugger;
-const resp = await fetch( `${BASE_URL}/quiz/update` ,{
+  isLoading = true; 
+  // debugger;
+  const resp = await fetch( `${BASE_URL}/quiz/update` ,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify( {quiz} )
     });
+
       const {updatedQuiz, code} = await resp.json();
         if (code == 0) { 
             isLoading = false; 
-            toast.push('saved...'); 
+            // toast.push('saved...'); 
         }else {
             isLoading = false;
-            toast.push('failed to save!');
+            // toast.push('failed to save!');
         }
 }//main save ends
 
@@ -97,7 +99,7 @@ const resp = await fetch( `${BASE_URL}/quiz/update` ,{
 <br>
 <p class="underline">Quiz</p>
 <br>
-<QuizBlock {quiz} {set_errors_Array} {members}/>
+<QuizBlock {quiz} {set_errors_Array} {members} />
 {/if}
 
 

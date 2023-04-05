@@ -4,6 +4,7 @@ import Intro from "./Intro.svelte";
 import Outro from "./Outro.svelte";
 import QuizComp from "./QuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
+import { toast } from '@zerodevx/svelte-toast';
 
 let quiz;
 let quizId;
@@ -27,7 +28,7 @@ try {
       pageState = "loaded"; //change it to setPageState()
       // console.log("loaded");
     }
-    
+     
     // }else {
     // }
 } catch (error) {
@@ -61,6 +62,7 @@ try {
   {#if quiz.showIntro == true}
   <Intro
     title= {quiz.title}
+    {quiz}
     description= {quiz.introText}
     {setPageState}
   />

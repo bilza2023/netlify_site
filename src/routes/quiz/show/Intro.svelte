@@ -1,11 +1,34 @@
 <script>
 import { goto } from '$app/navigation';
 export let title = "Welcome to our website!";
-export let description = "Discover the best deals today!";
+import { toast } from '@zerodevx/svelte-toast';
+export let description = "";
+export let quiz;
 export let setPageState;
+let email = "";
+let password = "";
+
+const pageStateHandler = ()=>{
+// debugger;
+if (quiz.dispatchTo == "selected"){
+  for (let i = 0; i < quiz.members.length; i++) {
+    const element = quiz.members[i];
+      if (element.email == email){
+        if (element.password == password){
+          setPageState("showQuiz");
+          return;
+        }  
+      }
+  }
+toast.push("wrong email or password");
+}else {
+setPageState("showQuiz");
+}
+
+}
 </script>
 
-
+ 
 <br/>
 
 <div class="border-2 border-white rounded-md bg-gray-700">
@@ -24,6 +47,20 @@ export let setPageState;
             </p>
       </div>
 
+{#if quiz.dispatchTo != "anyone"}
+<div class="flex bg-gray-800 justify-center border border-gray-500 p-2 m-1 rounded-md">
+
+    <label class="items-center p-1 m-1">Email</label>
+    <input class="bg-gray-600 text-white rounded-md m-1 p-1 border border-white"  type="text" bind:value={email}>
+
+
+    <label class="items-center p-1 m-1">Password</label>
+    <input class="bg-gray-600 text-white rounded-md m-1 p-1 border border-white"  type="text" bind:value={password}>
+
+</div>
+{/if}
+
+
 <div class="flex justify-center gap-4 ">
 
     <button class="bg-gray-300 text-white m-3 p-3 rounded-lg"
@@ -32,7 +69,7 @@ export let setPageState;
     </button>
 
     <button class="bg-green-500 text-white m-3 p-3 rounded-lg"
-    on:click={ ()=>setPageState("showQuiz") }>
+    on:click={pageStateHandler}>
     Quiz
     </button>
 

@@ -75,7 +75,7 @@ on:click={()=>{tooglePublish(true)}}>False</button>
 </FormRow>
  
 <FormRow title="Users"  >
-<Dispatch  {members}/>
+<Dispatch  {members} {quiz}/>
 </FormRow>
 
 

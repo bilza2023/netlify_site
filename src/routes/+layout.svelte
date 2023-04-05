@@ -1,7 +1,7 @@
 <script>
 import { onMount } from 'svelte';
 import NavMain from '$lib/containers/nav/NavMain.svelte';
-import NavMainMobile from '$lib/containers/nav/NavMainMobile.svelte';
+// import NavMainMobile from '$lib/containers/nav/NavMainMobile.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 // import Underconstruction from '$lib/cmp/Underconstruction.svelte';
 import './styles.css';

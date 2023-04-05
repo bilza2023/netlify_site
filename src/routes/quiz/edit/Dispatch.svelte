@@ -1,6 +1,52 @@
 <script>
-export let dispatchToAnyOne = true;
+// export let dispatchTo = true;
+// ["anyone", "selected", "team"],
 export let members;
+export let quiz;
+// quiz.members = [{email : "ffff" }];
+
+$: dispatchTo = quiz.dispatchTo;
+
+let mems = [...members];
+
+const toQuizMem = (email,password)=>{
+// debugger;
+let notExist = true;
+    for (let i = 0; i < quiz.members.length; i++) {
+        const element = quiz.members[i];
+        if (element.email == email){ 
+            notExist = false;
+        }     
+    }
+
+    if (notExist == true) {
+        quiz.members.push({email , password});
+        quiz.members = [...quiz.members];
+
+        for (let ii = 0; ii < mems.length; ii++) {
+            const element = mems[ii];
+        
+        if (element.email == email){ 
+            mems.splice(ii, 1);
+            mems = [...mems];
+        }
+            
+        }
+    }
+}
+const delQuizMem = (email,password)=>{
+// debugger;
+    for (let i = 0; i < quiz.members.length; i++) {
+        const element = quiz.members[i];
+        if (element.email == email){ 
+             quiz.members.splice(i, 1);
+             quiz.members = [...quiz.members ];
+        }     
+    }
+    //...
+    mems.push({email , password});
+    mems = [...mems];
+}
 
 </script>
 <!--------------------------------------->
@@ -8,26 +54,60 @@ export let members;
 <div class="flex w-full">
 
 <button class="flex-1
-{dispatchToAnyOne == true ? "bg-green-500" : "bg-gray-500" }
+{dispatchTo == "anyone" ? "bg-green-500" : "bg-gray-500" }
 p-1 m-1 rounded-md"
-on:click={()=> dispatchToAnyOne=true}
+on:click={()=> quiz.dispatchTo = "anyone" }
 >Any One</button>
 
 <button class="flex-1
- {dispatchToAnyOne == false ? "bg-green-500" : "bg-gray-500" } 
+ {dispatchTo == "selected" ? "bg-green-500" : "bg-gray-500" } 
  p-1 m-1 rounded-md"
-on:click={()=> dispatchToAnyOne=false}
+on:click={()=> {quiz.dispatchTo = "selected" ;console.log(quiz.dispatchTo) }  }
 >Selected</button>
 
 </div>
 
 
-{#if dispatchToAnyOne == false}
+{#if quiz.dispatchTo == "selected"}
 <div>
-<h1>Add Members:</h1>
-{#each members as member}
-<div>{member.email}</div>
-{/each}
+
+<div class="flex justify-around w-full">
+    <p class="border border-gray-600 p-1 m-1 rounded-lg bg-gray-400">User Members</p>
+    <p class="border border-gray-600 p-1 m-1 rounded-lg bg-gray-400">Quiz Members</p>
+
+</div>
+
+<div class="flex justify-between w-full gap-4">
+    <div class="flex-1 flex flex-col align-start">
+        <table>
+            {#each mems as member}
+            <tr><td class="border border-gray-500">{member.email}</td>
+                <td class="border  border-gray-500">
+                <button 
+                class="border bg-blue-800  p-1 w-full active:bg-blue-900 hover:bg-blue-700"
+                on:click={()=>toQuizMem(member.email , member.password)}
+                >--&gt;</button>
+                </td>
+            </tr>
+            {/each}
+        </table>
+    </div>
+    <div class="flex-1 flex flex-col align-start">
+        <table>
+            {#each quiz.members as member}
+            <tr>
+            <td class="border border-gray-500">{member.email}</td>
+            <td class="border  border-gray-500">
+                <button 
+                class="border bg-red-800  p-1 w-full active:bg-red-900 hover:bg-red-700"
+                 on:click={()=>delQuizMem(member.email , member.password)}
+                >delete</button>
+                </td>
+            </tr>
+            {/each}
+        </table>
+    </div>
+</div>
 
 </div>
 {/if}
