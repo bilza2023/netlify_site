@@ -5,17 +5,20 @@ import saveResponse from "./saveResponse.js";
 import Result from "./Result.svelte";
 export let quiz;
 let resp;
+
+
+const saveResults = async ()=>{
+
+
+}
+
 onMount(async () => {
  try {
-    //  console.log("quiz", quiz);
     resp = await saveResponse(quiz);
-    // debugger;
-   //  console.log("resp", resp );
 // debugger;
  } catch (error) {
     console.error(error);
-  }
-
+}
 }); 
 
 </script>
@@ -44,10 +47,10 @@ Home
 
 {#if quiz.saveResponse == true}
 <div class="flex-grow-4">
-<button class="bg-blue-600 text-white m-3 p-3 rounded-lg"
-on:click={ ()=> goto('/') }>
-Save Results
-</button>
+  <button class="bg-blue-600 text-white m-3 p-3 rounded-lg"
+  on:click={ saveResults  }>
+  Save Results
+  </button>
 </div>
 {/if}
 
