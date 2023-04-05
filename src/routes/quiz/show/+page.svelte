@@ -9,7 +9,28 @@ import { toast } from '@zerodevx/svelte-toast';
 let quiz;
 let quizId;
 let pageState = "loading";
-const setPageState = (st)=>{ pageState= st;}
+const  setPageState = (currentState)=>{
+  switch (currentState) {
+
+      case "loaded":
+        pageState = "loaded";
+        break;
+      case "notfound":
+        pageState = "notfound";
+        break;
+      case "showQuiz":
+        pageState = "showQuiz";
+        break;
+      case "outro":
+        pageState = "outro";
+        break;
+
+      default:
+        break;
+  }
+
+return "error";
+}
 //...
 onMount(async () => {
 try {
@@ -25,7 +46,7 @@ try {
       // console.log("notfound");
     } else {
       quiz = data.quiz; 
-      pageState = "loaded"; //change it to setPageState()
+      setPageState("loaded"); //change it to setPageState()
       // console.log("loaded");
     }
      
@@ -59,11 +80,11 @@ try {
 
 <!--Intro-->
 {#if pageState == "loaded"}
-  {#if quiz.showIntro == true}
+  {#if quiz.showIntro == true || quiz.dispatchTo == "selected" || quiz.dispatchTo == "team"}
   <Intro
     title= {quiz.title}
     {quiz}
-    description= {quiz.introText}
+    introText= {quiz.introText}
     {setPageState}
   />
   {:else}
@@ -76,7 +97,7 @@ try {
 {#if pageState == "showQuiz"}
 <QuizComp {quiz} {setPageState} />  
 {/if}
-
+ 
 <!--Outro-->
 {#if pageState == "outro"}
 <Outro {quiz}/>

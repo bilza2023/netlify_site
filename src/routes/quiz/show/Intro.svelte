@@ -2,7 +2,7 @@
 import { goto } from '$app/navigation';
 export let title = "Welcome to our website!";
 import { toast } from '@zerodevx/svelte-toast';
-export let description = "";
+export let introText = "";
 export let quiz;
 export let setPageState;
 let email = "";
@@ -40,12 +40,14 @@ setPageState("showQuiz");
         {title}
       </h1>
 
+      {#if quiz.showIntro == true}
       <div class="flex justify-center">
             <p class="text-1xl  bg-gray-800 w-4/5 leading-10 
-            m-3 p-3   rounded-lg mx-auto inline-block">
-                {description}
+            m-3 p-3 rounded-lg mx-auto inline-block">
+                {introText}
             </p>
       </div>
+      {/if}
 
 {#if quiz.dispatchTo != "anyone"}
 <div class="flex bg-gray-800 justify-center border border-gray-500 p-2 m-1 rounded-md">

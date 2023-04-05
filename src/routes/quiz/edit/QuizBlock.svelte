@@ -64,6 +64,14 @@ bind:value={quiz.introText}></textarea>
 <Tf obj={quiz} bool_prop="showIntro" />
 </FormRow>
 
+<FormRow title="Show Farewell Text">
+<Tf obj={quiz} bool_prop="showfarewellText" />
+</FormRow>
+
+<FormRow title="Show Results to user">
+<Tf obj={quiz} bool_prop="showResult" />
+</FormRow>
+
 <FormRow title="Published"  >
 
 {#if  quiz.published == true}
