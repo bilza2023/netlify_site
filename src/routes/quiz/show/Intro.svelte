@@ -5,8 +5,21 @@ import { toast } from '@zerodevx/svelte-toast';
 export let introText = "";
 export let quiz;
 export let setPageState;
-let email = "";
-let password = "";
+import { emailStore , passwordStore } from '$lib/stores/showStore.js';
+
+// let email = "";
+// import {is_login} from "$lib/stores/appStore.js";
+// let isLogin =false;
+// is_login.subscribe( (p)=> isLogin=p);
+
+let email ="";
+let password ="";
+//  $: email = $emailStore;
+//  $: password = $passwordStore;
+  emailStore.subscribe(value => email = value);
+  passwordStore.subscribe(value => password = value);
+
+
 
 const pageStateHandler = ()=>{
 // debugger;
@@ -15,6 +28,8 @@ if (quiz.dispatchTo == "selected"){
     const element = quiz.members[i];
       if (element.email == email){
         if (element.password == password){
+          emailStore.set(email); 
+          // passwordStore.set(password);
           setPageState("showQuiz");
           return;
         }  

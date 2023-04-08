@@ -1,8 +1,8 @@
 
-export default async function saveResponse(quiz){
+export default async function check(quiz){
 try{
 
-const {correctAnswers,wrongAnswers,skippedAnswers} = check(quiz.questions);
+const {correctAnswers,wrongAnswers,skippedAnswers} = check2(quiz.questions);
 return {correctAnswers,wrongAnswers,skippedAnswers};
 
 //   return quizResponse;
@@ -13,7 +13,7 @@ return false;
 }
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
-function check(questions){
+function check2(questions){
 
 const correctAnswers = [];
 const wrongAnswers = [];

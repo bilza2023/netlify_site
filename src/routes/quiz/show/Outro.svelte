@@ -1,20 +1,50 @@
 <script>
 import { onMount } from 'svelte';
 import { goto } from '$app/navigation';
-import saveResponse from "./saveResponse.js";
+import check from "./check.js";
 import Result from "./Result.svelte";
+import { BASE_URL } from '$lib/js/config.js';
+import { toast } from '@zerodevx/svelte-toast';
+import { emailStore , passwordStore } from '$lib/stores/showStore.js';
+
+let email ="";
+let password ="";
+//  $: email = $emailStore;
+//  $: password = $passwordStore;
+  emailStore.subscribe(value => email = value);
+  passwordStore.subscribe(value => password = value);
+
 export let quiz;
-let resp;
+let result;
+let showSaveResultButton = true;
 
 
 const saveResults = async ()=>{
+result.quizId = quiz._id; 
+// result.password = password; 
+result.email = email; 
 
-
+const resp = await fetch(`${BASE_URL}/result/save`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify( { result } )
+    });
+const data = await resp.json();
+    if (data.success == true){
+        toast.push("results saved");
+        showSaveResultButton = false;
+    }else {
+        toast.push(data.message);
+        showSaveResultButton = false;
+    }
 }
 
 onMount(async () => {
  try {
-    resp = await saveResponse(quiz);
+    result = await check(quiz);
+    console.error(result);
 // debugger;
  } catch (error) {
     console.error(error);
@@ -23,7 +53,7 @@ onMount(async () => {
 
 </script>
 {#if quiz.showResult == true}
-<Result  {quiz} {resp}   />  
+<Result  {quiz} {result}   />  
 {/if}
 
 {#if quiz.showfarewellText == true }
@@ -46,12 +76,15 @@ Home
 </div>
 
 {#if quiz.saveResponse == true}
+{#if showSaveResultButton == true}
+
 <div class="flex-grow-4">
-  <button class="bg-blue-600 text-white m-3 p-3 rounded-lg"
+  <button class="bg-blue-600 text-white m-3 p-3 rounded-lg hover:bg-blue-500 active:bg-blue-900"
   on:click={ saveResults  }>
   Save Results
   </button>
 </div>
+{/if}
 {/if}
 
 </div>

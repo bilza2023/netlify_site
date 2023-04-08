@@ -4,7 +4,8 @@ import Intro from "./Intro.svelte";
 import Outro from "./Outro.svelte";
 import QuizComp from "./QuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
-import { toast } from '@zerodevx/svelte-toast';
+
+// import { toast } from '@zerodevx/svelte-toast';
 
 let quiz;
 let quizId;
@@ -105,8 +106,6 @@ try {
 
 <br>
 <br>
-<br>
-
 
 {/if}
 
