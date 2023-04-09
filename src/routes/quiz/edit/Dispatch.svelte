@@ -3,6 +3,7 @@
 // ["anyone", "selected", "team"],
 export let members;
 export let quiz;
+let hide = true;
 // quiz.members = [{email : "ffff" }];
 
 $: dispatchTo = quiz.dispatchTo;
@@ -54,21 +55,21 @@ const delQuizMem = (email,password)=>{
 <div class="flex w-full">
 
 <button class="flex-1
-{dispatchTo == "anyone" ? "bg-green-500" : "bg-gray-500" }
+{hide == true ? "bg-green-500" : "bg-gray-500" }
 p-1 m-1 rounded-md"
-on:click={()=> quiz.dispatchTo = "anyone" }
->Any One</button>
+on:click={()=> hide = true}
+>Hide</button>
 
 <button class="flex-1
- {dispatchTo == "selected" ? "bg-green-500" : "bg-gray-500" } 
+{hide == false ? "bg-green-500" : "bg-gray-500" }
  p-1 m-1 rounded-md"
-on:click={()=> {quiz.dispatchTo = "selected" ;console.log(quiz.dispatchTo) }  }
->Selected</button>
+on:click={()=>hide = false }
+>Show</button>
 
 </div>
 
 
-{#if quiz.dispatchTo == "selected"}
+{#if hide == false}
 <div>
 
 <div class="flex justify-around w-full">

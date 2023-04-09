@@ -6,7 +6,7 @@ export let title ="Submit";
 
 {#if !isLoading}
 
-<button class="bg-gradient-to-br from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 focus:from-blue-700 focus:to-blue-900 text-black rounded-md p-2 pl-4 pr-6 m-6 transition-colors duration-300 ease-in-out w-6/12 mx-auto"  
+<button class="bg-gradient-to-br from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 focus:from-blue-700 focus:to-blue-900 text-black rounded-md p-2 pl-4 pr-6 m-6 transition-colors duration-300 ease-in-out w-11/12 mx-auto"  
   on:click={eventHandler}>
   {title}
 </button>

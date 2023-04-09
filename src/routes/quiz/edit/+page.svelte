@@ -20,7 +20,7 @@ let questions;
 let members;
 let errors_Array = [];
 let showErrors = false;
-
+let isDirty = true;
 const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
 
 onMount(async () => {
@@ -79,10 +79,10 @@ const saveMain = async ()=>{
       const {updatedQuiz, code} = await resp.json();
         if (code == 0) { 
             isLoading = false; 
-            // toast.push('saved...'); 
+            toast.push('saved...'); 
         }else {
             isLoading = false;
-            // toast.push('failed to save!');
+            toast.push('failed to save!');
         }
 }//main save ends
 
@@ -97,8 +97,16 @@ const saveMain = async ()=>{
 
 {#if quiz}
 <br>
-<p class="underline">Quiz</p>
 <br>
+
+<p class="underline  ">Quiz</p>
+
+<LoadBtn {isLoading} eventHandler={saveMain} title="Save"  class="w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 mx-auto" />
+
+
+<br>
+
+
 <QuizBlock {quiz} {set_errors_Array} {members} />
 {/if}
 
@@ -140,8 +148,5 @@ on:click={()=>showErrors = false}>Hide</button>
   </svg>
 </button>
 <br>
-
-
-<LoadBtn {isLoading} eventHandler={saveMain} title="Save"  class="w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 mx-auto" />
 
 {/if}

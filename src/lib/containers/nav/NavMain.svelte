@@ -23,7 +23,7 @@ is_login.set(false);
     <div class="" >
        {#if isLogin}
           <div>
-          <a class="text-white hover:text-gray-300 py-2 px-4" href="/dashboard">Create</a>
+          <a class="text-white hover:text-gray-300 py-2 px-4" href="/dashboard">Dashboard</a>
           <a class="text-white hover:text-gray-300 py-2 px-4" href="/members">Members</a>
           
           <a class="text-white hover:text-gray-300 py-2 px-4" href="#"

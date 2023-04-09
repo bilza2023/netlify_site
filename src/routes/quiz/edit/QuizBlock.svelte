@@ -16,21 +16,19 @@ let visible = true;
   }
 
 function tooglePublish(tf){
-
-if (tf == false){
-    quiz.published = false;
-    return;
-}
-if (tf == true){
-    const errors_Array =  check(quiz);
-  if (errors_Array.length !==0) {
-    set_errors_Array(errors_Array);
-    quiz.published = false;
-  }else {
-    quiz.published = true;
+  if (tf == false){
+      quiz.published = false;
+      return;
   }
-}
-// debugger;  
+  if (tf == true){
+      const errors_Array =  check(quiz);
+    if (errors_Array.length !==0) {
+      set_errors_Array(errors_Array);
+      quiz.published = false;
+    }else {
+      quiz.published = true;
+    }
+  }
 }
 
 </script>

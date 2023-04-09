@@ -10,6 +10,7 @@ import { SvelteToast } from '@zerodevx/svelte-toast'
 let isLogin;
 
  onMount(async ()=>{
+
 try {
     const token = await localStorage.getItem("token");
         if (token == null || token.length == 0) {

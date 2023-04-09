@@ -40,6 +40,7 @@ const  quizId = new URLSearchParams(location.search).get("quizId");
 <table class="w-10/12 ">
 <tr class="text-center text-white bg-blue-900">
 <td class="tbltd">ser</td>
+<td class="tbltd">IP</td>
 <td class="tbltd">email</td>
 <td class="tbltd">Correct Answers</td>
 <td class="tbltd">Wrong Answers</td>
@@ -50,6 +51,7 @@ const  quizId = new URLSearchParams(location.search).get("quizId");
 {#each results as result , index}
 <tr class="text-center">
 <td class="tbltd">{index+1}</td>
+<td class="tbltd">{result.ip}</td>
 <td class="tbltd">{result.email}</td>
 <td class="tbltd">{result.correctAnswers.length}</td>
 <td class="tbltd">{result.wrongAnswers.length}</td>

@@ -99,8 +99,7 @@ onMount(async () => {
 <button class="w-full 
 {isDirty ? "bg-green-600 hover:bg-green-700" : "bg-gray-600 hover:bg-gray-700" }
   active:bg-green-900 text-white rounded-md p-1 m-1"
-  on:click={saveAll}>Save All</button>
- 
+  on:click={saveAll}>Save All</button> 
 </div>
 
 <br />

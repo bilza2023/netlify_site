@@ -20,25 +20,33 @@ let showSaveResultButton = true;
 
 
 const saveResults = async ()=>{
-result.quizId = quiz._id; 
-// result.password = password; 
-result.email = email; 
+const r = await fetch('https://api.ipify.org?format=json');
+const d = await r.json();
+result.ip = d.ip;
 
-const resp = await fetch(`${BASE_URL}/result/save`,{
+result.quizId = quiz._id; 
+result.email = email; 
+save(result);
+
+}
+
+const save = async ( result )=> { 
+
+    const resp = await fetch(`${BASE_URL}/result/save`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify( { result } )
     });
-const data = await resp.json();
+    const data = await resp.json();
     if (data.success == true){
         toast.push("results saved");
         showSaveResultButton = false;
     }else {
         toast.push(data.message);
         showSaveResultButton = false;
-    }
+}
 }
 
 onMount(async () => {
