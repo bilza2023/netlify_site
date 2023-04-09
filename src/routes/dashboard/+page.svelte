@@ -80,6 +80,7 @@ const token = localStorage.getItem('token');
           <th class="">Title</th>
           <th class="">Show</th>
           <th class="">Edit</th>
+          <th class="">Analytics</th>
           <th class="">Delete</th>
         </tr>
       </thead> 
@@ -99,6 +100,12 @@ const token = localStorage.getItem('token');
 <td class="p-1 border bg-green-900 text-center text-white hover:bg-green-700 active:bg-green-800 rounded-md transition duration-200">
   <a href={`/quiz/edit?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
     edit
+  </a>
+</td>
+<!-- http://localhost:5173/analytics?quizId=642e02e8cfa55f9ef58091d8 -->
+<td class="p-1 border bg-blue-900 text-center text-white hover:bg-blue-700 active:bg-blue-800 rounded-md transition duration-200">
+  <a href={`/analytics?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
+    Analytics
   </a>
 </td>
 
