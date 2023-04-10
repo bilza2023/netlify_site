@@ -7,13 +7,14 @@ import Question from './Question.svelte';
 import Errors from './Errors.svelte';
 import {getQuiz, getQuestion , getOption} from "./new_quiz.js";
 import QuizBlock from "./QuizBlock.svelte";
+import NavMain from '$lib/containers/nav/NavMain.svelte';
+import Footer from '$lib/cmp/Footer.svelte';
 
 import { page } from '$app/stores';
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
 import LoadBtn from '$lib/cmp/LoadBtn.svelte';
 let isLoading = false;
-///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 let quiz;
 let questions;
@@ -89,6 +90,9 @@ const saveMain = async ()=>{
 
 </script>
 
+<NavMain isLogin={isLogin}/>
+<div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen">
+
 
 
 {#if !quiz}
@@ -150,3 +154,12 @@ on:click={()=>showErrors = false}>Hide</button>
 <br>
 
 {/if}
+
+
+
+<br>
+<br> 
+</div><!--app-->
+
+
+<Footer />

@@ -3,8 +3,11 @@ import { goto } from '$app/navigation';
 import {is_login} from "$lib/stores/appStore.js";
 import { toast } from '@zerodevx/svelte-toast';
 import validateEmail from "$lib/js/validateEmail.js";
-import validateString from "$lib/js/validateString.js";
+import validateString from "$lib/js/validateString.js"; 
+import NavLogin from "$lib/cmp/NavLogin.svelte";
 import { BASE_URL } from '$lib/js/config.js';
+import Footer from "$lib/cmp/Footer.svelte";
+
 let email ="";
 let password =""; 
 
@@ -48,7 +51,10 @@ isLoading = true;
       }
   }
 </script>
-
+<NavLogin />
+<div class="bg-gray-800 text-white m-0 py-0 px-6 ">
+<br>
+<br>
 
 <form id="my-form" class="flex flex-col text-center w-3/5 sm:w-4/5 mx-auto bg-gray-600 rounded-md p-2">
   <h1 class="text-white text-2xl font-bold mb-4">Register</h1>
@@ -66,3 +72,7 @@ isLoading = true;
   </label>
   <LoadBtn {isLoading} eventHandler={handleSubmit} class="w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 mx-auto" />
 </form>
+
+<br>
+</div> <!--app ends-->
+<Footer />

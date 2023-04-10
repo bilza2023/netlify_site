@@ -9,6 +9,8 @@ import { onMount } from 'svelte';
 import NewQuizComp  from "./NewQuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import { members, dirty } from "./store.js";
+import NavMain from '$lib/containers/nav/NavMain.svelte';
+import Footer from '$lib/cmp/Footer.svelte';
 //-- store inside the file
 
 $: isDirty = $dirty;
@@ -79,6 +81,12 @@ onMount(async () => {
 
 
 </script>
+
+
+
+<NavMain isLogin={isLogin}/>
+<div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen">
+<br>
 <!--page div-->
 
 <div class="w-ful">
@@ -127,3 +135,10 @@ onMount(async () => {
 <br>
 <br>
 </div><!--page div ends-->
+
+<br>
+<br> 
+</div><!--app-->
+
+
+<Footer />

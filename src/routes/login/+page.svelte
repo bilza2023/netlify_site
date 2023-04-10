@@ -3,16 +3,17 @@ import { goto } from '$app/navigation';
 import {is_login} from "$lib/stores/appStore.js";
 import { toast } from '@zerodevx/svelte-toast';
 import validateEmail from "$lib/js/validateEmail.js";
+import Footer from "$lib/cmp/Footer.svelte";
 import validateString from "$lib/js/validateString.js";
+import LoadBtn from '$lib/cmp/LoadBtn.svelte';
+import NavLogin from "$lib/cmp/NavLogin.svelte";
 import { BASE_URL } from '$lib/js/config.js';
  
 let email ="";
 let password =""; 
 
-import LoadBtn from '$lib/cmp/LoadBtn.svelte';
 let isLoading = false;
 
-/////////////
 async function handleSubmit(event) {
 event.preventDefault();
 const emailError = validateEmail(email);
@@ -45,10 +46,13 @@ const response = await fetch( `${BASE_URL}/user/login` , {
       }else {
         isLoading = false;
             toast.push( data.msg );
-
       }
   }
 </script>
+
+<NavLogin />
+<div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen">
+<br>
 <br>
 <form id="my-form" class="flex flex-col text-center w-3/5 sm:w-4/5 mx-auto bg-gray-600 rounded-md p-2">
   <h1 class="text-white text-2xl font-bold mb-4">Login</h1>
@@ -64,4 +68,12 @@ const response = await fetch( `${BASE_URL}/user/login` , {
    
   </label>
   <LoadBtn {isLoading} eventHandler={handleSubmit} class="w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 mx-auto" />
+
+
 </form>
+
+
+<br>
+</div>
+
+<Footer />
