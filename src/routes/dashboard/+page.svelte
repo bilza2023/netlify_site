@@ -2,7 +2,7 @@
 import {is_login} from "$lib/stores/appStore.js";
 import AreYouSure from "$lib/cmp/AreYouSure.svelte";
 import { toast } from '@zerodevx/svelte-toast';
-import NavMain from '$lib/containers/nav/NavMain.svelte';
+import MainNav from '$lib/cmp/MainNav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 
 let isLogin =false;
@@ -63,7 +63,7 @@ const token = localStorage.getItem('token');
 }
 </script>
 
-<NavMain isLogin={isLogin}/>
+<MainNav  isLogin={isLogin}/>
 <div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen">
 
 <!--page div-->

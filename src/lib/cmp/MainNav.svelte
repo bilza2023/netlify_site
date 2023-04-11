@@ -2,6 +2,8 @@
   let isVisible = false;
 
 import {is_login} from "$lib/stores/appStore.js";
+import NavDropDown from "$lib/cmp/NavDropDown.svelte";
+import cog from "$lib/svg/cog.svg";
 let isLogin =false;
 is_login.subscribe( (p)=> isLogin=p);
 
@@ -32,9 +34,12 @@ is_login.set(false);
         <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
         
           {#if isLogin}
-          <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/dashboard">Create</a></li>
+ 
+          <NavDropDown />
+
             <li><a class="text-white hover:text-gray-300 py-2 px-4" href="#"
             on:click={logoutFn} >Logout</a></li>
+          
           {:else}
             <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/register">Register</a></li>
             <li><a class="text-white hover:text-gray-300 py-2 px-4" href="/login">Login</a></li>

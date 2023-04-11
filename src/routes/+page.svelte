@@ -1,12 +1,11 @@
 <script>
 import { onMount } from 'svelte';
-import NavMain from '$lib/containers/nav/NavMain.svelte'; 
+import MainNav from '$lib/cmp/MainNav.svelte'; 
 import Footer from '$lib/cmp/Footer.svelte';
-
+export let isLogin = false;
 import Underconstruction from "$lib/cmp/Underconstruction.svelte";
 import ThreeCards from "$lib/cmp/ThreeCards.svelte";
 import  generateRandomGradient  from "$lib/js/gradiant_dark.js";
-import { BASE_URL } from '$lib/js/config.js';
 
 onMount(async ()=>{
 
@@ -42,7 +41,7 @@ const skrink = (txt)=>{
  
 </script>
 
-<NavMain isLogin={isLogin}/>
+<MainNav isLogin={isLogin}/>
 <div class="bg-gray-800 text-white m-0 py-0 px-6 ">
 <!-- <Underconstruction /> -->
 <br/>

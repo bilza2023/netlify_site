@@ -7,7 +7,7 @@ import Question from './Question.svelte';
 import Errors from './Errors.svelte';
 import {getQuiz, getQuestion , getOption} from "./new_quiz.js";
 import QuizBlock from "./QuizBlock.svelte";
-import NavMain from '$lib/containers/nav/NavMain.svelte';
+import NavMain from '$lib/cmp/NavMain.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 
 import { page } from '$app/stores';

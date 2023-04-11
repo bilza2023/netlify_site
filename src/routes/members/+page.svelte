@@ -9,7 +9,7 @@ import { onMount } from 'svelte';
 import NewQuizComp  from "./NewQuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import { members, dirty } from "./store.js";
-import NavMain from '$lib/containers/nav/NavMain.svelte';
+import NavMain from '$lib/cmp/NavMain.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 //-- store inside the file
 
