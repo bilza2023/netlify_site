@@ -4,13 +4,11 @@ import AreYouSure from "$lib/cmp/AreYouSure.svelte";
 import { toast } from '@zerodevx/svelte-toast';
 import MainNav from '$lib/cmp/MainNav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
-
-let isLogin =false;
-is_login.subscribe( (p)=> isLogin=p);
-
-import { onMount } from 'svelte';
-import NewQuizComp  from "./NewQuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
+import { onMount } from 'svelte';
+
+let isLogin =true;
+is_login.subscribe( (p)=> isLogin=p);
 
 $: quizzes = [];
 
@@ -64,24 +62,30 @@ const token = localStorage.getItem('token');
 </script>
 
 <MainNav  isLogin={isLogin}/>
-<div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen">
 
 <!--page div-->
-<div class="w-ful">
 
 {#if isLogin == false}
+<div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen flex justify-center " >
+<div class="w-11/12">
 <h1><a href="/login">Please login</a></h1>
+</div>
+</div>
 {/if}
+
 <br>
 
 {#if isLogin == true}
-<NewQuizComp callback={populate} />
 <br>
+<div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen flex justify-center " >
 
-<h1 class="m-1 text-slate-200 text-2xl mt-2 underline text-center">Quizzes</h1>
+<div class="w-11/12">
+<h1 class="m-1 text-slate-200 text-2xl mt-2 underline text-center">
+All Projects</h1>
+<br>
   {#if quizzes}
     <table class="w-full border-collapse table-responsive border-white">
-      <thead class="">
+      
         <tr class="bg-gray-900 text-white border-2 border-gray-200">
           <th class="">Ser</th>
           <th class="">Title</th>
@@ -90,12 +94,11 @@ const token = localStorage.getItem('token');
           <th class="">Analytics</th>
           <th class="">Delete</th>
         </tr>
-      </thead> 
-      <tbody>
-        {#each quizzes as quiz,index }
-          <tr class="text-white bg-gray-900 border-2 border-gray-200">
-            <td class="">{index+1}</td>
-            <td class="">{quiz.title}</td>
+
+{#each quizzes as quiz,index }
+<tr class="text-white bg-gray-900 border-2 border-gray-200">
+<td class="p-1 border  text-center text-white">{index+1}</td>
+<td class="p-1 border  text-center text-white">{quiz.title}</td>
 
 
 <td class="p-1 border bg-blue-900 text-center text-white hover:bg-blue-700 active:bg-blue-800 rounded-md transition duration-200">
@@ -121,20 +124,19 @@ const token = localStorage.getItem('token');
   <AreYouSure deleteFn={deleteQuiz} {index}/>
 </td>
             
-         </tr>
-        {/each}
-      </tbody>
-    </table>
+</tr>
+{/each}
+
+</table>
   {/if}
 
-{/if} 
-
-
 </div><!--page div ends-->
+</div><!--page div ends-->
+  {/if}
+
 
 <br>
 <br> 
-</div><!--app-->
 
 
 <Footer />
