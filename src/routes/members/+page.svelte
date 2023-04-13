@@ -5,11 +5,10 @@ import { browser } from '$app/environment';
 import MemberTable from "./MemberTable.svelte";
 import { toast } from '@zerodevx/svelte-toast';
 import { onDestroy } from 'svelte';
-import { onMount } from 'svelte';
 import NewQuizComp  from "./NewQuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import { members, dirty } from "./store.js";
-import NavMain from '$lib/cmp/NavMain.svelte';
+import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 //-- store inside the file
 
@@ -59,24 +58,30 @@ if (browser){
  window.addEventListener('beforeunload', handleBeforeUnload);
 }
 
-let isLogin =true; //make it false again
-// is_login.subscribe( (p)=> isLogin=p);
+import { onMount } from 'svelte';
+let isLogin=false;
+
 
 onMount(async () => {
-  const token = localStorage.getItem('token');
+  const token = await localStorage.getItem("token");
+      // debugger;
+          if (token == null || token.length == 0) {
+              isLogin = false;
+          }else {
+              isLogin = true;
+            const resp = await fetch( `${BASE_URL}/user/members` ,{
+            method: 'GET',
+            headers: {
+              // 'Authorization': `Bearer ${token}`,
+              'Authorization': `${token}`
+            }
+            });
 
-  const resp = await fetch( `${BASE_URL}/user/members` ,{
-  method: 'GET',
-  headers: {
-    // 'Authorization': `Bearer ${token}`,
-    'Authorization': `${token}`
-  }
-  });
-
-  const data = await resp.json();
-  console.log(data);
-  members.update(_ => data.members.members);
-  // console.log($members);
+            const data = await resp.json();
+            console.log(data);
+            members.update(_ => data.members.members);
+          }
+  
 }); 
 
 
@@ -84,7 +89,7 @@ onMount(async () => {
 
 
 
-<NavMain isLogin={isLogin}/>
+<Nav {isLogin}/>
 <div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen">
 <br>
 <!--page div-->
