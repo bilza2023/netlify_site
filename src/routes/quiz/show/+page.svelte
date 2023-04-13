@@ -1,5 +1,4 @@
 <script>
-import { onMount } from 'svelte';
 import Intro from "./Intro.svelte";
 import Outro from "./Outro.svelte";
 import QuizComp from "./QuizComp.svelte";
@@ -33,8 +32,21 @@ const  setPageState = (currentState)=>{
 return "error";
 }
 //...
+import { onMount } from 'svelte';
+let isLogin=false;
+
 onMount(async () => {
+
 try {
+const token = await localStorage.getItem("token");
+      // debugger;
+          if (token == null || token.length == 0) {
+              isLogin = false;
+          }else {
+              isLogin = true;
+            
+          }
+/////
   quizId = new URLSearchParams(location.search).get("quizId"); 
   const url = `${BASE_URL}/quiz/show/${quizId}`;
   const resp = await fetch(url);

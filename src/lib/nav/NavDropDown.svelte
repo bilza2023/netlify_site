@@ -16,10 +16,7 @@
 
  
       <a class="block px-4 py-2 bg-gray-600 text-white 
-      hover:bg-gray-400" href="/dashboard">Quiz</a>
-    
-      <a class="block px-4 py-2 bg-gray-600 text-white 
-      hover:bg-gray-400" href="/dashboard">Survey</a>
+      hover:bg-gray-400" href="/create">Create</a>
 
       <!-- <a class="block px-4 py-2 bg-gray-600 text-white 
       hover:bg-gray-400" href="/dashboard">Poll</a> -->

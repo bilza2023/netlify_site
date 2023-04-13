@@ -1,5 +1,4 @@
 <script>
-import { onMount } from 'svelte';
 import save from "./save.js";
 import update from "./update.js";
 import { v4 as uuidv4 } from 'uuid';
@@ -7,7 +6,7 @@ import Question from './Question.svelte';
 import Errors from './Errors.svelte';
 import {getQuiz, getQuestion , getOption} from "./new_quiz.js";
 import QuizBlock from "./QuizBlock.svelte";
-import NavMain from '$lib/cmp/NavMain.svelte';
+import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 
 import { page } from '$app/stores';
@@ -15,6 +14,38 @@ import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
 import LoadBtn from '$lib/cmp/LoadBtn.svelte';
 let isLoading = false;
+
+import { onMount } from 'svelte';
+let isLogin=false;
+onMount(async ()=>{
+
+  try {
+      const token = await localStorage.getItem("token");
+      // debugger;
+          if (token == null || token.length == 0) {
+              isLogin = false;
+          }else {
+              isLogin = true;
+              const  quizId = new URLSearchParams(location.search).get("quizId");
+            const resp = await fetch( `${BASE_URL}/quiz/find` , {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify( {token : "fdee087980kjk" ,quizId} )
+            });
+            const {incommingQuiz, incommingMembers, status } = await resp.json();
+            quiz = incommingQuiz;
+            questions = incommingQuiz.questions;
+            members = incommingMembers;
+          }
+    } catch (error) {
+      // console.error(error);
+    }
+// console.log("isLogin" , isLogin);    
+});
+
+
 ///////////////////////////////////////////////////
 let quiz;
 let questions;
@@ -23,23 +54,6 @@ let errors_Array = [];
 let showErrors = false;
 let isDirty = true;
 const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
-
-onMount(async () => {
-  const  quizId = new URLSearchParams(location.search).get("quizId");
-
-  const resp = await fetch( `${BASE_URL}/quiz/find` , {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify( {token : "fdee087980kjk" ,quizId} )
-    });
-  const {incommingQuiz, incommingMembers, status } = await resp.json();
-  // debugger;
-  quiz = incommingQuiz;
-  questions = incommingQuiz.questions;
-  members = incommingMembers;
-}); //onMount
 
 const addQuestion = ()=>{
     const q = getQuestion( uuidv4());
@@ -90,7 +104,7 @@ const saveMain = async ()=>{
 
 </script>
 
-<NavMain isLogin={isLogin}/>
+<Nav isLogin={isLogin}/>
 <div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen">
 
 
@@ -103,9 +117,9 @@ const saveMain = async ()=>{
 <br>
 <br>
 
-<p class="underline  ">Quiz</p>
 
-<LoadBtn {isLoading} eventHandler={saveMain} title="Save"  class="w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 mx-auto" />
+
+<LoadBtn {isLoading} eventHandler={saveMain} title="Save Quiz"  class="w-full mx-auto" />
 
 
 <br>

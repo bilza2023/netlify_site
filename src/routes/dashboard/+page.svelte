@@ -1,14 +1,9 @@
 <script>
-import {is_login} from "$lib/stores/appStore.js";
 import AreYouSure from "$lib/cmp/AreYouSure.svelte";
 import { toast } from '@zerodevx/svelte-toast';
-import MainNav from '$lib/cmp/MainNav.svelte';
+import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 import { BASE_URL } from '$lib/js/config.js';
-import { onMount } from 'svelte';
-
-let isLogin =true;
-is_login.subscribe( (p)=> isLogin=p);
 
 $: quizzes = [];
 
@@ -33,11 +28,26 @@ const response = await fetch( `${BASE_URL}/quiz/del` , {
       }
 }//del fn
 
-onMount(async () => {
-  if (isLogin == true){
-      populate();
-  }
-}); 
+import { onMount } from 'svelte';
+let isLogin=false;
+onMount(async ()=>{
+
+  try {
+      const token = await localStorage.getItem("token");
+      // debugger;
+          if (token == null || token.length == 0) {
+              isLogin = false;
+          }else {
+              isLogin = true;
+                    populate();
+          }
+    } catch (error) {
+      // console.error(error);
+    }
+// console.log("isLogin" , isLogin);    
+});
+
+ 
 const populate = async () =>{
 try {
 const token = localStorage.getItem('token');
@@ -61,7 +71,7 @@ const token = localStorage.getItem('token');
 }
 </script>
 
-<MainNav  isLogin={isLogin}/>
+<Nav  isLogin={isLogin}/>
 
 <!--page div-->
 
