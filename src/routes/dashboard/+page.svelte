@@ -81,12 +81,8 @@ const token = localStorage.getItem('token');
 <h1><a href="/login">Please login</a></h1>
 </div>
 </div>
-{/if}
 
-<br>
-
-{#if isLogin == true}
-<br>
+{:else}
 <div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen flex justify-center " >
 
 <div class="w-11/12">
@@ -140,13 +136,13 @@ All Projects</h1>
 </table>
   {/if}
 
+<br>
+<br> 
+
 </div><!--page div ends-->
 </div><!--page div ends-->
   {/if}
 
-
-<br>
-<br> 
 
 
 <Footer />
