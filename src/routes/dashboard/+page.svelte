@@ -108,13 +108,13 @@ All Projects</h1>
 
 
 <td class="p-1 border bg-blue-900 text-center text-white hover:bg-blue-700 active:bg-blue-800 rounded-md transition duration-200">
-  <a href= {`/quiz/show?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
+  <a href= {`/show?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
     show
   </a>
 </td>
 
 <td class="p-1 border bg-green-900 text-center text-white hover:bg-green-700 active:bg-green-800 rounded-md transition duration-200">
-  <a href={`/quiz/edit?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
+  <a href={`/edit?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
     edit
   </a>
 </td>
