@@ -38,15 +38,17 @@ const response = await fetch( `${BASE_URL}/user/login` , {
       'Content-Type': 'application/json'
     }
 });
-      const data = await response.json();
-      if (data.status == "ok"){
-      localStorage.setItem('token', data.token);
-      is_login.set(true); //login in appstore
-        goto('/');
-      }else {
-        isLoading = false;
-            toast.push( data.msg );
-      }
+    if (response.ok) {
+        const data = await response.json();
+        console.log("data",data);
+        localStorage.setItem("token", data.token);
+        isLoading = true; //--set true for this page-load
+        goto("/");
+  } else {
+    isLoading = false;
+    const data = await response.json();
+    toast.push(data.msg);
+  } 
   }
 </script>
 

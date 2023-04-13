@@ -3,6 +3,7 @@ import Nav from '$lib/nav/Nav.svelte';
 import { toast } from '@zerodevx/svelte-toast';
 import { BASE_URL } from '$lib/js/config.js';
 import { onMount } from 'svelte';
+import { goto } from '$app/navigation';
 let isLogin=false;
 onMount(async ()=>{
 
@@ -17,36 +18,33 @@ onMount(async ()=>{
     } catch (error) {
       // console.error(error);
     }
-// console.log("isLogin" , isLogin);    
 });
 
 let newPRojectName = "";
 
-const handler = async()=>{
-  // debugger;
+const handler = async(quizType)=>{
   const token = localStorage.getItem('token');
 
+  // debugger;
   const resp = await fetch( `${BASE_URL}/quiz/new` , {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify( {token ,title :newPRojectName} )
+      body: JSON.stringify( {token ,quizType ,title :newPRojectName} )
   });
 
-    newPRojectName = "";
-  const data = await resp.json();
-    if (data.status == "ok"){
-        // callback();
-        toast.push( "Success" );
-
-    }else {
-        toast.push( data.msg );
-    }
+  if (resp.ok) {
+      newPRojectName = "";
+      const data = await resp.json();
+      // toast.push( "Success" );
+      goto("/dashboard");
+  }else {
+      toast.push( data.msg );
+  }
 
 }
 
-// const callback = ( )=> {};
 </script>
 
 <Nav  {isLogin}/>
@@ -62,13 +60,18 @@ const handler = async()=>{
 <br>
 
 {#if isLogin == true}
+<br/>
+
 <div class=" border-2 border-white p-2 m-2  text-center rounded-lg ">
 <h1 class="m-1 text-slate-200 text-2xl underline">New Project</h1>
 <input class="bg-gray-700 text-white  w-10/12 m-1 rounded-lg"  type="text" bind:value={newPRojectName} >
 
+<br/>
+
 <div>
-<button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={handler}>New Quiz</button>
-<button class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={handler}>New Survey</button>
+<br/>
+<button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={()=>handler("quiz")}>New Quiz</button>
+<button class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={()=>handler("survey")}>New Survey</button>
 
 </div>
 

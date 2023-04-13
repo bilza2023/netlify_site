@@ -44,10 +44,11 @@ setPageState("showQuiz");
 </script>
 
  
-<br/>
 
-<div class="border-2 border-white rounded-md bg-gray-700">
+<div class="border-2 border-white rounded-md bg-gray-700 text-white min-h-screen">
   
+<br/>
+  <br>
       <h1 class="text-4xl font-bold text-left bg-gray-800 
       m-4 p-5  inline-block rounded-lg
       border-2 border-gray-600
@@ -91,6 +92,4 @@ setPageState("showQuiz");
     </button>
 
 </div>
-
-
 </div>

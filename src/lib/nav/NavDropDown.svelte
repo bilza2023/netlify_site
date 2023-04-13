@@ -9,7 +9,7 @@
 <div class="relative">
   <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded" on:click|preventDefault={() => showMenu = !showMenu}>
   
-  Products
+  Projects
   
   </button>
   <div class={`absolute left-0 mt-2 bg-white shadow-md rounded ${showMenu ? 'block' : 'hidden'} `}>
