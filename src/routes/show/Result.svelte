@@ -1,23 +1,24 @@
 <script>
 import ReportPart from "./ReportPart.svelte";
 export let quiz;
-export let resp;
+export let result;
+export let setShowOutroFinal;
 
 </script>
 
-{#if resp}
+{#if result}
 
 <div class="flex p-1 m-1 bg-gray-700 rounded-md justify-center">
 
 <div class="p-1 m-1 rounded-lg bg-red-900 text-white">
-Wrong Answers: {resp.wrongAnswers.length}</div>
+Wrong Answers: {result.wrongAnswers.length}</div>
 
 <div class="p-1 m-1 rounded-lg bg-green-900 text-white">
-Correct Answers: {resp.correctAnswers.length}</div>
+Correct Answers: {result.correctAnswers.length}</div>
 
 
 <div class="p-1 m-1 rounded-lg bg-gray-500 text-white">
-Skipped Answers: {resp.skippedAnswers.length}</div>
+Skipped Answers: {result.skippedAnswers.length}</div>
 
 </div>
 
@@ -30,14 +31,21 @@ Skipped Answers: {resp.skippedAnswers.length}</div>
 
 <div class="bg-gray-650 rounded-lg p-2 text-gray-100">
 <!--=================================-->
-<ReportPart answersArray={resp.wrongAnswers} {quiz} title="Wrong Questions" background_color="#470101"/>
+<ReportPart answersArray={result.wrongAnswers} {quiz} title="Wrong Questions" background_color="#470101"/>
 
 <!--=================================-->
-<ReportPart answersArray={resp.skippedAnswers} {quiz} title="Skipped Questions"  background_color="#0d2560"/>
+<ReportPart answersArray={result.skippedAnswers} {quiz} title="Skipped Questions"  background_color="#0d2560"/>
 
 <!--=================================-->
-<ReportPart answersArray={resp.correctAnswers} {quiz} title="Correct Questions" background_color="#023305" />
+<ReportPart answersArray={result.correctAnswers} {quiz} title="Correct Questions" background_color="#023305" />
 <!--=================================-->
+</div>
+
+<div class="flex-grow-4">
+  <button class="bg-blue-600 text-white m-3 p-3 rounded-lg hover:bg-blue-500 active:bg-blue-900"
+  n:click={setShowOutroFinal}>
+  Ok
+  </button>
 </div>
 
 

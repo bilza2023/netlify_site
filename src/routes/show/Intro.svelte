@@ -23,7 +23,7 @@ let password ="";
 
 const pageStateHandler = ()=>{
 // debugger;
-if (quiz.dispatchTo == "selected"){
+if (quiz.quizType == "quiz"){
   for (let i = 0; i < quiz.members.length; i++) {
     const element = quiz.members[i];
       if (element.email == email){
@@ -65,7 +65,7 @@ setPageState("showQuiz");
       </div>
       {/if}
 
-{#if quiz.dispatchTo != "anyone"}
+{#if quiz.quizType == "quiz"}
 <div class="flex bg-gray-800 justify-center border border-gray-500 p-2 m-1 rounded-md">
 
     <label class="items-center p-1 m-1">Email</label>
@@ -88,7 +88,7 @@ setPageState("showQuiz");
 
     <button class="bg-green-500 text-white m-3 p-3 rounded-lg"
     on:click={pageStateHandler}>
-    Quiz
+    Start
     </button>
 
 </div>

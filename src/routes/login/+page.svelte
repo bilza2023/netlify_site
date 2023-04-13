@@ -1,6 +1,6 @@
 <script>
 import { goto } from '$app/navigation';
-import {is_login} from "$lib/stores/appStore.js";
+// import {is_login} from "$lib/stores/appStore.js";
 import { toast } from '@zerodevx/svelte-toast';
 import validateEmail from "$lib/js/validateEmail.js";
 import Footer from "$lib/cmp/Footer.svelte";

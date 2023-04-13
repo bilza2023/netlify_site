@@ -1,7 +1,9 @@
 <script>
 import Intro from "./Intro.svelte";
 import Outro from "./Outro.svelte";
+import OutroFinal from "./OutroFinal.svelte";
 import QuizComp from "./QuizComp.svelte";
+import Result from "./Result.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 
 // import { toast } from '@zerodevx/svelte-toast';
@@ -9,6 +11,7 @@ import { BASE_URL } from '$lib/js/config.js';
 let quiz;
 let quizId;
 let pageState = "loading";
+
 const  setPageState = (currentState)=>{
   switch (currentState) {
 
@@ -33,19 +36,19 @@ return "error";
 }
 //...
 import { onMount } from 'svelte';
-let isLogin=false;
+// let isLogin=false;
 
 onMount(async () => {
 
 try {
 const token = await localStorage.getItem("token");
       // debugger;
-          if (token == null || token.length == 0) {
-              isLogin = false;
-          }else {
-              isLogin = true;
+          // if (token == null || token.length == 0) {
+          //     isLogin = false;
+          // }else {
+          //     isLogin = true;
             
-          }
+          // }
 /////
   quizId = new URLSearchParams(location.search).get("quizId"); 
   const url = `${BASE_URL}/quiz/show/${quizId}`;
@@ -73,6 +76,10 @@ const token = await localStorage.getItem("token");
 
 </script>
 
+<div class="w-full min-h-screen  bg:gray-800 text-white">
+
+
+
 {#if pageState == "notfound"}
   <p class="p-4 m-4 w-full bg-gray-500 border-2 border-gray-200 text-2xl">Not Found...</p>
 {/if}
@@ -84,6 +91,7 @@ const token = await localStorage.getItem("token");
 
 <!-- Quiz Title Always Except When Loading-->
 {#if pageState !== "loading" && pageState !== "loaded" && pageState !== "notfound"}
+<br>
 <div class="flex justify-center">
   <h1 class="bg-blue-900  p-2 m-1  mt-0  w-full text-center text-2xl rounded-md">{quiz.title}
   </h1>
@@ -93,7 +101,7 @@ const token = await localStorage.getItem("token");
 
 <!--Intro-->
 {#if pageState == "loaded"}
-  {#if quiz.showIntro == true || quiz.dispatchTo == "selected" || quiz.dispatchTo == "team"}
+  {#if quiz.showIntro == true }
   <Intro
     title= {quiz.title}
     {quiz}
@@ -121,3 +129,13 @@ const token = await localStorage.getItem("token");
 
 {/if}
 
+</div><!-- main page container-->
+
+
+
+<style>
+body {
+background-color: black;
+}
+
+</style>
