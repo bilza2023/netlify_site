@@ -6,7 +6,7 @@ export let background_color ="#512424";
 </script>
 
 
-<h1 class="mb-3 m-1 p-2  border-2 border-gray-500 rounded-md text-center ">{title}</h1>
+<h1 class="mb-3 m-1 p-2  border-2  rounded-md text-center text-white ">{title}</h1>
 
 {#if answersArray.length == 0}
 

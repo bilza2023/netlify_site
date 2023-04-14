@@ -23,6 +23,14 @@ const prev = ()=>{
 
 </script>
 
+<br>
+<div class="flex justify-center">
+  <h1 class="bg-blue-900  p-2 m-1  mt-0  w-full text-center text-2xl rounded-md">{quiz.title}
+  </h1>
+</div>
+  <br>
+
+
 <div class="flex flex-col justify-center bg-gray-700 p-1 
  text-white rounded-md w-10/12 mx-auto border-2 border-gray-100">
   

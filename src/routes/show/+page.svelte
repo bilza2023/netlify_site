@@ -1,13 +1,9 @@
 <script>
-// import Intro from "./Intro.svelte";
 import Outro from "./Outro.svelte";
-// import OutroFinal from "./OutroFinal.svelte";
 import QuizComp from "./QuizComp.svelte";
-// import Result from "./Result.svelte";
 import FormIntro from "./FormIntro.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import { onMount } from 'svelte';
-// import { toast } from '@zerodevx/svelte-toast';
 
 let quiz;
 let quizId;
@@ -47,23 +43,14 @@ onMount(async () => {
 </script>
 
 
+<div class="w-full p-2 bg-gray-800 min-h-screen ">
+
 {#if pageState == "notfound"}
   <p class="p-4 m-4 w-full bg-gray-500 border-2 border-gray-200 text-2xl">Not Found...</p>
 {/if}
 
 {#if pageState == "loading"}
   <p class="p-4 m-4 w-full bg-gray-500 border-2 border-gray-200 text-2xl">Loading...</p>
-{/if}
-
-
-<!-- Quiz Title Always Except When Loading-->
-{#if pageState !== "loading" && pageState !== "loaded" && pageState !== "notfound"}
-<br>
-<div class="flex justify-center">
-  <h1 class="bg-blue-900  p-2 m-1  mt-0  w-full text-center text-2xl rounded-md">{quiz.title}
-  </h1>
-</div>
-  <br>
 {/if}
 
 <!--Intro-->
@@ -79,13 +66,15 @@ onMount(async () => {
   
 
 {#if pageState == "showQuiz" }
-
 <QuizComp {quiz} {setPageState}  />
 {/if}
 
-{#if pageState == "outro" }
 
+
+{#if pageState == "outro" }
 <Outro  {quiz} />
 {/if}
 
 
+
+</div>

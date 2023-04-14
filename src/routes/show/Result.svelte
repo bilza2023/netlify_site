@@ -23,13 +23,10 @@ Skipped Answers: {result.skippedAnswers.length}</div>
 </div>
 
 
+<div class="p-2 m-2 rounded-md pt-4">
 
 
-
-<div class=" p-2 m-2 rounded-md pt-4">
-
-
-<div class="bg-gray-650 rounded-lg p-2 text-gray-100">
+<div class="bg-gray-800 rounded-lg p-2 text-gray-100">
 <!--=================================-->
 <ReportPart answersArray={result.wrongAnswers} {quiz} title="Wrong Questions" background_color="#470101"/>
 

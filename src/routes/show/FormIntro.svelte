@@ -40,7 +40,7 @@ setPageState("showQuiz");
 </script>
 
 
-<div class="border-2 border-white rounded-md bg-gray-700 text-white min-h-screen p-4 ">
+<div class="border-2 border-white rounded-md bg-gray-700 text-white  p-4 m-8 ">
 
 
  {#if quiz.showIntro == true}

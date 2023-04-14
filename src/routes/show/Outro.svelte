@@ -22,26 +22,6 @@ let showOutroFinal;
 const setShowOutroFinal = ()=> showOutroFinal=true;
 
 
-const save = async ( result )=> { 
-
-    const resp = await fetch(`${BASE_URL}/result/save`,{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify( { result } )
-    });
-
-    const data = await resp.json();
-    if (data.success == true){
-        toast.push("results saved");
-        showSaveResultButton = false;
-    }else {
-        toast.push(data.message);
-        showSaveResultButton = true;
-}
-}
-
 onMount(async () => {
  try {
     if (quiz.showResult == true) {
@@ -59,6 +39,12 @@ onMount(async () => {
 
 </script>
 
+<br>
+<div class="flex justify-center">
+  <h1 class="bg-blue-900  p-2 m-1  mt-0  w-full text-center text-2xl rounded-md">{quiz.title}
+  </h1>
+</div>
+  <br>
 
 {#if  showOutroFinal == false}
 <Result  {quiz} {result}  {setShowOutroFinal}  />
@@ -67,5 +53,4 @@ onMount(async () => {
 {#if  showOutroFinal == true}
 <OutroFinal {quiz} {result}/>
 {/if}
-
 

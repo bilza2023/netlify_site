@@ -2,6 +2,13 @@
 export let quiz;
 export let result;
 import { goto } from '$app/navigation';
+import { emailStore  } from '$lib/stores/showStore.js';
+import { BASE_URL } from '$lib/js/config.js';
+import { toast } from '@zerodevx/svelte-toast';
+
+let email ="";
+  emailStore.subscribe(value => email = value);
+
 let showSaveResultButton = true;
 
 const saveResults = async ()=>{
@@ -14,6 +21,27 @@ const saveResults = async ()=>{
   save(result);
 }
 
+
+
+const save = async ( result )=> { 
+
+    const resp = await fetch(`${BASE_URL}/result/save`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify( { result } )
+    });
+
+    const data = await resp.json();
+    if (data.success == true){
+        toast.push("results saved");
+        showSaveResultButton = false;
+    }else {
+        toast.push(data.message);
+        showSaveResultButton = true;
+}
+}
 </script>
 
 
