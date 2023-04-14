@@ -8,7 +8,6 @@ import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
 import { emailStore , passwordStore } from '$lib/stores/showStore.js';
 
-let showOutroFinal = false;
 let email ="";
 let password ="";
 //  $: email = $emailStore;
@@ -19,6 +18,7 @@ let password ="";
 export let quiz;
 let result;
 
+let showOutroFinal;
 const setShowOutroFinal = ()=> showOutroFinal=true;
 
 
@@ -44,7 +44,12 @@ const save = async ( result )=> {
 
 onMount(async () => {
  try {
-    result = await check(quiz);
+    if (quiz.showResult == true) {
+      result = await check(quiz);
+      showOutroFinal = false;
+    }else {
+      showOutroFinal = true;
+    }
     // console.error(result);
 // debugger;
  } catch (error) {
@@ -55,15 +60,12 @@ onMount(async () => {
 </script>
 
 
-{#if quiz.showResult == true && showOutroFinal == false}
+{#if  showOutroFinal == false}
 <Result  {quiz} {result}  {setShowOutroFinal}  />
-{:else}
-{showOutroFinal = true}
+{/if}
+
+{#if  showOutroFinal == true}
+<OutroFinal {quiz} {result}/>
 {/if}
 
 
-
-
-{#if showOutroFinal == true}
-<OutroFinal {quiz} {result} />
-{/if}

@@ -43,7 +43,7 @@ Skipped Answers: {result.skippedAnswers.length}</div>
 
 <div class="flex-grow-4">
   <button class="bg-blue-600 text-white m-3 p-3 rounded-lg hover:bg-blue-500 active:bg-blue-900"
-  n:click={setShowOutroFinal}>
+  on:click={setShowOutroFinal}>
   Ok
   </button>
 </div>

@@ -1,55 +1,25 @@
 <script>
-import Intro from "./Intro.svelte";
+// import Intro from "./Intro.svelte";
 import Outro from "./Outro.svelte";
-import OutroFinal from "./OutroFinal.svelte";
+// import OutroFinal from "./OutroFinal.svelte";
 import QuizComp from "./QuizComp.svelte";
-import Result from "./Result.svelte";
+// import Result from "./Result.svelte";
+import FormIntro from "./FormIntro.svelte";
 import { BASE_URL } from '$lib/js/config.js';
-
+import { onMount } from 'svelte';
 // import { toast } from '@zerodevx/svelte-toast';
 
 let quiz;
 let quizId;
 let pageState = "loading";
-
-const  setPageState = (currentState)=>{
-  switch (currentState) {
-
-      case "loaded":
-        pageState = "loaded";
-        break;
-      case "notfound":
-        pageState = "notfound";
-        break;
-      case "showQuiz":
-        pageState = "showQuiz";
-        break;
-      case "outro":
-        pageState = "outro";
-        break;
-
-      default:
-        break;
-  }
-
-return "error";
-}
 //...
-import { onMount } from 'svelte';
-// let isLogin=false;
+
+const setPageState = (state) => pageState = state;
 
 onMount(async () => {
-
-try {
-const token = await localStorage.getItem("token");
-      // debugger;
-          // if (token == null || token.length == 0) {
-          //     isLogin = false;
-          // }else {
-          //     isLogin = true;
-            
-          // }
-/////
+  try {
+// const token = await localStorage.getItem("token");
+     
   quizId = new URLSearchParams(location.search).get("quizId"); 
   const url = `${BASE_URL}/quiz/show/${quizId}`;
   const resp = await fetch(url);
@@ -62,7 +32,7 @@ const token = await localStorage.getItem("token");
       // console.log("notfound");
     } else {
       quiz = data.quiz; 
-      setPageState("loaded"); //change it to setPageState()
+      pageState = "loaded"; //change it to setPageState()
       // console.log("loaded");
     }
      
@@ -76,9 +46,6 @@ const token = await localStorage.getItem("token");
 
 </script>
 
-<div class="w-full min-h-screen  bg:gray-800 text-white">
-
-
 
 {#if pageState == "notfound"}
   <p class="p-4 m-4 w-full bg-gray-500 border-2 border-gray-200 text-2xl">Not Found...</p>
@@ -86,7 +53,7 @@ const token = await localStorage.getItem("token");
 
 {#if pageState == "loading"}
   <p class="p-4 m-4 w-full bg-gray-500 border-2 border-gray-200 text-2xl">Loading...</p>
-{:else}
+{/if}
 
 
 <!-- Quiz Title Always Except When Loading-->
@@ -100,42 +67,25 @@ const token = await localStorage.getItem("token");
 {/if}
 
 <!--Intro-->
-{#if pageState == "loaded"}
-  {#if quiz.showIntro == true }
-  <Intro
-    title= {quiz.title}
-    {quiz}
-    introText= {quiz.introText}
-    {setPageState}
-  />
-  {:else}
-  {pageState="showQuiz"}
-  {/if}
+{#if pageState == "loaded" }
+{#if quiz.showIntro == true || quiz.quizType == "quiz"}
+
+ <FormIntro {quiz} {setPageState} />
+
+{:else}
+{pageState = "showQuiz"}     
+{/if}
+{/if}
+  
+
+{#if pageState == "showQuiz" }
+
+<QuizComp {quiz} {setPageState}  />
+{/if}
+
+{#if pageState == "outro" }
+
+<Outro  {quiz} />
 {/if}
 
 
-<!--Quiz-->
-{#if pageState == "showQuiz"}
-<QuizComp {quiz} {setPageState} />  
-{/if}
- 
-<!--Outro-->
-{#if pageState == "outro"}
-<Outro {quiz}/>
-{/if}
-
-<br>
-<br>
-
-{/if}
-
-</div><!-- main page container-->
-
-
-
-<style>
-body {
-background-color: black;
-}
-
-</style>

@@ -17,14 +17,14 @@ const saveResults = async ()=>{
 </script>
 
 
-{#if quiz.showfarewellText == true }
+<!-- {#if quiz.showfarewellText == true } -->
     <div class="flex justify-center text-white">
           <p class="text-1xl  bg-gray-800 w-4/5 leading-10 
           m-3 p-3 rounded-lg mx-auto inline-block">
               {quiz.farewellText}
           </p>
     </div>
-{/if}
+<!-- {/if} -->
 
 
 <div class="flex justify-start gap-3 w-full p-1 m-1 rounded-md bg-gray-500">

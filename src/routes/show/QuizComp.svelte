@@ -1,5 +1,5 @@
 <script>
-import {pageState} from "./showQuizStore";
+// import {pageState} from "./showQuizStore";
 import ProgressBar from "$lib/cmp/ProgressBar.svelte";
 export let setPageState;
 export let quiz = {};
