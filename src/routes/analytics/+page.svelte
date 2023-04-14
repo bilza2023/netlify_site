@@ -2,33 +2,42 @@
 import { onMount } from 'svelte';
 import { page } from '$app/stores';
 import { BASE_URL } from '$lib/js/config.js';
+import Nav from '$lib/nav/Nav.svelte';
 
 let results=[];
- 
+let isLogin=false; 
 onMount(async () => {
   try {
-    // let { quizId } = $page.params;
-    // http://localhost:5173/analytics?quizId=642e02e8cfa55f9ef58091d8
-const  quizId = new URLSearchParams(location.search).get("quizId");
-
-    // debugger;
-    const response = await fetch(`${BASE_URL}/result/analytics`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ quizId })
-    });
-    const data = await response.json();
-    results = data.results;
-    console.log("results", results);
+  const token = await localStorage.getItem("token");
+      // debugger;
+  if (token == null || token.length == 0) {
+              isLogin = false;
+  }else {
+          isLogin = true;
+          const  quizId = new URLSearchParams(location.search).get("quizId");
+          const response = await fetch(`${BASE_URL}/result/analytics`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ quizId })
+          });
+          const data = await response.json();
+          results = data.results;
+            // console.log("results", results);
+  }
   } catch (error) {
     console.error(error);
-  }
-
+ }
 }); 
 
 </script>
+
+<Nav isLogin={isLogin}/>
+
+<div class="bg-gray-800 text-white w-full min-h-screen p-6 ">
+
+
 
 <div class="">
 <h1 class="rounded-lg p-2  bg-blue-900 text-center text-white text-2xl underline mb-4">Responses</h1>
@@ -61,6 +70,9 @@ const  quizId = new URLSearchParams(location.search).get("quizId");
 {/each}
 
 </table>
+</div>
+
+
 </div>
 
 

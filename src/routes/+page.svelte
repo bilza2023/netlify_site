@@ -61,7 +61,7 @@ onMount(async ()=>{
 <div class="flex flex-wrap  justify-center gap-2">
 
 {#each quizzes as item}
-<a href={`/quiz/show?quizId=${item._id}`} 
+<a href={`/show?quizId=${item._id}`} 
   class="flex-shrink-0   w-full md:w-1/2 lg:w-1/5  ">
 
 <div class=" rounded-lg cursor-pointer border-2 border-white text-center">
