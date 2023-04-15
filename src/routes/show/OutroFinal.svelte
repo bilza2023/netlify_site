@@ -1,36 +1,40 @@
 <script>
-export let quiz;
-export let result;
+import { onMount } from 'svelte';
 import { goto } from '$app/navigation';
 import { emailStore  } from '$lib/stores/showStore.js';
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
+import check from "./check.js";
+
+export let quiz;
+
 
 let email ="";
   emailStore.subscribe(value => email = value);
 
 let showSaveResultButton = true;
 
-const saveResults = async ()=>{
+let quizResult = {};
+$: console.log(quizResult);
+onMount(async () => {
+  quizResult = await check(quiz);
+});
+
+ async function saveResults  (){
+debugger;
   const r = await fetch('https://api.ipify.org?format=json');
   const d = await r.json();
-  result.ip = d.ip;
+  quizResult.ip = d.ip;
 
-  result.quizId = quiz._id; 
-  result.email = email; 
-  save(result);
-}
-
-
-
-const save = async ( result )=> { 
-
+  quizResult.quizId = quiz._id; 
+  quizResult.email = email; 
+///////////////
     const resp = await fetch(`${BASE_URL}/result/save`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify( { result } )
+      body: JSON.stringify( { result:quizResult } )
     });
 
     const data = await resp.json();
@@ -39,8 +43,10 @@ const save = async ( result )=> {
         showSaveResultButton = false;
     }else {
         toast.push(data.message);
+        toast.push("results saved");
         showSaveResultButton = true;
 }
+
 }
 </script>
 

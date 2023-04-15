@@ -1,5 +1,6 @@
 <script>
 import ReportPart from "./ReportPart.svelte";
+import check from "./check.js";
 export let quiz;
 export let result;
 export let setShowOutroFinal;

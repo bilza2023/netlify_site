@@ -12,13 +12,9 @@ const resp = await fetch( url ,{
       body: JSON.stringify( payload )
     });
 
-        if (resp.ok){
-          const data = await resp.json();
-          return data;      
-        }else {
-          return null; 
-        }
+    return resp;      
+
   }catch (error) {
-      return null;
+      return error;
   }
 }

@@ -1,7 +1,7 @@
 <script>
 import { onMount } from 'svelte';
 import { goto } from '$app/navigation';
-import check from "./check.js";
+
 import Result from "./Result.svelte";
 import OutroFinal from "./OutroFinal.svelte";
 import { BASE_URL } from '$lib/js/config.js';
@@ -16,7 +16,6 @@ let password ="";
   passwordStore.subscribe(value => password = value);
 
 export let quiz;
-let result;
 
 let showOutroFinal;
 const setShowOutroFinal = ()=> showOutroFinal=true;
@@ -25,12 +24,11 @@ const setShowOutroFinal = ()=> showOutroFinal=true;
 onMount(async () => {
  try {
     if (quiz.showResult == true) {
-      result = await check(quiz);
       showOutroFinal = false;
     }else {
       showOutroFinal = true;
     }
-    // console.error(result);
+    // console.error(quizResult);
 // debugger;
  } catch (error) {
     console.error(error);
@@ -47,10 +45,10 @@ onMount(async () => {
   <br>
 
 {#if  showOutroFinal == false}
-<Result  {quiz} {result}  {setShowOutroFinal}  />
+<Result  {quiz}   {setShowOutroFinal}  />
 {/if}
 
 {#if  showOutroFinal == true}
-<OutroFinal {quiz} {result}/>
+<OutroFinal {quiz} />
 {/if}
 

@@ -34,14 +34,16 @@ onMount(async ()=>{
               isLogin = true;
               const  quizId = new URLSearchParams(location.search).get("quizId");
              //----------------------------------
-            const data = await ajaxPost(`${BASE_URL}/quiz/find`,
+            const resp = await ajaxPost(`${BASE_URL}/quiz/find`,
             {token ,quizId} );
             // debugger;
-                if (data != null) {
+                if (resp.ok == true) {
+                const data = await resp.json();
                       const {incommingQuiz, incommingMembers } = data;
                       quiz = incommingQuiz;
                       questions = quiz.questions;
                       members = incommingMembers;
+                      // debugger;
                 }else {
                       toast.push("failed to add");
                 }  
@@ -52,18 +54,22 @@ onMount(async ()=>{
 });
 ///////////////////////////////////////////////////
 async function  addQuestion (){
+ const token = await localStorage.getItem("token");
     const question   = getQuestion( uuidv4());
     const op1 = getOption( uuidv4());
     const op2 = getOption( uuidv4());
     question.options.push(op1);
     question.options.push(op2);
   //----------------------------------
-  const data = await ajaxPost(`${BASE_URL}/quiz/question/new`,{question , quizId : quiz._id});
-  // debugger;
-      if (data != null) {
-            questions = data.questions;
-      }else {
-            toast.push("failed to add");
+  const resp = await ajaxPost(`${BASE_URL}/quiz/question/new`,{question , quizId : quiz._id, token});
+  
+  if (resp.ok){
+     const data = await resp.json();
+     questions = data.questions;
+      toast.push("New Question Added!");
+  }else {
+            const data = await resp.json();
+            toast.push(data.msg);
       }
 }
 /////////////////////////////////////
@@ -72,7 +78,8 @@ const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
 async function  deleteQuestion (questionId){
   const data = await ajaxPost(`${BASE_URL}/quiz/question/delete`,{quizId : quiz._id , questionId});
       if (data != null) {
-            questions = data.questions
+            questions = data.questions;
+            //maybe quiz.question = questions;
       }else {
         toast.push("failed to delete");
       }
@@ -81,6 +88,7 @@ async function  deleteQuestion (questionId){
 
 const saveMain = async ()=>{
   isLoading = true; 
+  //--Very important else the quiz.questions and the questions will be out of sync;
   quiz.questions = questions;
   // debugger;
   const data = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz});
@@ -95,17 +103,18 @@ const saveMain = async ()=>{
         }
       }// if ends
 }
-// const addOption = (qId)=>{
-//   const op = getOption( uuidv4());
-//   quiz.questions[qId].options.push(op);
-//   quiz = quiz;
-// }
+
+const addOption = (qId)=>{
+  const op = getOption( uuidv4());
+  questions[qId].options.push(op);
+  questions = questions;
+}
 
 
-// const deleteOption = (q_index,option_index)=>{
-//   quiz.questions[q_index].options.splice(option_index, 1);
-//   quiz = quiz;
-// }
+const deleteOption = (q_index,option_index)=>{
+  questions[q_index].options.splice(option_index, 1);
+  questions = questions;
+}
 
 </script>
 
@@ -152,10 +161,19 @@ on:click={()=>showErrors = false}>Hide</button>
 {#if questions}
 {#if questions.length > 0}
 <br>
-    
+
+<!--This is the QUESTION  block -->    
+<!--This is the QUESTION  block -->    
+
 {#each questions as question, index }
 <p class="underline">Question : {`${index + 1}`}</p>
-<Question {question}  {index} {deleteQuestion}/>
+<Question 
+            {question}  
+            {index} 
+            {deleteQuestion}
+            {deleteOption}
+            {addOption}
+/>
 <br>
 {/each}
 {/if}
