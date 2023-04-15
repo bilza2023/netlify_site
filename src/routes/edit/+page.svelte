@@ -11,9 +11,9 @@ import Footer from '$lib/cmp/Footer.svelte';
 import { page } from '$app/stores';
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
-import LoadBtn from '$lib/cmp/LoadBtn.svelte';
+import LoadBtn from './LoadBtn.svelte';
 import { onMount } from 'svelte';
-
+import ajaxPost from "$lib/js/ajaxPost.js";
 
 let isLoading = false;
 let quiz;
@@ -33,135 +33,85 @@ onMount(async ()=>{
           }else {
               isLogin = true;
               const  quizId = new URLSearchParams(location.search).get("quizId");
-            const resp = await fetch( `${BASE_URL}/quiz/find` , {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify( {token : "fdee087980kjk" ,quizId} )
-            });
-            const {incommingQuiz, incommingMembers } = await resp.json();
-            quiz = incommingQuiz;
-            questions = quiz.questions;
-            members = incommingMembers;
+             //----------------------------------
+            const data = await ajaxPost(`${BASE_URL}/quiz/find`,
+            {token ,quizId} );
             // debugger;
+                if (data != null) {
+                      const {incommingQuiz, incommingMembers } = data;
+                      quiz = incommingQuiz;
+                      questions = quiz.questions;
+                      members = incommingMembers;
+                }else {
+                      toast.push("failed to add");
+                }  
           }
     } catch (error) {
       // console.error(error);
     }
-// console.log("isLogin" , isLogin);    
 });
-
-
 ///////////////////////////////////////////////////
-
-const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
-let q = [];
-
 async function  addQuestion (){
     const question   = getQuestion( uuidv4());
     const op1 = getOption( uuidv4());
     const op2 = getOption( uuidv4());
     question.options.push(op1);
     question.options.push(op2);
-
-    const resp = await fetch( `${BASE_URL}/quiz/question/new` ,{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify( {question , quizId : quiz._id} )
-    });
-
-    // if (resp.ok){
-
-    const data = await resp.json();
-      // debugger;
-      // questions = [...questions ,data.question];
-      // quiz.questions = data.questions
-      questions = data.questions
-      // console.log("data.question",data.question);     
-      // console.log("quiz.question",quiz.question);     
-
-    // }else {
-       
-      // console.error("error",data);     
-    // }
-
-/////
+  //----------------------------------
+  const data = await ajaxPost(`${BASE_URL}/quiz/question/new`,{question , quizId : quiz._id});
+  // debugger;
+      if (data != null) {
+            questions = data.questions;
+      }else {
+            toast.push("failed to add");
+      }
 }
+/////////////////////////////////////
+const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
+/////////////////////////////////////
 async function  deleteQuestion (questionId){
-  
-
-    const resp = await fetch( `${BASE_URL}/quiz/question/delete` ,{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify( {quizId : quiz._id , questionId} )
-    });
-
-    // if (resp.ok){
-
-    const data = await resp.json();
-      // debugger;
-      // questions = [...questions ,data.question];
-      // quiz.questions = data.questions
-      questions = data.questions
-      // console.log("data.question",data.question);     
-      // console.log("quiz.question",quiz.question);     
-
-    // }else {
-       
-      // console.error("error",data);     
-    // }
-
-/////
+  const data = await ajaxPost(`${BASE_URL}/quiz/question/delete`,{quizId : quiz._id , questionId});
+      if (data != null) {
+            questions = data.questions
+      }else {
+        toast.push("failed to delete");
+      }
 }
+/////////////////////////////////////////
 
+const saveMain = async ()=>{
+  isLoading = true; 
+  quiz.questions = questions;
+  // debugger;
+  const data = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz});
+      if (data != null) {
+          const {code} =data;
+             if (code == 0) { 
+                isLoading = false; 
+                toast.push('saved...'); 
+            }else {
+                isLoading = false;
+                toast.push('failed to save!');
+        }
+      }// if ends
+}
 // const addOption = (qId)=>{
 //   const op = getOption( uuidv4());
 //   quiz.questions[qId].options.push(op);
 //   quiz = quiz;
 // }
 
-// const deleteQuestion = (q_index, id)=>{
-// console.log("Question id" , id);
-//   // quiz.questions.splice( q_index , 1 );
-//   // quiz = quiz;
-// }
 
 // const deleteOption = (q_index,option_index)=>{
 //   quiz.questions[q_index].options.splice(option_index, 1);
 //   quiz = quiz;
 // }
 
-const saveMain = async ()=>{
-  isLoading = true; 
-  // debugger;
-  const resp = await fetch( `${BASE_URL}/quiz/update` ,{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify( {quiz} )
-    });
-
-      const {updatedQuiz, code} = await resp.json();
-        if (code == 0) { 
-            isLoading = false; 
-            toast.push('saved...'); 
-        }else {
-            isLoading = false;
-            toast.push('failed to save!');
-        }
-}//main save ends
-
-
 </script>
 
 <Nav isLogin={isLogin}/>
 <div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen">
+
 
 
 
@@ -175,7 +125,7 @@ const saveMain = async ()=>{
 
 
 
-<LoadBtn {isLoading} eventHandler={saveMain} title="Save Quiz"  class="w-full mx-auto" />
+<LoadBtn {isLoading} eventHandler={saveMain} title="Save Quiz"   />
 
 
 <br>

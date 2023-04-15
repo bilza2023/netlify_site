@@ -14,7 +14,7 @@ const setPageState = (state) => pageState = state;
 
 onMount(async () => {
   try {
-// const token = await localStorage.getItem("token");
+  // const token = await localStorage.getItem("token");
      
   quizId = new URLSearchParams(location.search).get("quizId"); 
   const url = `${BASE_URL}/quiz/show/${quizId}`;
