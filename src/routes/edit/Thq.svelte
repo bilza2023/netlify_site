@@ -1,8 +1,8 @@
 <script>
 export let title;
-export let index;
+export let id;
 export let visible = true;
-import AreYouSure from "$lib/cmp/AreYouSure.svelte";
+import QDel from "./QDel.svelte";
 const  toggleVisibility = ()=> visible = !visible;
 export let deleteQuestion;
 </script>
@@ -12,12 +12,12 @@ export let deleteQuestion;
      <div class="  text-center w-full p-2">
         {title} 
     </div>
-    
-    <AreYouSure deleteFn={deleteQuestion} {index}/>
+     
+    <QDel deleteFn={deleteQuestion} {id}/>
     
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="rounded-t-lg border border-gray-400 p-2 
-    hover:cursor-pointer"
+    hover:cursor-pointer hover:bg-gray-600 active:bg-gray-900"
     on:click={toggleVisibility}    
     >
         {visible == true ? "Hide" : "Show" }

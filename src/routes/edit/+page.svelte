@@ -8,20 +8,26 @@ import {getQuiz, getQuestion , getOption} from "./new_quiz.js";
 import QuizBlock from "./QuizBlock.svelte";
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
-
 import { page } from '$app/stores';
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
 import LoadBtn from '$lib/cmp/LoadBtn.svelte';
-let isLoading = false;
-
 import { onMount } from 'svelte';
+
+
+let isLoading = false;
+let quiz;
+let questions = [];
+let members;
+let errors_Array = [];
+let showErrors = false;
+let isDirty = true;
 let isLogin=false;
+
 onMount(async ()=>{
 
   try {
       const token = await localStorage.getItem("token");
-      // debugger;
           if (token == null || token.length == 0) {
               isLogin = false;
           }else {
@@ -34,10 +40,11 @@ onMount(async ()=>{
             },
             body: JSON.stringify( {token : "fdee087980kjk" ,quizId} )
             });
-            const {incommingQuiz, incommingMembers, status } = await resp.json();
+            const {incommingQuiz, incommingMembers } = await resp.json();
             quiz = incommingQuiz;
-            questions = incommingQuiz.questions;
+            questions = quiz.questions;
             members = incommingMembers;
+            // debugger;
           }
     } catch (error) {
       // console.error(error);
@@ -47,38 +54,87 @@ onMount(async ()=>{
 
 
 ///////////////////////////////////////////////////
-let quiz;
-let questions;
-let members;
-let errors_Array = [];
-let showErrors = false;
-let isDirty = true;
-const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
 
-const addQuestion = ()=>{
-    const q = getQuestion( uuidv4());
+const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
+let q = [];
+
+async function  addQuestion (){
+    const question   = getQuestion( uuidv4());
     const op1 = getOption( uuidv4());
     const op2 = getOption( uuidv4());
-    q.options.push(op1);
-    q.options.push(op2);
-    quiz.questions.push(q);
-    quiz = quiz;
+    question.options.push(op1);
+    question.options.push(op2);
+
+    const resp = await fetch( `${BASE_URL}/quiz/question/new` ,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify( {question , quizId : quiz._id} )
+    });
+
+    // if (resp.ok){
+
+    const data = await resp.json();
+      // debugger;
+      // questions = [...questions ,data.question];
+      // quiz.questions = data.questions
+      questions = data.questions
+      // console.log("data.question",data.question);     
+      // console.log("quiz.question",quiz.question);     
+
+    // }else {
+       
+      // console.error("error",data);     
+    // }
+
+/////
+}
+async function  deleteQuestion (questionId){
+  
+
+    const resp = await fetch( `${BASE_URL}/quiz/question/delete` ,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify( {quizId : quiz._id , questionId} )
+    });
+
+    // if (resp.ok){
+
+    const data = await resp.json();
+      // debugger;
+      // questions = [...questions ,data.question];
+      // quiz.questions = data.questions
+      questions = data.questions
+      // console.log("data.question",data.question);     
+      // console.log("quiz.question",quiz.question);     
+
+    // }else {
+       
+      // console.error("error",data);     
+    // }
+
+/////
 }
 
-const addOption = (qId)=>{
-  const op = getOption( uuidv4());
-  quiz.questions[qId].options.push(op);
-  quiz = quiz;
-}
+// const addOption = (qId)=>{
+//   const op = getOption( uuidv4());
+//   quiz.questions[qId].options.push(op);
+//   quiz = quiz;
+// }
 
-const deleteQuestion = (q_index)=>{
-  quiz.questions.splice( q_index , 1 );
-  quiz = quiz;
-}
-const deleteOption = (q_index,option_index)=>{
-  quiz.questions[q_index].options.splice(option_index, 1);
-  quiz = quiz;
-}
+// const deleteQuestion = (q_index, id)=>{
+// console.log("Question id" , id);
+//   // quiz.questions.splice( q_index , 1 );
+//   // quiz = quiz;
+// }
+
+// const deleteOption = (q_index,option_index)=>{
+//   quiz.questions[q_index].options.splice(option_index, 1);
+//   quiz = quiz;
+// }
 
 const saveMain = async ()=>{
   isLoading = true; 
@@ -143,14 +199,16 @@ on:click={()=>showErrors = false}>Hide</button>
 
 
 <br>
-{#if quiz && quiz.questions && quiz.questions.length > 0}
+{#if questions}
+{#if questions.length > 0}
 <br>
     
-{#each quiz.questions as question, index }
+{#each questions as question, index }
 <p class="underline">Question : {`${index + 1}`}</p>
-<Question {question} {addOption} {index} {deleteOption} {deleteQuestion}/>
+<Question {question}  {index} {deleteQuestion}/>
 <br>
 {/each}
+{/if}
 {/if}
 
 
