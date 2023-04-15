@@ -1,9 +1,24 @@
 <script>
 import ReportPart from "./ReportPart.svelte";
 import check from "./check.js";
+import { onMount } from 'svelte';
+
 export let quiz;
-export let result;
+let result;
 export let setShowOutroFinal;
+
+
+onMount(async () => {
+ try {
+   result = await check(quiz);
+
+    // console.error(quizResult);
+// debugger;
+ } catch (error) {
+    console.error(error);
+}
+}); 
+
 
 </script>
 

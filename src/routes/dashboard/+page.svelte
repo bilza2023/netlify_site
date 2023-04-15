@@ -4,6 +4,7 @@ import { toast } from '@zerodevx/svelte-toast';
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 import { BASE_URL } from '$lib/js/config.js';
+import ajaxPost from "$lib/js/ajaxPost.js";
 
 $: quizzes = [];
 
@@ -11,19 +12,15 @@ const deleteQuiz = async (index)=>{
 // debugger;
 const token = localStorage.getItem('token');
 const q = quizzes[index];
-const response = await fetch( `${BASE_URL}/quiz/del` , {
-// const response = await fetch('http://localhost/user/login', {
-    method: 'POST',
-    body: JSON.stringify( {id : q._id,token} ),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-});
-      const data = await response.json();
-      if (data.status == "ok"){
+
+const resp = await ajaxPost(`${BASE_URL}/quiz/del`,{quizId : q._id,token});
+// debugger;
+      if (resp.ok == true){
+      const data = await resp.json();
         toast.push('deleted'); 
         populate();
       }else {
+      const data = await resp.json();
         toast.push( data.msg );
       }
 }//del fn
@@ -49,8 +46,8 @@ onMount(async ()=>{
 
  
 const populate = async () =>{
-try {
-const token = localStorage.getItem('token');
+ try {
+ const token = localStorage.getItem('token');
 
   const resp = await fetch( `${BASE_URL}/quiz/page/10/0` ,{
   method: 'GET',

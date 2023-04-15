@@ -76,32 +76,38 @@ async function  addQuestion (){
 const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
 /////////////////////////////////////
 async function  deleteQuestion (questionId){
-  const data = await ajaxPost(`${BASE_URL}/quiz/question/delete`,{quizId : quiz._id , questionId});
-      if (data != null) {
+ const token = await localStorage.getItem("token");
+  const resp = await ajaxPost(`${BASE_URL}/quiz/question/delete`,{quizId : quiz._id , questionId , token});
+  // debugger;
+      if (resp.ok == true) {
+            const data = await resp.json();
             questions = data.questions;
+            toast.push("Question deleted");
             //maybe quiz.question = questions;
       }else {
-        toast.push("failed to delete");
+            const data = await resp.json();
+            toast.push(data.msg);
       }
 }
 /////////////////////////////////////////
 
 const saveMain = async ()=>{
-  isLoading = true; 
-  //--Very important else the quiz.questions and the questions will be out of sync;
-  quiz.questions = questions;
-  // debugger;
-  const data = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz});
-      if (data != null) {
-          const {code} =data;
-             if (code == 0) { 
-                isLoading = false; 
-                toast.push('saved...'); 
-            }else {
-                isLoading = false;
-                toast.push('failed to save!');
-        }
+ const token = await localStorage.getItem("token");
+    isLoading = true; 
+    //--Very important else the quiz.questions and the questions will be out of sync;
+    quiz.questions = questions;
+    // debugger;
+    const resp = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz,token});
+      if (resp.ok == true) {
+            const data = await resp.json();
+            isLoading = false; 
+            toast.push(data.msg); 
+        }else {
+          const data = await resp.json();
+            isLoading = false;
+            toast.push(data.msg);
       }// if ends
+
 }
 
 const addOption = (qId)=>{

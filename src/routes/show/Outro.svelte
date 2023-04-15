@@ -1,7 +1,7 @@
 <script>
 import { onMount } from 'svelte';
 import { goto } from '$app/navigation';
-
+ 
 import Result from "./Result.svelte";
 import OutroFinal from "./OutroFinal.svelte";
 import { BASE_URL } from '$lib/js/config.js';

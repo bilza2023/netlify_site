@@ -21,7 +21,7 @@ onMount(async () => {
 });
 
  async function saveResults  (){
-debugger;
+// debugger;
   const r = await fetch('https://api.ipify.org?format=json');
   const d = await r.json();
   quizResult.ip = d.ip;
