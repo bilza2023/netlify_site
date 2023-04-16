@@ -37,8 +37,10 @@ const handler = async(quizType)=>{
   if (resp.ok) {
       newPRojectName = "";
       const data = await resp.json();
+      // debugger;
       // toast.push( "Success" );
-      goto("/dashboard");
+
+      goto( `/edit?quizId=${data.quiz._id}`);
   }else {
       toast.push( data.msg );
   }
