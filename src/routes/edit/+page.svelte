@@ -1,16 +1,15 @@
 <script>
 import update from "./update.js";
 import { v4 as uuidv4 } from 'uuid';
-import Question from './Question.svelte';
+import Question from './question/Question.svelte';
 import {getQuiz, getQuestion , getOption} from "./new_quiz.js";
-import QuizBlock from "./QuizBlock.svelte";
+import QuizBlock from "./settings/QuizBlock.svelte";
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
-import { page } from '$app/stores';
+// import { page } from '$app/stores';
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
-import LoadBtn from './LoadBtn.svelte';
-import ToolBar from './ToolBar.svelte';
+import ToolBar from './toolbar/ToolBar.svelte';
 import { onMount } from 'svelte';
 import ajaxPost from "$lib/js/ajaxPost.js";
 
@@ -161,7 +160,8 @@ const deleteOption = (q_index,option_index)=>{
 
 
 {#if isLoading == true}
-<div class= "animate-spin w-8 h-8 border-white rounded-full border-b-8 mx-auto "></div>
+<div class= "animate-spin w-8 h-8 border-white rounded-full border-b-8 mx-auto ">
+</div>
 {/if}
 
 <br>

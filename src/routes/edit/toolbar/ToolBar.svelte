@@ -1,6 +1,9 @@
 <script>
 import { onMount } from 'svelte';
 import check from "./check.js";
+import Clone from "./Clone.svelte";
+import { fade } from 'svelte/transition';
+import QuizDel from "./QuizDel.svelte";
 import Errors from './Errors.svelte';
 export let quiz;
 export let questions;
@@ -38,6 +41,16 @@ function tooglePublish(){
     }
   }
 // console.log("quiz.published",quiz.published);  
+}
+
+let showClone = false;
+function toggleShowClone(){
+  showClone = !showClone;
+}
+
+let showQuizDel = false;
+function toggleshowQuizDel(){
+  showQuizDel = !showQuizDel;
 }
 </script>
 
@@ -90,14 +103,16 @@ function tooglePublish(){
 
 
 <div class="w-24">
-  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
+  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
+  on:click={toggleShowClone} >
     <span class="text-2xl">🐑</span>
     <span class="text-sm font-medium text-white">Clone</span>
   </button>
 </div>
 
 <div class="w-24">
-  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
+  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
+  on:click={()=>{toggleshowQuizDel()}}>
     <span class="text-2xl">🗑️</span>
     <span class="text-sm font-medium text-white">Delete</span>
   </button>
@@ -111,7 +126,7 @@ function tooglePublish(){
   </button>
   </a>
 </div>
-
+<!--
 <div class="w-24">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
     <span class="text-2xl">🎨</span>
@@ -134,16 +149,31 @@ function tooglePublish(){
     <span class="text-sm font-medium text-white">Share</span>
   </button>
 </div>
+-->
 
 </div>
 
+<!---The divs which are out of the toolbar div-->
 
+<div class="w-full bg-gray-800">
 
 {#if showErrors==true}
-<div class="p-2 m-2 bg-gray-600 border-white border-2 rounded-md">
+<div class="p-2 m-2 bg-gray-600 border-white border-2 rounded-md"
+in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} >
 <Errors {errors_Array}/>
 <button 
 class="bg-gray-700 rounded-md m-1 p-1  hover:bg-gray-600 active:bg-gray-800"
 on:click={()=>showErrors = false}>Hide</button>
 </div>
 {/if}
+
+
+{#if showClone == true}
+<Clone  {quiz}/>
+{/if}
+
+{#if showQuizDel == true}
+<QuizDel  {quiz} {toggleshowQuizDel}/>
+{/if}
+
+</div>

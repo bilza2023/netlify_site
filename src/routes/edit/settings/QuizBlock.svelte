@@ -1,8 +1,8 @@
 <script>
-import Tf from "./Tf.svelte";
+import Tf from "../Tf.svelte";
 import Dispatch from "./Dispatch.svelte";
 import Th from "./Th.svelte";
-import FormRow from "./FormRow.svelte";
+import FormRow from "../FormRow.svelte";
 import { fade } from 'svelte/transition';
 
 export let quiz;
@@ -16,6 +16,8 @@ let visible = true;
 
 
 </script>
+
+<div in:fade={{ delay: 300 }} out:fade={{ delay: 300 }}>
 
 <Th title={quiz.title}>
 
@@ -67,5 +69,6 @@ bind:value={quiz.introText}></textarea>
 </div>
 
 
-
 </Th>
+
+</div>

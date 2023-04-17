@@ -1,9 +1,10 @@
 <script>
 export let title;
-export let visible = true;
+export let visible = false;
 
 const  toggleVisibility = ()=> visible = !visible;
 </script>
+
 
 <div class="flex  rounded-t-lg border border-gray-400 p-0 ">
 

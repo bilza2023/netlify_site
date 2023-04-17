@@ -2,7 +2,7 @@
 export let title;
 export let id;
 export let ser;
-export let visible = true;
+export let visible = false;
 import QDel from "./QDel.svelte";
 const  toggleVisibility = ()=> visible = !visible;
 export let deleteQuestion;

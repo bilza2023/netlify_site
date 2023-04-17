@@ -1,7 +1,8 @@
 <script>
 import Thq from "./Thq.svelte";
-import FormRow from "./FormRow.svelte";
+import FormRow from "../FormRow.svelte";
 import { fade } from 'svelte/transition';
+
 export let question;
 export let addOption;
 export let deleteOption;
