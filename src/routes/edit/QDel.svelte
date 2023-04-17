@@ -13,14 +13,16 @@ setTimeout( ()=> trigger=false,2000);
 
 {#if trigger == false}    
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="rounded-t-lg border border-gray-400 p-2 
-    hover:cursor-pointer hover:bg-gray-600 active:bg-gray-900"  on:click={fire} >
-      Delete
+    <div class="flex items-center justify-center rounded-t-lg border border-gray-400 p-2 
+    hover:cursor-pointer hover:bg-gray-600 active:bg-gray-800 w-1/12
+    bg-gray-900 text-center "  on:click={fire} >
+      <span class="text-xl">🗑️</span>
     </div>
 {:else}    
   <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="rounded-t-lg border border-gray-400 p-2 text-white 
-    hover:cursor-pointer bg-red-800 hover:bg-red-600 active:bg-red-900"
+    <div class="flex items-center justify-center  rounded-t-lg border border-gray-400 p-2 text-white 
+    hover:cursor-pointer bg-red-800 hover:bg-red-600 active:bg-red-900
+    w-1/12 text-center"
       on:click={()=>deleteFn(id)} >
       Sure?
     </div>

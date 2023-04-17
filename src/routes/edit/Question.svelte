@@ -7,13 +7,14 @@ export let addOption;
 export let deleteOption;
 export let index;
 export let deleteQuestion;
+export let ser;
 const mark_correct = (option_id)=>{
 question.correctOption = option_id;
 }
 
 </script>
 
-<Thq title={question.content} {deleteQuestion} id={question._id}>
+<Thq title={question.content} {deleteQuestion} id={question._id} {ser}>
 
 <div in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} 
  class="border-2 border-gray-500 p-1 m-0 mt-0" >

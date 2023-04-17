@@ -92,7 +92,7 @@ All Projects</h1>
         <tr class="bg-gray-900 text-white border-2 border-gray-200">
           <th class="">Ser</th>
           <th class="">Title</th>
-          <th class="">Show</th>
+          <th class="">Launch</th>
           <th class="">Edit</th>
           <th class="">Analytics</th>
           <th class="">Delete</th>
@@ -101,28 +101,28 @@ All Projects</h1>
 {#each quizzes as quiz,index }
 <tr class="text-white bg-gray-900 border-2 border-gray-200">
 <td class="p-1 border  text-center text-white">{index+1}</td>
-<td class="p-1 border  text-center text-white">{quiz.title}</td>
+<td class="p-1 border  text-left text-white">&nbsp;{quiz.title}</td>
 
 
 <td class="p-1 border bg-blue-900 text-center text-white hover:bg-blue-700 active:bg-blue-800 rounded-md transition duration-200">
   <a href= {`/show?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
-    show
+    <span class="text-sm">🚀</span>
   </a>
 </td>
 
 <td class="p-1 border bg-green-900 text-center text-white hover:bg-green-700 active:bg-green-800 rounded-md transition duration-200">
   <a href={`/edit?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
-    edit
+    <span class="text-sm">⚙️</span>
   </a>
 </td>
 <!-- http://localhost:5173/analytics?quizId=642e02e8cfa55f9ef58091d8 -->
 <td class="p-1 border bg-blue-900 text-center text-white hover:bg-blue-700 active:bg-blue-800 rounded-md transition duration-200">
   <a href={`/analytics?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
-    Analytics
+    <span class="text-sm">📊</span>
   </a>
 </td>
 
-<td class="border bg-red-900 text-center text-white hover:bg-gray-700 active:bg-gray-800 rounded-md transition duration-200">
+<td class="border bg-red-900 text-center text-white hover:bg-gray-700 active:bg-red-800 rounded-md transition duration-200">
   
   <AreYouSure deleteFn={deleteQuiz} {index}/>
 </td>

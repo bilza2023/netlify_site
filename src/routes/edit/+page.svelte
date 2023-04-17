@@ -1,9 +1,7 @@
 <script>
-import save from "./save.js";
 import update from "./update.js";
 import { v4 as uuidv4 } from 'uuid';
 import Question from './Question.svelte';
-import Errors from './Errors.svelte';
 import {getQuiz, getQuestion , getOption} from "./new_quiz.js";
 import QuizBlock from "./QuizBlock.svelte";
 import Nav from '$lib/nav/Nav.svelte';
@@ -12,18 +10,28 @@ import { page } from '$app/stores';
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
 import LoadBtn from './LoadBtn.svelte';
+import ToolBar from './ToolBar.svelte';
 import { onMount } from 'svelte';
 import ajaxPost from "$lib/js/ajaxPost.js";
 
 let isLoading = false;
 let quiz;
 let questions = [];
+let showSettings = true;
 let members;
-let errors_Array = [];
-let showErrors = false;
+
+
 let isDirty = true;
 let isLogin=false;
 
+function toggleShowSettings(){
+      showSettings = !showSettings;
+}
+
+function unPublish(){
+      quiz.published = false;
+      // console.log("quiz.published",quiz.published);
+}
 onMount(async ()=>{
 
   try {
@@ -66,6 +74,7 @@ async function  addQuestion (){
   if (resp.ok){
      const data = await resp.json();
      questions = data.questions;
+     unPublish();
       toast.push("New Question Added!");
   }else {
             const data = await resp.json();
@@ -73,7 +82,7 @@ async function  addQuestion (){
       }
 }
 /////////////////////////////////////
-const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
+
 /////////////////////////////////////
 async function  deleteQuestion (questionId){
  const token = await localStorage.getItem("token");
@@ -82,6 +91,7 @@ async function  deleteQuestion (questionId){
       if (resp.ok == true) {
             const data = await resp.json();
             questions = data.questions;
+            unPublish();
             toast.push("Question deleted");
             //maybe quiz.question = questions;
       }else {
@@ -91,7 +101,7 @@ async function  deleteQuestion (questionId){
 }
 /////////////////////////////////////////
 
-const saveMain = async ()=>{
+const save = async ()=>{
  const token = await localStorage.getItem("token");
     isLoading = true; 
     //--Very important else the quiz.questions and the questions will be out of sync;
@@ -114,17 +124,28 @@ const addOption = (qId)=>{
   const op = getOption( uuidv4());
   questions[qId].options.push(op);
   questions = questions;
+  unPublish();
 }
 
 
 const deleteOption = (q_index,option_index)=>{
   questions[q_index].options.splice(option_index, 1);
   questions = questions;
+  unPublish();
 }
 
 </script>
 
 <Nav isLogin={isLogin}/>
+
+ 
+{#if quiz}
+<ToolBar {quiz} {save} {questions} {toggleShowSettings}
+{showSettings} />
+{/if}
+
+
+
 <div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen">
 
 
@@ -139,26 +160,19 @@ const deleteOption = (q_index,option_index)=>{
 <br>
 
 
-
-<LoadBtn {isLoading} eventHandler={saveMain} title="Save Quiz"   />
-
+{#if isLoading == true}
+<div class= "animate-spin w-8 h-8 border-white rounded-full border-b-8 mx-auto "></div>
+{/if}
 
 <br>
 
-
-<QuizBlock {quiz} {set_errors_Array} {members} />
+      {#if showSettings}
+      <QuizBlock {quiz}  {members} />
+      {/if}
 {/if}
 
 
 
-{#if showErrors==true}
-<div class="p-2 m-2 bg-gray-600 border-white border-2 rounded-md">
-<Errors {errors_Array}/>
-<button 
-class="bg-gray-700 rounded-md m-1 p-1  hover:bg-gray-600 active:bg-gray-800"
-on:click={()=>showErrors = false}>Hide</button>
-</div>
-{/if}
 
 
 
@@ -172,13 +186,14 @@ on:click={()=>showErrors = false}>Hide</button>
 <!--This is the QUESTION  block -->    
 
 {#each questions as question, index }
-<p class="underline">Question : {`${index + 1}`}</p>
+
 <Question 
             {question}  
             {index} 
             {deleteQuestion}
             {deleteOption}
             {addOption}
+            ser={index}
 />
 <br>
 {/each}
