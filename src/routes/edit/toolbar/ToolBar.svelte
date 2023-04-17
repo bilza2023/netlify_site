@@ -169,7 +169,7 @@ on:click={()=>showErrors = false}>Hide</button>
 
 
 {#if showClone == true}
-<Clone  {quiz}/>
+<Clone  {quiz} questions/>
 {/if}
 
 {#if showQuizDel == true}

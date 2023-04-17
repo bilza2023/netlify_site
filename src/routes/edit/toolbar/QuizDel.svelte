@@ -2,35 +2,31 @@
 import { toast } from '@zerodevx/svelte-toast';
 import { BASE_URL } from '$lib/js/config.js';
 import { fade } from 'svelte/transition';
+import {goto} from '$app/navigation';
+import ajaxPost from '$lib/js/ajaxPost.js';
 //  import { blur } from 'svelte/transition';
 //   import { scale } from 'svelte/transition';
 	// import { fly } from 'svelte/transition';
-  export let quiz;
+export let quiz;
 let visible = false;
 export let toggleshowQuizDel;
-const handler = async(quizType)=>{
-  const token = localStorage.getItem('token');
 
-  // debugger;
-  const resp = await fetch( `${BASE_URL}/quiz/del` , {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify( {token ,quizId : quiz._id ,title :newPRojectName} )
-  });
+const deleteQuiz = async ()=>{
+// debugger;
+const token = localStorage.getItem('token');
 
-  if (resp.ok) {
-      newPRojectName = "";
+const resp = await ajaxPost(`${BASE_URL}/quiz/del`,{quizId : quiz._id,token});
+// debugger;
+      if (resp.ok == true){
       const data = await resp.json();
-      // debugger;
-      toast.push( "Cloned" );
+        toast.push('deleted'); 
+        goto("/dashboard");
+      }else {
+      const data = await resp.json();
+        toast.push( data.msg );
+      }
+}//del fn
 
-  }else {
-      toast.push( data.msg );
-  }
-
-}
 
 </script>
 <br/>
@@ -56,8 +52,9 @@ in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} >
     in:fade={{ delay: 300 }} out:fade={{ delay: 300 }}>
     <p class="text-white text-xl ">This is your final warning:</p>
 
-    <button class="bg-red-400 text-white rounded-md p-2 m-2">Delete Results</button>
-    <button class="bg-red-400 text-white rounded-md p-2 m-2">Delete Quiz</button>
+    <button class="bg-red-400 text-white rounded-md p-2 m-2 hover:bg-red-300 active:bg-red-900">Delete Results</button>
+    <button class="bg-red-400 text-white rounded-md p-2 m-2 hover:bg-red-300 active:bg-red-900"
+    on:click={deleteQuiz}>Delete Quiz</button>
     </div>
 {/if}
 

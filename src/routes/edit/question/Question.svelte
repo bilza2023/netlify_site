@@ -56,18 +56,18 @@ on:click={()=>addOption(index)}
           {#if question.correctOption==option.id}
           <button class="w-2/12 bg-green-600 rounded-sm focus:outline-none active:bg-green-400 hover:bg-green-500 hover:cursor-pointer mx-2 my-1"
           on:click={mark_correct(option.id)}>
-          Mark Correct
+          <span class="text-xl white-icon">👍</span>  
           </button>
           {:else}
-          <button class="w-2/12 bg-gray-600 rounded-sm focus:outline-none active:bg-gray-400 hover:bg-gray-500 hover:cursor-pointer mx-2 my-1"
+          <button class="w-2/12 bg-gray-600 rounded-sm focus:outline-none active:bg-green-900 hover:bg-green-500 hover:cursor-pointer mx-2 my-1"
           on:click={mark_correct(option.id)}>
-          Mark Correct
+          <span class="text-xl white-icon">👍</span>
           </button>
           {/if}
           
-<button class="w-2/12 bg-red-600 rounded-sm focus:outline-none active:bg-red-400 hover:bg-red-500 hover:cursor-pointer mx-2 my-1"
+<button class="w-2/12 bg-gray-600 rounded-sm focus:outline-none active:bg-red-900 hover:bg-red-500 hover:cursor-pointer mx-2 my-1"
           on:click={()=>deleteOption(index,option_index)}>
-          Delete
+          <span class="text-xl">🗑️</span>
 </button>
 
     </div>
@@ -77,3 +77,4 @@ on:click={()=>addOption(index)}
 </div>
 
 </Thq>
+

@@ -1,22 +1,23 @@
 <script>
-  import { toast } from '@zerodevx/svelte-toast';
-  import { BASE_URL } from '$lib/js/config.js';
+import { toast } from '@zerodevx/svelte-toast';
+import { BASE_URL } from '$lib/js/config.js';
 import { fade } from 'svelte/transition';
 
-  export let quiz;
+export let quiz;
+export let questions;
 
   let newPRojectName = "";
 
 const handler = async(quizType)=>{
   const token = localStorage.getItem('token');
-
+  quiz.questions = questions; //-update
   // debugger;
   const resp = await fetch( `${BASE_URL}/quiz/clone` , {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify( {token ,quizId : quiz._id ,title :newPRojectName} )
+      body: JSON.stringify( {token , id : quiz._id ,title :newPRojectName} )
   });
 
   if (resp.ok) {
@@ -26,6 +27,8 @@ const handler = async(quizType)=>{
       toast.push( "Cloned" );
 
   }else {
+      const data = await resp.json();
+
       toast.push( data.msg );
   }
 
