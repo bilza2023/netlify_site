@@ -90,17 +90,29 @@ All Projects</h1>
     <table class="w-full border-collapse table-responsive border-white">
       
         <tr class="bg-gray-900 text-white border-2 border-gray-200">
-          <th class="">Ser</th>
-          <th class="">Title</th>
-          <th class="">Launch</th>
-          <th class="">Edit</th>
-          <th class="">Analytics</th>
-          <th class="">Delete</th>
+          <td class="text-center">Ser</td>
+          <td class="text-center">Type</td>
+          <td class="text-center">Title</td>
+          <td class="text-center">Launch</td>
+          <td class="text-center">Edit</td>
+          <td class="text-center">Analytics</td>
         </tr>
 
 {#each quizzes as quiz,index }
 <tr class="text-white bg-gray-900 border-2 border-gray-200">
 <td class="p-1 border  text-center text-white">{index+1}</td>
+
+<td class="p-1 border  text-center text-white  rounded-md">
+      {#if quiz.quizType == "quiz"}
+      <span class="text-sm">📝</span>
+      {/if}
+      {#if quiz.quizType == "survey"}
+      <span class="text-sm">🗳️</span>
+      {/if}
+</td>
+
+
+
 <td class="p-1 border  text-left text-white">&nbsp;{quiz.title}</td>
 
 
@@ -122,10 +134,6 @@ All Projects</h1>
   </a>
 </td>
 
-<td class="border bg-red-900 text-center text-white hover:bg-gray-700 active:bg-red-800 rounded-md transition duration-200">
-  
-  <AreYouSure deleteFn={deleteQuiz} {index}/>
-</td>
             
 </tr>
 {/each}

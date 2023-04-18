@@ -4,10 +4,12 @@ import QuizComp from "./QuizComp.svelte";
 import FormIntro from "./FormIntro.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import { onMount } from 'svelte';
-
+import ajaxPost from '$lib/js/ajaxPost.js';
+    import { toast } from "@zerodevx/svelte-toast";
 let quiz;
 let quizId;
 let pageState = "loading";
+let notFoundMsg = "Not Found";
 //...
 
 const setPageState = (state) => pageState = state;
@@ -19,16 +21,18 @@ onMount(async () => {
   quizId = new URLSearchParams(location.search).get("quizId"); 
   const url = `${BASE_URL}/quiz/show/${quizId}`;
   const resp = await fetch(url);
-  const data = await resp.json();
-  const x = data.code;
   // console.log(data);
   // debugger;
-    if (x === 2) {
-      pageState = "notfound";
-      // console.log("notfound");
-    } else {
+    if (resp.ok) {
+    const data = await resp.json();
       quiz = data.quiz; 
       pageState = "loaded"; //change it to setPageState()
+      // console.log("notfound");
+    } else {
+    const data = await resp.json();
+      pageState = "notfound";  
+      // toast.push(data.msg);
+      notFoundMsg = data.msg;
       // console.log("loaded");
     }
      
@@ -46,11 +50,14 @@ onMount(async () => {
 <div class="w-full p-2 bg-gray-800 min-h-screen ">
 
 {#if pageState == "notfound"}
-  <p class="p-4 m-4 w-full bg-gray-500 border-2 border-gray-200 text-2xl">Not Found...</p>
+
+  <p class="p-4 mx-auto mt-12 w-6/12 bg-gray-500 border-2 border-gray-200  text-white text-center text-3xl">
+  {`${notFoundMsg}`}</p>
 {/if}
 
 {#if pageState == "loading"}
-  <p class="p-4 m-4 w-full bg-gray-500 border-2 border-gray-200 text-2xl">Loading...</p>
+   <p class="p-4 mx-auto mt-12 w-6/12 bg-gray-500 border-2 border-gray-200  text-white text-center text-3xl">
+  Loading....</p>
 {/if}
 
 <!--Intro-->
