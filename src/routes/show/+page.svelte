@@ -6,11 +6,13 @@ import { BASE_URL } from '$lib/js/config.js';
 import { onMount } from 'svelte';
 import ajaxPost from '$lib/js/ajaxPost.js';
     import { toast } from "@zerodevx/svelte-toast";
+
 let quiz;
 let quizId;
 let pageState = "loading";
 let notFoundMsg = "Not Found";
-//...
+////////////////////////////////////////////
+////////////////////////////////////////////
 
 const setPageState = (state) => pageState = state;
 
@@ -54,7 +56,7 @@ onMount(async () => {
   <p class="p-4 mx-auto mt-12 w-6/12 bg-gray-500 border-2 border-gray-200  text-white text-center text-3xl">
   {`${notFoundMsg}`}</p>
 {/if}
-
+ 
 {#if pageState == "loading"}
    <p class="p-4 mx-auto mt-12 w-6/12 bg-gray-500 border-2 border-gray-200  text-white text-center text-3xl">
   Loading....</p>
