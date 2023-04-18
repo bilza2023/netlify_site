@@ -1,6 +1,7 @@
 <script>
-let trigger = false;
 export let deleteFn;
+
+let trigger = false;
 // export let index;
 export let id;
 
