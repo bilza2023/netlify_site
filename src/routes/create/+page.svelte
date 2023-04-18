@@ -24,6 +24,11 @@ let newPRojectName = "";
 
 const handler = async(quizType)=>{
   const token = localStorage.getItem('token');
+  if (newPRojectName == ""){
+      toast.push( "Project name can not be empty" );
+      return;
+  }
+
 
   // debugger;
   const resp = await fetch( `${BASE_URL}/quiz/new` , {
@@ -62,7 +67,7 @@ const handler = async(quizType)=>{
 <br>
 
 {#if isLogin == true}
-<br/>
+
 
 <div class=" border-2 border-white p-2 m-2  text-center rounded-lg ">
 <h1 class="m-1 text-slate-200 text-2xl underline">New Project</h1>
@@ -71,9 +76,15 @@ const handler = async(quizType)=>{
 <br/>
 
 <div>
-<br/>
-<button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={()=>handler("quiz")}>New Quiz</button>
-<button class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={()=>handler("survey")}>New Survey</button>
+
+<button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={()=>handler("quiz")}>
+<span class="text-2xl">📝 New Quiz</span>
+</button>
+
+
+<button class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={()=>handler("survey")}>
+      <span class="text-2xl">🗳️ New Survey</span>
+</button>
 
 </div>
 
