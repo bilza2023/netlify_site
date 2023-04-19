@@ -139,8 +139,8 @@ const deleteOption = (q_index,option_index)=>{
 
  
 {#if quiz}
-<!-- <ToolBar {quiz} {save} {questions} {toggleShowSettings} -->
-<!-- {showSettings} /> -->
+<ToolBar {quiz} {save} {questions} {toggleShowSettings}
+{showSettings} />
 {/if}
 
 

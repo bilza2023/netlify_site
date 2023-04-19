@@ -57,9 +57,9 @@ function toggleshowQuizDel(){
 
 
 
-<div class="flex justify-left p-2 bg-gray-400 gap-2">
-  
-  <div class="w-24">
+<div class="flex justify-left   items-center bg-gray-400 px-2 gap-2  ">
+
+<div class="w-20">
   
     <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
     on:click={save}
@@ -69,7 +69,7 @@ function toggleshowQuizDel(){
     </button>
   </div>
  
-  <div class="w-24">
+  <div class="w-20">
     <a href= {`/show?quizId=${quiz._id}`} >
     <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
       <span class="text-2xl">🚀</span>
@@ -78,7 +78,7 @@ function toggleshowQuizDel(){
     </a>
   </div>
 
-<div class="w-24">
+<div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
   on:click={()=>{tooglePublish()}}>
     <span class="text-2xl">📤</span>
@@ -91,7 +91,7 @@ function toggleshowQuizDel(){
 
 
 
-<div class="w-24">
+<div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
   on:click={toggleShowSettings}  >
     <span class="text-2xl">⚙️</span>
@@ -103,7 +103,7 @@ function toggleshowQuizDel(){
 
 
 
-<div class="w-24">
+<div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
   on:click={toggleShowClone} >
     <span class="text-2xl">🐑</span>
@@ -111,7 +111,7 @@ function toggleshowQuizDel(){
   </button>
 </div>
 
-<div class="w-24">
+<div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
   on:click={()=>{toggleshowQuizDel()}}>
     <span class="text-2xl">🗑️</span>
@@ -119,7 +119,7 @@ function toggleshowQuizDel(){
   </button>
 </div>
 
-<div class="w-24">
+<div class="w-20">
 <a href= {`/analytics?quizId=${quiz._id}`} >
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
     <span class="text-2xl">📊</span>
@@ -128,7 +128,7 @@ function toggleshowQuizDel(){
   </a>
 </div>
 <!--
-<div class="w-24">
+<div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
     <span class="text-2xl">🎨</span>
     <span class="text-sm font-medium text-white">Theme</span>
@@ -136,7 +136,7 @@ function toggleshowQuizDel(){
 </div>
 
 
-<div class="w-24">
+<div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
     <span class="text-2xl">📄⚙️</span>
     <span class="text-sm font-medium text-white">Page</span>
@@ -144,7 +144,7 @@ function toggleshowQuizDel(){
 </div>
 
 
-<div class="w-24">
+<div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
     <span class="text-2xl">📱</span>
     <span class="text-sm font-medium text-white">Share</span>
