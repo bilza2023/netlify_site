@@ -7,8 +7,8 @@ export let title;
 <div class="w-15">
   <a href= {`${url}`} >
     <button class="w-full flex flex-col items-center p-2 m-0  rounded hover:bg-gray-500 active:bg-gray-900">
-      <span class="text-xs">{icon}</span>
-      <span class="text-xs font-medium text-white">{title}</span>
+      <span class="text-md">{icon}</span>
+      <span class="text-xs font-md text-white">{title}</span>
     </button>
   </a>
 </div>
