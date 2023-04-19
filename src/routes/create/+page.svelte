@@ -95,4 +95,5 @@ const handler = async(quizType)=>{
 
 </div>
 
+
 </div>

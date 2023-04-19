@@ -145,7 +145,7 @@ const deleteOption = (q_index,option_index)=>{
 
 
 
-<div class="bg-gray-800 text-white m-0 py-0  min-h-screen w-full">
+<div class="bg-gray-800 text-white m-0 px-8  min-h-screen w-full">
 
 
 
