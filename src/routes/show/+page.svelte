@@ -4,12 +4,11 @@ import QuizComp from "./quizComp/QuizComp.svelte";
 import FormIntro from "./formIntro/FormIntro.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import { onMount } from 'svelte';
-import { emailStore , passwordStore , quizStore } from './store';
-import ajaxPost from '$lib/js/ajaxPost.js';
+import { quizStore , membersStore } from './store';
+// import ajaxPost from '$lib/js/ajaxPost.js';
     // import { toast } from "@zerodevx/svelte-toast";
 
 let quiz;
-
 quizStore.subscribe(value => quiz = value);
 
 let pageState = "loading";
@@ -31,9 +30,9 @@ let  quizId = new URLSearchParams(location.search).get("quizId");
     const data = await resp.json();
       // quiz = data.quiz; 
 
-      quizStore.update(currentValue => {
-      return { ... data.quiz };
-});
+    quizStore.update(() => ({ ...data.quiz }));
+    membersStore.update(() => ({ ...data.members }));
+
       pageState = "loaded"; //change it to setPageState()
       // console.log("notfound");
     } else {
@@ -72,7 +71,7 @@ let  quizId = new URLSearchParams(location.search).get("quizId");
 {#if pageState == "loaded" }
 {#if quiz.showIntro == true || quiz.quizType == "quiz"}
 
- <FormIntro {quiz} {setPageState} />
+ <FormIntro  {setPageState} />
 
 {:else}
 {pageState = "showQuiz"}     

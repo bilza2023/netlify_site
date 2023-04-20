@@ -5,9 +5,14 @@ import { toast } from "@zerodevx/svelte-toast";
 import Title from "./Title.svelte";
 import IntroText from "./IntroText.svelte";
 import IfQuiz from "./IfQuiz.svelte";
+import { quizStore } from '../store';
+let quiz;
+quizStore.subscribe(value => quiz = value);
+
+
 
 export let setPageState;
-export let quiz;
+
 import { emailStore , passwordStore } from '../store';
 let email;
 let password;
