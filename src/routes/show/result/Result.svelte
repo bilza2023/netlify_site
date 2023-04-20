@@ -1,8 +1,8 @@
 <script>
 import ReportPart from "./ReportPart.svelte";
-import check from "./check.js";
+import check from "../check.js";
 import { onMount } from 'svelte';
-
+import Cards from "./Cards.svelte";
 export let quiz;
 let result;
 export let setShowOutroFinal;
@@ -23,18 +23,17 @@ onMount(async () => {
 </script>
 
 {#if result}
+<h1>Result</h1>
+
+
 
 <div class="flex p-1 m-1 bg-gray-700 rounded-md justify-center">
 
-<div class="p-1 m-1 rounded-lg bg-red-900 text-white">
-Wrong Answers: {result.wrongAnswers.length}</div>
+<Cards  title= 'Wrong Answers' icon=&#x1F645;  count ={result.wrongAnswers.length} bg="bg-red-900" />
 
-<div class="p-1 m-1 rounded-lg bg-green-900 text-white">
-Correct Answers: {result.correctAnswers.length}</div>
+<Cards  title= 'Correct Answers' icon=&#x1F44D;  count ={result.correctAnswers.length} bg="bg-green-900" />
 
-
-<div class="p-1 m-1 rounded-lg bg-gray-500 text-white">
-Skipped Answers: {result.skippedAnswers.length}</div>
+<Cards  title= 'Skipped Answers' icon=&#x1F937;  count ={result.skippedAnswers.length} bg="bg-blue-900" />
 
 </div>
 

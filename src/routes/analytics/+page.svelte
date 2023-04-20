@@ -26,14 +26,14 @@ onMount(async () => {
 const getResults = (async () => {
   try {
   const token = localStorage.getItem("token");
-  debugger;
+  // debugger;
           const  quizId = new URLSearchParams(location.search).get("quizId");
           const response = await fetch(`${BASE_URL}/result/analytics`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
               },
-              body: JSON.stringify({ quizId })
+              body: JSON.stringify({ quizId ,token })
           });
           const data = await response.json();
           results = data.results;
