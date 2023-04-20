@@ -6,7 +6,7 @@ import Result from "../result/Result.svelte";
 import OutroFinal from "./OutroFinal.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
-import { emailStore , passwordStore } from '$lib/stores/showStore.js';
+import { emailStore , passwordStore } from '../store.js';
 
 let email ="";
 let password ="";

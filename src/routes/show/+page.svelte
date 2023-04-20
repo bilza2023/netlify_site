@@ -4,11 +4,14 @@ import QuizComp from "./quizComp/QuizComp.svelte";
 import FormIntro from "./formIntro/FormIntro.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import { onMount } from 'svelte';
+import { emailStore , passwordStore , quizStore } from './store';
 import ajaxPost from '$lib/js/ajaxPost.js';
     // import { toast } from "@zerodevx/svelte-toast";
 
 let quiz;
-let quizId;
+
+quizStore.subscribe(value => quiz = value);
+
 let pageState = "loading";
 let notFoundMsg = "Not Found";
 ////////////////////////////////////////////
@@ -19,15 +22,18 @@ const setPageState = (state) => pageState = state;
 onMount(async () => {
   try {
   // const token = await localStorage.getItem("token");
-      
-  quizId = new URLSearchParams(location.search).get("quizId"); 
+let  quizId = new URLSearchParams(location.search).get("quizId"); 
   const url = `${BASE_URL}/quiz/show/${quizId}`;
   const resp = await fetch(url);
   // console.log(data);
   // debugger;
     if (resp.ok) {
     const data = await resp.json();
-      quiz = data.quiz; 
+      // quiz = data.quiz; 
+
+      quizStore.update(currentValue => {
+      return { ... data.quiz };
+});
       pageState = "loaded"; //change it to setPageState()
       // console.log("notfound");
     } else {

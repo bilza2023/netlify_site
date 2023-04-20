@@ -8,7 +8,7 @@ import IfQuiz from "./IfQuiz.svelte";
 
 export let setPageState;
 export let quiz;
-import { emailStore , passwordStore } from '$lib/stores/showStore.js';
+import { emailStore , passwordStore } from '../store';
 let email;
 let password;
 emailStore.subscribe(value => email = value);

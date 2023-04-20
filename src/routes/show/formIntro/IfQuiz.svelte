@@ -1,7 +1,9 @@
 <script>
-import { emailStore , passwordStore } from '$lib/stores/showStore.js';
+import { emailStore , passwordStore } from '../store';
+
 let email ="";
 let password ="";
+
 emailStore.subscribe(value => email = value);
 passwordStore.subscribe(value => password = value);
 
@@ -20,16 +22,16 @@ const handlePasswordInput = (event) => {
 <div class="flex justify-center w-full ">
 
 <div class="flex bg-gray-800  border border-gray-500 
-p-2 m-1 rounded-md w-8/12">
+p-2 m-1 rounded-md w-8/12" >
 <div>
 
-    <label class="items-center p-1 m-1">Email</label>
+    <label for=""  class="items-center p-1 m-1">Email</label>
     <input class="bg-gray-600 text-white rounded-md m-1 p-1 border border-white"  type="text" bind:value={email} on:input|preventDefault={handleEmailInput}>
 
 </div>
 
 <div>
-    <label class="items-center p-1 m-1">Password</label>
+    <label  for=""  class="items-center p-1 m-1">Password</label>
     <input class="bg-gray-600 text-white rounded-md m-1 p-1 border border-white"  type="text" bind:value={password} on:input|preventDefault={handlePasswordInput}>
 </div>
 

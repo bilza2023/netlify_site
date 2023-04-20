@@ -6,7 +6,20 @@ export let setPageState;
 export let quiz = {};
 $: questions = quiz.questions;
 let cq = 0;
-
+const next = ()=>{
+  if (cq < questions.length-1){ // This is correct
+    cq += 1;
+  }else {
+  cq = ( questions.length-1 );
+  }
+}
+const prev = ()=>{
+  if (cq > 0){
+  cq -=1;
+  }else {
+    cq= 0;
+  }
+}
 
 </script>
 
@@ -44,6 +57,9 @@ let cq = 0;
   {/each}
   </div> 
 
- 
-<Btns   {questions} {cq} {setPageState} {quiz}  saveResponse={quiz.saveResponse} />
+
+<Btns   {questions} {cq} {setPageState} {quiz}  saveResponse={quiz.saveResponse} {next} {prev}  />
+
+
+
 </div><!--flex box ends--->
