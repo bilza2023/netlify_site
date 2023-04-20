@@ -1,11 +1,11 @@
 <script>
-import Outro from "./Outro.svelte";
-import QuizComp from "./QuizComp.svelte";
-import FormIntro from "./FormIntro.svelte";
+import Outro from "./outro/Outro.svelte";
+import QuizComp from "./quizComp/QuizComp.svelte";
+import FormIntro from "./formIntro/FormIntro.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import { onMount } from 'svelte';
 import ajaxPost from '$lib/js/ajaxPost.js';
-    import { toast } from "@zerodevx/svelte-toast";
+    // import { toast } from "@zerodevx/svelte-toast";
 
 let quiz;
 let quizId;
@@ -19,7 +19,7 @@ const setPageState = (state) => pageState = state;
 onMount(async () => {
   try {
   // const token = await localStorage.getItem("token");
-     
+      
   quizId = new URLSearchParams(location.search).get("quizId"); 
   const url = `${BASE_URL}/quiz/show/${quizId}`;
   const resp = await fetch(url);

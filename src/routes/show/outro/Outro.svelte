@@ -2,7 +2,7 @@
 import { onMount } from 'svelte';
 import { goto } from '$app/navigation';
  
-import Result from "./Result.svelte";
+import Result from "../Result.svelte";
 import OutroFinal from "./OutroFinal.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
@@ -39,7 +39,7 @@ onMount(async () => {
 
 <br>
 <div class="flex justify-center">
-  <h1 class="bg-blue-900  p-2 m-1  mt-0  w-full text-center text-2xl rounded-md">{quiz.title}
+  <h1 class="bg-blue-900  p-2 m-1  mt-0  w-full text-center text-2xl rounded-md text-white">{quiz.title}
   </h1>
 </div>
   <br>
