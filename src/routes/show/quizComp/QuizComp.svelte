@@ -2,8 +2,13 @@
 // import {pageState} from "./showQuizStore";
 import Btns from "./Btns.svelte";
 import ProgressBar from "$lib/cmp/ProgressBar.svelte";
+  import Loading from '$lib/cmp/Loading.svelte';
 export let setPageState;
 export let quiz = {};
+
+let showWaiting = false;
+const  setWaiting = ()=>showWaiting =true;
+
 $: questions = quiz.questions;
 let cq = 0;
 const next = ()=>{
@@ -30,11 +35,11 @@ const prev = ()=>{
 </div>
   <br>
 
-
+  
+{#if showWaiting == false}  
 <div class="flex flex-col justify-center bg-gray-700 p-1 
  text-white rounded-md w-10/12 mx-auto border-2 border-gray-100">
-  
-  
+
 <ProgressBar total={questions.length} current={cq}/>
 
   <h1 
@@ -58,8 +63,11 @@ const prev = ()=>{
   </div> 
 
 
-<Btns   {questions} {cq} {setPageState} {quiz}  saveResponse={quiz.saveResponse} {next} {prev}  />
-
-
-
+<Btns   {questions} {cq} {setPageState} {quiz}  saveResponse={quiz.saveResponse} {next} {prev} {setWaiting} />
 </div><!--flex box ends--->
+
+{:else}
+<Loading title="Saving Result.." />
+{/if}
+
+

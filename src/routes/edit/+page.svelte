@@ -1,5 +1,6 @@
 <script>
 import update from "./update.js";
+// import { onDestroy } from 'svelte';
 import { v4 as uuidv4 } from 'uuid';
 import Question from './question/Question.svelte';
 import {getQuiz, getQuestion , getOption} from "./new_quiz.js";
@@ -51,7 +52,7 @@ onMount(async ()=>{
                 if (resp.ok == true) {
                 const data = await resp.json();
                       const {incommingQuiz, incommingMembers } = data;
-// debugger;
+ // debugger;
                          quizStore.update(() => ({ ... incommingQuiz }));
                          membersStore.update(() => ({ ...incommingMembers }));
                          console.log("members",members);

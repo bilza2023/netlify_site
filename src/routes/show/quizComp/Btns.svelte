@@ -2,6 +2,8 @@
 export let questions;
 export let quiz;
 export let next;
+export let setWaiting;
+
 import check from "../check.js";
 export let cq;
 export let prev;
@@ -16,6 +18,7 @@ emailStore.subscribe(value => email = value);
 let hideSaveBtn = false;
 
 async function saveResults  (){
+setWaiting();
   // debugger;
   hideSaveBtn = true;  
   let quizResult = await check(quiz);

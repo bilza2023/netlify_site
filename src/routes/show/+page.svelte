@@ -3,6 +3,7 @@ import Outro from "./outro/Outro.svelte";
 import QuizComp from "./quizComp/QuizComp.svelte";
 import FormIntro from "./formIntro/FormIntro.svelte";
 import { BASE_URL } from '$lib/js/config.js';
+import Loading from '$lib/cmp/Loading.svelte';
 import { onMount } from 'svelte';
 import { quizStore , membersStore } from './store';
 // import ajaxPost from '$lib/js/ajaxPost.js';
@@ -63,8 +64,7 @@ let  quizId = new URLSearchParams(location.search).get("quizId");
 {/if}
  
 {#if pageState == "loading"}
-   <p class="p-4 mx-auto mt-12 w-6/12 bg-gray-500 border-2 border-gray-200  text-white text-center text-3xl">
-  Loading....</p>
+<Loading   title="Loading..."  />
 {/if}
 
 <!--Intro-->
