@@ -5,6 +5,11 @@ Mid-Term
     4. 27-match-2023 :OAuth-2 integration.
     4. 27-match-2023 :Email Integration.
 
+20-Apr-2023
+
+1. Edit Page (Quiz) the members when swapped between the 2 lists (in Dispatch Comp) the lists get out of sync.
+2. Loading / Saving Component for saving results and loading the quiz
+
 27-match-2023
 1. Remove Navbar from the quiz/show/page
 2. XX- Remove personal links from footer.

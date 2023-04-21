@@ -5,8 +5,12 @@ import Th from "./Th.svelte";
 import FormRow from "../FormRow.svelte";
 import { fade } from 'svelte/transition';
 
-export let quiz;
-export let members;
+import { quizStore , membersStore } from '../store';
+let quiz;
+let members;
+quizStore.subscribe(value => quiz = value);
+membersStore.subscribe(value => members = value);
+
 
 let visible = true;
 
@@ -59,7 +63,7 @@ bind:value={quiz.introText}></textarea>
 {#if quiz.quizType == "quiz"}
   
 <FormRow title="Users"  >
-<Dispatch  {members} {quiz}/>
+<Dispatch  />
 </FormRow>
 {/if} 
 

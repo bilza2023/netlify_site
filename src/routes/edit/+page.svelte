@@ -12,12 +12,16 @@ import { toast } from '@zerodevx/svelte-toast';
 import ToolBar from './toolbar/ToolBar.svelte';
 import { onMount } from 'svelte';
 import ajaxPost from "$lib/js/ajaxPost.js";
+import { quizStore , membersStore } from './store';
+
+let quiz;
+let members;
+let questions = [];
+quizStore.subscribe(value => quiz = value);
+membersStore.subscribe(value => members = Object.values(value));
 
 let isLoading = false;
-let quiz;
-let questions = [];
 let showSettings = true;
-let members;
 
 
 let isDirty = true;
@@ -47,9 +51,14 @@ onMount(async ()=>{
                 if (resp.ok == true) {
                 const data = await resp.json();
                       const {incommingQuiz, incommingMembers } = data;
-                      quiz = incommingQuiz;
-                      questions = quiz.questions;
-                      members = incommingMembers;
+// debugger;
+                         quizStore.update(() => ({ ... incommingQuiz }));
+                         membersStore.update(() => ({ ...incommingMembers }));
+                         console.log("members",members);
+                         questions = quiz.questions;
+                         console.log("quiz",quiz);
+                  //     quiz = incommingQuiz;
+                  //     members = incommingMembers;
                       // debugger;
                 }else {
                       toast.push("failed to add");
@@ -167,7 +176,7 @@ const deleteOption = (q_index,option_index)=>{
 <br>
 
       {#if showSettings}
-      <QuizBlock {quiz}  {members} />
+      <QuizBlock  />
       {/if}
 {/if}
 
