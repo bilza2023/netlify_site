@@ -1,29 +1,18 @@
 <script>
 import AreYouSure from "$lib/cmp/AreYouSure.svelte";
-import { toast } from '@zerodevx/svelte-toast';
+// import { toast } from '@zerodevx/svelte-toast';
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
+import H1 from '$lib/cmp/H1.svelte';
+import Table from "./Table.svelte";
+import ToolBar from "./toolbar/ToolBar.svelte";
+import Cards from "./Cards.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import ajaxPost from "$lib/js/ajaxPost.js";
 
 $: quizzes = [];
-
-const deleteQuiz = async (index)=>{
-// debugger;
-const token = localStorage.getItem('token');
-const q = quizzes[index];
-
-const resp = await ajaxPost(`${BASE_URL}/quiz/del`,{quizId : q._id,token});
-// debugger;
-      if (resp.ok == true){
-      const data = await resp.json();
-        toast.push('deleted'); 
-        populate();
-      }else {
-      const data = await resp.json();
-        toast.push( data.msg );
-      }
-}//del fn
+let showTable = false;
+const toggleShowTable = () => showTable = !showTable;
 
 import { onMount } from 'svelte';
 let isLogin=false;
@@ -67,8 +56,10 @@ const populate = async () =>{
 }
 }
 </script>
-
+<div class="bg-gray-800"><!--page div-->
 <Nav  isLogin={isLogin}/>
+
+<ToolBar  {toggleShowTable} {showTable}/>
 
 <!--page div-->
 
@@ -80,74 +71,23 @@ const populate = async () =>{
 </div>
 
 {:else}
-<div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen flex justify-center " >
+<div class="flex justify-center">
+<h1
+class="w-4/12 text-center p-2 m-1 rounded-md text-white text-1xl bg-blue-900"
+>Projects</h1>
+</div>
 
-<div class="w-11/12">
-<h1 class="m-1 text-slate-200 text-2xl mt-2 underline text-center">
-All Projects</h1>
-<br>
-  {#if quizzes}
-    <table class="w-full border-collapse table-responsive border-white">
-      
-        <tr class="bg-gray-900 text-white border-2 border-gray-200">
-          <td class="text-center">Ser</td>
-          <td class="text-center">Type</td>
-          <td class="text-center">Title</td>
-          <td class="text-center">Launch</td>
-          <td class="text-center">Edit</td>
-          <td class="text-center">Analytics</td>
-        </tr>
+<div class="bg-gray-800">
 
-{#each quizzes as quiz,index }
-<tr class="text-white bg-gray-900 border-2 border-gray-200">
-<td class="p-1 border  text-center text-white">{index+1}</td>
-
-<td class="p-1 border  text-center text-white  rounded-md">
-      {#if quiz.quizType == "quiz"}
-      <span class="text-sm">📝</span>
-      {/if}
-      {#if quiz.quizType == "survey"}
-      <span class="text-sm">🗳️</span>
-      {/if}
-</td>
-
-
-
-<td class="p-1 border  text-left text-white">&nbsp;{quiz.title}</td>
-
-
-<td class="p-1 border bg-blue-900 text-center text-white hover:bg-blue-700 active:bg-blue-800 rounded-md transition duration-200">
-  <a href= {`/show?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
-    <span class="text-sm">🚀</span>
-  </a>
-</td>
-
-<td class="p-1 border bg-green-900 text-center text-white hover:bg-green-700 active:bg-green-800 rounded-md transition duration-200">
-  <a href={`/edit?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
-    <span class="text-sm">⚙️</span>
-  </a>
-</td>
-<!-- http://localhost:5173/analytics?quizId=642e02e8cfa55f9ef58091d8 -->
-<td class="p-1 border bg-blue-900 text-center text-white hover:bg-blue-700 active:bg-blue-800 rounded-md transition duration-200">
-  <a href={`/analytics?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
-    <span class="text-sm">📊</span>
-  </a>
-</td>
-
-            
-</tr>
-{/each}
-
-</table>
-  {/if}
-
-<br>
-<br> 
-
-</div><!--page div ends-->
-</div><!--page div ends-->
-  {/if}
+          {#if showTable == true}
+              <Table  {quizzes}/>
+          {:else }
+              <Cards {quizzes} />
+          {/if}
+</div>          
+{/if}
 
 
 
 <Footer />
+</div>

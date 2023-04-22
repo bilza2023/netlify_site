@@ -46,6 +46,8 @@ isLogin = false ;
 
 
 
+
+
 <div class="w-15">
     <button class="w-full flex flex-col items-center p-2 m-0  rounded hover:bg-gray-500 active:bg-gray-900"
     on:click={logoutFn}>
@@ -53,6 +55,8 @@ isLogin = false ;
       <span class="text-xs font-md text-white">Logout</span>
     </button>
 </div>
+
+<Card url={'/docs'} icon=&#x1F4D6; title="Help" />
 
 {:else}
 <Card url={'/register'} icon=&#x1F4C2; title="Register" />

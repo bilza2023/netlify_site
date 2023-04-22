@@ -1,12 +1,11 @@
 <script>
-export let bg_color = "bg-red-900";
+export let bg_color = "bg-blue-900";
 export let text_color = "text-white";
-export let content = "Content (content) For the Heading";
+export let title = " Heading Content";
 
 </script>
 
-
-
-<div class="m-1 p-1 {bg_color} {text_color} flex justify-center ">
-    <h1>{content}</h1>
-</div> 
+<h1 
+    class="{bg_color} {text_color} rounded-md p-4   text-center text-xl">
+    {title}
+  </h1>
