@@ -64,16 +64,18 @@ const populate = async () =>{
 <!--page div-->
 
 {#if isLogin == false}
-<div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen flex justify-center " >
+<div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen flex justify-center  " >
 <div class="w-11/12">
 <h1><a href="/login">Please login</a></h1>
 </div>
 </div>
 
 {:else}
+
 <div class="flex justify-center">
 <h1
-class="w-4/12 text-center p-2 m-1 rounded-md text-white text-1xl bg-blue-900"
+class="w-4/12 text-center p-2 m-1 rounded-md text-white text-1xl 
+bg-blue-700 my-4"
 >Projects</h1>
 </div>
 
@@ -86,7 +88,6 @@ class="w-4/12 text-center p-2 m-1 rounded-md text-white text-1xl bg-blue-900"
           {/if}
 </div>          
 {/if}
-
 
 
 <Footer />

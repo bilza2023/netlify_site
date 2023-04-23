@@ -3,55 +3,61 @@ import { toast } from '@zerodevx/svelte-toast';
 import validateEmail from "$lib/js/validateEmail.js";
 import validateString from "$lib/js/validateString.js";
 
-import { BASE_URL } from '$lib/js/config.js';
 let email = "";
 let password = "";
 export let members;
 export let saveAll;
 
 const create = async (event) =>{
-event.preventDefault();
-const emailError = validateEmail(email);
+ event.preventDefault();
+ const emailError = validateEmail(email);
     if (emailError.status !== "ok"){
           toast.push('Not a valid email');  
       return;
     }
 
-const passwordError = validateString(password,4,30);
+ const passwordError = validateString(password,4,30);
     if (passwordError.status !== "ok"){
           toast.push('Not a valid password');  
       return;
     }
   //  members.update(arr => [...arr, { email, password }]);
   members.update(arr => [{ email, password }, ...arr]);
- email = "";
-password = "";
+  email = "";
+  password = "";
   await saveAll();
-};
+}
 
 </script>
 
+<div class="flex justify-center">
+<div class="inline-block border-2 border-white p-2 m-2  text-center rounded-lg ">
 
-<div class=" border-2 border-white p-2 m-2  text-center rounded-lg ">
-<!-- <h1 class="m-1 text-slate-200 text-2xl underline">New Member</h1> -->
-<div class="flex">
-<h3 class="w-4/12 text-center  ml-2 underline">Assign Password</h3>
-<h3 class="w-4/12 text-center ml-2 underline">Member`s Email</h3>
-<div class="w-4/12" ></div>
+<div class="flex justify-center">
 
-</div>
-
-<div class="flex ">
-<input class="w-4/12 bg-gray-700 text-white   m-1 rounded-lg"  type="email" bind:value={email} >
-<input class="w-4/12 bg-gray-700 text-white   m-1 rounded-lg"  type="text" bind:value={password} >
-
-<div class="w-4/12" >
-<button class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={create}><span class="text-xs">Add New</span></button>
-
-</div>
+<div class="flex flex-col">
+      <h3 class=" text-center ml-2 underline">Member`s Email</h3>
+    <input class=" bg-gray-700 text-white   m-1 rounded-lg"  type="email" bind:value={email} >
 </div>
 
 
+<div class="flex flex-col" >
+      <h3 class=" text-center  ml-2 underline">Assign Password</h3>
+    <input class=" bg-gray-700 text-white   m-1 rounded-lg"  type="text" bind:value={password} >
+
+</div>
 
 
+</div><!--outer most flex-->
+
+
+
+
+<div class="flex justify-center " >
+
+<button class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={create}><span class="text-xs">Add New Member</span></button>
+</div>
+
+
+</div><!--outer div for border-->
 </div>

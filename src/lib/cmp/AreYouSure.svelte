@@ -2,9 +2,10 @@
 let trigger = false;
 export let deleteFn;
 export let index;
+
 const fire = ()=> {
-trigger = true;
-setTimeout( ()=> trigger=false,2000);
+  trigger = true;
+  setTimeout( ()=> trigger=false,2000);
 }
 
 </script>

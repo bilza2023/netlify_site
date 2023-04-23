@@ -1,18 +1,28 @@
 <script>
-import { writable,get } from 'svelte/store'; 
-import {is_login} from "$lib/stores/appStore.js";
+import { get} from 'svelte/store'; 
+// import {is_login} from "$lib/stores/appStore.js";
 import { browser } from '$app/environment';
 import MemberTable from "./MemberTable.svelte";
 import { toast } from '@zerodevx/svelte-toast';
 import { onDestroy } from 'svelte';
 import NewQuizComp  from "./NewQuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
-import { members, dirty } from "./store.js";
+import { membersStore, dirty } from "./store.js";
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
+import { onMount } from 'svelte';
 //-- store inside the file
 
+
+let isLogin=false;
+
 $: isDirty = $dirty;
+let members = [];
+// debugger;
+// $: members = $membersStore;
+membersStore.subscribe((value) => {
+  members = value;
+});
 
 function handleBeforeUnload(event) {
   if ( get(dirty) ) {
@@ -22,7 +32,7 @@ function handleBeforeUnload(event) {
 }
 
 const deleteFn = (index) =>{
-  members.update(arr => arr.filter((_, i) => i !== index));
+  // members.update(arr => arr.filter((_, i) => i !== index));
   dirty.set(true);
   // console.log(members);
 } 
@@ -30,17 +40,21 @@ const deleteFn = (index) =>{
 const saveAll = async ()=>{ 
   const token = localStorage.getItem('token');
   // debugger;
-  const mm = get(members);
+  // const mm = get(members);
   const response = await fetch( `${BASE_URL}/user/members/save` , {
     method: 'POST',
     body: JSON.stringify( {members :mm ,token} ),
     headers: { 'Content-Type': 'application/json' }
   });
-      const data = await response.json();
       // debugger;
-      if (data.success == true){
+      if (response.ok){
+      const data = await response.json();
+      // members.set(data.members);
+      membersStore.update(() => ({ ...data.members }));
+      console.log("members" , members);
         toast.push('saved'); 
       }else {
+      const data = await response.json();
       dirty.set(false);
       toast.push( data.message );
       }
@@ -57,10 +71,6 @@ onDestroy(() => {
 if (browser){
  window.addEventListener('beforeunload', handleBeforeUnload);
 }
-
-import { onMount } from 'svelte';
-let isLogin=false;
-
 
 onMount(async () => {
   const token = await localStorage.getItem("token");
@@ -117,20 +127,8 @@ onMount(async () => {
 
 <br />
   {#if $members.length}
-    <table class="w-full border-collapse table-responsive border-white">
-      <thead class="">
-        <tr class="bg-gray-900 text-white border-2 border-gray-200">
-          <td class="border text-center">Ser</td>
-          <td class="border text-center">Email</td>
-          <td class="border text-center">Password</td>
-          <td class="border text-center">Edit</td>
-          <td class="border text-center">Delete</td>
-        </tr>
-      </thead> 
-      <tbody>
+   
           <MemberTable    {deleteFn}  />
-      </tbody>
-    </table>
   {/if}
 
 {/if} 
