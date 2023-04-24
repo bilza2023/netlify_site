@@ -14,10 +14,7 @@ const fire = ()=> {
   <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="flex hover:cursor-pointer justify-center"  on:click={fire} >
 
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M16.5 6.5L7.5 15.5" />
-        <path d="M7.5 6.5L16.5 15.5" />
-      </svg>
+      <span class="text-2xl">&#x1F5D1;</span>
 
     </div>
 {:else}    

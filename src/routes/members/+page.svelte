@@ -1,13 +1,13 @@
 <script>
-import { get} from 'svelte/store'; 
+// import { get} from 'svelte/store'; 
 // import {is_login} from "$lib/stores/appStore.js";
 import { browser } from '$app/environment';
-import MemberTable from "./MemberTable.svelte";
+// import MemberTable from "./MemberTable.svelte";
 import { toast } from '@zerodevx/svelte-toast';
 import { onDestroy } from 'svelte';
 import NewQuizComp  from "./NewQuizComp.svelte";
 import { BASE_URL } from '$lib/js/config.js';
-import { membersStore, dirty } from "./store.js";
+import { membersStore, storeDirty } from "./store.js";
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 import { onMount } from 'svelte';
@@ -16,7 +16,7 @@ import { onMount } from 'svelte';
 
 let isLogin=false;
 
-$: isDirty = $dirty;
+$: isDirty = $storeDirty;
 let members = [];
 // debugger;
 // $: members = $membersStore;
@@ -33,7 +33,7 @@ function handleBeforeUnload(event) {
 
 const deleteFn = (index) =>{
   // members.update(arr => arr.filter((_, i) => i !== index));
-  dirty.set(true);
+  storeDirty.set(true);
   // console.log(members);
 } 
 
@@ -51,11 +51,11 @@ const saveAll = async ()=>{
       const data = await response.json();
       // members.set(data.members);
       membersStore.update(() => ({ ...data.members }));
-      console.log("members" , members);
+      // console.log("members" , members);
         toast.push('saved'); 
       }else {
       const data = await response.json();
-      dirty.set(false);
+      storeDirty.set(false);
       toast.push( data.message );
       }
 
@@ -126,9 +126,9 @@ onMount(async () => {
 </div>
 
 <br />
-  {#if $members.length}
+  {#if members.length}
    
-          <MemberTable    {deleteFn}  />
+          <!-- <MemberTable    {deleteFn}  /> -->
   {/if}
 
 {/if} 

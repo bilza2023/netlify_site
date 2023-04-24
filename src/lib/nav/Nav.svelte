@@ -42,7 +42,7 @@ isLogin = false ;
 
 <Card url={'/dashboard'} icon=&#x1F5A5; title="DashBoard" />
 
-<Card url={'/members'} icon=&#x1F46C; title="Members" />
+<Card url={'/teams'} icon=&#x1F46C; title="Teams" />
 
 
 
