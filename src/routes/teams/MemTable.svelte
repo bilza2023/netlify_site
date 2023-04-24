@@ -30,7 +30,7 @@ const addMember = async (member)=>{
     
     <td class="border text-center">
       <input 
-       disabled={member.clean} 
+       disabled={ member.clean} 
         class="bg-gray-600 text-white p-0 m-0 text-center rounded-md
         {member.clean == true ? "bg-gray-600" : "bg-red-900" }
         "

@@ -25,7 +25,8 @@ const create = async (event) =>{
       return;
     }
   //  members.update(arr => [...arr, { email, password }]);
-  storeMembers.update(arr => [{ email, password }, ...arr]);
+  //--add clean
+  storeMembers.update(arr => [{ email, password , clean:true }, ...arr]);
   email = "";
   password = "";
   await saveAll();

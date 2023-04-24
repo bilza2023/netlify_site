@@ -1,6 +1,6 @@
 <script>
 import { storeMembers , storeDirty} from './store.js';
-import Member from './MemTable.svelte';
+import MemTable from './MemTable.svelte';
 import NewMember from './NewMember.svelte';
 import Nav from '$lib/nav/Nav.svelte';
 import { onMount,onDestroy } from 'svelte';
@@ -17,7 +17,22 @@ storeDirty.set(true);
 
 let members;
 storeMembers.subscribe(value => {members = value;});
+function membersDown(members) {
+    return members.map(member => {
+        const { clean, ...rest } = member;
+        return rest;
+    });
+}
+function membersUp(members) {
+    return members.map(member => ({...member, clean: true}));
+}
 
+function handleBeforeUnload(event) {
+  if ( get(dirty) ) {
+    event.preventDefault();
+    event.returnValue = '';
+  }
+}
 let isLogin=true;
 
 onMount(async () => {
@@ -46,9 +61,9 @@ onMount(async () => {
 }); 
 
 const saveAll = async ()=>{ 
-const memToSave = membersDown(members);
-// console.log("memToSave" , memToSave);
-// return;
+ const memToSave = membersDown(members);
+ // console.log("memToSave" , memToSave);
+ // return;
   const token = localStorage.getItem('token');
   // debugger;
   // const mm = get(members);
@@ -60,9 +75,10 @@ const memToSave = membersDown(members);
       // debugger;
       if ( response.ok ){
       const data = await response.json();
-         storeMembers.set(data.members.members);
+          const membersUpArray = membersUp(data.members.members);
+         storeMembers.set(membersUpArray);
       // membersStore.update(() => ({ ...data.members }));
-        console.log("members" , members);
+        // console.log("members" , members);
         toast.push('saved'); 
       }else {
       const data = await response.json();
@@ -78,21 +94,7 @@ onDestroy(() => {
   window.removeEventListener('beforeunload', handleBeforeUnload);
   }
 });
-function membersUp(members) {
-    return members.map(member => ({...member, clean: true}));
-}
-function membersDown(members) {
-    return members.map(member => {
-        const { clean, ...rest } = member;
-        return rest;
-    });
-}
-function handleBeforeUnload(event) {
-  if ( get(dirty) ) {
-    event.preventDefault();
-    event.returnValue = '';
-  }
-}
+
 if (browser){
  window.addEventListener('beforeunload', handleBeforeUnload);
 }
@@ -123,7 +125,7 @@ if (browser){
 <br />
 
 
-<Member />
+<MemTable />
 
 <br/>
 <br/>
