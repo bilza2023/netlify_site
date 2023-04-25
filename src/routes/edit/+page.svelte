@@ -145,7 +145,7 @@ const deleteOption = (q_index,option_index)=>{
 
 </script>
 
-<Nav isLogin={isLogin}/>
+<Nav/>
 
  
 {#if quiz}

@@ -104,7 +104,7 @@ if (browser){
 
 <div class="p-0 m-0 width-full   bg-gray-800 text-white min-h-screen">
 
-<Nav {isLogin}/>
+<Nav/>
 <br>
 <h1 class="w-full text-white  text-2xl underline text-center">Add New Member</h1>
 <br>

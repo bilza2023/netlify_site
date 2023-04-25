@@ -54,7 +54,7 @@ const handler = async(quizType)=>{
 
 </script>
 
-<Nav  {isLogin}/>
+<Nav />
 <div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen">
 
 <!--page div-->

@@ -26,8 +26,16 @@ setWaiting();
     const d = await r.json();
     quizResult.ip = d.ip;
 
+
+  // Get the user's country code
+  const countryCodeResponse = await fetch(`https://ip2c.org/${quizResult.ip }`);
+  const countryCodeData = await countryCodeResponse.text();
+  const countryCode = countryCodeData.split(';')[1];
+  quizResult.countryCode = countryCode;
+
   quizResult.quizId = quiz._id; 
-  quizResult.email = email; 
+  quizResult.email = email;
+  // debugger; 
  ///////////////
     const resp = await fetch(`${BASE_URL}/result/save`,{
       method: 'POST',

@@ -1,13 +1,30 @@
 <script>
 import Card from "./Card.svelte";
-// let isLogin =false;
-// is_login.subscribe( (p)=> isLogin=p);
-export let isLogin;
+import { onMount } from 'svelte';
+import { toast } from '@zerodevx/svelte-toast';
+
+let isLogin;
 //--only place to logout
 const logoutFn = ()=>{
 localStorage.setItem('token',"");
 isLogin = false ;
 }
+
+onMount(async () => {
+  try {
+  const token =  localStorage.getItem("token");
+      // debugger;
+  if (token == null || token.length == 0) {
+              isLogin = false;
+  }else {
+          isLogin = true;
+  }
+  } catch (error) {
+    toast.push("Login error");
+    console.error(error);
+ }
+});
+
 </script>
 
   <div class="flex  justify-between items-center bg-gray-700 px-2  ">

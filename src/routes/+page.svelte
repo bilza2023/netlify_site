@@ -44,7 +44,7 @@ onMount(async ()=>{
 
 </script>
 
-<Nav isLogin={isLogin}/>
+<Nav />
 <div class="bg-gray-800 text-white m-0 py-0 px-6 ">
 <!-- <Underconstruction /> -->
 <br/>

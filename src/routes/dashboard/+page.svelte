@@ -57,7 +57,7 @@ const populate = async () =>{
 }
 </script>
 <div class="bg-gray-800"><!--page div-->
-<Nav  isLogin={isLogin}/>
+<Nav />
 
 <ToolBar  {toggleShowTable} {showTable}/>
 

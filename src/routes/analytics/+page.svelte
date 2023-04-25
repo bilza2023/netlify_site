@@ -3,46 +3,46 @@ import { onMount } from 'svelte';
 import { page } from '$app/stores';
 import { BASE_URL } from '$lib/js/config.js';
 import Nav from '$lib/nav/Nav.svelte';
+import Loading from '$lib/cmp/Loading.svelte';
+import TableQuiz from './TableQuiz.svelte';
+import TableSurvey from './TableSurvey.svelte';
+import Summary from './Summary.svelte';
 import ajaxPost from "$lib/js/ajaxPost.js";
 import { toast } from '@zerodevx/svelte-toast';
-
-let results=[];
+let pageState = "loading";
+let results= null;
+export let quiz;
 let isLogin=false; 
 onMount(async () => {
   try {
-  const token = await localStorage.getItem("token");
-      // debugger;
-  if (token == null || token.length == 0) {
-              isLogin = false;
-  }else {
-          isLogin = true;
      getResults();
-  }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    toast.push("page load error");
  }
 });
 
 const getResults = (async () => {
-  try {
+ try {
   const token = localStorage.getItem("token");
-  // debugger;
-          const  quizId = new URLSearchParams(location.search).get("quizId");
-          const response = await fetch(`${BASE_URL}/result/analytics`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ quizId ,token })
-          });
-          const data = await response.json();
-          results = data.results;
-            // console.log("results", results);
+  const  quizId = new URLSearchParams(location.search).get("quizId");
+  const response = await ajaxPost(`${BASE_URL}/result/analytics`,{ quizId ,token });
+  
+          if (response.ok){
+            const data = await response.json();
+            results = data.results;
+            quiz = data.quiz;
+            console.log("qioz data..",data);
+            pageState = "loaded";
+          }else {
+            toast.push("failed to load results");
+          }
   
   } catch (error) {
-    console.error(error);
+    toast.push("unknown error in loading results");
  }
 }); 
+
 
 async function deleteARez(resultId){
   try {
@@ -65,62 +65,54 @@ async function deleteARez(resultId){
               toast.push("Failed to delete");
         }
 
-} catch (error) {
-  // console.error(error);
-}
+ } catch (error) {
+      toast.push("Failed to delete"); 
+ }
 }
 </script>
 
-<Nav isLogin={isLogin}/>
+<Nav/>
 
 <div class="bg-gray-800 text-white w-full min-h-screen p-6 ">
 
 
+{#if pageState == "loading" }
+<div class="flex justify-center w-full">
+<Loading  />
+</div>
+{/if}
 
-<div class="">
-<h1 class="rounded-lg p-2  bg-blue-900 text-center text-white text-2xl underline mb-4">Responses</h1>
+
+
+
+{#if pageState == "loaded" }
+
+
+<h1 class="rounded-lg p-2  bg-blue-900 text-center text-white text-2xl underline mb-4">Responses: {quiz.title}</h1>
+
+
+<Summary {results}/>
+
+          {#if results.length > 0  }
+              <div class="flex justify-center">
+                {#if quiz.quizType == "survey"}
+                <TableSurvey  {results} {deleteARez}/>
+                {:else}
+                <TableQuiz  {results} {deleteARez}/>
+                {/if}
+              </div>
+
+          {:else} 
+          <div class="flex justify-center w-full">
+          <h1 class="rounded-lg p-2  bg-red-900 text-center text-white text-2xl underline mb-4 w-6/12">No Results Yet...</h1>
+          </div>
+          {/if}    
+
+
+{/if}
+
+
 </div>
 
-<br/>
-
-<div class="flex justify-center">
-<table class="w-10/12 ">
-<tr class="text-center text-white bg-blue-900">
-<td class="tbltd">ser</td>
-<td class="tbltd">IP</td>
-<td class="tbltd">email</td>
-<td class="tbltd">Correct Answers</td>
-<td class="tbltd">Wrong Answers</td>
-<td class="tbltd">Skipped Answers</td>
-<td class="tbltd">Marks</td>
-<td class="tbltd ">Delete</td>
-</tr>
-
-{#each results as result , index}
-<tr class="text-center">
-<td class="tbltd">{index+1}</td>
-<td class="tbltd">{result.ip}</td>
-<td class="tbltd">{result.email}</td>
-<td class="tbltd">{result.correctAnswers.length}</td>
-<td class="tbltd">{result.wrongAnswers.length}</td>
-<td class="tbltd">{result.skippedAnswers.length}</td>
-<td class="tbltd">{result.correctAnswers.length}</td>
-<td class="tbltd bg-red-900 text-white"><button on:click={()=>deleteARez(result._id)}>Delete</button></td>
-</tr>
-{/each}
-
-</table>
-</div>
 
 
-</div>
-
-
-<style>
-.tbltd {
-border:1px solid silver;
-padding:1px;
-color:white;
-
-}
-</style>

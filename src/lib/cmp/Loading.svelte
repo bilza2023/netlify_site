@@ -1,6 +1,6 @@
 
 <script>
-  export let title;
+  export let title ="loading...";
     let size = 1;
   let interval = setInterval(() => {
     size = size === 3 ? 1 : size + 1;
