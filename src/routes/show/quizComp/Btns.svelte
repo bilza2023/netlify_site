@@ -12,6 +12,9 @@ export let setPageState;
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from "@zerodevx/svelte-toast";
 import { emailStore } from '../store.js';
+import ajaxPost from "$lib/js/ajaxPost.js";
+
+
 let email;
 emailStore.subscribe(value => email = value);
 
@@ -37,16 +40,11 @@ setWaiting();
   quizResult.email = email;
   // debugger; 
  ///////////////
-    const resp = await fetch(`${BASE_URL}/result/save`,{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify( { result:quizResult } )
-    });
-
-    const data = await resp.json();
-    if (data.success == true){
+ const token = await localStorage.getItem("token");
+    const resp = await ajaxPost(`${BASE_URL}/result/save`,{ result:quizResult } , token); 
+    
+    if (resp.ok){
+      // const data = await resp.json();
         toast.push("results saved");
         setPageState("outro");
     }else {

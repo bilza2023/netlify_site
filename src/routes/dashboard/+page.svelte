@@ -1,6 +1,6 @@
 <script>
 import AreYouSure from "$lib/cmp/AreYouSure.svelte";
-// import { toast } from '@zerodevx/svelte-toast';
+
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 import H1 from '$lib/cmp/H1.svelte';
@@ -8,7 +8,8 @@ import Table from "./Table.svelte";
 import ToolBar from "./toolbar/ToolBar.svelte";
 import Cards from "./Cards.svelte";
 import { BASE_URL } from '$lib/js/config.js';
-import ajaxPost from "$lib/js/ajaxPost.js";
+import ajaxGet from "$lib/js/ajaxGet.js";
+import { toast } from '@zerodevx/svelte-toast';
 
 $: quizzes = [];
 let showTable = false;
@@ -36,23 +37,22 @@ onMount(async ()=>{
  
 const populate = async () =>{
  try {
- const token = localStorage.getItem('token');
+//  debugger;
 
-  const resp = await fetch( `${BASE_URL}/quiz/page/10/0` ,{
-  method: 'GET',
-  headers: {
-    // 'Authorization': `Bearer ${token}`,
-    'Authorization': `${token}`
+  const resp = await ajaxGet( `${BASE_URL}/quiz/page/10/0`);
+  if(resp.ok){
+    const data = await resp.json();
+    // console.log(data);
+    quizzes = data.quizzes; 
+ 
+  }else {
+    toast.push("failed to load");
   }
-  });
-
-  const data = await resp.json();
-//   console.log(data);
-  quizzes = data.quizzes; 
-  // console.log("quizzes",quizzes);
+   // console.log("quizzes",quizzes);
 
 } catch (error) {
-    console.error(error);
+    // console.error(error);
+    toast.push("failed to load..");
 }
 }
 </script>

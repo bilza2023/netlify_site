@@ -24,9 +24,9 @@ onMount(async () => {
 
 const getResults = (async () => {
  try {
-  const token = localStorage.getItem("token");
+  // debugger;
   const  quizId = new URLSearchParams(location.search).get("quizId");
-  const response = await ajaxPost(`${BASE_URL}/result/analytics`,{ quizId ,token });
+  const response = await ajaxPost(`${BASE_URL}/result/analytics`,{quizId});
   
           if (response.ok){
             const data = await response.json();

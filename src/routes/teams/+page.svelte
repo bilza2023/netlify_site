@@ -8,6 +8,7 @@ import { browser } from '$app/environment';
 import { BASE_URL } from '$lib/js/config.js';
 import Footer from '$lib/cmp/Footer.svelte';
 import { toast } from "@zerodevx/svelte-toast";
+import ajaxPost from "$lib/js/ajaxPost.js";
   // Update the value of the store
   // storeMembers.set(['Alice', 'Bob', 'Charlie']);
   
@@ -45,8 +46,8 @@ onMount(async () => {
             const resp = await fetch( `${BASE_URL}/user/members` ,{
             method: 'GET',
             headers: {
-              // 'Authorization': `Bearer ${token}`,
-              'Authorization': `${token}`
+              'Authorization': `Bearer ${token}`,
+              // 'Authorization': `${token}`
             }
             });
 
@@ -67,15 +68,13 @@ const saveAll = async ()=>{
   const token = localStorage.getItem('token');
   // debugger;
   // const mm = get(members);
-  const response = await fetch( `${BASE_URL}/user/members/save` , {
-    method: 'POST',
-    body: JSON.stringify( {members:memToSave ,token} ),
-    headers: { 'Content-Type': 'application/json' }
-  });
-      // debugger;
+
+  const response = await ajaxPost(`${BASE_URL}/user/members/save` ,{members:memToSave ,token} , token );
+  
+  // debugger;
       if ( response.ok ){
       const data = await response.json();
-          const membersUpArray = membersUp(data.members.members);
+          const membersUpArray = membersUp(data.members);
          storeMembers.set(membersUpArray);
       // membersStore.update(() => ({ ...data.members }));
         // console.log("members" , members);

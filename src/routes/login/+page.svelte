@@ -8,7 +8,8 @@ import validateString from "$lib/js/validateString.js";
 import LoadBtn from '$lib/cmp/LoadBtn.svelte';
 import NavLogin from "$lib/cmp/NavLogin.svelte";
 import { BASE_URL } from '$lib/js/config.js';
- 
+import ajaxPost from "$lib/js/ajaxPost.js";
+
 let email ="";
 let password =""; 
 
@@ -30,15 +31,10 @@ const passwordError = validateString(password,6,30);
 
 isLoading = true; 
   
-const response = await fetch( `${BASE_URL}/user/login` , {
-// const response = await fetch('http://localhost/user/login', {
-    method: 'POST',
-    body: JSON.stringify( {email,password} ),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-});
+const response = await ajaxPost( `${BASE_URL}/login` , {email,password});
+
     if (response.ok) {
+    // debugger;
         const data = await response.json();
         console.log("data",data);
         localStorage.setItem("token", data.token);

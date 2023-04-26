@@ -14,6 +14,7 @@ import ToolBar from './toolbar/ToolBar.svelte';
 import { onMount } from 'svelte';
 import ajaxPost from "$lib/js/ajaxPost.js";
 import { quizStore , membersStore } from './store';
+import Loading from '$lib/cmp/Loading.svelte';
 
 let quiz;
 let members;
@@ -26,7 +27,6 @@ let showSettings = true;
 
 
 let isDirty = true;
-let isLogin=false;
 
 function toggleShowSettings(){
       showSettings = !showSettings;
@@ -39,32 +39,27 @@ function unPublish(){
 onMount(async ()=>{
 
   try {
-      const token = await localStorage.getItem("token");
-          if (token == null || token.length == 0) {
-              isLogin = false;
-          }else {
-              isLogin = true;
-              const  quizId = new URLSearchParams(location.search).get("quizId");
+      const token =  localStorage.getItem("token");    
+      const  quizId = new URLSearchParams(location.search).get("quizId");
              //----------------------------------
-            const resp = await ajaxPost(`${BASE_URL}/quiz/find`,
-            {token ,quizId} );
+ const resp = await ajaxPost(`${BASE_URL}/quiz/find`,{token ,quizId},token);
             // debugger;
                 if (resp.ok == true) {
                 const data = await resp.json();
-                      const {incommingQuiz, incommingMembers } = data;
+                const {incommingQuiz, incommingMembers } = data;
  // debugger;
-                         quizStore.update(() => ({ ... incommingQuiz }));
-                         membersStore.update(() => ({ ...incommingMembers }));
-                         console.log("members",members);
-                         questions = quiz.questions;
-                         console.log("quiz",quiz);
+                  quizStore.update(() => ({ ... incommingQuiz }));
+                  membersStore.update(() => ({ ...incommingMembers }));
+                  console.log("members",members);
+                  questions = quiz.questions;
+                  // console.log("quiz",quiz);
                   //     quiz = incommingQuiz;
                   //     members = incommingMembers;
                       // debugger;
                 }else {
-                      toast.push("failed to add");
+                      toast.push("failed to open");
                 }  
-          }
+          
     } catch (error) {
       // console.error(error);
     }
@@ -111,12 +106,12 @@ async function  deleteQuestion (questionId){
 /////////////////////////////////////////
 
 const save = async ()=>{
- const token = await localStorage.getItem("token");
+ const token = localStorage.getItem("token");
     isLoading = true; 
     //--Very important else the quiz.questions and the questions will be out of sync;
     quiz.questions = questions;
     // debugger;
-    const resp = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz,token});
+    const resp = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz,token},token);
       if (resp.ok == true) {
             const data = await resp.json();
             isLoading = false; 
@@ -161,7 +156,7 @@ const deleteOption = (q_index,option_index)=>{
 
 
 {#if !quiz}
-<h1>Loading...</h1>
+<Loading  />
 {/if}
 
 {#if quiz}
@@ -192,8 +187,6 @@ const deleteOption = (q_index,option_index)=>{
 {#if questions.length > 0}
 <br>
 
-<!--This is the QUESTION  block -->    
-<!--This is the QUESTION  block -->    
 
 {#each questions as question, index }
 

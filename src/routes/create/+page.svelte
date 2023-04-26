@@ -4,7 +4,10 @@ import { toast } from '@zerodevx/svelte-toast';
 import { BASE_URL } from '$lib/js/config.js';
 import { onMount } from 'svelte';
 import { goto } from '$app/navigation';
+import ajaxPost from "$lib/js/ajaxPost.js";
+
 let isLogin=false;
+
 onMount(async ()=>{
 
   try {
@@ -23,31 +26,23 @@ onMount(async ()=>{
 let newPRojectName = "";
 
 const handler = async(quizType)=>{
-  const token = localStorage.getItem('token');
   if (newPRojectName == ""){
       toast.push( "Project name can not be empty" );
       return;
   }
-
-
   // debugger;
-  const resp = await fetch( `${BASE_URL}/quiz/new` , {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify( {token ,quizType ,title :newPRojectName} )
-  });
+  const response = await ajaxPost( `${BASE_URL}/quiz/new` , {quizType ,title :newPRojectName} );
 
-  if (resp.ok) {
+  if (response.ok) {
       newPRojectName = "";
-      const data = await resp.json();
+      const data = await response.json();
       // debugger;
-      // toast.push( "Success" );
-
       goto( `/edit?quizId=${data.quiz._id}`);
+      toast.push( "Success" );
+
   }else {
-      toast.push( data.msg );
+    //   toast.push( data.msg );
+      toast.push( "Failed to create new project" );
   }
 
 }

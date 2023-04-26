@@ -22,8 +22,8 @@ const setPageState = (state) => pageState = state;
 onMount(async () => {
   try {
   // const token = await localStorage.getItem("token");
-let  quizId = new URLSearchParams(location.search).get("quizId"); 
-  const url = `${BASE_URL}/quiz/show/${quizId}`;
+ let  quizId = new URLSearchParams(location.search).get("quizId"); 
+  const url = `${BASE_URL}/show/${quizId}`;
   const resp = await fetch(url);
   // console.log(data);
   // debugger;

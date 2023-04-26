@@ -31,7 +31,7 @@ const passwordError = validateString(password,6,30);
     }
 
 isLoading = true; 
-    const response = await fetch( `${BASE_URL}/user/register` , {
+    const response = await fetch( `${BASE_URL}/register` , {
     // const response = await fetch('http://localhost/user/register', {
       method: 'POST',
       body: JSON.stringify({email,password}),
