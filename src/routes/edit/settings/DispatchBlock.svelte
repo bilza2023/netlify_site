@@ -7,14 +7,14 @@ quizStore.subscribe(value => quiz = value);
 membersStore.subscribe(value => members = Object.values(value));
 /////////////////////////////////////////////////////////////
 const doesMemExistInQuiz = (email)=>{
-let yesExist = false;
+ let yesExist = false;
     for (let i = 0; i < quiz.members.length; i++) {
         const element = quiz.members[i];
         if (element.email == email){ 
             yesExist = true;
         }     
     }
-return yesExist;
+ return yesExist;
 }
 //--important
 memWOquizMems = memWOquizMemsMethod();
@@ -81,7 +81,9 @@ const delQuizMem = (email)=>{
                 <button 
                 class="border bg-blue-800  p-1 w-full active:bg-blue-900 hover:bg-blue-700"
                 on:click={()=>toQuizMem(member.email , member.password)}
-                >--&gt;</button>
+                >
+                <span style="color: white;">&#x2192;</span>
+                </button>
                 </td>
             </tr>
             {/each}
@@ -97,7 +99,9 @@ const delQuizMem = (email)=>{
                 <button 
                 class="border bg-red-800  p-1 w-full active:bg-red-900 hover:bg-red-700"
                  on:click={()=>delQuizMem(member.email)}
-                >delete</button>
+                >
+                <span class="text-sm">🗑️</span>
+                </button>
                 </td>
             </tr> 
             {/each}

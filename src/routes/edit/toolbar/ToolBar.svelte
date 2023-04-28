@@ -1,43 +1,42 @@
 <script>
-import { onMount } from 'svelte';
+////////////-store variables--///////
+import { quizStore , membersStore } from '../store';
+quizStore.subscribe(value => quiz = value);
+membersStore.subscribe(value => members = Object.values(value));
+$: quiz = $quizStore; 
+$: members = $membersStore;
+////////////-store variables--///////
+
 import check from "./check.js";
 import Clone from "./Clone.svelte";
 import { fade } from 'svelte/transition';
 import QuizDel from "./QuizDel.svelte";
 import Errors from './Errors.svelte';
-export let quiz;
-export let questions;
+// export let quiz;
+// export let questions;
 export let save;
 export let toggleShowSettings;
 export let showSettings;
 let errors_Array = [];
 let showErrors = false;
 const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
-onMount(async ()=>{
 
-  try {
-    //   const token = await localStorage.getItem("token");
-        // console.log("Toolbar",quiz);
-    } catch (error) {
-      // console.error(error);
-    }
-});
 
 function tooglePublish(){
       showErrors = false ; //start with this
   if (quiz.published == true){
-      quiz.published = false;
+        quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
       return;
   }
   if (quiz.published == false){
-      //--when ever check sync quiz.questions and questions
-      quiz.questions = questions;
       const errors_Array =  check(quiz);
     if (errors_Array.length !==0) {
       set_errors_Array(errors_Array);
-      quiz.published = false;
+      // quiz.published = false;
+        quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
     }else {
       quiz.published = true;
+        quizStore.update(currentQuiz => ({ ...currentQuiz, published: true }));
     }
   }
 // console.log("quiz.published",quiz.published);  
@@ -170,7 +169,7 @@ on:click={()=>showErrors = false}>Hide</button>
 
 
 {#if showClone == true}
-<Clone  {quiz} questions/>
+<Clone  {quiz} {toggleShowClone}/>
 {/if}
 
 {#if showQuizDel == true}

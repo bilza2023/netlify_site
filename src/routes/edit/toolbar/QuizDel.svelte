@@ -12,16 +12,16 @@ let visible = false;
 export let toggleshowQuizDel;
 
 async function deleteAllResults (){
- const token = await localStorage.getItem("token");
+//  const token = await localStorage.getItem("token");
   const resp = await ajaxPost(`${BASE_URL}/result/deleteAll`,
-            {token ,quizId : quiz._id} );
+            {quizId : quiz._id} );
  if (resp.ok == true){
-      const data = await resp.json();
-        toast.push(data.msg); 
+      // const data = await resp.json();
+        toast.push("All project responses deleted"); 
         // goto("/dashboard");
       }else {
-      const data = await resp.json();
-        toast.push( data.msg );
+      // const data = await resp.json();
+        toast.push("failed to delete project responses");
       }
 
 
@@ -29,8 +29,8 @@ async function deleteAllResults (){
 
 const deleteQuiz = async ()=>{
   // debugger;
-  const token = localStorage.getItem('token');
-  const resp = await ajaxPost(`${BASE_URL}/quiz/del`,{quizId : quiz._id,token});
+  // const token = localStorage.getItem('token');
+  const resp = await ajaxPost(`${BASE_URL}/quiz/delete`,{quizId : quiz._id});
  // debugger;
       if (resp.ok == true){
       const data = await resp.json();
@@ -38,7 +38,7 @@ const deleteQuiz = async ()=>{
         goto("/dashboard");
       }else {
       const data = await resp.json();
-        toast.push( data.msg );
+        toast.push("failed to delete" );
       }
 }//del fn
 

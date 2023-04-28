@@ -41,8 +41,9 @@ const handler = async(quizType)=>{
       toast.push( "Success" );
 
   }else {
+      const data = await response.json();
     //   toast.push( data.msg );
-      toast.push( "Failed to create new project" );
+      toast.push( data.errormsg );
   }
 
 }

@@ -1,9 +1,7 @@
 <script>
-import update from "./update.js";
-// import { onDestroy } from 'svelte';
 import { v4 as uuidv4 } from 'uuid';
-import Question from './question/Question.svelte';
-import {getQuiz, getQuestion , getOption} from "./new_quiz.js";
+import Questions from './questions/Questions.svelte';
+import { getMCQ , getOption} from "./questions/getMCQ.js";
 import QuizBlock from "./settings/QuizBlock.svelte";
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
@@ -13,14 +11,16 @@ import { toast } from '@zerodevx/svelte-toast';
 import ToolBar from './toolbar/ToolBar.svelte';
 import { onMount } from 'svelte';
 import ajaxPost from "$lib/js/ajaxPost.js";
-import { quizStore , membersStore } from './store';
 import Loading from '$lib/cmp/Loading.svelte';
 
-let quiz;
-let members;
-let questions = [];
+
+////////////-store variables--///////
+import { quizStore , membersStore } from './store';
 quizStore.subscribe(value => quiz = value);
 membersStore.subscribe(value => members = Object.values(value));
+$: quiz = $quizStore; 
+$: members = $membersStore;
+////////////-store variables--///////
 
 let isLoading = false;
 let showSettings = true;
@@ -31,7 +31,8 @@ function toggleShowSettings(){
 }
 
 function unPublish(){
-      quiz.published = false;
+      // quiz.published = false;
+        quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
       // console.log("quiz.published",quiz.published);
 }
 onMount(async ()=>{
@@ -47,14 +48,9 @@ onMount(async ()=>{
                 const data = await resp.json();
                 const {incommingQuiz, incommingMembers } = data;
             // debugger;
-                  quizStore.update(() => ({ ... incommingQuiz }));
-                  membersStore.update(() => ({ ...incommingMembers }));
-                  console.log("members",members);
-                  questions = quiz.questions;
-                  // console.log("quiz",quiz);
-                  //     quiz = incommingQuiz;
-                  //     members = incommingMembers;
-                      // debugger;
+                  quizStore.set(incommingQuiz);
+                  membersStore.set(incommingMembers);
+                  //--these are user members and not quiz members
                 }else {
                       toast.push("failed to open");
                 }  
@@ -65,48 +61,23 @@ onMount(async ()=>{
 });
 ///////////////////////////////////////////////////
 async function  addQuestion (){
-//  const token = await localStorage.getItem("token");
-    const question   = getQuestion( uuidv4());
-    const op1 = getOption( uuidv4());
-    const op2 = getOption( uuidv4());
-    question.options.push(op1);
-    question.options.push(op2);
-  //----------------------------------
-  const resp = await ajaxPost(`${BASE_URL}/quiz/question/new`,{question , quizId : quiz._id});
-  
-  if (resp.ok){
-     const data = await resp.json();
-     questions = data.questions;
-     unPublish();
-      toast.push("New Question Added!");
-  }else {
-            const data = await resp.json();
-            toast.push(data.msg);
-      }
+  const question = getMCQ(uuidv4());
+  quizStore.update(currentQuiz => {
+    currentQuiz.questions.push(question);
+    return currentQuiz;
+  });
+  unPublish();
+  toast.push("New Question Added!");
 }
-/////////////////////////////////////
 
 /////////////////////////////////////
-async function  deleteQuestion (questionId){
-  const resp = await ajaxPost(`${BASE_URL}/quiz/question/delete`,{quizId : quiz._id , questionId});
-  // debugger;
-      if (resp.ok == true) {
-            const data = await resp.json();
-            questions = data.questions;
-            unPublish();
-            toast.push("Question deleted");
-            //maybe quiz.question = questions;
-      }else {
-            const data = await resp.json();
-            toast.push(data.msg);
-      }
-}
+
 /////////////////////////////////////////
 
 const save = async ()=>{
     isLoading = true; 
     //--Very important else the quiz.questions and the questions will be out of sync;
-    quiz.questions = questions;
+ //     quiz.questions = questions;
     // debugger;
     const resp = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz});
       if (resp.ok == true) {
@@ -115,26 +86,13 @@ const save = async ()=>{
             toast.push("Quiz Saved"); 
         }else {
           const data = await resp.json();
-          console.log(data);
+      //     console.log(data);
             isLoading = false;
             toast.push("failed to save");
       }// if ends
 
 }
 
-const addOption = (qId)=>{
-  const op = getOption( uuidv4()); //get option
-  questions[qId].options.push(op);
-  questions = questions;
-  unPublish();
-}
-
-//--instead of using index use id
-const deleteOption = (q_index,option_index)=>{
-  questions[q_index].options.splice(option_index, 1);
-  questions = questions;
-  unPublish();
-}
 
 </script>
 
@@ -142,7 +100,7 @@ const deleteOption = (q_index,option_index)=>{
 
  
 {#if quiz}
-<ToolBar {quiz} {save} {questions} {toggleShowSettings}
+<ToolBar  {save}  {toggleShowSettings}
 {showSettings} />
 {/if}
 
@@ -181,25 +139,7 @@ const deleteOption = (q_index,option_index)=>{
 
 
 <br>
-{#if questions}
-{#if questions.length > 0}
-<br>
-
-
-{#each questions as question, index }
-
-<Question 
-            {question}  
-            {index} 
-            {deleteQuestion}
-            {deleteOption}
-            {addOption}
-            ser={index}
-/>
-<br>
-{/each}
-{/if}
-{/if}
+<Questions/>
 
 
 <br>

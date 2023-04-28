@@ -40,16 +40,16 @@ setWaiting();
   quizResult.email = email;
   // debugger; 
  ///////////////
- const token = await localStorage.getItem("token");
-    const resp = await ajaxPost(`${BASE_URL}/result/save`,{ result:quizResult } , token); 
+//  const token = await localStorage.getItem("token");
+    const resp = await ajaxPost(`${BASE_URL}/result/save`,{ result:quizResult } ); 
     
     if (resp.ok){
-      // const data = await resp.json();
         toast.push("results saved");
         setPageState("outro");
     }else {
+      const data = await resp.json();
         hideSaveBtn = false;
-        toast.push(data.message);
+        toast.push(data.errormsg);
  }
 
 }

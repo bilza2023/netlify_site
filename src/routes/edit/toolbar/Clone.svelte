@@ -2,29 +2,25 @@
 import { toast } from '@zerodevx/svelte-toast';
 import { BASE_URL } from '$lib/js/config.js';
 import { fade } from 'svelte/transition';
+import ajaxPost from '$lib/js/ajaxPost';
 
 export let quiz;
-export let questions;
+export let toggleShowClone;
 
   let newPRojectName = "";
 
 const handler = async(quizType)=>{
-  const token = localStorage.getItem('token');
-  quiz.questions = questions; //-update
+  // const token = localStorage.getItem('token');
+  // quiz.questions = questions; //-update
   // debugger;
-  const resp = await fetch( `${BASE_URL}/quiz/clone` , {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify( {token , id : quiz._id ,title :newPRojectName} )
-  });
-
+  const resp = await ajaxPost(`${BASE_URL}/quiz/clone` , { id : quiz._id ,title :newPRojectName});
+  
   if (resp.ok) {
       newPRojectName = "";
       const data = await resp.json();
       // debugger;
       toast.push( "Cloned" );
+      toggleShowClone();
 
   }else {
       const data = await resp.json();

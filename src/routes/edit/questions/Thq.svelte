@@ -2,10 +2,10 @@
 export let title;
 export let id;
 export let ser;
-export let visible = false;
+export let visible = false; //why export?
 import QDel from "./QDel.svelte";
 const  toggleVisibility = ()=> visible = !visible;
-export let deleteQuestion;
+
 </script>
 
 <div class="flex  rounded-t-lg border border-gray-400 p-0">
@@ -18,7 +18,7 @@ export let deleteQuestion;
         {title} 
     </div>
      
-    <QDel deleteFn={deleteQuestion} {id}/>
+    <QDel {id}/>
     
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="rounded-t-lg border border-gray-400 p-2 
