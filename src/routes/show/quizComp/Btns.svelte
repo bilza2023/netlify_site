@@ -40,7 +40,7 @@ setWaiting();
   quizResult.email = email;
   // debugger; 
  ///////////////
-//  const token = await localStorage.getItem("token");
+
     const resp = await ajaxPost(`${BASE_URL}/result/save`,{ result:quizResult } ); 
     
     if (resp.ok){

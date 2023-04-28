@@ -2,7 +2,9 @@
 import Card from "./Card.svelte";
 import { onMount } from 'svelte';
 import { toast } from '@zerodevx/svelte-toast';
-
+import Logo from "./Logo.svelte";
+import LoginMobile from "./LoginMobile.svelte";
+import IfLogin from "./IfLogin.svelte";
 let isLogin;
 //--only place to logout
 const logoutFn = ()=>{
@@ -29,51 +31,21 @@ onMount(async () => {
 
   <div class="flex  justify-between items-center bg-gray-700 px-2  ">
 
-  <!--left div first inner flex box-->
-    <div class="flex justify-between items-center">
-
-
-
-<div class="w-15">
-  <a href="/">
-    <button class="w-full flex flex-col items-center p-2 m-0  rounded hover:bg-gray-500 active:bg-gray-900">
-      <span class="text-md">&#x1F3E0;</span>
-      <span class="text-xs font-md text-white">Skillzaa.com</span>
-    </button>
-  </a>
-</div>
-
-
-
-
-</div><!--left div-->
-
-
-
+<Logo />
+  
   <!--right div left inner flex box-->
     <div class="flex justify-between items-center gap-2">
 
 {#if isLogin}
 
-<Card url={'/create'} icon=&#x1F4A1; title="Create" />
-
-<Card url={'/dashboard'} icon=&#x1F5A5; title="DashBoard" />
-
-<Card url={'/teams'} icon=&#x1F46C; title="Teams" />
-
-
-
-
-
-<div class="w-15">
-    <button class="w-full flex flex-col items-center p-2 m-0  rounded hover:bg-gray-500 active:bg-gray-900"
-    on:click={logoutFn}>
-      <span class="text-md">&#x1F6EB;</span>
-      <span class="text-xs font-md text-white">Logout</span>
-    </button>
+<div class="xs:hidden md:block">
+  <IfLogin {logoutFn} />
 </div>
 
-<Card url={'/docs'} icon=&#x1F4D6; title="Help" />
+<!-- LoginMobile component -->
+<div class="xs:block md:hidden">
+  <LoginMobile />
+</div>
 
 {:else}
 <Card url={'/register'} icon=&#x1F4C2; title="Register" />
