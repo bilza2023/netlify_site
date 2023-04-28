@@ -1,5 +1,3 @@
-import { error } from "@sveltejs/kit";
-
 
 export default async function ajaxPost(url, payload){
 try{

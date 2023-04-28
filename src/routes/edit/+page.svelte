@@ -26,8 +26,6 @@ let isLoading = false;
 let showSettings = true;
 
 
-let isDirty = true;
-
 function toggleShowSettings(){
       showSettings = !showSettings;
 }
@@ -39,15 +37,16 @@ function unPublish(){
 onMount(async ()=>{
 
   try {
-      const token =  localStorage.getItem("token");    
-      const  quizId = new URLSearchParams(location.search).get("quizId");
+      // const token =  localStorage.getItem("token");    
+      const quizId = new URLSearchParams(location.search).get("quizId");
              //----------------------------------
- const resp = await ajaxPost(`${BASE_URL}/quiz/find`,{token ,quizId},token);
+
+      const resp = await ajaxPost(`${BASE_URL}/quiz/find`,{quizId});
             // debugger;
                 if (resp.ok == true) {
                 const data = await resp.json();
                 const {incommingQuiz, incommingMembers } = data;
- // debugger;
+            // debugger;
                   quizStore.update(() => ({ ... incommingQuiz }));
                   membersStore.update(() => ({ ...incommingMembers }));
                   console.log("members",members);
@@ -66,14 +65,14 @@ onMount(async ()=>{
 });
 ///////////////////////////////////////////////////
 async function  addQuestion (){
- const token = await localStorage.getItem("token");
+//  const token = await localStorage.getItem("token");
     const question   = getQuestion( uuidv4());
     const op1 = getOption( uuidv4());
     const op2 = getOption( uuidv4());
     question.options.push(op1);
     question.options.push(op2);
   //----------------------------------
-  const resp = await ajaxPost(`${BASE_URL}/quiz/question/new`,{question , quizId : quiz._id, token});
+  const resp = await ajaxPost(`${BASE_URL}/quiz/question/new`,{question , quizId : quiz._id});
   
   if (resp.ok){
      const data = await resp.json();
@@ -89,8 +88,7 @@ async function  addQuestion (){
 
 /////////////////////////////////////
 async function  deleteQuestion (questionId){
- const token = await localStorage.getItem("token");
-  const resp = await ajaxPost(`${BASE_URL}/quiz/question/delete`,{quizId : quiz._id , questionId , token});
+  const resp = await ajaxPost(`${BASE_URL}/quiz/question/delete`,{quizId : quiz._id , questionId});
   // debugger;
       if (resp.ok == true) {
             const data = await resp.json();
@@ -106,32 +104,32 @@ async function  deleteQuestion (questionId){
 /////////////////////////////////////////
 
 const save = async ()=>{
- const token = localStorage.getItem("token");
     isLoading = true; 
     //--Very important else the quiz.questions and the questions will be out of sync;
     quiz.questions = questions;
     // debugger;
-    const resp = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz,token},token);
+    const resp = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz});
       if (resp.ok == true) {
             const data = await resp.json();
             isLoading = false; 
-            toast.push(data.msg); 
+            toast.push("Quiz Saved"); 
         }else {
           const data = await resp.json();
+          console.log(data);
             isLoading = false;
-            toast.push(data.msg);
+            toast.push("failed to save");
       }// if ends
 
 }
 
 const addOption = (qId)=>{
-  const op = getOption( uuidv4());
+  const op = getOption( uuidv4()); //get option
   questions[qId].options.push(op);
   questions = questions;
   unPublish();
 }
 
-
+//--instead of using index use id
 const deleteOption = (q_index,option_index)=>{
   questions[q_index].options.splice(option_index, 1);
   questions = questions;
