@@ -38,12 +38,12 @@ onMount(async () => {
 
 {#if isLogin}
 
-<div class="xs:hidden md:block">
+<div class="largeScreen">
   <IfLogin {logoutFn} />
 </div>
 
 <!-- LoginMobile component -->
-<div class="xs:block md:hidden">
+<div class="smallScreen">
   <LoginMobile />
 </div>
 
@@ -57,3 +57,24 @@ onMount(async () => {
 
 
 </div><!--outer most div-->
+
+
+<style>
+  .smallScreen {
+    display: none;
+  }
+
+  .largeScreen {
+    display: block;
+  }
+
+  @media (max-width: 360px) {
+    .smallScreen {
+      display: block;
+    }
+
+    .largeScreen {
+      display: none;
+    }
+  }
+</style>
