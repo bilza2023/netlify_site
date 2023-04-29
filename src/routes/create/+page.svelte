@@ -73,10 +73,10 @@ const handler = async(quizType)=>{
 
 <div class="flex flex-col sm:flex-row justify-center w-full">
   <button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-full sm:w-4/12 m-1" on:click={()=>handler("quiz")}>
-    <span class="text-2xl">📝 <span class="hidden sm:inline text-sm">New Quiz</span></span>
+    <span class="text-2xl">📝 <span class="hidden md:inline text-sm">New Quiz</span></span>
   </button>
   <button class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white font-bold py-2 px-4 rounded w-full sm:w-4/12 m-1" on:click={()=>handler("survey")}>
-    <span class="text-2xl">🗳️ <span class="hidden sm:inline text-sm">New Survey</span></span>
+    <span class="text-2xl">🗳️ <span class="hidden md:inline text-sm">New Survey</span></span>
   </button>
 </div>
 

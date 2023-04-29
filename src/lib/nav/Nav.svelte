@@ -44,7 +44,7 @@ onMount(async () => {
 
 <!-- LoginMobile component -->
 <div class="smallScreen">
-  <IfLoginMobile />
+  <IfLoginMobile  {logoutFn}/>
 </div>
 
 {:else}

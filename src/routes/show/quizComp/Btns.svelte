@@ -57,42 +57,46 @@ setWaiting();
 
 
 
-<div class="flex justify-between w-full gap-16 mt-2 mb-2 pl-8 pr-8">
- 
-  <button class="flex-grow bg-blue-600 rounded-2xl p-1" on:click={prev}>
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-      <path fill="#fff" d="M21.333 25.333v-18.666l-12 9.333z" />
-    </svg>
+<div class="flex   justify-between w-full   gap-2  mt-2 mb-2 items-center">
+  <div class="elm">
+  <button class="" on:click={prev}>
+  <span class="text-2xl p-2">&#8592;</span>
   </button>
+  </div>
 
-<!--submit btn-->
-{#if (cq == questions.length-1)} 
-{#if (hideSaveBtn == false)}
- <button 
-    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded flex items-center focus:outline-none focus:shadow-outline"
-    on:click={ saveResults  }   > 
-    <svg class="w-6 h-6 fill-current mr-2" viewBox="0 0 24 24">
-      <path d="M16.59 6l-5.3-5.3C11.16.21 10.91 0 10.59 0H3C1.9 0 1.01.9 1.01 2L1 22c0 1.1.89 2 1.99 2H19c1.1 0 2-.9 2-2V8c0-.31-.21-.56-.5-.66L16.59 6zM5 18V9h2v9H5zm3 0V9h2v9H8zm3 0V9h2v9h-2zm3 0V9h2v9h-2z"/>
-    </svg>
-    {#if saveResponse == true}
-    <span>Submit & Save</span>
-    {:else}
-    <span>Submit</span>
+  <div class="elm">
+    <!--submit btn-->
+    {#if (cq == questions.length-1)} 
+      {#if (hideSaveBtn == false)}
+        <button 
+          class=""
+          on:click={ saveResults  }   > 
+          {#if saveResponse == true}
+          <span class="text-2xl">💾 Submit & Save</span>
+          {:else}
+            <span class="text-2xl">📋Submit</span>
+          {/if}
+        </button>
+      {/if}
     {/if}
- </button>
-{/if}
-{/if}
+  </div>
 
-
-
-
-  <button class="flex-grow bg-blue-600 flex flex-row-reverse rounded-2xl p-1" on:click={next}>
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-      <path fill="#fff" d="M10.667 6.667v18.666l12-9.333z" />
-    </svg>
+  <div class="elm">
+  <button class="" on:click={next}>
+   <span class="text-2xl p-2">&#8594;</span>
   </button>
+  </div>
+</div>
 
 
+<style>
+.elm {
+  background-color:blue;
+  color:white;
+  padding:1px;
+  pargin:1px;
+  border-radius: 10px;
 
+  }
 
-</div><!-- flex ends !-->
+</style>

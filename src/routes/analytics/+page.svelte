@@ -73,7 +73,7 @@ async function deleteARez(resultId){
 
 <Nav/>
 
-<div class="bg-gray-800 text-white w-full min-h-screen p-6 ">
+<div class="wrapper bg-gray-800 text-white w-full min-h-screen p-6 ">
 
 
 {#if pageState == "loading" }
@@ -115,4 +115,17 @@ async function deleteARez(resultId){
 </div>
 
 
+
+<style>
+@media screen and (max-width: 640px) {
+  .wrapper::before {
+    content: "Please use a larger screen to view this web page";
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    padding: 20px;
+  }
+}
+
+</style>
 

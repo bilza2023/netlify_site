@@ -106,7 +106,7 @@ const save = async ()=>{
 
 
 
-<div class="bg-gray-800 text-white m-0 px-8  min-h-screen w-full">
+<div class="wrapper bg-gray-800 text-white m-0 px-8  min-h-screen w-full">
 
 
 
@@ -165,3 +165,17 @@ const save = async ()=>{
 
 
 <Footer />
+
+
+<style>
+@media screen and (max-width: 640px) {
+  .wrapper::before {
+    content: "Please use a larger screen to view this web page";
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    padding: 20px;
+  }
+}
+
+</style>

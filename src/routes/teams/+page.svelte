@@ -105,7 +105,8 @@ if (browser){
 
 <Nav/>
 <br>
-<h1 class="w-full text-white  text-2xl underline text-center">Add New Member</h1>
+
+<h1 class="wrapper w-full text-white  text-2xl underline text-center">Add New Member</h1>
 <br>
 <NewMember {saveAll} />
 <br>
@@ -141,3 +142,17 @@ if (browser){
 </div>
 
 <Footer />
+
+
+<style>
+@media screen and (max-width: 640px) {
+  .wrapper::before {
+    content: "Please use a larger screen to view this web page";
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    padding: 20px;
+  }
+}
+
+</style>

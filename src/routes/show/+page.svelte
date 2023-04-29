@@ -55,7 +55,7 @@ onMount(async () => {
 </script>
 
 
-<div class="w-full p-2 bg-gray-800 min-h-screen ">
+<div class="wrapper w-full p-2 bg-gray-800 min-h-screen ">
 
 {#if pageState == "notfound"}
 
@@ -92,3 +92,17 @@ onMount(async () => {
 
 
 </div>
+
+
+<style>
+@media screen and (max-width: 358px) {
+  .wrapper::before {
+    content: "Please use a larger screen to view this web page";
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    padding: 20px;
+  }
+}
+
+</style>
