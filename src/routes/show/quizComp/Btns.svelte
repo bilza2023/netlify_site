@@ -41,7 +41,7 @@ setWaiting();
   // debugger; 
  ///////////////
 
-    const resp = await ajaxPost(`${BASE_URL}/result/save`,{ result:quizResult } ); 
+  const resp = await ajaxPost(`${BASE_URL}/result/save`,{ result:quizResult, quiz } ); 
     
     if (resp.ok){
         toast.push("results saved");
@@ -50,6 +50,7 @@ setWaiting();
       const data = await resp.json();
         hideSaveBtn = false;
         toast.push(data.errormsg);
+      setPageState("outro");
  }
 
 }
