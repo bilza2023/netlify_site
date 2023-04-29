@@ -6,7 +6,7 @@ import ThreeBtns from "./ThreeBtns.svelte";
 
 </script>
 
-<div class="w-3/12 bg-gray-600 rounded-md p-2 m-1 
+<div class="w-full bg-gray-600 rounded-md p-2 m-1 
 border-4 
 {quiz.quizType == 'quiz' ? 'border-blue-700' : 'border-green-400'}
 

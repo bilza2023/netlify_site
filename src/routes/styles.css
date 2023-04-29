@@ -5,3 +5,12 @@
 @tailwind utilities;
 
 
+@media screen and (max-width: 660px) {
+  body::before {
+    content: "Please use a larger screen to view this website";
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    padding: 20px;
+  }
+}

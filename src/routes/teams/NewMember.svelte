@@ -23,7 +23,7 @@ const create = async (event) =>{
     if (passwordError.status !== "ok"){
           toast.push('Not a valid password');  
       return;
-    }
+    } 
   //  members.update(arr => [...arr, { email, password }]);
   //--add clean
   storeMembers.update(arr => [{ email, password , clean:true }, ...arr]);

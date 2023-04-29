@@ -1,9 +1,9 @@
 <script>
-import AreYouSure from "$lib/cmp/AreYouSure.svelte";
+// import AreYouSure from "$lib/cmp/AreYouSure.svelte";
 
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
-import H1 from '$lib/cmp/H1.svelte';
+// import H1 from '$lib/cmp/H1.svelte';
 import Table from "./Table.svelte";
 import ToolBar from "./toolbar/ToolBar.svelte";
 import Cards from "./Cards.svelte";
@@ -59,7 +59,7 @@ const populate = async () =>{
 <div class="bg-gray-800"><!--page div-->
 <Nav />
 
-<ToolBar  {toggleShowTable} {showTable}/>
+<!-- <ToolBar  {toggleShowTable} {showTable}/> -->
 
 <!--page div-->
 
@@ -79,13 +79,13 @@ bg-blue-700 my-4"
 >Projects</h1>
 </div>
 
-<div class="bg-gray-800">
+<div class="bg-gray-800 w-full">
 
-          {#if showTable == true}
+          <!-- {#if showTable == true}
               <Table  {quizzes}/>
-          {:else }
+          {:else } -->
               <Cards {quizzes} />
-          {/if}
+          <!-- {/if} -->
 </div>          
 {/if}
 

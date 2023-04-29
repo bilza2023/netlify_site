@@ -84,3 +84,14 @@ const  copyButton = async (id)=> {
 
 </div><!--page div ends-->
 </div><!--page div ends-->
+
+<style>
+@media screen and (max-width: 360px) {
+  table {
+    font-size: 0.8rem;
+  }
+  td, th {
+    padding: 0.3rem;
+  }
+}
+</style>

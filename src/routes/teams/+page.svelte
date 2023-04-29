@@ -107,7 +107,7 @@ if (browser){
 <br>
 <h1 class="w-full text-white  text-2xl underline text-center">Add New Member</h1>
 <br>
-<NewMember {saveAll} />
+<!-- <NewMember {saveAll} /> -->
 <br>
 
 <h1 class="w-full text-white  text-2xl underline text-center">All Members</h1>

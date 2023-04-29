@@ -22,7 +22,7 @@ const addMember = async (member)=>{
 
 </script>
 
-
+<div class="table-container">
 <table class="w-8/12 text-white border-separate rounded mx-auto">
   {#each members as member, index}
   <tr>
@@ -46,7 +46,7 @@ const addMember = async (member)=>{
     "
     type="email"   bind:value = {member.password}
     >
-    </td>
+    </td> 
 
 <td class="p-1 border 
 { member.clean == false ? "bg-red-900 hover:bg-red-700" : "bg-gray-700 hover:bg-gray-800"}
@@ -68,9 +68,15 @@ const addMember = async (member)=>{
     
   {/each}
 </table>
+</div>
 
-<!-- <button on:click|preventDefault={reset} class="bg-red-900 text-white">
-Change</button>
-
-<button on:click|preventDefault={()=>addMember("Jill")} class="bg-red-900 text-white">
-addMember</button> -->
+<style>
+  @media (max-width: 650px) {
+    .table-container {
+      overflow-x: auto;
+    }
+    table {
+      min-width: 360px;
+    }
+  }
+</style>
