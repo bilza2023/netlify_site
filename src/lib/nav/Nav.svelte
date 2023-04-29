@@ -3,7 +3,7 @@ import Card from "./Card.svelte";
 import { onMount } from 'svelte';
 import { toast } from '@zerodevx/svelte-toast';
 import Logo from "./Logo.svelte";
-import LoginMobile from "./LoginMobile.svelte";
+import IfLoginMobile from "./IfLoginMobile/IfLoginMobile.svelte";
 import IfLogin from "./IfLogin.svelte";
 let isLogin;
 //--only place to logout
@@ -44,7 +44,7 @@ onMount(async () => {
 
 <!-- LoginMobile component -->
 <div class="smallScreen">
-  <LoginMobile />
+  <IfLoginMobile />
 </div>
 
 {:else}
@@ -68,7 +68,7 @@ onMount(async () => {
     display: block;
   }
 
-  @media (max-width: 360px) {
+  @media (max-width: 480px) {
     .smallScreen {
       display: block;
     }
