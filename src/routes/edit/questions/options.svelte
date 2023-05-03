@@ -1,6 +1,6 @@
 <script>
 import Option from "./Option.svelte";
-import { getOption } from "./getMCQ";
+import { getOption } from "../addQuestions/mcq";
 import unPublish from "../unPublish";
 import { quizStore  } from '../store';
 quizStore.subscribe(value => quiz = value);

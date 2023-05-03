@@ -1,7 +1,7 @@
 <script>
-import { v4 as uuidv4 } from 'uuid';
+
 import Questions from './questions/Questions.svelte';
-import { getMCQ , getOption} from "./questions/getMCQ.js";
+
 import QuizBlock from "./settings/QuizBlock.svelte";
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
@@ -9,6 +9,7 @@ import Footer from '$lib/cmp/Footer.svelte';
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
 import ToolBar from './toolbar/ToolBar.svelte';
+import AddQuestionBar from './addQuestions/AddQuestionBar.svelte';
 import { onMount } from 'svelte';
 import ajaxPost from "$lib/js/ajaxPost.js";
 import Loading from '$lib/cmp/Loading.svelte';
@@ -60,15 +61,6 @@ onMount(async ()=>{
     }
 });
 ///////////////////////////////////////////////////
-async function  addQuestion (){
-  const question = getMCQ(uuidv4());
-  quizStore.update(currentQuiz => {
-    currentQuiz.questions.push(question);
-    return currentQuiz;
-  });
-  unPublish();
-  toast.push("New Question Added!");
-}
 
 /////////////////////////////////////
 
@@ -145,20 +137,22 @@ const save = async ()=>{
 <br>
 {#if quiz}
 
-<button class="flex items-center bg-green-700 rounded-sm m-2 p-2 border-green-300 border-2 hover:bg-green-600 active:bg-green-800"
-   on:click={addQuestion} 
->
-  <span class="text-white mr-2">Add New Question</span>
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-    <path d="M12 2v20m10-10H2" stroke="white" stroke-width="3" fill="none"/>
-  </svg>
-</button>
-<br>
+
+<AddQuestionBar />
+
 
 {/if}
 
 
 
+<br>
+<br> 
+<br>
+<br> 
+<br>
+<br> 
+<br>
+<br> 
 <br>
 <br> 
 </div><!--app-->
