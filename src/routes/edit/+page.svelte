@@ -1,6 +1,6 @@
 <script>
 
-import Questions from './questions/Questions.svelte';
+import Questions from './showQuestions/Questions.svelte';
 
 import QuizBlock from "./settings/QuizBlock.svelte";
 import Nav from '$lib/nav/Nav.svelte';
@@ -36,6 +36,7 @@ function unPublish(){
         quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
       // console.log("quiz.published",quiz.published);
 }
+
 onMount(async ()=>{
 
   try {
@@ -68,16 +69,14 @@ onMount(async ()=>{
 
 const save = async ()=>{
     isLoading = true; 
-    //--Very important else the quiz.questions and the questions will be out of sync;
- //     quiz.questions = questions;
-    // debugger;
+ //  debugger;
     const resp = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz});
       if (resp.ok == true) {
             const data = await resp.json();
             isLoading = false; 
             toast.push("Quiz Saved"); 
         }else {
-          const data = await resp.json();
+            const data = await resp.json();
       //     console.log(data);
             isLoading = false;
             toast.push("failed to save");
@@ -112,23 +111,12 @@ const save = async ()=>{
 <br>
 
 
-{#if isLoading == true}
-<div class= "animate-spin w-8 h-8 border-white rounded-full border-b-8 mx-auto ">
-</div>
-{/if}
-
 <br>
 
       {#if showSettings}
       <QuizBlock  />
       {/if}
 {/if}
-
-
-
-
-
-
 
 <br>
 <Questions/>

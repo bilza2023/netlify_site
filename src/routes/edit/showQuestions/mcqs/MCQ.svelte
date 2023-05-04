@@ -5,7 +5,7 @@
 // $: questions = $quizStore.questions;
 
 import Thq from "./Thq.svelte";
-import FormRow from "../FormRow.svelte";
+import FormRow from "../../FormRow.svelte";
 import Options from "./options.svelte";
 import { fade } from 'svelte/transition';
 

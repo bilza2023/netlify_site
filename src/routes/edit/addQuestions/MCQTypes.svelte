@@ -1,7 +1,7 @@
 <script>
 import Btn from "./BtnNav.svelte";
 export let btnBg="bg-gray-700";
-import { getMcqWOption} from "./mcqTypes";
+import { getMcqWOption} from "./mcq.js";
 </script>
 
 

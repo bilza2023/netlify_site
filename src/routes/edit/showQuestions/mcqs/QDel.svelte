@@ -1,5 +1,5 @@
 <script>
-import { quizStore  } from '../store';
+import { quizStore  } from '../../store';
 quizStore.subscribe(value => quiz = value);
 $: quiz = $quizStore; 
 

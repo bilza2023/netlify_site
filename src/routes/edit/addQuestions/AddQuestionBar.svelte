@@ -1,8 +1,8 @@
 <script>
 import Btn from "./BtnNav.svelte";
 import { v4 as uuidv4 } from 'uuid';
-import { genericMCQ} from "./mcqTypes";
-import { toast } from '@zerodevx/svelte-toast';
+import { genericMCQ } from "./mcq.js";
+// import { toast } from '@zerodevx/svelte-toast';
 ////////////-store variables--///////
 import { quizStore  } from '../store';
     import McqTypes from "./MCQTypes.svelte";

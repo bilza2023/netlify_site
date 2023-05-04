@@ -1,8 +1,8 @@
 <script>
 import Option from "./Option.svelte";
-import { getOption } from "../addQuestions/mcq";
-import unPublish from "../unPublish";
-import { quizStore  } from '../store';
+import { getOption } from "../../addQuestions/mcq.js";
+import unPublish from "../../unPublish"; 
+import { quizStore  } from '../../store';
 quizStore.subscribe(value => quiz = value);
 $: quiz = $quizStore; 
 // $: questions = $quizStore.questions;
