@@ -2,7 +2,7 @@
 import CardSlim from "./CardSlim.svelte";
 import CardInner from "./CardInner.svelte";
 import CardItem from "./CardItem.svelte";
-import {genericMCQ,getInput} from "./mcq.js";
+import {genericMCQ,getInput , getMcqWOption} from "./mcq.js";
 
 let pageState = "mcqs";
 
@@ -47,29 +47,29 @@ on:click={genericMCQ}
 
 {#if pageState=="mcq_types"}
 <CardInner>
-<CardItem>Yes/No</CardItem>
-<CardItem>Like/Dislike</CardItem>
-<CardItem>Allowed/Not Allowed</CardItem>
-<CardItem>True/False</CardItem>
+<CardItem handler={()=>getMcqWOption(["Yes", "No"])}>Yes/No</CardItem>
+<CardItem handler={()=>getMcqWOption(["Like"  , "Dislike" ])}>Like/Dislike</CardItem>
+<CardItem handler={()=>getMcqWOption(["Allowed" ,"Not Allowed" ])}>Allowed/Not Allowed</CardItem>
+<CardItem handler={()=>getMcqWOption(["True " ,"False" ])}>True/False</CardItem>
+<CardItem handler={()=>getMcqWOption(["Correct " ,"Incorrect" ])}>Correct/Incorrect</CardItem>
+<CardItem handler={()=>getMcqWOption(["Right " ,"Wrong" ])}>Right/Wrong</CardItem>
+<CardItem handler={()=>getMcqWOption(["Good " ,"Bad" ])}>Good/Bad</CardItem>
+<CardItem handler={()=>getMcqWOption(["Pass " ,"Fail" ])}>Pass/Fail</CardItem>
+<CardItem handler={()=>getMcqWOption(["Accept " ,"Reject" ])}>Accept/Reject</CardItem>
+<CardItem handler={()=>getMcqWOption(["Agree " ,"Disagree" ])}>Agree/Disagree</CardItem>
+<CardItem handler={()=>getMcqWOption(["More " ,"Less" ])}>More/Less</CardItem>
 
-<CardItem>Correct/Incorrect</CardItem>
-<CardItem>Right/Wrong</CardItem>
-<CardItem>Good/Bad</CardItem>
-<CardItem>Pass/Fail</CardItem>
-<CardItem>Accept/Reject</CardItem>
-<CardItem>Agree/Disagree</CardItem>
-<CardItem>More/Less</CardItem>
-<CardItem>High/Low</CardItem>
-<CardItem>Strongly Agree/Agree</CardItem>
-<CardItem>Excellent/Good</CardItem>
-<CardItem>Always/Often</CardItem>
-<CardItem>Very Likely/Likely</CardItem>
-<CardItem>Very Satisfied</CardItem>
-<CardItem>Very Important</CardItem>
-<CardItem>Very Easy/Easy</CardItem>
-<CardItem>Very High/High</CardItem>
-<CardItem>Very Fast/Fast</CardItem>
-<CardItem>A lot/A little</CardItem>
+<CardItem handler={()=>getMcqWOption(["High","Low" ])}>High/Low</CardItem>
+<CardItem handler={()=>getMcqWOption([ "Strongly Agree" , "Agree" , "Neutral" ,"Disagree" , "Strongly Disagree"])}>Strongly Agree/Agree</CardItem>
+<CardItem handler={()=>getMcqWOption(["Excellent" ,"Good", "Average" , "Poor" ])}>Excellent/Good</CardItem>
+<CardItem handler={()=>getMcqWOption(["Always" ,"Often" ,"Sometimes" ,"Rarely" , "Never" ])}>Always/Often</CardItem>
+<CardItem handler={()=>getMcqWOption(["Very Likely", "Likely" , "Unsure" , "Unlikely" , "Very Unlikely" ])}>Very Likely/Likely</CardItem>
+<CardItem handler={()=>getMcqWOption(["Very Satisfied" , "Satisfied " , "Neutral " ,"Dissatisfied" , "Very Dissatisfied" ])}>Very Satisfied</CardItem>
+<CardItem handler={()=>getMcqWOption(["Very Important ", "Important ", "Somewhat Important " , "Not Important" ])}>Very Important</CardItem>
+<CardItem handler={()=>getMcqWOption(["Very Easy","Easy" ,"Moderate","Difficult","Very Difficult" ])}>Very Easy/Easy</CardItem>
+<CardItem handler={()=>getMcqWOption(["Very High" ,"High","Medium","Low","Very Low" ])}>Very High/High</CardItem>
+<CardItem handler={()=>getMcqWOption(["Very Fast" , "Fast" , "Medium" , "Slow" , "Very Slow" ])}>Very Fast/Fast</CardItem>
+<CardItem handler={()=>getMcqWOption(["A lot","A little" ,"Not at all" ])}>A lot/A little</CardItem>
 
   </CardInner>
   
