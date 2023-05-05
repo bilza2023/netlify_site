@@ -1,4 +1,4 @@
-import { quizStore  } from '../store';
+import { quizStore  } from '../store.js';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from '@zerodevx/svelte-toast';
 

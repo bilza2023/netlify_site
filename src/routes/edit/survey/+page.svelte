@@ -61,14 +61,13 @@ onMount(async ()=>{
 <br>
 <ToolBar  {setPageState}/>
 </div>
-
 <!-------------------------------------------------->
 <!-------------------------------------------------->
 <!-------------------------------------------------->
 <div class="flex justify-center w-full">
 
 {#if pageState == "questions"}
-        <EditQuestions />
+        <EditQuestions  {quiz}/>
 {/if}
 
 {#if pageState == "theme"}

@@ -17,7 +17,7 @@ const  copyButton = async ()=> {
 
  <a 
  class="hover:bg-gray-300  rounded-lg "
- href={`/${quiz.quizType == "quiz" ? "edit" : "survey"}?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
+ href={`/${quiz.quizType == "quiz" ? "edit/test" : "edit/survey"}?quizId=${quiz._id}`} style="display: block; height: 100%; width: 100%;">
     <span class="text-sm">⚙️</span>
 </a>
 
