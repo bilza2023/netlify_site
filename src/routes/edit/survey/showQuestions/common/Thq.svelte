@@ -1,5 +1,6 @@
 <script>
 export let title;
+export let icon="";
 export let id;
 export let ser;
 export let visible = false; //why export?
@@ -11,7 +12,18 @@ const  toggleVisibility = ()=> visible = !visible;
 <div class="flex  rounded-t-lg border border-gray-400 p-0">
 
  <div class="flex items-center justify-center    w-3/12  p-0 bg-gray-900 text-xl rounded-t-lg border border-gray-400 ">
-        Question # {`${ser + 1}`}
+
+        <div class="flex just items-center">
+            <div>
+                {icon}
+            </div>
+            
+            <div>
+            #{` ${ser + 1}`}
+            </div>
+        </div>
+
+         
 </div>
 
      <div class="  text-center w-full p-2">

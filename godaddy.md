@@ -1,1 +1,0 @@
-Dear I have my website is hosted on netlify at https://skillzaa.netlify.app/ . I own skillzaa.com registered with godaddy. I am facing problems in redirecting skillzaa.com to https://skillzaa.netlify.app/ 

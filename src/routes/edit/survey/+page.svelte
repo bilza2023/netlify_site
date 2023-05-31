@@ -23,13 +23,12 @@ const setPageState = (val)=>{
 }
 
 
-
 onMount(async ()=>{
   try {
       const quizId = new URLSearchParams(location.search).get("quizId");
             // debugger;
              //----------------------------------
-      const resp = await ajaxPost(`${BASE_URL}/quiz/find`,{quizId});
+      const resp = await ajaxPost(`${BASE_URL}/survey/find`,{quizId});
                 if (resp.ok == true) {
                 const data = await resp.json();
                 const {incommingQuiz, incommingMembers } = data;
@@ -50,6 +49,23 @@ onMount(async ()=>{
     }
 });
 
+const save = async ()=>{
+  try {
+      const resp = await ajaxPost(`${BASE_URL}/survey/update`,{survey :quiz});
+                if (resp.ok == true) {
+                const data = await resp.json();
+                const {survey } = data;
+                // debugger;
+                  const r = quizStore.set(survey);
+                      toast.push("saved");
+                }else {
+                      toast.push("failed to save");
+                }  
+    } catch (error) {
+        toast.push("failed to save");
+    }
+}
+
 </script>
 
 
@@ -59,7 +75,7 @@ onMount(async ()=>{
 
 <div class="px-14">
 <br>
-<ToolBar  {setPageState}/>
+<ToolBar  {setPageState} {save}/>
 </div>
 <!-------------------------------------------------->
 <!-------------------------------------------------->

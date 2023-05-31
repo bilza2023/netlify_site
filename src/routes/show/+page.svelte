@@ -7,7 +7,7 @@ import Loading from '$lib/cmp/Loading.svelte';
 import { onMount } from 'svelte';
 import { quizStore , membersStore } from './store';
 // import ajaxPost from '$lib/js/ajaxPost.js';
-    // import { toast } from "@zerodevx/svelte-toast";
+// import { toast } from "@zerodevx/svelte-toast";
 
 let quiz;
 quizStore.subscribe(value => quiz = value);
@@ -26,9 +26,11 @@ onMount(async () => {
   const url = `${BASE_URL}/show/${quizId}`;
   const resp = await fetch(url);
   // console.log(data);
-  // debugger;
+  // debugger; 
     if (resp.ok) {
     const data = await resp.json();
+    //--remove me
+    console.log("data",data);
       // quiz = data.quiz; 
 
     quizStore.update(() => ({ ...data.quiz }));
@@ -46,10 +48,10 @@ onMount(async () => {
      
     // }else {
     // }
-} catch (error) {
+  } catch (error) {
     // console.error(error);
     pageState = "notfound";
-}
+  }
 }); 
 
 </script>

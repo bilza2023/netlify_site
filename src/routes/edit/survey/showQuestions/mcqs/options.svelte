@@ -1,11 +1,14 @@
 <script>
 import Option from "./Option.svelte";
-import { getOption } from "../../htoolbar/mcq.js";
-import unPublish from "../../unPublish"; 
+import { v4 as uuid } from 'uuid';
+// import { getOption } from "../../htoolbar/mcq.js";
+// import unPublish from "../../unPublish"; 
+// import markCorrect from "./markCorrect.js";
+
 import { quizStore  } from '../../store.js';
 quizStore.subscribe(value => quiz = value);
 $: quiz = $quizStore; 
-// $: questions = $quizStore.questions;
+$: questions = $quizStore.questions;
 
 
 export let question;
@@ -17,7 +20,7 @@ function deleteOption(questionId, optionId) {
       let optionIndex = question.options.findIndex(o => o.id === optionId);
       if (optionIndex !== -1) {
         question.options.splice(optionIndex, 1);
-        unPublish();
+        // unPublish();
       }
     }
     return currentQuiz;
@@ -28,17 +31,14 @@ const addOption = qid => {
   quizStore.update(currentQuiz => {
     const index = currentQuiz.questions.findIndex(question => question.id === qid);
     if (index !== -1) {
-      const op = getOption();
+      const op = {id : uuid() , content : ""};
       currentQuiz.questions[index].options.push(op);
-      unPublish();
+      // unPublish();
     }
     return currentQuiz;
   });
 };
 
-const mark_correct = (option_id)=>{
-question.correctOption = option_id;
-}
 
 </script>
 
@@ -47,16 +47,16 @@ question.correctOption = option_id;
 <div class="flex bg-green-600 m-2 p-2 w-2/12 rounded-sm focus:outline-none active:bg-green-400 hover:bg-green-500 hover:cursor-pointer"
 on:click={()=>addOption(question.id)}
 >
-<span class="">Add Option</span> &nbsp;&nbsp;&nbsp;&nbsp;
-<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-    <path d="M12 2v20m10-10H2" stroke="white" stroke-width="3" fill="none"/>
-  </svg>
+<span class="text-md">Add Option + </span>
+
 </div>
 
 <br/>
 
     <div class="text-center">
+    {#if question.options}
     {#each question.options as option}
-   <Option {option} {question} {deleteOption} {mark_correct}/>
+   <Option {option} {question} {deleteOption} />
     {/each}
+    {/if}
     </div>

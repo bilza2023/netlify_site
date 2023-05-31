@@ -2,8 +2,15 @@
 import CardSlim from "./CardSlim.svelte";
 import CardInner from "./CardInner.svelte";
 import CardItem from "./CardItem.svelte";
-import {genericMCQ,getInput , getMcqWOption} from "./mcq.js";
 
+import getMCQ from "./get/getSurveyMCQ";
+import getInput from "./get/getSurveyInput";
+import getEmail from "./get/getSurveyEmail";
+import getNumber from "./get/getSurveyNumber";
+import getParagraph from "./get/getSurveyParagraph";
+import getPassword from "./get/getSurveyPassword";
+import getUrl from "./get/getSurveyUrl";
+import getMcqWOption from "./get/getMcqWOption";
 let pageState = "mcqs";
 
 const setPageState = (newState)=>{
@@ -34,11 +41,11 @@ pageState = newState;
 <CardInner>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="text-xs hover:bg-stone-800 hover:cursor-pointer  m-1"
-on:click={genericMCQ}
+on:click={getMCQ}
 >MCQ</div>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="text-xs hover:bg-stone-800 hover:cursor-pointer  m-1"
-    on:click={genericMCQ}>
+    on:click={getMCQ}>
   MCQ MS</div>
 </CardInner>
 {/if}
@@ -79,12 +86,12 @@ on:click={genericMCQ}
 
 {#if pageState=="inputs"}
  <CardInner> 
-        <CardItem handler={()=>getInput("inputText")}>Text</CardItem>
-        <CardItem handler={()=>getInput("inputParagraph")}>Paragraph</CardItem>
-        <CardItem handler={()=>getInput("inputNumber")}>Number</CardItem>
-        <CardItem handler={()=>getInput("inputEmail")}>Email</CardItem>
-        <CardItem handler={()=>getInput("inputPassword")}>Password</CardItem>
-        <CardItem handler={()=>getInput("inputUrl")}>Url</CardItem>
+        <CardItem handler={()=>getInput()}>Text</CardItem>
+        <CardItem handler={()=>getParagraph()}>Paragraph</CardItem>
+        <CardItem handler={()=>getNumber()}>Number</CardItem>
+        <CardItem handler={()=>getEmail()}>Email</CardItem>
+        <CardItem handler={()=>getPassword()}>Password</CardItem>
+        <CardItem handler={()=>getUrl()}>Url</CardItem>
 </CardInner>
 {/if}
 

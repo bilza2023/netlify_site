@@ -1,9 +1,11 @@
 <script>
 // import {pageState} from "./showQuizStore";
 import Btns from "./Btns.svelte";
-import ShowQuestions from "../showQuestions/ShowQuestions.svelte";
+import ShowQuestions from "./showQuestions/ShowQuestions.svelte";
 import ProgressBar from "$lib/cmp/ProgressBar.svelte";
-  import Loading from '$lib/cmp/Loading.svelte';
+import Loading from '$lib/cmp/Loading.svelte';
+// import ShowMcq from "./showQuestions/ShowMcq.svelte";
+
 export let setPageState;
 export let quiz = {};
 
@@ -11,7 +13,9 @@ let showWaiting = false;
 const  setWaiting = ()=>showWaiting =true;
 
 $: questions = quiz.questions;
+
 let cq = 0;
+
 const next = ()=>{
   if (cq < questions.length-1){ // This is correct
     cq += 1;
@@ -38,6 +42,7 @@ const prev = ()=>{
 
   
 {#if showWaiting == false}  
+
 <div class="flex flex-col justify-center bg-gray-700 p-1 
  text-white rounded-md w-10/12 mx-auto border-2 border-gray-100">
 
@@ -49,9 +54,10 @@ const prev = ()=>{
   </h1>
 <br>
 
-            
-           <ShowQuestions  {questions} {cq}  />
+         
 
+           <ShowQuestions  {questions} {cq}  />
+  <!-- <ShowMcq {questions} {cq}/> -->
 
 <Btns   {questions} {cq} {setPageState} {quiz}  saveResponse={quiz.saveResponse} {next} {prev} {setWaiting} />
 </div><!--flex box ends--->

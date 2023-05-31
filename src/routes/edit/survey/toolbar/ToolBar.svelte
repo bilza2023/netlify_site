@@ -1,6 +1,9 @@
 <script>
 import Card from "./Card.svelte";
+// import save from "../../save.js";
 export let setPageState;
+export let save;
+
 </script>
  
 
@@ -22,7 +25,7 @@ export let setPageState;
 
 
 <div class=" flex gap-1">
-<Card title = "Save" handler = {()=>console.log("ok")} icon=💾/>
+<Card title = "Save" handler = {save} icon=💾/>
 <Card title = "Publish" handler = {()=>console.log("ok")} icon=📤/>
 <Card title = "Clone" handler = {()=>console.log("ok")} icon="&#x1F411;"/>
 <Card title = "Delete" handler = {()=>console.log("ok")} icon= 🗑️ />

@@ -29,49 +29,49 @@ import InputParagraph from "./inputQuestions/InputParagraph.svelte";
     {#each questions as question, index }
                     <!--MCQ-->
             
-            {#if question.type == "mcq"}
+            {#if question.backendType == "SurveyMCQ"}
                 <MCQ 
                     {question}  
                     ser={index}
                 />
             {/if}
                     <!--Inputs-->
-            {#if question.type == "inputText"}
+            {#if question.backendType == "SurveyInput"}
                 <InputText 
                  {question}  
                     ser={index}
                 />
             {/if}        
             
-            {#if question.type == "inputParagraph"}
+            {#if question.backendType == "SurveyParagraph"}
                 <InputParagraph 
                  {question}  
                     ser={index}
                 />
             {/if}        
             
-            {#if question.type == "inputEmail"}
+            {#if question.backendType == "SurveyEmail"}
                 <InputEmail 
                  {question}  
                     ser={index}
                 />
             {/if}        
             
-            {#if question.type == "inputPassword"}
+            {#if question.backendType == "SurveyPassword"}
                 <InputPassword 
                  {question}  
                     ser={index}
                 />
             {/if}        
             
-            {#if question.type == "inputNumber"}
+            {#if question.backendType == "SurveyNumber"}
                 <InputNumber 
                  {question}  
                     ser={index}
                 />
             {/if}        
             
-            {#if question.type == "inputUrl"}
+            {#if question.backendType == "SurveyUrl"}
                 <InputUrl 
                  {question}  
                     ser={index}

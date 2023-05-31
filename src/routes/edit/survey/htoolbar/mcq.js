@@ -21,10 +21,10 @@ return returnOption;
 
 export function getMCQ(){
   const question = {
-    type : "mcq", 
+    type : "mcq",  
     content: "",
     id: uuidv4(),
-    correctOption : "",
+    // correctOption : "",
     explanation: "",
     options: [ ]
 }
