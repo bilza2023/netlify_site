@@ -20,8 +20,22 @@ const wrongAnswers = [];
 const skippedAnswers = [];
 
 for (let i = 0; i < questions.length; i++) {
+
     const ques = questions[i];
-    if (ques.selectedOption == null){
+//------------------------------------------------
+  if (ques.questionType == 'SurveyMCQ'){
+    checkMCQ(ques,skippedAnswers,correctAnswers,wrongAnswers);
+  }else {
+  
+  }
+}
+
+return {correctAnswers,wrongAnswers,skippedAnswers};    
+}
+
+////////////////
+function checkMCQ(ques,skippedAnswers,correctAnswers,wrongAnswers){
+   if (ques.selectedOption == null){
       skippedAnswers.push(ques._id);
     }else {
           if (ques.selectedOption === ques.correctOption){
@@ -30,8 +44,4 @@ for (let i = 0; i < questions.length; i++) {
             wrongAnswers.push(ques._id);
           }
     }
-    
-}
-
-return {correctAnswers,wrongAnswers,skippedAnswers};    
 }

@@ -21,12 +21,12 @@ emailStore.subscribe(value => email = value);
 let hideSaveBtn = false;
 
 async function saveResults  (){
-console.log("quiz at submit" ,quiz);
-return;
+
 setWaiting();
   // debugger;
   hideSaveBtn = true;  
   let quizResult = await check(quiz);
+  quizResult.userId = quiz.userId;
   // console.log("quizResult" , quizResult);
   // return;
     const r = await fetch('https://api.ipify.org?format=json');
@@ -44,11 +44,14 @@ setWaiting();
   quizResult.email = email;
   // debugger; 
  ///////////////
+// console.log("quizResult after check before save" ,quizResult);
+// return;
 
-  const resp = await ajaxPost(`${BASE_URL}/result/save`,{ result:quizResult, quiz } ); 
+  const resp = await ajaxPost(`${BASE_URL}/result/save`,{ quizResult, quiz } ); 
     
     if (resp.ok){
         toast.push("results saved");
+        console.log("resp",resp)
         setPageState("outro");
     }else {
       const data = await resp.json();
