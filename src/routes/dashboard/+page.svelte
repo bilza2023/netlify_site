@@ -39,11 +39,11 @@ const populate = async () =>{
  try {
 //  debugger;
 
-  const resp = await ajaxGet( `${BASE_URL}/quiz/page/10/0`);
+  const resp = await ajaxGet( `${BASE_URL}/survey/page/10/0`);
   if(resp.ok){
     const data = await resp.json();
     // console.log(data);
-    quizzes = data.quizzes; 
+    quizzes = data.surveys; 
  
   }else {
     toast.push("failed to load");
