@@ -57,8 +57,9 @@ const prev = ()=>{
          
 
            <ShowQuestions  {questions} {cq}  />
-  <!-- <ShowMcq {questions} {cq}/> -->
+  
 
+  
 <Btns   {questions} {cq} {setPageState} {quiz}  saveResponse={quiz.saveResponse} {next} {prev} {setWaiting} />
 </div><!--flex box ends--->
 

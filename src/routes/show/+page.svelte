@@ -30,7 +30,7 @@ onMount(async () => {
     if (resp.ok) {
     const data = await resp.json();
     //--remove me
-    console.log("data",data);
+    console.log("quiz at load",data);
       // quiz = data.quiz; 
 
     quizStore.update(() => ({ ...data.quiz }));

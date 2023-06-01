@@ -21,10 +21,14 @@ emailStore.subscribe(value => email = value);
 let hideSaveBtn = false;
 
 async function saveResults  (){
+console.log("quiz at submit" ,quiz);
+return;
 setWaiting();
   // debugger;
   hideSaveBtn = true;  
   let quizResult = await check(quiz);
+  // console.log("quizResult" , quizResult);
+  // return;
     const r = await fetch('https://api.ipify.org?format=json');
     const d = await r.json();
     quizResult.ip = d.ip;

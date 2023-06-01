@@ -1,7 +1,7 @@
 
 export default async function check(quiz){
 try{
-
+ 
 const {correctAnswers,wrongAnswers,skippedAnswers} = check2(quiz.questions);
 return {correctAnswers,wrongAnswers,skippedAnswers};
 
