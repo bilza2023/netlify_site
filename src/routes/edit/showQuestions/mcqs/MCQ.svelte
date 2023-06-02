@@ -8,6 +8,7 @@ import Thq from "./Thq.svelte";
 import FormRow from "../../FormRow.svelte";
 import Options from "./options.svelte";
 import { fade } from 'svelte/transition';
+import Tf from "../../Tf.svelte";
 
 export let question;
 // export let addOption;
@@ -26,6 +27,10 @@ export let ser;
 <FormRow title="Question">
 <input type="text" class="w-full bg-gray-700 color-white"
 bind:value={question.content} >
+</FormRow>
+
+<FormRow title="Multi Select">
+<Tf obj={question} bool_prop="multiSelect" />
 </FormRow>
 
 <FormRow title="Explanation">
