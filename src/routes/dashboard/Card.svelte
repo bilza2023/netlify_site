@@ -16,12 +16,12 @@ text-center
 
     <div class="flex flex-col"><!--inner -div-->
                 <div class="mb-2">
-                {#if quiz.quizType == "quiz"}
+                <!-- {#if quiz.quizType == "quiz"} -->
                       <span class="text-4xl">📝</span>
-                {/if}
-                {#if quiz.quizType == "survey"}
+                <!-- {/if} -->
+                <!-- {#if quiz.quizType == "survey"}
                         <span class="text-4xl">🗳️</span>
-                {/if}
+                {/if} -->
                 </div>
     <span
     class="p-1 m-1 bg-gray-700 text-sm rounded-md"
