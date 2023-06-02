@@ -1,47 +1,50 @@
 <script>
-import Btn from "./BtnNav.svelte";
-import { genericMCQ } from "./mcq.js";
-// import { toast } from '@zerodevx/svelte-toast';
-////////////-store variables--///////
 import { quizStore  } from '../store';
-    import McqTypes from "./MCQTypes.svelte";
-    import InputTypes from "./InputTypes.svelte";
-    import Mix from "./Mix.svelte";
+
+
+import Btn from "./BtnNav.svelte";
+
+import { qDataUrl,qDataPassword,qDataParagraph,qDataNumber,qDataInput,qDataEmail,qDataMCQ, getSurvey } from "./questionTypesData.js";
 
  
-let showMCQType = false;
-let showInputs = false;
-let showMix = false;
+  let showMCQType = false;
+  let showInputs = false;
+  let showMix = false;
+  const toggleHandler = (value)=> {
 
-const toggleHandler = (value)=> {
+    switch (value) {
 
-  switch (value) {
+      case "showMCQType":
+        showMCQType = !showMCQType;
+        showInputs = false;
+        showMix = false;
+      break;
 
-    case "showMCQType":
-      showMCQType = !showMCQType;
-      showInputs = false;
-      showMix = false;
-    break;
+      case "showInputs":
+        showMCQType = false;
+        showInputs = !showInputs;
+        showMix = false;
+      break;
 
-    case "showInputs":
-      showMCQType = false;
-      showInputs = !showInputs;
-      showMix = false;
-    break;
+      case "showMix":
+        showMCQType = false;
+        showInputs = false;
+        showMix = !showMix;
+      break;
+    
+      default:
+      break;
+    }
 
-    case "showMix":
-      showMCQType = false;
-      showInputs = false;
-      showMix = !showMix;
-    break;
-  
-    default:
-    break;
   }
 
+const addMCQ = () => {
+  const newMCQ = qDataMCQ;
+  quizStore.update(curr => {
+    const questions = [...curr.questions, newMCQ];
+    return { ...curr, questions };
+  });
 }
-
-
 
 </script>
 
@@ -51,7 +54,7 @@ const toggleHandler = (value)=> {
   <div class="flex justify-between    bg-gray-700 m-0 p-0">
      
     <div class="flex">
-    <Btn title="MCQ" clickHandler={genericMCQ} />  
+    <Btn title="MCQ" clickHandler={addMCQ} />  
     <Btn title="Inputs"   clickHandler={()=>toggleHandler("showInputs")}/>   
 
     </div>
@@ -69,15 +72,18 @@ const toggleHandler = (value)=> {
 
 <!--not flex area the lower portion-->
 {#if showMCQType}
-<McqTypes />
+fff
+<!-- <McqTypes /> -->
 {/if}
 
 {#if showInputs}
-<InputTypes />
+sss
+<!-- <InputTypes /> -->
 {/if}
 
 {#if showMix}
-<Mix />
+azaz
+<!-- <Mix /> -->
 {/if}
 
 

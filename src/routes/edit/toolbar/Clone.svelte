@@ -13,7 +13,7 @@ const handler = async(quizType)=>{
   // const token = localStorage.getItem('token');
   // quiz.questions = questions; //-update
   // debugger;
-  const resp = await ajaxPost(`${BASE_URL}/quiz/clone` , { id : quiz._id ,title :newPRojectName});
+  const resp = await ajaxPost(`${BASE_URL}/survey/clone` , { id : quiz._id ,title :newPRojectName});
   
   if (resp.ok) {
       newPRojectName = "";

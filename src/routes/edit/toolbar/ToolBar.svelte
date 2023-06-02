@@ -12,9 +12,10 @@ import Clone from "./Clone.svelte";
 import { fade } from 'svelte/transition';
 import QuizDel from "./QuizDel.svelte";
 import Errors from './Errors.svelte';
+import save from "./save.js";
 // export let quiz;
 // export let questions;
-export let save;
+// export let save;
 export let toggleShowSettings;
 export let showSettings;
 let errors_Array = [];
@@ -61,7 +62,7 @@ function toggleshowQuizDel(){
 <div class="w-20">
   
     <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
-    on:click={save}
+    on:click={()=>save({survey:quiz})}
     >
       <span class="text-2xl">💾</span>
       <span class="text-sm font-medium text-white">Save</span>
