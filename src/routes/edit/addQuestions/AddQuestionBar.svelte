@@ -1,15 +1,14 @@
 <script>
 import { quizStore  } from '../store';
-
-
+import InputTypes from './InputTypes.svelte';
+import McqTypes from './MCQTypes.svelte';
 import Btn from "./BtnNav.svelte";
 
-import { qDataUrl,qDataPassword,qDataParagraph,qDataNumber,qDataInput,qDataEmail,qDataMCQ, getSurvey } from "./questionTypesData.js";
+import { getDataUrl,getDataPassword,getDataParagraph,getDataNumber,getDataInput,getDataEmail,getDataMCQ,getDataBaseMCQ, getMcqWOption, getSurvey} from "./questionTypesData.js";
 
  
-  let showMCQType = false;
   let showInputs = false;
-  let showMix = false;
+  let showMCQType = false;
   const toggleHandler = (value)=> {
 
     switch (value) {
@@ -17,19 +16,11 @@ import { qDataUrl,qDataPassword,qDataParagraph,qDataNumber,qDataInput,qDataEmail
       case "showMCQType":
         showMCQType = !showMCQType;
         showInputs = false;
-        showMix = false;
       break;
 
       case "showInputs":
         showMCQType = false;
         showInputs = !showInputs;
-        showMix = false;
-      break;
-
-      case "showMix":
-        showMCQType = false;
-        showInputs = false;
-        showMix = !showMix;
       break;
     
       default:
@@ -39,7 +30,7 @@ import { qDataUrl,qDataPassword,qDataParagraph,qDataNumber,qDataInput,qDataEmail
   }
 
 const addMCQ = () => {
-  const newMCQ = qDataMCQ;
+  const newMCQ = getDataBaseMCQ();
   quizStore.update(curr => {
     const questions = [...curr.questions, newMCQ];
     return { ...curr, questions };
@@ -61,7 +52,7 @@ const addMCQ = () => {
     
     
     <div class="flex">
-    <Btn title="Mix" bgColor="bg-stone-800"  clickHandler={()=>toggleHandler("showMix")}/>  
+    <!-- <Btn title="Mix" bgColor="bg-stone-800"  clickHandler={()=>toggleHandler("showMix")}/>   -->
     <Btn title="MCQ-Types" bgColor="bg-stone-800"  
       clickHandler={()=>toggleHandler("showMCQType")} />  
     </div>
@@ -72,19 +63,13 @@ const addMCQ = () => {
 
 <!--not flex area the lower portion-->
 {#if showMCQType}
-fff
-<!-- <McqTypes /> -->
+<McqTypes />
 {/if}
 
 {#if showInputs}
-sss
-<!-- <InputTypes /> -->
+<InputTypes />
 {/if}
 
-{#if showMix}
-azaz
-<!-- <Mix /> -->
-{/if}
 
 
 </div><!-- main div-->
