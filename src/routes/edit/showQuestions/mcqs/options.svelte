@@ -2,12 +2,10 @@
 
 import Option from "./Option.svelte";
 import { v4 as uuid } from 'uuid';
-// import { getOption } from "../../addQuestions/mcq.js";
+
+import { quizStore } from '../../store'; // import your quiz store
+
 import unPublish from "../../unPublish"; 
-import { quizStore  } from '../../store';
-quizStore.subscribe(value => quiz = value);
-$: quiz = $quizStore; 
-// $: questions = $quizStore.questions;
 
 
 export let question;
@@ -30,7 +28,7 @@ const addOption = qid => {
   quizStore.update(currentQuiz => {
     const index = currentQuiz.questions.findIndex(question => question.id === qid);
     if (index !== -1) {
-      const op = {id : uuid() , content : "content.."};
+      const op = {id : uuid() , content : ""};
       currentQuiz.questions[index].options.push(op);
       unPublish();
     }
@@ -38,8 +36,25 @@ const addOption = qid => {
   });
 };
 
-const mark_correct = (option_id)=>{
-question.correctOption = option_id;
+const mark_correct = (option_id) => {
+  quizStore.update(currentQuiz => {
+    // find the question in the currentQuiz object
+    let currentQuestion = currentQuiz.questions.find(q => q.id === question.id);
+    if (currentQuestion) {
+      if (currentQuestion.multiSelect == false) {
+        currentQuestion.correctOptions = [option_id];
+      } else {
+        let index = currentQuestion.correctOptions.indexOf(option_id);
+        if (index > -1) {
+          currentQuestion.correctOptions.splice(index, 1);
+        } else {
+          currentQuestion.correctOptions.push(option_id);
+        }
+      }
+    }
+    // console.log(question.correctOptions);  
+    return currentQuiz;
+  });
 }
 
 </script>

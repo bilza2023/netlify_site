@@ -7,7 +7,9 @@ export let mark_correct;
 
 //--instead of using index use id
 
-
+function checkInCorrectOptions(optionId) {
+    return question.correctOptions.includes(optionId);
+}  
 
 
 </script>
@@ -22,7 +24,7 @@ export let mark_correct;
           type="text" bind:value={option.content} 
           />
           
-          {#if question.correctOption==option.id}
+          {#if question.correctOptions.includes(option.id)}
           <button class="w-2/12 bg-green-600 rounded-sm focus:outline-none active:bg-green-400 hover:bg-green-500 hover:cursor-pointer mx-2 my-1"
           on:click={mark_correct(option.id)}>
           <span class="text-xl white-icon">👍</span>  
