@@ -10,17 +10,15 @@ $: members = $membersStore;
 import Clone from "./Clone.svelte";
 import { fade } from 'svelte/transition';
 import QuizDel from "./QuizDel.svelte";
-import Errors from './Errors.svelte';
+import PublishErrors from './PublishBtn/PublishErrors.svelte';
 import PublishBtn from './PublishBtn/PublishBtn.svelte';
-import save from "./save.js";
 import {showErrorsStore} from "../store";
+import SaveBtn from './SaveBtn.svelte';
+
 $: showErrors = $showErrorsStore;
-// export let quiz;
-// export let questions;
-// export let save;
+
 export let toggleShowSettings;
 export let showSettings;
-let errors_Array = [];
 
 
 let showClone = false;
@@ -39,15 +37,8 @@ function toggleshowQuizDel(){
 
 <div class="flex justify-left   items-center bg-gray-400 px-2  py-2 gap-2  ">
 
-<div class="w-20">
+<SaveBtn />  
   
-    <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
-    on:click={()=>save({survey:quiz})}
-    >
-      <span class="text-2xl">💾</span>
-      <span class="text-sm font-medium text-white">Save</span>
-    </button>
-  </div>
  
   <div class="w-20">
     <a href= {`/show?quizId=${quiz._id}`} >
@@ -132,7 +123,7 @@ function toggleshowQuizDel(){
 {#if showErrors==true}
 <div class="p-2 m-2 bg-gray-600 border-white border-2 rounded-md"
 in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} >
-<Errors {errors_Array}/>
+<PublishErrors />
 <button 
 class="bg-gray-700 rounded-md m-1 p-1  hover:bg-gray-600 active:bg-gray-800"
 on:click={()=>showErrors = false}>Hide</button>

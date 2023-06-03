@@ -1,0 +1,22 @@
+
+
+export default function checkQuiz(quiz ,errorsArray){
+    checkTitle(quiz,errorsArray);
+    checkQuestionsNo(quiz ,errorsArray);
+
+}
+
+///////////////////////////
+function checkTitle(quiz ,errorsArray){
+if (quiz.title == ""){
+        errorsArray.push("Title can not be empty");
+    }
+
+}
+function checkQuestionsNo(quiz ,errorsArray){
+
+
+    if (quiz.questions.length == 0){
+        errorsArray.push("Quiz must have at least one question");
+    }
+}
