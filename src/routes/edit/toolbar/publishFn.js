@@ -4,7 +4,7 @@ import { toast } from '@zerodevx/svelte-toast';
 
 
 export default async function publishFn(survey){
-debugger;
+// debugger;
 //////////////////////////////////////
 const resp = await ajaxPost(`${BASE_URL}/survey/publish` ,survey);
   

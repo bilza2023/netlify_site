@@ -1,30 +1,34 @@
 <script>
 import { toast } from '@zerodevx/svelte-toast';
+import ajaxPost from '$lib/js/ajaxPost';
+import { BASE_URL } from '$lib/js/config.js';
 import checkBeforePub from './checkBeforePub.js';
-import save from  "../save";
 import publishFn from  "../publishFn.js";
 import { quizStore , showErrorsStore, errorsArrayStore } from '../../store';
 $: quiz = $quizStore; 
+$: published = $quizStore.published; 
 
-
-
-
+////////////////////////////////////////////
+////////////////////////////////////////////
 async function tooglePublish(){
       // debugger;
       showErrorsStore.set(false); //start with this
 
   if (quiz.published == true){
-        debugger;
+        // debugger;
         quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
-        //  need to save unpublished state
+
         const q2 = quiz;
         q2.published = false;
-        await save({survey:q2});
-        // toast.push("Unpublished");
+        const resp = await ajaxPost(`${BASE_URL}/survey/update` ,{survey:q2}); 
+                  if (resp.ok) {
+                      toast.push( "UnPublished" );
+                  }else {
+                      toast.push( "failed to UnPublish" );
+                  }
       return;
   }else {
       const errors_Array =  checkBeforePub(quiz);
-      // const errors_Array =  []; --fake line for testing
     if (errors_Array.length !==0) {
       // set_errors_Array(errors_Array);
         //--This is wrong since errorsArrayStore is not an object
@@ -32,17 +36,14 @@ async function tooglePublish(){
         errorsArrayStore.set(errors_Array);
         showErrorsStore.set( true); //here
 
-        // quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
     }else {
-      debugger;
+      // debugger;
         await quizStore.update(currentQuiz => ({ ...currentQuiz, published: true }));
         const q2 = quiz;
         q2.published = true;
         await publishFn({survey:q2});
-        // toast.push("Published");
     }
   }
-// console.log("quiz.published",quiz.published);  
 }
 
 </script>
@@ -54,8 +55,8 @@ async function tooglePublish(){
   on:click={tooglePublish}>
     <span class="text-2xl">📤</span>
     <span class="text-sm font-medium 
-    { quiz.published == true ? "text-green-400" : "text-red-400"}
-    ">Publish</span>
+    { published == true ? "text-green-400" : "text-red-400"}
+    ">{ published == true ? "Publish" : "UnPublish"}</span>
   </button>
 </div>
  
