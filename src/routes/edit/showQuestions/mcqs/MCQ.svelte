@@ -8,7 +8,7 @@ import Thq from "./Thq.svelte";
 import FormRow from "../../FormRow.svelte";
 import Options from "./options.svelte";
 import { fade } from 'svelte/transition';
-import Tf from "../../Tf.svelte";
+import MultiSelectToggle from "./MultiSelectToggle.svelte";
 
 export let question;
 // export let addOption;
@@ -30,7 +30,7 @@ bind:value={question.content} >
 </FormRow>
 
 <FormRow title="Multi Select">
-<Tf obj={question} bool_prop="multiSelect" />
+<MultiSelectToggle question={question} bool_prop="multiSelect"  />
 </FormRow>
 
 <FormRow title="Explanation">

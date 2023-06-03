@@ -7,9 +7,6 @@ export let mark_correct;
 
 //--instead of using index use id
 
-function checkInCorrectOptions(optionId) {
-    return question.correctOptions.includes(optionId);
-}  
 
 
 </script>

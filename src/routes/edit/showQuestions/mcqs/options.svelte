@@ -55,7 +55,7 @@ const mark_correct = (option_id) => {
     // console.log(question.correctOptions);  
     return currentQuiz;
   });
-}
+} 
 
 </script>
 
