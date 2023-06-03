@@ -3,11 +3,14 @@
 
 export default function checkMCQ(question,errorsArray){
 
-    checkCorrectOptions(question,errorsArray);
+    checkAllCorrectOptionsExists(question,errorsArray);
+    checkOptionMissingStatements(question,errorsArray);
+    atleastOneCorrectOption(question,errorsArray);
+    atleastTwoOptions(question,errorsArray);
 
 }
 ///////////////////////////////
-function checkCorrectOptions(question,errorsArray) {
+function checkAllCorrectOptionsExists(question,errorsArray) {
   const optionsIds = question.options.map(option => option.id);
  
  const result =  question.correctOptions.every(correctOptionId => optionsIds.includes(correctOptionId));
@@ -17,17 +20,30 @@ function checkCorrectOptions(question,errorsArray) {
     }
 }
 
-function checkOptionMissingStatements(questions,errorsArray){
+function atleastOneCorrectOption(question,errorsArray){
+    if (question.correctOptions.length < 1 ){
+        const st = `Question: ${question.content.substring(0, 20)}  ----> does not have even a single correct option selected`;
+            errorsArray.push(st);
+    }
 
-for (let i = 0; i < questions.length; i++) {
-    const q = questions[i];
-    
-    for (let j = 0; j < q.options.length; j++) {
-    const option = q.options[j];
+}
+function atleastTwoOptions(question,errorsArray){
+    if (question.options.length < 2 ){
+        const st = `Question: ${question.content.substring(0, 20)}  ----> There should be atleast two options in a multiple choice question.`;
+            errorsArray.push(st);
+    }
+
+}
+function checkOptionMissingStatements(question,errorsArray){
+
+    for (let i = 0; i < question.options.length; i++) {
+    const option = question.options[i];
             if ( option.content == "") {
-            const statement  = q.content == "" ? "Missing Statement" : q.content;
-                errorsArray.push(`Question # ${i+1} : "${statement}" has blank option.`)
-            }
+            const st = `Question: 
+            ${question.content.substring(0, 20)}  ::: -> has missing content in option
+            `;
+            
+            errorsArray.push(st);
     }
 }
 }

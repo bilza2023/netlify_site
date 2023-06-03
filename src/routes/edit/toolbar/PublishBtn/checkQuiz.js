@@ -3,10 +3,18 @@
 export default function checkQuiz(quiz ,errorsArray){
     checkTitle(quiz,errorsArray);
     checkQuestionsNo(quiz ,errorsArray);
+    mustHaveOneMember(quiz ,errorsArray);
 
 }
 
 ///////////////////////////
+function mustHaveOneMember(quiz ,errorsArray){
+      if ( quiz.members.length < 1 ) {
+        const st = `There are no members / students attached to this product`;
+            errorsArray.push(st);
+    }
+}
+
 function checkTitle(quiz ,errorsArray){
 if (quiz.title == ""){
         errorsArray.push("Title can not be empty");

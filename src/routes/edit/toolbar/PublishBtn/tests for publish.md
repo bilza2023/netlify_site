@@ -7,10 +7,10 @@ Survey
 Questions
 
 All
-    1.  Statement is must.
+    1.  XX- Statement is must.
 
 MCQs:
-    1. Option statement is must.
+    1. XX-Option statement is must.
     2. atleast one correct option.
     3. cant have one option. must be 2 or above.
 

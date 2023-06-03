@@ -2,4 +2,7 @@
 
 
 
-export default function checkMCQSingleSelect(question,errorsArray){}
+export default function checkMCQSingleSelect(question,errorsArray){
+
+
+}
