@@ -1,4 +1,5 @@
-export default function check(quiz){
+
+export default function checkBeforePub(quiz){
 const errorsArray = [];
 
 if (quiz.title == ""){

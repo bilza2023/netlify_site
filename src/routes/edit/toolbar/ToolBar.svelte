@@ -7,41 +7,21 @@ $: quiz = $quizStore;
 $: members = $membersStore;
 ////////////-store variables--///////
 
-import check from "./check.js";
 import Clone from "./Clone.svelte";
 import { fade } from 'svelte/transition';
 import QuizDel from "./QuizDel.svelte";
 import Errors from './Errors.svelte';
+import PublishBtn from './PublishBtn/PublishBtn.svelte';
 import save from "./save.js";
+import {showErrorsStore} from "../store";
+$: showErrors = $showErrorsStore;
 // export let quiz;
 // export let questions;
 // export let save;
 export let toggleShowSettings;
 export let showSettings;
 let errors_Array = [];
-let showErrors = false;
-const set_errors_Array = (arr)=> {errors_Array = arr;showErrors = true;}
 
-
-function tooglePublish(){
-      showErrors = false ; //start with this
-  if (quiz.published == true){
-        quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
-      return;
-  }
-  if (quiz.published == false){
-      const errors_Array =  check(quiz);
-    if (errors_Array.length !==0) {
-      set_errors_Array(errors_Array);
-      // quiz.published = false;
-        quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
-    }else {
-      quiz.published = true;
-        quizStore.update(currentQuiz => ({ ...currentQuiz, published: true }));
-    }
-  }
-// console.log("quiz.published",quiz.published);  
-}
 
 let showClone = false;
 function toggleShowClone(){
@@ -77,16 +57,7 @@ function toggleshowQuizDel(){
     </button>
     </a>
   </div>
-
-<div class="w-20">
-  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
-  on:click={()=>{tooglePublish()}}>
-    <span class="text-2xl">📤</span>
-    <span class="text-sm font-medium 
-    {quiz.published == true ? "text-green-400" : "text-red-400"}
-    ">Publish</span>
-  </button>
-</div>
+<PublishBtn />
 
 
 
