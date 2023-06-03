@@ -4,8 +4,6 @@ import { toast } from '@zerodevx/svelte-toast';
 
 
 export default async function save(survey){
-// console.log("save");
-// return;
 //////////////////////////////////////
 const resp = await ajaxPost(`${BASE_URL}/survey/update` ,survey);
   

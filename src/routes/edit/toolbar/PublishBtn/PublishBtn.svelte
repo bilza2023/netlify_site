@@ -1,7 +1,7 @@
 <script>
 import { toast } from '@zerodevx/svelte-toast';
 import checkBeforePub from './checkBeforePub.js';
-// import save from  "../save";
+import save from  "../save";
 import publishFn from  "../publishFn.js";
 import { quizStore , showErrorsStore, errorsArrayStore } from '../../store';
 $: quiz = $quizStore; 
@@ -14,12 +14,13 @@ async function tooglePublish(){
       showErrorsStore.set(false); //start with this
 
   if (quiz.published == true){
+        debugger;
         quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
-        // No need to save unpublished state
-        // const q2 = quiz;
-        // q2.published = false;
-        // await publishFn({survey:q2});
-        toast.push("Unpublished");
+        //  need to save unpublished state
+        const q2 = quiz;
+        q2.published = false;
+        await save({survey:q2});
+        // toast.push("Unpublished");
       return;
   }else {
       const errors_Array =  checkBeforePub(quiz);
