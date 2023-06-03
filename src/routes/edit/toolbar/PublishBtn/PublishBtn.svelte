@@ -1,7 +1,8 @@
 <script>
 import { toast } from '@zerodevx/svelte-toast';
 import checkBeforePub from './checkBeforePub.js';
-import save from  "../save";
+// import save from  "../save";
+import publishFn from  "../publishFn.js";
 import { quizStore , showErrorsStore, errorsArrayStore } from '../../store';
 $: quiz = $quizStore; 
 
@@ -10,13 +11,14 @@ $: quiz = $quizStore;
 
 async function tooglePublish(){
       // debugger;
-      showErrorsStore.update(() => false); //start with this
+      showErrorsStore.set(false); //start with this
 
   if (quiz.published == true){
         quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
-        const q2 = quiz;
-        q2.published = false;
-        await save({survey:q2});
+        // No need to save unpublished state
+        // const q2 = quiz;
+        // q2.published = false;
+        // await publishFn({survey:q2});
         toast.push("Unpublished");
       return;
   }else {
@@ -27,16 +29,16 @@ async function tooglePublish(){
         //--This is wrong since errorsArrayStore is not an object
         // errorsArrayStore.update(currentArr => ({ errors_Array }));
         errorsArrayStore.set(errors_Array);
-        showErrorsStore.update(() => true); //here
+        showErrorsStore.set( true); //here
 
         // quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
     }else {
-      // debugger;
+      debugger;
         await quizStore.update(currentQuiz => ({ ...currentQuiz, published: true }));
         const q2 = quiz;
         q2.published = true;
-        await save({survey:q2});
-        toast.push("Published");
+        await publishFn({survey:q2});
+        // toast.push("Published");
     }
   }
 // console.log("quiz.published",quiz.published);  
