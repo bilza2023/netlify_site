@@ -30,7 +30,7 @@ async function deleteAllResults (){
 const deleteQuiz = async ()=>{
   // debugger;
   // const token = localStorage.getItem('token');
-  const resp = await ajaxPost(`${BASE_URL}/quiz/delete`,{quizId : quiz._id});
+  const resp = await ajaxPost(`${BASE_URL}/survey/delete`,{quizId : quiz._id});
  // debugger;
       if (resp.ok == true){
       const data = await resp.json();

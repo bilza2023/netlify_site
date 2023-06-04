@@ -3,7 +3,7 @@
 export default function checkQuiz(quiz ,errorsArray){
     checkTitle(quiz,errorsArray);
     checkQuestionsNo(quiz ,errorsArray);
-    // mustHaveOneMember(quiz ,errorsArray);
+    mustHaveOneMember(quiz ,errorsArray);
 
 }
 

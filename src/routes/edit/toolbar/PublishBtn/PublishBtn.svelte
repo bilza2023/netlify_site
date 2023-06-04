@@ -56,7 +56,7 @@ async function tooglePublish(){
     <span class="text-2xl">📤</span>
     <span class="text-sm font-medium 
     { published == true ? "text-green-400" : "text-red-400"}
-    ">{ published == true ? "Publish" : "UnPublish"}</span>
+    ">{ published == true ? "Published" : "UnPublished"}</span>
   </button>
 </div>
  

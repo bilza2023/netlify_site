@@ -60,12 +60,10 @@ bind:value={quiz.introText}></textarea>
 <Tf obj={quiz} bool_prop="showResult" />
 </FormRow>
  
-{#if quiz.quizType == "quiz"}
   
 <FormRow title="Users"  >
 <Dispatch  />
 </FormRow>
-{/if} 
 
 
 
