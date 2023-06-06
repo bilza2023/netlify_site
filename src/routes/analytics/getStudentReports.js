@@ -1,10 +1,15 @@
 import getQuestionContent from "./getQuestionContent";
 import getQuestionCorrectOptions from "./getQuestionCorrectOptions";
+import calcGTotal from "./getGTotal";
+
 export default async function getStudentReports(quiz,results){
     // debugger;
     //--just make a copy of results object.
     const studentReports = [...results];
+
+    //--now edit the studentReports answers
     for (let i = 0; i < studentReports.length; i++) {
+    //--report = student report card
         const report = studentReports[i];
         for (let j = 0; j < report.answers.length; j++) {
             const answer = report.answers[j];
@@ -12,6 +17,8 @@ export default async function getStudentReports(quiz,results){
             answer.correctOptions = getQuestionCorrectOptions(quiz, answer.questionId);
             answer.marksObtained = gradeMCQ(answer);
         }
+      //---now send the report
+      calcGTotal(report);  
     }
     return studentReports;
 }

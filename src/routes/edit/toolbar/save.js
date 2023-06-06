@@ -12,9 +12,9 @@ quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
   if (resp.ok) {
       toast.push( "saved" );
   }else {
-      // const data = await resp.json();
+      const data = await resp.json();
 
-      toast.push( "failed to save" );
+      toast.push( data.msg );
   }
 
 

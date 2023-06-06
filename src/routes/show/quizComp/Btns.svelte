@@ -53,10 +53,10 @@ console.log("quiz" ,quiz);
   const resp = await ajaxPost(`${BASE_URL}/result/save`,{ quizResult, quiz } ); 
     
     if (resp.ok){
-        toast.push("results saved");
-        console.log("resp",resp)
+        // console.log("resp",resp)
           pageStateStore.set('outro');
         console.log("outro",$pageStateStore)
+        toast.push("results saved");
     }else {
       const data = await resp.json();
         hideSaveBtn = false;

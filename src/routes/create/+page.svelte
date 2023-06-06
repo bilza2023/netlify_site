@@ -38,7 +38,7 @@ const handler = async(quizType)=>{
       const data = await response.json();
       const survey  = data.survey;
       // debugger;
-      goto( `/edit/survey?quizId=${survey._id}`);
+      goto( `/edit?quizId=${survey._id}`);
       toast.push( "Success" );
 
   }else {
@@ -67,7 +67,7 @@ const handler = async(quizType)=>{
 
 
 <div class=" border-2 border-white p-2 m-2  text-center rounded-lg ">
-<h1 class="m-1 text-slate-200 text-2xl underline">New Project</h1>
+<h1 class="m-1 text-slate-200 text-2xl underline">Create New Test</h1>
 <input class="bg-gray-700 text-white  w-10/12 m-1 rounded-lg"  type="text" bind:value={newPRojectName} >
 
 <br/>
@@ -77,7 +77,7 @@ const handler = async(quizType)=>{
     <span class="text-2xl">📝 <span class="hidden md:inline text-sm">New Quiz</span></span>
   </button> -->
   <button class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white font-bold py-2 px-4 rounded w-full sm:w-4/12 m-1" on:click={()=>handler("survey")}>
-    <span class="text-2xl">🗳️ <span class="hidden md:inline text-sm">New Survey</span></span>
+    <span class="text-2xl">🗳️ <span class="hidden md:inline text-sm">New Test</span></span>
   </button>
 </div>
 

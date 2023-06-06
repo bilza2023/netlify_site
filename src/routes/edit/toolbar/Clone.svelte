@@ -25,7 +25,7 @@ const handler = async(quizType)=>{
   }else {
       const data = await resp.json();
 
-      toast.push( data.msg );
+      toast.push( data.errormsg );
   }
 
 }

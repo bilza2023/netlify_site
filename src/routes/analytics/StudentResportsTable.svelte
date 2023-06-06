@@ -13,12 +13,21 @@ console.log("studentResports",studentResports);
    <table class="w-full">
   <tr>
     <td class="border border-white px-4 py-2 bg-blue-900">email</td>
-    <td class="border border-white px-4 py-2 bg-blue-900">{studentResport.email}</td>
+    <td class="border border-white px-4 py-2 bg-stone-900">{studentResport.email}</td>
     <td class="border border-white px-4 py-2 bg-blue-900">Ip</td>
-    <td class="border border-white px-4 py-2 bg-blue-900">{studentResport.ip}</td>
+    <td class="border border-white px-4 py-2 bg-stone-900">{studentResport.ip}</td>
     <td class="border border-white px-4 py-2 bg-blue-900">countryCode</td>
-        <td class="border border-white px-4 py-2 bg-blue-900">{studentResport.countryCode}</td>
+        <td class="border border-white px-4 py-2 bg-stone-900">{studentResport.countryCode}</td>
   </tr>
+  
+  <tr>
+    <td class="border border-white px-4 py-2 bg-blue-900">Total Marks</td>
+        <td class="border border-white px-4 py-2 bg-stone-900">{studentResport.examTotalMarks}</td>
+    <td class="border border-white px-4 py-2 bg-blue-900">Marks Obtained</td>
+        <td class="border border-white px-4 py-2 bg-stone-900">{studentResport.totalMarksObtained}</td>
+    <td class="border border-white px-4 py-2 bg-blue-900">Percentage</td>
+        <td class="border border-white px-4 py-2 bg-stone-900">{studentResport.percentage}%</td>
+  <tr>
 
 </table>
 
