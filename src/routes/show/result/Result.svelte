@@ -1,6 +1,6 @@
 <script>
 import ReportPart from "./ReportPart.svelte";
-import check from "../check.js";
+import check from "../check/check.js";
 import { onMount } from 'svelte';
 import Cards from "./Cards.svelte";
 import Title from "./Title.svelte";

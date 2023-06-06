@@ -28,7 +28,7 @@ export let ser;
 <input type="text" class="w-full bg-gray-700 color-white"
 bind:value={question.content} >
 </FormRow>
-
+ 
 <FormRow title="Multi Select">
 <MultiSelectToggle question={question} bool_prop="multiSelect"  />
 </FormRow>

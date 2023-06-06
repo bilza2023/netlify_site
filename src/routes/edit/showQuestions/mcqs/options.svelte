@@ -43,9 +43,11 @@ const mark_correct = (option_id) => {
     if (currentQuestion) {
       if (currentQuestion.multiSelect == false) {
         currentQuestion.correctOptions = [option_id];
-      } else {
+      } 
+      else {
         let index = currentQuestion.correctOptions.indexOf(option_id);
         if (index > -1) {
+          //--remove the option if already exists
           currentQuestion.correctOptions.splice(index, 1);
         } else {
           currentQuestion.correctOptions.push(option_id);

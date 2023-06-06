@@ -1,32 +1,33 @@
 <script>
+import { v4 as uuid } from 'uuid';
+
 export let questions;
 export let quiz;
 export let next;
 export let setWaiting;
 
-import check from "../check.js";
+import check from "../check/check.js";
 export let cq;
 export let prev;
 export let saveResponse;
-export let setPageState;
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from "@zerodevx/svelte-toast";
-import { emailStore } from '../store.js';
 import ajaxPost from "$lib/js/ajaxPost.js";
 
-
-let email;
-emailStore.subscribe(value => email = value);
+import {quizStore , pageStateStore, emailStore } from '../store.js';
+$: email = $emailStore;
 
 let hideSaveBtn = false;
 
 async function saveResults  (){
 
-setWaiting();
+ setWaiting();
   // debugger;
   hideSaveBtn = true;  
-  let quizResult = await check(quiz);
-  quizResult.userId = quiz.userId;
+  let quizResult = {};
+  quizResult.answers = await check(quiz);
+
+quizResult.userId = quiz.userId;
   // console.log("quizResult" , quizResult);
   // return;
     const r = await fetch('https://api.ipify.org?format=json');
@@ -40,24 +41,26 @@ setWaiting();
   const countryCode = countryCodeData.split(';')[1];
   quizResult.countryCode = countryCode;
 
+  quizResult.id = uuid(); 
   quizResult.quizId = quiz._id; 
   quizResult.email = email;
-  // debugger; 
- ///////////////
-// console.log("quizResult after check before save" ,quizResult);
+  
+  console.log("quizResult after check before save" ,quizResult);
+console.log("quiz" ,quiz);
 // return;
+ ///////////////
 
   const resp = await ajaxPost(`${BASE_URL}/result/save`,{ quizResult, quiz } ); 
     
     if (resp.ok){
         toast.push("results saved");
         console.log("resp",resp)
-        setPageState("outro");
+        pageStateStore.set('outro');
     }else {
       const data = await resp.json();
         hideSaveBtn = false;
         toast.push(data.errormsg);
-      setPageState("outro");
+        pageStateStore.set('outro');
  }
 
 }
@@ -102,7 +105,7 @@ setWaiting();
   background-color:blue;
   color:white;
   padding:1px;
-  pargin:1px;
+  margin:1px;
   border-radius: 10px;
 
   }

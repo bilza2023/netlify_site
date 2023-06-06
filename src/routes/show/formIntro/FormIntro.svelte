@@ -5,37 +5,28 @@ import { toast } from "@zerodevx/svelte-toast";
 import Title from "./Title.svelte";
 import IntroText from "./IntroText.svelte";
 import IfQuiz from "./IfQuiz.svelte";
-import { quizStore } from '../store';
-let quiz;
-quizStore.subscribe(value => quiz = value);
+import { emailStore , passwordStore ,quizStore , pageStateStore } from '../store';
+//--we need these only if we want to react to them
+$: quiz = $quizStore;
+$: email = $emailStore;
+$: password = $passwordStore;
 
 
-
-export let setPageState;
-
-import { emailStore , passwordStore } from '../store';
-let email;
-let password;
-emailStore.subscribe(value => email = value);
-passwordStore.subscribe(value => password = value);
 const checklogin = ()=>{
 //  debugger;
-  if (quiz.quizType == "quiz"){
+  // if (quiz.quizType == "quiz"){
   for (let i = 0; i < quiz.members.length; i++) {
     const element = quiz.members[i];
       if (element.email == email){
         if (element.password == password){
           emailStore.set(email); 
           // passwordStore.set(password);
-          setPageState("showQuiz");
+          pageStateStore.set("showQuiz");
           return;
         }  
       }
   }
   toast.push("wrong email or password");
-}else {
-setPageState("showQuiz");
-}
 
 }
 
@@ -47,14 +38,10 @@ text-white  p-4 m-8  ">
 
 <Title title ={quiz.title} />
 
-{#if quiz.showIntro == true}
 <IntroText introText= {quiz.introText} />
-{/if} 
 
 
-{#if quiz.quizType == "quiz"}
-<IfQuiz  {quiz} {setPageState} />    
-{/if}
+<IfQuiz  {quiz}  />    
 
 
 <!--button-->

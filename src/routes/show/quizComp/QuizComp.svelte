@@ -5,14 +5,15 @@ import ShowQuestions from "./showQuestions/ShowQuestions.svelte";
 import ProgressBar from "$lib/cmp/ProgressBar.svelte";
 import Loading from '$lib/cmp/Loading.svelte';
 // import ShowMcq from "./showQuestions/ShowMcq.svelte";
+import { quizStore } from '../store';
+//--we need these only if we want to react to them
+$: quiz = $quizStore;
+$: questions = quiz.questions;
 
-export let setPageState;
-export let quiz = {};
 
 let showWaiting = false;
 const  setWaiting = ()=>showWaiting =true;
 
-$: questions = quiz.questions;
 
 let cq = 0;
 
@@ -60,7 +61,7 @@ const prev = ()=>{
   
 
   
-<Btns   {questions} {cq} {setPageState} {quiz}  saveResponse={quiz.saveResponse} {next} {prev} {setWaiting} />
+<Btns   {questions} {cq}  {quiz}  saveResponse={quiz.saveResponse} {next} {prev} {setWaiting} />
 </div><!--flex box ends--->
 
 {:else}

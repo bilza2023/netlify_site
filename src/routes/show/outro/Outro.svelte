@@ -6,16 +6,10 @@ import Result from "../result/Result.svelte";
 import OutroFinal from "./OutroFinal.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
-import { emailStore , passwordStore } from '../store.js';
 
-let email ="";
-let password ="";
-//  $: email = $emailStore;
-//  $: password = $passwordStore;
-  emailStore.subscribe(value => email = value);
-  passwordStore.subscribe(value => password = value);
-
-export let quiz;
+import { quizStore } from '../store';
+//--we need these only if we want to react to them
+$: quiz = $quizStore;
 
 let showOutroFinal;
 const setShowOutroFinal = ()=> showOutroFinal=true;

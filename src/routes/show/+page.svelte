@@ -1,26 +1,22 @@
 <script>
-import Outro from "./outro/Outro.svelte";
-import QuizComp from "./quizComp/QuizComp.svelte";
 import FormIntro from "./formIntro/FormIntro.svelte";
+import QuizComp from "./quizComp/QuizComp.svelte";
+import Outro from "./outro/Outro.svelte";
+
 import { BASE_URL } from '$lib/js/config.js';
 import Loading from '$lib/cmp/Loading.svelte';
 import { onMount } from 'svelte';
-import { quizStore , membersStore } from './store';
-// import ajaxPost from '$lib/js/ajaxPost.js';
-// import { toast } from "@zerodevx/svelte-toast";
+//membersStore is quiz members ; the name is confusing
+import { quizStore , pageStateStore, membersStore } from './store';
 
-let quiz;
-quizStore.subscribe(value => quiz = value);
+$: quiz = $quizStore;
 
-let pageState = "loading";
+
 let notFoundMsg = "Not Found";
-////////////////////////////////////////////
-////////////////////////////////////////////
-
-const setPageState = (state) => pageState = state;
 
 onMount(async () => {
   try {
+  pageStateStore.set('loading');
   // const token = await localStorage.getItem("token");
  let  quizId = new URLSearchParams(location.search).get("quizId"); 
   const url = `${BASE_URL}/show/${quizId}`;
@@ -36,11 +32,11 @@ onMount(async () => {
     quizStore.update(() => ({ ...data.quiz }));
     membersStore.update(() => ({ ...data.members }));
 
-      pageState = "loaded"; //change it to setPageState()
+      pageStateStore.set("loaded");
       // console.log("notfound");
     } else {
     const data = await resp.json();
-      pageState = "notfound";  
+      pageStateStore.set("notfound");
       // toast.push(data.msg);
       notFoundMsg = data.msg;
       // console.log("loaded");
@@ -50,7 +46,8 @@ onMount(async () => {
     // }
   } catch (error) {
     // console.error(error);
-    pageState = "notfound";
+    // p = "notfound";
+    pageStateStore.set("notfound");
   }
 }); 
 
@@ -59,36 +56,30 @@ onMount(async () => {
 
 <div class="wrapper w-full p-2 bg-gray-800 min-h-screen ">
 
-{#if pageState == "notfound"}
+{#if $pageStateStore == "loading"}
+ <Loading   title="Loading..."  />
+{/if}
+
+{#if $pageStateStore == "notfound"}
 
   <p class="p-4 mx-auto mt-12 w-6/12 bg-gray-500 border-2 border-gray-200  text-white text-center text-3xl">
   {`${notFoundMsg}`}</p>
 {/if}
- 
-{#if pageState == "loading"}
-<Loading   title="Loading..."  />
-{/if}
 
-<!--Intro-->
-{#if pageState == "loaded" }
-{#if quiz.showIntro == true || quiz.quizType == "quiz"}
-
- <FormIntro  {setPageState} />
-
-{:else}
-{pageState = "showQuiz"}     
-{/if}
+<!--Intro pageStateStore == "loaded"-->
+{#if $pageStateStore == "loaded" }
+ <FormIntro  />
 {/if}
   
 
-{#if pageState == "showQuiz" }
-<QuizComp {quiz} {setPageState}  />
+{#if $pageStateStore == "showQuiz" }
+ <QuizComp   />
 {/if}
 
 
 
-{#if pageState == "outro" }
-<Outro  {quiz} />
+{#if $pageStateStore == "outro" }
+ <Outro />
 {/if}
 
 
