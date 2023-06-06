@@ -11,8 +11,8 @@ import { quizStore } from '../store';
 //--we need these only if we want to react to them
 $: quiz = $quizStore;
 
-let showOutroFinal;
-const setShowOutroFinal = ()=> showOutroFinal=true;
+// let showOutroFinal;
+// const setShowOutroFinal = ()=> showOutroFinal=true;
 
 
 onMount(async () => {
@@ -38,11 +38,11 @@ onMount(async () => {
 </div>
   <br>
 
-{#if  showOutroFinal == false}
+<!-- {#if  showOutroFinal == false}
 <Result  {quiz}   {setShowOutroFinal}  />
-{/if}
+{/if} -->
 
-{#if  showOutroFinal == true}
+<!-- {#if  showOutroFinal == true} -->
 <OutroFinal {quiz} />
-{/if}
+<!-- {/if} -->
 

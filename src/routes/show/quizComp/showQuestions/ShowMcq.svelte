@@ -14,7 +14,7 @@ const mark_selected = (option_id) => {
         //singleselect
       if (questions[cq].multiSelect == false) {
         questions[cq].selectedOptions= [];
-        questions[cq].selectedOptions[0] = [option_id];
+        questions[cq].selectedOptions[0] = option_id;
       } 
       else {
         // Multi select

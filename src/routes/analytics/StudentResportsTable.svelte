@@ -32,7 +32,8 @@ console.log("studentResports",studentResports);
       <th class="border border-white px-4 py-2 bg-blue-500">questionType</th>
       <th class="border border-white px-4 py-2 bg-blue-500">Status</th>
       <th class="border border-white px-4 py-2 bg-blue-500">totalMarks</th>
-      <th class="border border-white px-4 py-2 bg-blue-500">Marks Obtained</th>
+      <th class="border border-white px-4 py-2 bg-blue-500">Obtained</th>
+      <th class="border border-white px-4 py-2 bg-blue-500">%age</th>
       <th class="border border-white px-4 py-2 bg-blue-500">required</th>
     </tr>
   </thead>
@@ -43,7 +44,8 @@ console.log("studentResports",studentResports);
         <td class="border border-white px-4 py-2">{report.questionType}</td>
         <td class="border border-white px-4 py-2">Correct</td>
         <td class="border border-white px-4 py-2">{report.totalMarks}</td>
-        <td class="border border-white px-4 py-2">{(report.totalMarks/2)}</td>
+        <td class="border border-white px-4 py-2">{(report.marksObtained)}</td>
+        <td class="border border-white px-4 py-2">{((report.marksObtained/report.totalMarks)*100)}%</td>
         <td class="border border-white px-4 py-2">{report.required}</td>
       </tr>
     {/each}

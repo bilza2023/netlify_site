@@ -10,6 +10,7 @@ import { onMount } from 'svelte';
 import { quizStore , pageStateStore, membersStore } from './store';
 
 $: quiz = $quizStore;
+$: pageState = $pageStateStore;
 
 
 let notFoundMsg = "Not Found";
@@ -56,29 +57,29 @@ onMount(async () => {
 
 <div class="wrapper w-full p-2 bg-gray-800 min-h-screen ">
 
-{#if $pageStateStore == "loading"}
+{#if pageState == "loading"}
  <Loading   title="Loading..."  />
 {/if}
 
-{#if $pageStateStore == "notfound"}
+{#if pageState == "notfound"}
 
   <p class="p-4 mx-auto mt-12 w-6/12 bg-gray-500 border-2 border-gray-200  text-white text-center text-3xl">
   {`${notFoundMsg}`}</p>
 {/if}
 
 <!--Intro pageStateStore == "loaded"-->
-{#if $pageStateStore == "loaded" }
+{#if  pageState == "loaded" }
  <FormIntro  />
 {/if}
   
 
-{#if $pageStateStore == "showQuiz" }
+{#if pageState == "showQuiz" }
  <QuizComp   />
 {/if}
 
 
 
-{#if $pageStateStore == "outro" }
+{#if pageState == "outro" }
  <Outro />
 {/if}
 

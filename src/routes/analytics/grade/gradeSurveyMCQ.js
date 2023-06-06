@@ -8,7 +8,6 @@ function getData (){
         required   : false,
         totalMarks   : 0,
         payload : '',
-        multiSelect : false,
         selectedOptions : []
     };
 }
@@ -19,7 +18,6 @@ export default async function CheckSurveyMCQ(question,answers,extraData,quiz){
     g.questionId = question.id;
     g.required = false;
     g.totalMarks = 10; //????
-    g.multiSelect = question.multiSelect; //????
     g.questionType = question.questionType;
         // if(question.selectedOptions){
         g.selectedOptions = question.selectedOptions;

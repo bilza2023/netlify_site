@@ -14,7 +14,7 @@ import { BASE_URL } from '$lib/js/config.js';
 import { toast } from "@zerodevx/svelte-toast";
 import ajaxPost from "$lib/js/ajaxPost.js";
 
-import {quizStore , pageStateStore, emailStore } from '../store.js';
+import {pageStateStore, emailStore } from '../store.js';
 $: email = $emailStore;
 
 let hideSaveBtn = false;
@@ -49,20 +49,21 @@ quizResult.userId = quiz.userId;
 console.log("quiz" ,quiz);
 // return;
  ///////////////
-
+// debugger;
   const resp = await ajaxPost(`${BASE_URL}/result/save`,{ quizResult, quiz } ); 
     
     if (resp.ok){
         toast.push("results saved");
         console.log("resp",resp)
-        pageStateStore.set('outro');
+          pageStateStore.set('outro');
+        console.log("outro",$pageStateStore)
     }else {
       const data = await resp.json();
         hideSaveBtn = false;
         toast.push(data.errormsg);
         pageStateStore.set('outro');
  }
-
+pageStateStore.set('outro');
 }
 </script>
 
