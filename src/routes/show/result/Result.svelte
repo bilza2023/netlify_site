@@ -1,6 +1,6 @@
 <script>
 import ReportPart from "./ReportPart.svelte";
-import check from "../check/check.js";
+import transformQ2R from "../transformQ2R/transformQ2R";
 import { onMount } from 'svelte';
 import Cards from "./Cards.svelte";
 import Title from "./Title.svelte";
@@ -9,16 +9,16 @@ let result;
 export let setShowOutroFinal;
 
 
-onMount(async () => {
- try {
-   result = await check(quiz);
+// onMount(async () => {
+//  try {
+//    result = await transformQ2R(quiz);
 
-    // console.error(quizResult);
-// debugger;
- } catch (error) {
-    console.error(error);
-}
-}); 
+//     // console.error(quizResult);
+// // debugger;
+//  } catch (error) {
+//     console.error(error);
+// }
+// }); 
 
 
 </script>
