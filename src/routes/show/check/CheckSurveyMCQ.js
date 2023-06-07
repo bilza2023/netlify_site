@@ -18,8 +18,8 @@ export default async function CheckSurveyMCQ(question,answers,extraData,quiz){
     const g = getData();
     g.questionId = question.id;
     g.required = false;
-    g.totalMarks = 10; //????
-    g.multiSelect = question.multiSelect; //????
+    g.totalMarks = 10; 
+    g.multiSelect = question.multiSelect;
     g.questionType = question.questionType;
         // if(question.selectedOptions){
         g.selectedOptions = question.selectedOptions;
