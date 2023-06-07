@@ -6,7 +6,7 @@ export let quiz;
 export let next;
 export let setWaiting;
 
-import check from "../check/check.js";
+import transformQ2R from "../transformQ2R/transformQ2R";
 export let cq;
 export let prev;
 export let saveResponse;
@@ -25,7 +25,7 @@ async function saveResults  (){
   // debugger;
   hideSaveBtn = true;  
   let quizResult = {};
-  quizResult.answers = await check(quiz);
+  quizResult.answers = await transformQ2R(quiz);
 
 quizResult.userId = quiz.userId;
   // console.log("quizResult" , quizResult);
