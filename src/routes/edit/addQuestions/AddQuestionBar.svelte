@@ -4,7 +4,7 @@ import InputTypes from './InputTypes.svelte';
 import McqTypes from './MCQTypes.svelte';
 import Btn from "./BtnNav.svelte";
 
-import { getDataUrl,getDataPassword,getDataParagraph,getDataNumber,getDataInput,getDataEmail,getDataMCQ,getDataBaseMCQ, getMcqWOption, getSurvey} from "./questionTypesData.js";
+import { getDataUrl,getDataPassword,getDataParagraph,getDataNumber,getDataInput,getDataEmail,getDataMCQ,getDataBaseMCQ, getMcqWOption, getSurvey} from "../../../lib/globals/questionTypesData";
 
  
   let showInputs = false;

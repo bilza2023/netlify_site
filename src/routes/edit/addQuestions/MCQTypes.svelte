@@ -1,7 +1,7 @@
 <script>
 import Btn from "./BtnNav.svelte";
 export let btnBg="bg-gray-700";
-import { getDataUrl,getDataPassword,getDataParagraph,getDataNumber,getDataInput,getDataEmail,getDataMCQ,getDataBaseMCQ, getMcqWOption, getSurvey} from "./questionTypesData";
+import { getDataUrl,getDataPassword,getDataParagraph,getDataNumber,getDataInput,getDataEmail,getDataMCQ,getDataBaseMCQ, getMcqWOption, getSurvey} from "../../../lib/globals/questionTypesData";
 import { quizStore  } from '../store';
 
 const createMCQwOpt = (opt=[])=>{

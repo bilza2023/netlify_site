@@ -3,7 +3,7 @@ import Btn from "./BtnNav.svelte";
 import { quizStore  } from '../store';
 export let btnBg="bg-gray-700";
 
-import { getDataUrl,getDataPassword,getDataParagraph,getDataNumber,getDataInput,getDataEmail,getDataMCQ,getDataBaseMCQ, getMcqWOption, getSurvey } from "./questionTypesData.js";
+import { getDataUrl,getDataPassword,getDataParagraph,getDataNumber,getDataInput,getDataEmail,getDataMCQ,getDataBaseMCQ, getMcqWOption, getSurvey } from "../../../lib/globals/questionTypesData";
 
 
 const getInput = (questionType) =>{
