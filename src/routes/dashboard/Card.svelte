@@ -1,5 +1,6 @@
 <script>
 export let quiz;
+export let urlTag;
 import ThreeBtns from "./ThreeBtns.svelte";
 
 
@@ -28,7 +29,7 @@ text-center
     >
     {quiz.title}
     </span>
-    <ThreeBtns {quiz} />            
+    <ThreeBtns {quiz} {urlTag}/>            
     </div><!--inner -div-->
 
 </div><!--outer-div-->

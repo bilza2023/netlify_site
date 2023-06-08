@@ -8,7 +8,6 @@ $: members = $membersStore;
 ////////////-store variables--///////
 
 import Clone from "./Clone.svelte";
-import MakeTest from "./MakeTest.svelte";
 import { fade } from 'svelte/transition';
 import QuizDel from "./QuizDel.svelte";
 import PublishErrors from './PublishBtn/PublishErrors.svelte';
@@ -27,11 +26,6 @@ function toggleShowClone(){
   showClone = !showClone;
 }
 
-let showTest = false;
-function toggleshowTest(){
-  showTest = !showTest;
-}
-
 let showQuizDel = false;
 function toggleshowQuizDel(){
   showQuizDel = !showQuizDel;
@@ -45,7 +39,21 @@ function toggleshowQuizDel(){
 
 <SaveBtn />  
   
- <div class="w-20">
+ 
+  <div class="w-20">
+    <a href= {`/show?quizId=${quiz._id}`} >
+    <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
+      <span class="text-2xl">🚀</span>
+      <span class="text-sm font-medium text-white">Launch</span>
+    </button>
+    </a>
+  </div>
+<PublishBtn />
+
+
+
+
+<div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
   on:click={toggleShowSettings}  >
     <span class="text-2xl">⚙️</span>
@@ -56,15 +64,6 @@ function toggleshowQuizDel(){
 </div>
 
 
-
-
-<div class="w-20">
-  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
-  on:click={toggleshowTest} >
-    <span class="text-2xl">🚀</span>
-    <span class="text-sm font-medium text-white">Test</span>
-  </button>
-</div>
 
 <div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
@@ -82,8 +81,38 @@ function toggleshowQuizDel(){
   </button>
 </div>
 
+<div class="w-20">
+<a href= {`/analytics?quizId=${quiz._id}`} >
+  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
+    <span class="text-2xl">📊</span>
+    <span class="text-sm font-medium text-white">Analytics</span>
+  </button>
+  </a>
+</div>
+<!--
+<div class="w-20">
+  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
+    <span class="text-2xl">🎨</span>
+    <span class="text-sm font-medium text-white">Theme</span>
+  </button>
+</div>
 
 
+<div class="w-20">
+  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
+    <span class="text-2xl">📄⚙️</span>
+    <span class="text-sm font-medium text-white">Page</span>
+  </button>
+</div>
+
+
+<div class="w-20">
+  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
+    <span class="text-2xl">📱</span>
+    <span class="text-sm font-medium text-white">Share</span>
+  </button>
+</div>
+-->
 
 </div>
 
@@ -104,10 +133,6 @@ on:click={()=>showErrors = false}>Hide</button>
 
 {#if showClone == true}
 <Clone  {quiz} {toggleShowClone}/>
-{/if}
-
-{#if showTest == true}
-<MakeTest  {quiz} {toggleshowTest}/>
 {/if}
 
 {#if showQuizDel == true}

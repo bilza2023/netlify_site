@@ -6,8 +6,8 @@ import { quizStore } from '../store';
 
 export default async function save(survey){
 //////////////////////////////////////
-const resp = await ajaxPost(`${BASE_URL}/template/save` ,survey);
-// quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
+const resp = await ajaxPost(`${BASE_URL}/survey/update` ,survey);
+quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
 
   if (resp.ok) {
       toast.push( "saved" );

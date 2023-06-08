@@ -17,7 +17,7 @@ let notFoundMsg = "Not Found";
 
 onMount(async () => {
   try {
-  pageStateStore.set('loading');
+    pageStateStore.set('loading');
   // const token = await localStorage.getItem("token");
  let  quizId = new URLSearchParams(location.search).get("quizId"); 
   const url = `${BASE_URL}/show/${quizId}`;
