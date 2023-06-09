@@ -1,6 +1,6 @@
 <script>
 
-import {errorsArrayStore} from "../../store";
+import {errorsArrayStore} from "../store";
 
 //errorsArrayStore is a smart pointer and $errorsArrayStore stores the value of the pointer in errors_Array , so now its variables are accessable directly.  
 $: errors_Array = $errorsArrayStore;

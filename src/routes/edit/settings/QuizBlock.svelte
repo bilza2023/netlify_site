@@ -1,6 +1,6 @@
 <script>
 import Tf from "../Tf.svelte";
-import Dispatch from "./Dispatch.svelte";
+// import Dispatch from "./Dispatch.svelte";
 import Th from "./Th.svelte";
 import FormRow from "../FormRow.svelte";
 import { fade } from 'svelte/transition';
@@ -61,9 +61,9 @@ bind:value={quiz.introText}></textarea>
 </FormRow>
  
   
-<FormRow title="Users"  >
+<!-- <FormRow title="Users"  >
 <Dispatch  />
-</FormRow>
+</FormRow> -->
 
 
 

@@ -8,12 +8,12 @@ import Footer from '$lib/cmp/Footer.svelte';
 // import { page } from '$app/stores';
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
-import ToolBar from './toolbar/ToolBar.svelte';
+import ToolBarEdit from './toolbar/ToolBarEdit.svelte';
+
 import AddQuestionBar from './addQuestions/AddQuestionBar.svelte';
 import { onMount } from 'svelte';
 import ajaxPost from "$lib/js/ajaxPost.js";
 import Loading from '$lib/cmp/Loading.svelte';
-
 
 ////////////-store variables--///////
 import { quizStore , membersStore } from './store';
@@ -31,17 +31,10 @@ function toggleShowSettings(){
       showSettings = !showSettings;
 }
 
-function unPublish(){
-      // quiz.published = false;
-        quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
-      // console.log("quiz.published",quiz.published);
-}
 
 onMount(async ()=>{
 
   try {
-//   debugger;
-      // const token =  localStorage.getItem("token");    
       const quizId = new URLSearchParams(location.search).get("quizId");
              //----------------------------------
 
@@ -69,6 +62,7 @@ onMount(async ()=>{
 /////////////////////////////////////////
 
 const save = async ()=>{
+
     isLoading = true; 
  //  debugger;
     const resp = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz});
@@ -92,7 +86,7 @@ const save = async ()=>{
 
  
 {#if quiz}
-<ToolBar  {save}  {toggleShowSettings}
+<ToolBarEdit  {save}  {toggleShowSettings}
 {showSettings} />
 {/if}
 

@@ -3,16 +3,24 @@ import { toast } from '@zerodevx/svelte-toast';
 import { BASE_URL } from '$lib/js/config.js';
 import { fade } from 'svelte/transition';
 import ajaxPost from '$lib/js/ajaxPost';
-
+import checkBeforePub from "../check/checkBeforePub";
 export let quiz;
-export let toggle;
-
+// export let openDivFn;
+// import {errorsArrayStore,showErrorsStore} from "../store.js";
+import {showErrorsStore,errorsArrayStore,showTestStore,showCloneStore,showQuizDelStore} from "../store";
   let newPRojectName = "";
 
 const handler = async(quizType)=>{
-  // const token = localStorage.getItem('token');
-  // quiz.questions = questions; //-update
-  // debugger;
+// debugger;
+  // showTestStore.set(false);return;
+  const errorsArray = checkBeforePub(quiz);
+  if (errorsArray.length > 0){
+  errorsArrayStore.set(errorsArray);
+  showErrorsStore.set(true);
+  showTestStore.set(false);
+  return;
+  }
+  
   const resp = await ajaxPost(`${BASE_URL}/survey/maketest` , { id : quiz._id ,title :newPRojectName});
   
   if (resp.ok) {
@@ -20,7 +28,6 @@ const handler = async(quizType)=>{
       const data = await resp.json();
       // debugger;
       toast.push( "New Test Created" );
-      toggle();
 
   }else {
       const data = await resp.json();

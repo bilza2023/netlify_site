@@ -5,7 +5,7 @@ import { fade } from 'svelte/transition';
 import ajaxPost from '$lib/js/ajaxPost';
 
 export let quiz;
-export let toggleShowClone;
+export let clk;
 
   let newPRojectName = "";
 
