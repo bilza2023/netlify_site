@@ -4,7 +4,7 @@
 // $: quiz = $quizStore; 
 // $: questions = $quizStore.questions;
 
-import Thq from "./Thq.svelte";
+import Thq from "../common/Thq.svelte";
 import FormRow from "../../FormRow.svelte";
 import Options from "./options.svelte";
 import { fade } from 'svelte/transition';
@@ -18,7 +18,7 @@ export let ser;
 
 </script>
 
-<Thq title={question.content}  id={question.id} {ser} >
+<Thq title={question.content}  id={question.id} {ser} icon=&#x1F531;>
 
 <div in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} 
  class="border-2 border-gray-500 p-1 m-0 mt-0" >

@@ -3,7 +3,7 @@ import { quizStore  } from '../../store';
 quizStore.subscribe(value => quiz = value);
 $: quiz = $quizStore; 
 
-
+ 
 // export let index;
 export let id;
 

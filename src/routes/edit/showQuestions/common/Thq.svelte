@@ -12,14 +12,24 @@ const  toggleVisibility = ()=> visible = !visible;
 <div class="flex  rounded-t-lg border border-gray-400 p-0">
 
  <div class="flex items-center justify-center    w-3/12  p-0 bg-gray-900 text-xl rounded-t-lg border border-gray-400 ">
-        {`${icon} #${ser + 1} `}
-</div>
+        {`${ser + 1}`}
+</div> 
 
      <div class="  text-center w-full p-2">
         {title} 
     </div>
-     
+
+
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div class="rounded-t-lg border border-gray-400 p-2 
+    hover:cursor-pointer hover:bg-gray-600 active:bg-gray-800 bg-gray-900 w-1/12 text-center"
+    >
+        {icon}
+    </div>
+
+
     <QDel {id}/>
+    
     
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="rounded-t-lg border border-gray-400 p-2 

@@ -1,6 +1,6 @@
 <script>
 
-import Thq from "./common/Thq.svelte";
+import Thq from "../common/Thq.svelte";
 import FormRow from "../../FormRow.svelte";
 
 import { fade } from 'svelte/transition';

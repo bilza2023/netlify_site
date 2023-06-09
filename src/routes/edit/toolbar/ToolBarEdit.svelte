@@ -1,10 +1,6 @@
 <script>
 ////////////-store variables--///////
-import { quizStore , membersStore } from '../store';
-quizStore.subscribe(value => quiz = value);
-membersStore.subscribe(value => members = Object.values(value));
-$: quiz = $quizStore; 
-$: members = $membersStore;
+
 ////////////-store variables--///////
 
 import Clone from "./Clone.svelte";
@@ -12,22 +8,30 @@ import MakeTest from "./MakeTest.svelte";
 import { fade } from 'svelte/transition';
 import QuizDel from "./QuizDel.svelte";
 import PublishErrors from '../ErrorsArray/PublishErrors.svelte';
-import {showErrorsStore,showTestStore,showCloneStore,showQuizDelStore} from "../store";
+
 import save from "./save";
 import ToolBar from '$lib/toolbar/ToolBar.svelte';
 import HideIfNot from '$lib/cmp/HideIfNot.svelte';
 import ToolBarBtn from '$lib/toolbar/ToolBarBtn.svelte';
 
+import {quizStore ,showErrorsStore,showTestStore,showCloneStore,showQuizDelStore} from "../store";
 
+$: quiz = $quizStore; 
 $: showErrors = $showErrorsStore;
-// $: showTest = $showTestStore;
 let showTest;
-$: {
+ $: {
   showTest = $showTestStore;
-  console.log("showTest:", showTest);
+  // console.log("showTest:", showTest);
+ }
+// $: showClone = $showCloneStore;
+let showClone;
+$: {
+  showClone = $showCloneStore;
 }
-$: showClone = $showCloneStore;
-$: showQuizDel = $showQuizDelStore;
+let showQuizDel;
+$: {
+  showQuizDel = $showQuizDelStore;
+}
 showErrorsStore.set(false);
  
  
@@ -43,10 +47,10 @@ showErrorsStore.set(false);
 clk={()=> showTestStore.set(!$showTestStore) } falseColor={"text-gray-600"}/>
 
 <ToolBarBtn  icon={"🐑"} title="Clone" tf={showClone} trueColor={"text-white"}  falseColor={"text-gray-600"}
-clk={()=> showClone = !showClone} />
+clk={()=> showCloneStore.set(!$showCloneStore)} />
 
-<ToolBarBtn  icon={"🗑️"} title="Delete" tf={showQuizDel} trueColor={"text-white"} falseColor={"text-gray-600"}
-clk={()=>showQuizDel = !showQuizDel } />
+<ToolBarBtn  icon={"🗑️"} title="Delete" tf={showQuizDel} trueColor= {"text-white"} falseColor={"text-gray-600"}
+ clk={()=>showQuizDelStore.set(!$showCloneStore) } />
 
 </ToolBar>
 
@@ -56,30 +60,27 @@ clk={()=>showQuizDel = !showQuizDel } />
 <div class="w-full bg-gray-800">
 
 {#if showErrors}
-<!-- <HideIfNot ifNot={showErrors}> -->
-<div class="p-2 m-2 bg-gray-600 border-white border-2 rounded-md"
-in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} >
-<PublishErrors />
-<button 
-class="bg-gray-700 rounded-md m-1 p-1  hover:bg-gray-600 active:bg-gray-800"
-on:click={()=>showErrorsStore.set(false)}>Hide</button>
-</div>
+  <!-- <HideIfNot ifNot={showErrors}> -->
+  <div class="p-2 m-2 bg-gray-600 border-white border-2 rounded-md"
+  in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} >
+  <PublishErrors />
+  <button 
+  class="bg-gray-700 rounded-md m-1 p-1  hover:bg-gray-600 active:bg-gray-800"
+  on:click={()=>showErrorsStore.set(false)}>Hide</button>
+  </div>
 {/if}
-<!-- </HideIfNot> -->
 
-<HideIfNot ifNot={showClone}>
-<Clone  {quiz} />
-</HideIfNot>
+
+{#if showClone == true}
+  <Clone  {quiz} />
+{/if}
 
 {#if showTest == true}
-<!-- <HideIfNot ifNot={showTest}> -->
-<MakeTest  {quiz}  />
-<!-- </HideIfNot> -->
+  <MakeTest  {quiz}  />
 {/if}
 
 <HideIfNot ifNot={showQuizDel}>
-<QuizDel  {quiz} />
+  <QuizDel  {quiz} />
 </HideIfNot>
-
 
 </div>

@@ -1,6 +1,6 @@
 <script>
 
-import Thq from "./common/Thq.svelte";
+import Thq from "../common/Thq.svelte";
 import FormRow from "../../FormRow.svelte";
 
 import { fade } from 'svelte/transition';
@@ -11,7 +11,7 @@ export let ser;
 
 </script>
 
-<Thq title={question.content}  id={question.id} {ser} icon= &#x2211; >
+<Thq title={question.content}  id={question.id} {ser} icon= ❶  >
 
 <div in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} 
  class="border-2 border-gray-500 p-1 m-0 mt-0" >

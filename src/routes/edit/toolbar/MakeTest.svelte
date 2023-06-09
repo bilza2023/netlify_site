@@ -7,7 +7,7 @@ import checkBeforePub from "../check/checkBeforePub";
 export let quiz;
 // export let openDivFn;
 // import {errorsArrayStore,showErrorsStore} from "../store.js";
-import {showErrorsStore,errorsArrayStore,showTestStore,showCloneStore,showQuizDelStore} from "../store";
+import {showErrorsStore,errorsArrayStore,showTestStore} from "../store";
   let newPRojectName = "";
 
 const handler = async(quizType)=>{

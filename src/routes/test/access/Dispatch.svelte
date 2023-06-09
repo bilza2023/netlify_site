@@ -1,5 +1,5 @@
 <script>
-import DispatchBlock from "./DispatchBlock.svelte";
+import DispatchBlock from "../../edit/settings/DispatchBlock.svelte";
 let hide = true;
 </script>
 <!--------------------------------------->

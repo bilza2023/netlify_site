@@ -3,13 +3,19 @@ import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
 import { quizStore } from '../store';
 
+// let quiz = quizStore.subscribe( value => {quiz = value} );
 
-export default async function save(survey){
+let quiz;
+const unsubscribe = quizStore.subscribe((value) => {
+  quiz = value;
+});
+
+export default async function save(){
 //////////////////////////////////////
-const resp = await ajaxPost(`${BASE_URL}/template/save` ,survey);
+const resp = await ajaxPost(`${BASE_URL}/template/save` ,{survey: quiz});
 // quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
-
   if (resp.ok) {
+      // quizStore.set()
       toast.push( "saved" );
   }else {
       const data = await resp.json();
@@ -18,5 +24,5 @@ const resp = await ajaxPost(`${BASE_URL}/template/save` ,survey);
   }
 
 
-
+unsubscribe();
 }

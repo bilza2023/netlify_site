@@ -3,24 +3,24 @@ import { toast } from '@zerodevx/svelte-toast';
 import { BASE_URL } from '$lib/js/config.js';
 import { fade } from 'svelte/transition';
 import ajaxPost from '$lib/js/ajaxPost';
+import {showCloneStore} from "../store";
 
 export let quiz;
-export let clk;
 
   let newPRojectName = "";
 
 const handler = async(quizType)=>{
-  // const token = localStorage.getItem('token');
-  // quiz.questions = questions; //-update
-  // debugger;
-  const resp = await ajaxPost(`${BASE_URL}/survey/clone` , { id : quiz._id ,title :newPRojectName});
+// showCloneStore.set(false);
+// return;
+  
+    const resp = await ajaxPost(`${BASE_URL}/template/clone` , { id : quiz._id ,title :newPRojectName});
   
   if (resp.ok) {
       newPRojectName = "";
       const data = await resp.json();
       // debugger;
       toast.push( "Cloned" );
-      toggleShowClone();
+      showCloneStore.set(false);
 
   }else {
       const data = await resp.json();
