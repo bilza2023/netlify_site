@@ -1,21 +1,21 @@
 <script>
 ////////////-store variables--///////
 import { quizStore , membersStore } from '../store';
+
 quizStore.subscribe(value => quiz = value);
 membersStore.subscribe(value => members = Object.values(value));
 $: quiz = $quizStore; 
 $: members = $membersStore;
+
 ////////////-store variables--///////
 
 import Clone from "./Clone.svelte";
-import { fade } from 'svelte/transition';
 import QuizDel from "./QuizDel.svelte";
-import PublishErrors from './PublishBtn/PublishErrors.svelte';
-import PublishBtn from './PublishBtn/PublishBtn.svelte';
-import {showErrorsStore} from "../store";
+// import RunErrors from './runBtn/RunErrors.svelte';
+import RunBtn from './runBtn/RunBtn.svelte';
+import RunBtnDivs from './runBtn/RunBtnDivs.svelte';
 import SaveBtn from './SaveBtn.svelte';
 
-$: showErrors = $showErrorsStore;
 
 export let toggleShowSettings;
 export let showSettings;
@@ -40,18 +40,6 @@ function toggleshowQuizDel(){
 <SaveBtn />  
   
  
-  <div class="w-20">
-    <a href= {`/show?quizId=${quiz._id}`} >
-    <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
-      <span class="text-2xl">🚀</span>
-      <span class="text-sm font-medium text-white">Launch</span>
-    </button>
-    </a>
-  </div>
-<PublishBtn />
-
-
-
 
 <div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
@@ -64,14 +52,9 @@ function toggleshowQuizDel(){
 </div>
 
 
+<RunBtn />
 
-<div class="w-20">
-  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
-  on:click={toggleShowClone} >
-    <span class="text-2xl">🐑</span>
-    <span class="text-sm font-medium text-white">Clone</span>
-  </button>
-</div>
+
 
 <div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
@@ -89,30 +72,14 @@ function toggleshowQuizDel(){
   </button>
   </a>
 </div>
-<!--
-<div class="w-20">
-  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
-    <span class="text-2xl">🎨</span>
-    <span class="text-sm font-medium text-white">Theme</span>
-  </button>
-</div>
 
 
-<div class="w-20">
-  <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
-    <span class="text-2xl">📄⚙️</span>
-    <span class="text-sm font-medium text-white">Page</span>
-  </button>
-</div>
-
-
-<div class="w-20">
+<!-- <div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900">
     <span class="text-2xl">📱</span>
     <span class="text-sm font-medium text-white">Share</span>
   </button>
-</div>
--->
+</div> -->
 
 </div>
 
@@ -120,20 +87,11 @@ function toggleshowQuizDel(){
 
 <div class="w-full bg-gray-800">
 
-{#if showErrors==true}
-<div class="p-2 m-2 bg-gray-600 border-white border-2 rounded-md"
-in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} >
-<PublishErrors />
-<button 
-class="bg-gray-700 rounded-md m-1 p-1  hover:bg-gray-600 active:bg-gray-800"
-on:click={()=>showErrors = false}>Hide</button>
-</div>
-{/if}
-
+<RunBtnDivs />
 
 {#if showClone == true}
 <Clone  {quiz} {toggleShowClone}/>
-{/if}
+{/if}''
 
 {#if showQuizDel == true}
 <QuizDel  {quiz} {toggleshowQuizDel}/>

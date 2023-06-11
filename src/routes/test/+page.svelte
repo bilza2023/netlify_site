@@ -3,6 +3,8 @@
 import Questions from './showQuestions/Questions.svelte';
 
 import QuizBlock from "./settings/QuizBlock.svelte";
+import Teams from "./settings/Teams.svelte";
+import Timings from "./settings/Timings.svelte";
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 // import { page } from '$app/stores';
@@ -90,6 +92,10 @@ onMount(async ()=>{
 {/if}
 
 <br>
+<Teams />
+<br>
+<!-- <Timings />
+<br> -->
 
 
 <br>

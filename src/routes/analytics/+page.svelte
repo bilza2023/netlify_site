@@ -17,29 +17,26 @@ import { onMount } from 'svelte';
 onMount(async () => {
   try {
     
-     await getResults();
-     studentResports = await getStudentReports(quiz,results);
-    //  console.log("quiz",quiz);
-    //  console.log("results",results);
-     pageState = "loaded";
+  const  quizId = new URLSearchParams(location.search).get("quizId");
+  const response = await ajaxPost(`${BASE_URL}/result/analytics`,{quizId});
+
+          if (response.ok){
+            const data = await response.json();
+            results = data.results;
+            quiz = data.quiz;
+            // studentResports = []
+              // debugger;
+            studentResports = await getStudentReports(quiz,results);
+            pageState = "loaded";
+            return;
+          }
   } catch (error) {
     // console.error(error);
     toast.push("page load error");
  }
 });
 
-const getResults = async () => {
-  // debugger;
-  const  quizId = new URLSearchParams(location.search).get("quizId");
-  const response = await ajaxPost(`${BASE_URL}/result/analytics`,{quizId});
-  
-          if (response.ok){
-            const data = await response.json();
-            results = data.results;
-            quiz = data.quiz;
-            return;
-          }
-}; 
+
 </script>
 
 <Nav/>

@@ -3,7 +3,7 @@ import getQuestionCorrectOptions from "./getQuestionCorrectOptions";
 import calcGTotal from "./getGTotal";
 
 export default async function getStudentReports(quiz,results){
-    // debugger;
+    
     //--just make a copy of results object.
     const studentReports = [...results];
 
@@ -12,9 +12,11 @@ export default async function getStudentReports(quiz,results){
     //--report = student report card
         const report = studentReports[i];
         for (let j = 0; j < report.answers.length; j++) {
+          // debugger;
             const answer = report.answers[j];
             answer.content = getQuestionContent(quiz, answer.questionId)
             answer.correctOptions = getQuestionCorrectOptions(quiz, answer.questionId);
+            answer.marksObtained = gradeMCQ(answer);
             answer.marksObtained = gradeMCQ(answer);
         }
       //---now send the report

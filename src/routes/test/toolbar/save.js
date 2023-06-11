@@ -4,17 +4,18 @@ import { toast } from '@zerodevx/svelte-toast';
 import { quizStore } from '../store';
 
 
-export default async function save(survey){
+export default async function save(){
 //////////////////////////////////////
-const resp = await ajaxPost(`${BASE_URL}/survey/update` ,survey);
-quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
+quizStore.update(currentQuiz => ({ ...currentQuiz, published: true }));
+
+const resp = await ajaxPost(`${BASE_URL}/survey/save` ,{test : quizStore} );
 
   if (resp.ok) {
-      toast.push( "saved" );
+      toast.push( "New Test Running" );
   }else {
       const data = await resp.json();
 
-      toast.push( data.msg );
+      toast.push( "Failed to Run Test" );
   }
 
 

@@ -1,7 +1,7 @@
 <script>
 import Tf from "../Tf.svelte";
 // import Dispatch from "./Dispatch.svelte";
-import Th from "./Th.svelte";
+import Th from "$lib/cmp/Th.svelte";
 import FormRow from "../FormRow.svelte";
 import { fade } from 'svelte/transition';
 
