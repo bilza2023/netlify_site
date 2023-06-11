@@ -27,8 +27,17 @@ const deleteFn = async ()=>{
 
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="text-3xl border-separate border-2 border-gray-500 rounded-md p-1 bg-gray-800 hover:cursor-pointer
+    hover:bg-green-900" on:click={()=>deleteFn()}>
+        🚀
+    </div>
+
+
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div class="text-3xl border-separate border-2 border-gray-500 rounded-md p-1 bg-gray-800 hover:cursor-pointer
     hover:bg-red-900" on:click={()=>deleteFn()}>
         🗑️
     </div>
+    
+    
     
 </div>

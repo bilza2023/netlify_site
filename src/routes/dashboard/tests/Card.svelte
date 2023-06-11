@@ -1,7 +1,7 @@
 <script>
 export let quiz;
 export let urlTag;
-import ThreeBtns from "../ThreeBtns.svelte";
+import ThreeBtns from "./ThreeBtns.svelte";
 
 
 

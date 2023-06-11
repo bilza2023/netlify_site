@@ -6,16 +6,18 @@ import Footer from '$lib/cmp/Footer.svelte';
 // import H1 from '$lib/cmp/H1.svelte';
 import Table from "./Table.svelte";
 import DashboardBtns from './DashboardBtns.svelte';
-import Cards from "./Cards.svelte";
+import Cards from "./templ/Cards.svelte";
 import RunningCards from "./running/RunningCards.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import ajaxGet from "$lib/js/ajaxGet.js";
 import { toast } from '@zerodevx/svelte-toast';
 import getRunning from "./getRunning";
 import TestCards from './tests/TestCards.svelte';
+import NewTempl from './NewTempl.svelte';
 
-import {runningStore} from "./dashboardStore";
+import {runningStore,showNewTemplStore} from "./dashboardStore";
 $: running = $runningStore;
+$: showNewTempl = $showNewTemplStore;
 
 
 let tests = null;
@@ -121,14 +123,11 @@ const populate2 = async () =>{
 
 <!--page div-->
 
-{#if isLogin == false}
-<div class="bg-gray-800 text-white m-0 py-0 px-6 min-h-screen flex justify-center  " >
-<div class="w-11/12">
-<h1><a href="/login">Please login</a></h1>
-</div>
-</div>
 
-{:else}
+{#if isLogin}
+            {#if showNewTempl}
+            <NewTempl />
+            {/if}
 <DashboardBtns 
 {showTemplates}
 {showTests}

@@ -8,12 +8,7 @@ import ThreeBtns from "./ThreeBtns.svelte";
 </script>
 
 <div class="w-full bg-gray-600 rounded-md p-2 m-1 
-border-4 max-h-32
-{quiz.quizType == 'quiz' ? 'border-blue-700' : 'border-green-400'}
-
-text-center
-
-"><!--outer -div-->
+border-4 max-h-32 border-blue-700 text-center "><!--outer -div-->
 
     <div class="flex flex-col"><!--inner -div-->
                 <div class="mb-2">

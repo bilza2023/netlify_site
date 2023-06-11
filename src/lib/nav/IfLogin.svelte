@@ -5,8 +5,6 @@ export let logoutFn;
 
 <div class="flex" >
 
-<Card url={'/create'} icon=&#x1F4A1; title="Create" />
-
 <Card url={'/dashboard'} icon=&#x1F5A5; title="DashBoard" />
 
 <Card url={'/teams'} icon=&#x1F46C; title="Teams" />
