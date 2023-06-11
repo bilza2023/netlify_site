@@ -5,14 +5,19 @@ import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 // import H1 from '$lib/cmp/H1.svelte';
 import Table from "./Table.svelte";
-import ToolBar from "./toolbar/ToolBar.svelte";
+import DashboardBtns from './DashboardBtns.svelte';
 import Cards from "./Cards.svelte";
+import RunningCards from "./running/RunningCards.svelte";
 import { BASE_URL } from '$lib/js/config.js';
 import ajaxGet from "$lib/js/ajaxGet.js";
 import { toast } from '@zerodevx/svelte-toast';
+import getRunning from "./getRunning";
+import TestCards from './tests/TestCards.svelte';
 
-$: quizzes = [];
-// let showTable = false;
+import {runningStore} from "./dashboardStore";
+$: running = $runningStore;
+
+
 let tests = null;
 let templates = null;
 let running = null;
@@ -20,6 +25,7 @@ let running = null;
 let showTemplates = true;
 let showTests = false;
 let showRunning = false;
+
 
 const tooglePanel = (tag) => {
   switch (tag) {
@@ -95,27 +101,7 @@ const populate2 = async () =>{
     const data = await resp.json();
     // console.log(data);
     tests = data.surveys; 
-    populate3();
-  }else {
-    toast.push("failed to load Tests");
-  }
-   // console.log("quizzes",quizzes);
-
- } catch (error) {
-    // console.error(error);
-    toast.push("failed to load..");
- }
-}
-const populate3 = async () =>{
- try {
- //  debugger;
-
-  const resp = await ajaxGet( `${BASE_URL}/survey/page/10/0`);
-  if(resp.ok){
-    const data = await resp.json();
-    // console.log(data);
-    running = data.surveys; 
- 
+    getRunning();
   }else {
     toast.push("failed to load Tests");
   }
@@ -143,22 +129,12 @@ const populate3 = async () =>{
 </div>
 
 {:else}
-
-<div class="flex justify-center">
-
-<button class=" text-center p-2 m-1 rounded-md text-white text-1xl 
-bg-blue-700 my-4" on:click={() => tooglePanel("templates")}
->Templates</button>
-<button class=" text-center p-2 m-1 rounded-md text-white text-1xl 
-bg-red-700 my-4" on:click={() => tooglePanel("tests")}
->Tests</button>
-<button class=" text-center p-2 m-1 rounded-md text-white text-1xl 
-bg-green-700 my-4" on:click={() => tooglePanel("running")}
->Running</button>
-
-
-</div>
-
+<DashboardBtns 
+{showTemplates}
+{showTests}
+{showRunning}
+{tooglePanel}
+/>
 <div class="bg-gray-800 w-full">
             
             {#if showTemplates == true}
@@ -166,10 +142,10 @@ bg-green-700 my-4" on:click={() => tooglePanel("running")}
             {/if}
 
             {#if showTests == true}
-              <Cards quizzes={tests} urlTag={"test"} />
+              <TestCards quizzes={tests} urlTag={"test"} />
             {/if}
             {#if showRunning == true}
-              <Cards quizzes={running} urlTag={"show"} />
+              <RunningCards quizzes={running} urlTag={"show"} />
             {/if}
 
 </div>          

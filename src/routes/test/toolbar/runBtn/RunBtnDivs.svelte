@@ -7,6 +7,7 @@ import {quizStore} from "../../store";
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
 
+let newName = "New Process";
 $:  showErrors = $showErrorsStore;
 $:  showRun = $showRunStore;
 $:  errorsArray = $errorsArrayStore;
@@ -15,9 +16,12 @@ $:  quiz = $quizStore;
 
 const run  = async ()=>{
 // debugger;
-quizStore.update(currentQuiz => ({ ...currentQuiz, published: true }));
+// quizStore.update(currentQuiz => ({ ...currentQuiz, title: true }));
+const survey = {...quiz };
+survey.title = newName;
+survey.createdAt =  new Date();;
 //////////////////////////////////////
-const resp = await ajaxPost(`${BASE_URL}/survey/save` ,{survey : quiz});
+const resp = await ajaxPost(`${BASE_URL}/survey/save` ,{survey});
   
   if (resp.ok) {
       toast.push( "Test is Running now" );
@@ -46,9 +50,12 @@ on:click={()=> showErrorsStore.set(false) }>Hide</button>
 in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} >
 
 <br/>
-    <span class="text-white text-xl ">You Test is Ready to Run</span>
+    
+    <input class="w-full bg-gray-700 text-white rounded-md px-10" 
+    type="text" bind:value={newName}>
+
     <button class="bg-red-700 text-white rounded-md p-2 m-2"
-    on:click={run}>Run   </button>
+    on:click={run}>Run</button>
     <button class="bg-green-700 text-white rounded-md p-2 m-2"
     on:click={()=>showRunStore.set(false)}>
     Cancel</button>
