@@ -4,7 +4,9 @@ import { toast } from '@zerodevx/svelte-toast';
 import { BASE_URL } from '$lib/js/config.js';
 import ajaxPost from "$lib/js/ajaxPost.js";
 
-import {showNewTemplStore} from "./dashboardStore";
+import {templatesStore,showNewTemplStore} from "./dashboardStore";
+
+
 let newPRojectName = "";
 
 const handler = async( )=>{
@@ -13,21 +15,21 @@ const handler = async( )=>{
       return;
   }
   // debugger;
-  const response = await ajaxPost( `${BASE_URL}/survey/new` , {title :newPRojectName} );
+  const response = await ajaxPost( `${BASE_URL}/template/new` , {title :newPRojectName} );
 
   if (response.ok) {
       newPRojectName = "";
-      const data = await response.json();
-    //   const survey  = data.survey;
-    showNewTemplStore.set(false);
       // debugger;
-    //   goto( `/edit?quizId=${survey._id}`);
-      toast.push( "Success" );
+      const data = await response.json();
+      templatesStore.update( curr =>{return [...curr,data.template]})
+      showNewTemplStore.set(false);
+      toast.push( "New Template Created" );
 
   }else {
+      //  debugger;
       const data = await response.json();
-    //   toast.push( data.msg );
-      toast.push( data.errormsg );
+       console.log(data);
+      toast.push( data.message );
   }
 
 }

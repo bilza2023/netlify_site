@@ -11,6 +11,7 @@ const unsubscribe = quizStore.subscribe((value) => {
 });
 
 export default async function save(){
+// debugger;
 //////////////////////////////////////
 const resp = await ajaxPost(`${BASE_URL}/template/save` ,{survey: quiz});
 // quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
@@ -20,7 +21,7 @@ const resp = await ajaxPost(`${BASE_URL}/template/save` ,{survey: quiz});
   }else {
       const data = await resp.json();
 
-      toast.push( data.msg );
+      toast.push( data.errorMsg );
   }
 
 

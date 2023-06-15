@@ -15,14 +15,13 @@ import getRunning from "./getRunning";
 import TestCards from './tests/TestCards.svelte';
 import NewTempl from './NewTempl.svelte';
 
-import {runningStore,showNewTemplStore} from "./dashboardStore";
+import {templatesStore,runningStore,showNewTemplStore} from "./dashboardStore";
 $: running = $runningStore;
+$: templates = $templatesStore;
 $: showNewTempl = $showNewTemplStore;
 
 
 let tests = null;
-let templates = null;
-let running = null;
 
 let showTemplates = true;
 let showTests = false;
@@ -80,8 +79,7 @@ const populate = async () =>{
   const resp = await ajaxGet( `${BASE_URL}/survey/pagetemplate/10/0`);
   if(resp.ok){
     const data = await resp.json();
-    // console.log(data);
-    templates = data.surveys; 
+    templatesStore.set(data.surveys); 
     populate2();
   }else {
     toast.push("failed to load Templates");

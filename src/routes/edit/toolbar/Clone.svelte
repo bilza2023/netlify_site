@@ -12,7 +12,7 @@ export let quiz;
 const handler = async(quizType)=>{
 // showCloneStore.set(false);
 // return;
-  
+  // debugger;
     const resp = await ajaxPost(`${BASE_URL}/template/clone` , { id : quiz._id ,title :newPRojectName});
   
   if (resp.ok) {
