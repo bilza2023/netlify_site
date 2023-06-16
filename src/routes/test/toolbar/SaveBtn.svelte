@@ -1,23 +1,28 @@
 <script>
-async function save(){
-//////////////////////////////////////
-quizStore.update(currentQuiz => ({ ...currentQuiz, published: true }));
+import ajaxPost from '$lib/js/ajaxPost';
+import { BASE_URL } from '$lib/js/config.js';
+import { toast } from '@zerodevx/svelte-toast';
+import { quizStore } from '../store';
 
-const resp = await ajaxPost(`${BASE_URL}/survey/save` ,{test : quizStore} );
+$: quiz = $quizStore;
 
-  if (resp.ok) {
-      toast.push( "New Test Running" );
-  }else {
-      const data = await resp.json();
+async function save( ){
+  // debugger;
+  //////////////////////////////////////
+  quizStore.update(currentQuiz => ({ ...currentQuiz, published: true }));
+  
+  // console.log("quiz",quiz);
+  // return;
+  const resp = await ajaxPost(`${BASE_URL}/test/save` ,{test : quiz} );
 
-      toast.push( "Failed to Run Test" );
+    if (resp.ok) {
+        toast.push( "Test saved" );
+    }else {
+        const data = await resp.json();
+
+        toast.push( "Failed to Save Test" );
+    }
   }
-
-
-
-}
-
-
 </script>
 
 <div class="w-20">
