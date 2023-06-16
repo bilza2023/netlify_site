@@ -17,11 +17,11 @@ async function deleteAllResults (){
             {quizId : quiz._id} );
  if (resp.ok == true){
       // const data = await resp.json();
-        toast.push("All project responses deleted"); 
+        toast.push("All responses were deleted"); 
         // goto("/dashboard");
       }else {
       // const data = await resp.json();
-        toast.push("failed to delete project responses");
+        toast.push("failed to delete responses");
       }
 
 
@@ -30,30 +30,29 @@ async function deleteAllResults (){
 const deleteQuiz = async ()=>{
   // debugger;
   // const token = localStorage.getItem('token');
-  const resp = await ajaxPost(`${BASE_URL}/survey/delete`,{quizId : quiz._id});
+  const resp = await ajaxPost(`${BASE_URL}/test/delete`,{id : quiz._id});
  // debugger;
       if (resp.ok == true){
-      const data = await resp.json();
+      // const data = await resp.json();
         toast.push('deleted'); 
         goto("/dashboard");
       }else {
       const data = await resp.json();
-        toast.push("failed to delete" );
+        toast.push(data.message );
       }
 }//del fn
 
 
 </script>
-<br/>
 
 <div class="w-full p-2  text-center  bg-red-900 
 rounded-md border-2 border-gray-500   "
 in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} >
 
-<h1 class="m-1 text-slate-200 text-2xl underline">Delete Quiz</h1>
+<h1 class="m-1 text-slate-200 text-2xl underline">Delete Test</h1>
 
     <div class="flex gap-2 m-4 justify-center items-center bg-gray-900 rounded-md">
-    <p class="text-white text-xl ">Deleting Your Quiz will also delete all your results / responses. ARE YOU SURE</p>
+    <p class="text-white text-xl ">Deleting Your Test will also delete all your results / responses. ARE YOU SURE</p>
 
     <button class="bg-red-700 text-white rounded-md p-2 m-2"
     on:click={()=> visible = !visible}>I Know</button>
@@ -69,9 +68,9 @@ in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} >
 
     <button class="bg-red-400 text-white rounded-md p-2 m-2 hover:bg-red-300 active:bg-red-900"
     on:click={deleteAllResults}>
-    Delete Results</button>
+    Delete Responses</button>
     <button class="bg-red-400 text-white rounded-md p-2 m-2 hover:bg-red-300 active:bg-red-900"
-    on:click={deleteQuiz}>Delete Quiz</button>
+    on:click={deleteQuiz}>Delete Test</button>
     </div>
 {/if}
 

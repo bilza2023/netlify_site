@@ -13,13 +13,13 @@ $:  showRun = $showRunStore;
 $:  errorsArray = $errorsArrayStore;
 $:  quiz = $quizStore;
 
-
 const run  = async ()=>{
 // debugger;
 // quizStore.update(currentQuiz => ({ ...currentQuiz, title: true }));
 const survey = {...quiz };
 survey.title = newName;
-survey.createdAt =  new Date();;
+survey.published = true;
+survey.createdAt =  new Date();
 //////////////////////////////////////
 const resp = await ajaxPost(`${BASE_URL}/survey/save` ,{survey});
   
