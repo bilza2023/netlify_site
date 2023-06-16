@@ -46,7 +46,7 @@ const addMCQ = () => {
      
     <div class="flex">
     <Btn title="MCQ" clickHandler={addMCQ} />  
-    <Btn title="Inputs"   clickHandler={()=>toggleHandler("showInputs")}/>   
+    <!-- <Btn title="Inputs"   clickHandler={()=>toggleHandler("showInputs")}/>    -->
 
     </div>
     
@@ -66,9 +66,9 @@ const addMCQ = () => {
 <McqTypes />
 {/if}
 
-{#if showInputs}
+<!-- {#if showInputs}
 <InputTypes />
-{/if}
+{/if} -->
 
 
 

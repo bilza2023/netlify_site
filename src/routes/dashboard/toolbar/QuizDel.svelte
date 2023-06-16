@@ -20,8 +20,10 @@ async function deleteAllResults (){
         toast.push(data.msg); 
         // goto("/dashboard");
       }else {
+      debugger;
       const data = await resp.json();
-        toast.push( data.msg );
+      // console.log("data", data);
+        toast.push( data.message );
       }
 
 
@@ -38,7 +40,7 @@ const deleteQuiz = async ()=>{
         goto("/dashboard");
       }else {
       const data = await resp.json();
-        toast.push( data.msg );
+        toast.push( data.message );
       }
 }//del fn
 

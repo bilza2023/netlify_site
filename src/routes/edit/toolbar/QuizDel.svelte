@@ -24,7 +24,8 @@ const deleteQuiz = async ()=>{
         goto("/dashboard");
       }else {
       const data = await resp.json();
-        toast.push("failed to delete" );
+      // debugger;
+        toast.push(data.message);
       }
 }//del fn
 
@@ -41,9 +42,14 @@ in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} >
     in:fade={{ delay: 300 }} out:fade={{ delay: 300 }}>
     <p class="text-white text-xl ">Are you sure:</p>
 
-
+    <div>
     <button class="bg-red-700 text-white rounded-md p-2 m-2 hover:bg-red-300 active:bg-red-900"
-    on:click={deleteQuiz}>Delete Template</button>
+    on:click={deleteQuiz}>Delete</button>
+    <button class="bg-green-700 text-white rounded-md p-2 m-2 hover:bg-green-300 active:bg-green-900"
+    on:click={()=>showQuizDelStore.set(false)}>Cancel</button>
+    </div>
+
+
     </div>
 
 

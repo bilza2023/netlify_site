@@ -25,6 +25,7 @@ const handler = async(quizType)=>{
   
   if (resp.ok) {
       newPRojectName = "";
+      showTestStore.set(false);
       const data = await resp.json();
       // debugger;
       toast.push( "New Test Created" );
@@ -50,8 +51,11 @@ rounded-md border-2 border-white ">
 <input class="bg-gray-700 text-white  w-10/12 m-1 rounded-lg"  type="text" bind:value={newPRojectName} >
 
 <br/>
+      <div >
+      <button class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 active:from-green-700 active:to-green-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={()=>handler("quiz")}>Create Test</button>
+      <button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={()=>showTestStore.set(false)}>Cancel</button>
+      </div>
 
-<button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={()=>handler("quiz")}>Create Test</button>
 
 </div>
 </div>
