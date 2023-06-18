@@ -3,6 +3,7 @@ import { BASE_URL } from '$lib/js/config.js';
 import Nav from '$lib/nav/Nav.svelte';
 import Loading from '$lib/cmp/Loading.svelte';
 import Indl from './indl/Indl.svelte';
+import ToolBar from './toolbar/ToolBar.svelte';
 import ajaxPost from "$lib/js/ajaxPost.js";
 import { toast } from '@zerodevx/svelte-toast';
 import check from './check/check.js';
@@ -46,7 +47,7 @@ onMount(async () => {
 </script>
 
 <Nav/>
-
+<ToolBar />
 <div class="wrapper bg-gray-800 text-white w-full min-h-screen p-6 ">
 
 {#if pageState == "loading" }

@@ -18,8 +18,6 @@ function dec(){
 /////////////////////////////////////////////
 </script>
 
-<h1>Individual Student Results</h1>
-
 <NavBtns {count} length={results.length} {inc} {dec} />
 <br/>
 <StudentReportHead result={results[count]} />

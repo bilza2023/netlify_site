@@ -10,7 +10,7 @@ export let results;
         <thead>
             <tr>
                 <th class="py-2 px-3 border border-white">Ques</th>
-                <th class="py-2 px-3 border border-white">Marks</th>
+                <th class="py-2 px-3 border border-white">T-Marks</th>
                 <th class="py-2 px-3 border border-white">Obtained</th>
                 <th class="py-2 px-3 border border-white">%age</th>
                 <th class="py-2 px-3 border border-white">Status</th>
