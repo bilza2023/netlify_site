@@ -24,30 +24,34 @@ export default async function transformQ2R(quiz){
 }
 /////////////////////////////////////////////////////////
 
+/**
+ *  correctOptions are not saved.
+ */
 function transformMCQ(question) {
      return {
-        id      : uuid(),
-        questionId : question.id,
-        required   : question.required,
-        totalMarks   : 10,
-        payload : question.payload,
-        multiSelect : question.multiSelect,
+        id              : uuid(),
+        questionId      : question.id,
+        required        : question.required,
+        marks           : question.marks,
+        payload         : question.payload,
+        multiSelect     : question.multiSelect,
         selectedOptions : question.selectedOptions,
-        questionType : question.questionType
+        questionType    : question.questionType
     };
-
 }
 
+/**
+ * correctOptions are not saved.
+ */
 function transformInput(question) {
      return {
-        id      : uuid(),
+        id           : uuid(),
         questionId   : question.id,
         required     : question.required,
-        totalMarks   : 10,
+        marks        : question.marks,
         payload      : question.payload,
         questionType : question.questionType
     };
-
 }
 
 

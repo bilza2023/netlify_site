@@ -1,4 +1,4 @@
-I have an array pf objects "answers". This contain the answer to a MCQ (multiple choice question).
+I have an array of objects "answers". This contain the answer to a MCQ (multiple choice question).
 
 The answer object is in following format:
 {
@@ -31,5 +31,10 @@ lets write a seperate function for each state to be called (from the main functi
 
 - To grade when  multiSelect = false; just compare the item 0 or the selected options with item 0 of correct options. if it matches give full marks else give 0.
 
---- we will discuss multiSelect = true; later
-
+Now lets write a function for multiSelect. 
+for multi select the number of correct options are more than one. and their ids are written in correctOptions. The student has sleelcted id and they are located in selectedOptions. 
+Marking needs to be as following:
+    - divide the total question marks by the number of correct options (10/correctoptions.length)  (assume question marks = 10). this will give you mark for each correct option.
+    - assign marks for each correct option.
+    - deduct same amount of marks for selecting a wrong answer. this will prevent the student from clicking all the options.
+    - if the student finally gets negative marks just return 0 

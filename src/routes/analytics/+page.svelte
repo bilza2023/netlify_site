@@ -2,21 +2,24 @@
 import { BASE_URL } from '$lib/js/config.js';
 import Nav from '$lib/nav/Nav.svelte';
 import Loading from '$lib/cmp/Loading.svelte';
+import Indl from './indl/Indl.svelte';
 import ajaxPost from "$lib/js/ajaxPost.js";
 import { toast } from '@zerodevx/svelte-toast';
-import StudentResportsTable from "./StudentResportsTable.svelte"; 
-import getStudentReports from "./getStudentReports.js"; 
+import check from './check/check.js';
+
+// import StudentResportsTable from "./individual/StudentResportsTable.svelte"; 
+// import getStudentReports from "./individual/getStudentReports.js"; 
 
 let pageState = "loading";
 let results= null;
 let quiz;
-let studentResports =[];
+// let studentResports =[];
 
 ////////////////////////////////////
 import { onMount } from 'svelte';
 onMount(async () => {
   try {
-    
+
   const  quizId = new URLSearchParams(location.search).get("quizId");
   const response = await ajaxPost(`${BASE_URL}/result/analytics`,{quizId});
 
@@ -24,9 +27,12 @@ onMount(async () => {
             const data = await response.json();
             results = data.results;
             quiz = data.quiz;
-            // studentResports = []
               // debugger;
-            studentResports = await getStudentReports(quiz,results);
+              await check(results,quiz);
+
+            // console.log("Results:" , results);
+            // studentResports = []
+            // studentResports = await getStudentReports(quiz,results);
             pageState = "loaded";
             return;
           }
@@ -51,9 +57,13 @@ onMount(async () => {
 
 
 {#if pageState == "loaded" }
+<Indl {quiz} {results}/>
+{/if}
+
+<!-- {#if pageState == "loaded" }
   <h1 class="rounded-lg p-2  bg-blue-900 text-center text-white text-2xl underline mb-4">Results: {quiz.title}</h1>
   <StudentResportsTable  {studentResports}/>
-{/if}
+{/if} -->
 
 </div>
 
