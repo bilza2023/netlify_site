@@ -1,9 +1,14 @@
 <script>
+import { onMount } from 'svelte';
 import NavBtns from "./NavBtns.svelte";
 import Details from "./Details.svelte";
-import StudentReportHead from "./StudentReportHead.svelte";
+import getTestTotalMarks from "./getTestTotalMarks";
+import StudentReportHead from "../StudentReportHead/StudentReportHead.svelte";
 export let results;
+export let quiz;
 let count = 0;
+let testTotalMarks;
+
 
 function inc(){
     count += 1;
@@ -15,11 +20,19 @@ function dec(){
     count -= 1;
     if (count < 0 ){count = 0;}
 }
+
+onMount(async () => {
+  try {
+    testTotalMarks = await getTestTotalMarks(quiz);
+  }catch(e) {
+  
+  }
+});  
 /////////////////////////////////////////////
 </script>
-
+ 
 <NavBtns {count} length={results.length} {inc} {dec} />
 <br/>
-<StudentReportHead result={results[count]} />
+<StudentReportHead result={results[count]}  {testTotalMarks}/>
 <br/>
 <Details {count} {results}  />
