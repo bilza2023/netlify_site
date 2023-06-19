@@ -3,6 +3,8 @@ import { BASE_URL } from '$lib/js/config.js';
 import Nav from '$lib/nav/Nav.svelte';
 import Loading from '$lib/cmp/Loading.svelte';
 import Indl from './indl/Indl.svelte';
+import Summary from './summary/Summary.svelte';
+import Combined from './combined/Combined.svelte';
 import ToolBar from './toolbar/ToolBar.svelte';
 import ajaxPost from "$lib/js/ajaxPost.js";
 import { toast } from '@zerodevx/svelte-toast';
@@ -15,7 +17,9 @@ let pageState = "loading";
 let results= null;
 let quiz;
 // let studentResports =[];
-
+function setPageState(val){
+pageState = val;
+}
 ////////////////////////////////////
 import { onMount } from 'svelte';
 onMount(async () => {
@@ -30,11 +34,7 @@ onMount(async () => {
             quiz = data.quiz;
               // debugger;
               await check(results,quiz);
-
-            // console.log("Results:" , results);
-            // studentResports = []
-            // studentResports = await getStudentReports(quiz,results);
-            pageState = "loaded";
+            pageState = "indl";
             return;
           }
   } catch (error) {
@@ -46,8 +46,8 @@ onMount(async () => {
 
 </script>
 
-<Nav/>
-<ToolBar />
+<Nav />
+<ToolBar {setPageState} />
 <div class="wrapper bg-gray-800 text-white w-full min-h-screen p-6 ">
 
 {#if pageState == "loading" }
@@ -57,8 +57,16 @@ onMount(async () => {
 {/if}
 
 
-{#if pageState == "loaded" }
+{#if pageState == "indl" }
 <Indl {quiz} {results}/>
+{/if}
+
+{#if pageState == "summary" }
+<Summary {quiz} {results} />
+{/if}
+
+{#if pageState == "combined" }
+<Combined  {quiz} {results}/>
 {/if}
 
 <!-- {#if pageState == "loaded" }

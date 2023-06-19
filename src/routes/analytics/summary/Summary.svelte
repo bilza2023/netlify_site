@@ -4,43 +4,26 @@ import Card from "./Card.svelte";
 
 import { onMount } from 'svelte';
 export let results;
-let quizResults;
+export let quiz;
 
-function getQuizSummary() {
-  let correctCount = 0;
-  let skippedCount = 0;
-  let wrongCount = 0;
-
-  results.forEach(result => {
-    correctCount += result.correctAnswers.length;
-    skippedCount += result.skippedAnswers.length;
-    wrongCount += result.wrongAnswers.length;
-  });
-
-  return {
-    correct: correctCount,
-    skipped: skippedCount,
-    wrong: wrongCount
-  };
-}
 onMount(async () => {
-     quizResults =  getQuizSummary();
+    //  quizResults =  getQuizSummary();
     //  console.log("{quizResults.correct}" ,quizResults);
-
 });
 
 </script>
-
-
+ <div class="flex justify-center">
+<h1 class="inline-flex bg-blue-800 text-white rounded-md p-2 m-2 px-14">Class Summary</h1>
+ </div>
 
 <div class="flex justify-center w-full my-4 gap-1">
 
-{#if quizResults}
-<Card title="Total Responses" count={results.length} />
-<Card title="Total Correct" count= {quizResults.correct} />
-<Card title="Total Skipped" count= {quizResults.skipped} />
-<Card title="Total Wrong" count= {quizResults.wrong} />
-{/if}
+<!-- {#if quizResults} -->
+<Card title="Number of Questions" count={quiz.questions.length} />
+<Card title="Number of Responses" count= {results.length} />
+<Card title="Total Students" count= {quiz.members.length} />
+<Card title="Students Missing" count= {quiz.members.length - results.length} />
+<!-- {/if} -->
 
 
 </div>

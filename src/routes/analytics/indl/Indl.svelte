@@ -1,8 +1,8 @@
 <script>
 import { onMount } from 'svelte';
-import NavBtns from "./NavBtns.svelte";
+import NavBtns from "./NavBtns.svelte"; 
 import Details from "./Details.svelte";
-import getTestTotalMarks from "./getTestTotalMarks";
+import getTestTotalMarks from "../pure/getTestTotalMarks";
 import StudentReportHead from "../StudentReportHead/StudentReportHead.svelte";
 export let results;
 export let quiz;
