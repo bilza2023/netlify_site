@@ -9,7 +9,11 @@ $: quiz = $quizStore;
 async function save( ){
   // debugger;
   //////////////////////////////////////
-  quizStore.update(currentQuiz => ({ ...currentQuiz, published: true }));
+    quizStore.update((currentQuiz) => {
+    currentQuiz.publishObj.runStartTime = new Date();
+    return currentQuiz;
+  });
+
   
   // console.log("quiz",quiz);
   // return;

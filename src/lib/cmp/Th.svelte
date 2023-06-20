@@ -13,7 +13,7 @@ const  toggleVisibility = ()=> visible = !visible;
         {icon}
     </div>
    
-    <div class="  text-center w-full p-2">
+    <div class="  text-center w-full p-2 bg-gray-700">
         {title} 
     </div>
     

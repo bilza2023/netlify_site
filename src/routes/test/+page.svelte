@@ -4,6 +4,8 @@ import Questions from './showQuestions/Questions.svelte';
  
 import QuizBlock from "./settings/QuizBlock.svelte";
 import Teams from "./settings/Teams.svelte";
+import PulishTiming from "./pulishTiming/PulishTiming.svelte";
+import UnPulishTiming from "./pulishTiming/UnPulishTiming.svelte";
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 // import { page } from '$app/stores';
@@ -23,7 +25,6 @@ membersStore.subscribe(value => members = Object.values(value));
 $: quiz = $quizStore; 
 $: members = $membersStore;
 ////////////-store variables--///////
-
 let isLoading = false;
 let showSettings = true;
 
@@ -45,6 +46,8 @@ onMount(async ()=>{
             // debugger;
                   quizStore.set(incommingQuiz);
                   membersStore.set(incommingMembers);
+
+                  
                   //--these are user members and not quiz members
                 }else {
                       toast.push("failed to open");
@@ -93,9 +96,10 @@ onMount(async ()=>{
 <br>
 <Teams />
 <br>
-<!-- <Timings />
-<br> -->
-
+<PulishTiming  />
+<br>
+<UnPulishTiming />
+<br>
 
 <br>
 

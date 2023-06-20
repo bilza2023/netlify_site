@@ -8,6 +8,7 @@ import Loading from '$lib/cmp/Loading.svelte';
 import { onMount } from 'svelte';
 //membersStore is quiz members ; the name is confusing
 import { quizStore , pageStateStore, membersStore } from './store';
+// import isPublished from './fn/isPublished';
 
 $: quiz = $quizStore;
 $: pageState = $pageStateStore;
@@ -33,7 +34,7 @@ onMount(async () => {
     membersStore.update(() => ({ ...data.members }));
 
       pageStateStore.set("loaded");
-      // console.log("notfound");
+    
     } else {
     const data = await resp.json();
       pageStateStore.set("notfound");
