@@ -30,12 +30,12 @@ membersStore.subscribe(value => members = value);
 </select>
 </FormRow>
 
-<FormRow title="Publish Hour" >
+<FormRow title="Un Publish Hour" >
 <input class="bg-gray-700" type="number" bind:value={quiz.publishObj.unpublishHour} min=0 max=23  
 >hours
 </FormRow>
 
-<FormRow title="Publish Minute"  >
+<FormRow title="Un Publish Minute"  >
 <input class="bg-gray-700" type="number" bind:value={quiz.publishObj.unpublishMin} min=0 max=60
 >minutes
 </FormRow>

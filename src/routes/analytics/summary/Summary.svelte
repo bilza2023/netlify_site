@@ -13,7 +13,8 @@ onMount(async () => {
 
 </script>
  <div class="flex justify-center">
-<h1 class="inline-flex bg-blue-800 text-white rounded-md p-2 m-2 px-14">Class Summary</h1>
+<h1 class="inline-flex bg-blue-800 text-white rounded-md p-2 m-2 px-14">
+Test Summary</h1>
  </div>
 
 <div class="flex justify-center w-full my-4 gap-1">
