@@ -1,7 +1,7 @@
 <script>
 
 import Questions from './showQuestions/Questions.svelte';
-
+ 
 import QuizBlock from "./settings/QuizBlock.svelte";
 import Teams from "./settings/Teams.svelte";
 import Nav from '$lib/nav/Nav.svelte';

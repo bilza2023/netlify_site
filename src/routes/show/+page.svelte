@@ -27,8 +27,7 @@ onMount(async () => {
     if (resp.ok) {
     const data = await resp.json();
     //--remove me
-    console.log("quiz at load",data);
-      // quiz = data.quiz; 
+    // console.log("quiz at load",data);
 
     quizStore.update(() => ({ ...data.quiz }));
     membersStore.update(() => ({ ...data.members }));
