@@ -16,6 +16,22 @@ $: pageState = $pageStateStore;
 
 let notFoundMsg = "Not Found";
 
+function formatDate(dateString) {
+  var date = new Date(dateString);
+  
+  var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  
+  var dayOfWeek = daysOfWeek[date.getDay()];
+  var day = date.getDate();
+  var month = months[date.getMonth()];
+  var year = date.getFullYear();
+
+  var formattedDate = `${dayOfWeek} ${day} ${month}, ${year}`;
+
+  return formattedDate;
+}
+
 onMount(async () => {
   try {
     pageStateStore.set('loading');
@@ -38,9 +54,13 @@ onMount(async () => {
     } else {
     const data = await resp.json();
       pageStateStore.set("notfound");
-      // toast.push(data.msg);
-      notFoundMsg = data.msg;
-      // console.log("loaded");
+      // debugger;
+      if (data.pub.publishStatus == 'waiting'){
+        notFoundMsg = `The Test is in Waiting. Will start at 
+        ${formatDate(data.pub.publishTime)} with in ${data.pub.waitingTime.hours} hours and ${data.pub.waitingTime.minutes} minutes`;
+      }else{
+        notFoundMsg = data.msg;
+      }
     }
      
     // }else {
