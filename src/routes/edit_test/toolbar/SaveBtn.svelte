@@ -10,9 +10,12 @@ async function save( ){
   // debugger;
   //////////////////////////////////////
     quizStore.update((currentQuiz) => {
-    currentQuiz.publishObj.runStartTime = new Date();
+currentQuiz.publishObj.runStartTime = new Date();
+currentQuiz.publishObj.publishDate = new Date(currentQuiz.publishObj.publishDate);
+currentQuiz.publishObj.publishDate.setHours(currentQuiz.publishObj.hour);
+currentQuiz.publishObj.publishDate.setMinutes(currentQuiz.publishObj.min);
     return currentQuiz;
-  });
+});
 
   
   // console.log("quiz",quiz);

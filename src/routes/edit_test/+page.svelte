@@ -11,7 +11,6 @@ import Footer from '$lib/cmp/Footer.svelte';
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
 import ToolBar from './toolbar/ToolBar.svelte';
-import AddQuestionBar from './addQuestions/AddQuestionBar.svelte';
 import { onMount } from 'svelte';
 import ajaxPost from "$lib/js/ajaxPost.js";
 import Loading from '$lib/cmp/Loading.svelte';
