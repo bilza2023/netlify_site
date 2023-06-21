@@ -14,7 +14,7 @@ membersStore.subscribe(value => members = value);
 
 <div in:fade={{ delay: 300 }} out:fade={{ delay: 300 }}>
 
-<Th title={"Un-Publish timings"} icon={"⌛"}>
+<Th title={"Un-Publish Timings"} icon={"⌛"}>
 
 <div in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} 
  class="border-2 border-gray-500 p-1 m-0 mt-0" >
@@ -31,12 +31,12 @@ membersStore.subscribe(value => members = value);
 </FormRow>
 
 <FormRow title="Un Publish Hour" >
-<input class="bg-gray-700" type="number" bind:value={quiz.publishObj.unpublishHour} min=0 max=23  
+<input class="bg-gray-700 m-2 p-2 rounded-2xl text-center" type="number" bind:value={quiz.publishObj.unpublishHour} min=0 max=23  
 >hours
 </FormRow>
 
 <FormRow title="Un Publish Minute"  >
-<input class="bg-gray-700" type="number" bind:value={quiz.publishObj.unpublishMin} min=0 max=60
+<input class="bg-gray-700 m-2 p-2 rounded-2xl text-center" type="number" bind:value={quiz.publishObj.unpublishMin} min=0 max=60
 >minutes
 </FormRow>
 

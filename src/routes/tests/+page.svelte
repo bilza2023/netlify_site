@@ -2,12 +2,10 @@
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 import Cards from "./tests/Cards.svelte";
-
 import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';
 import { BASE_URL } from '$lib/js/config.js';
 import ajaxGet from "$lib/js/ajaxGet.js";
 import { toast } from '@zerodevx/svelte-toast';
-
 
 
 let tests = null;
@@ -49,7 +47,7 @@ onMount(async ()=>{
 <div class="bg-gray-800"><!--page div-->
 <Nav />
 
-
+ 
 <HdgWithIcon title="Tests" , icon ="🧪"/>
 {#if isLogin}
             

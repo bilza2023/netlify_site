@@ -1,9 +1,8 @@
 <script>
-
-import Questions from './showQuestions/Questions.svelte';
- 
+import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';  
 import QuizBlock from "./settings/QuizBlock.svelte";
 import Teams from "./settings/Teams.svelte";
+import QuestionsROM from "./QuestionsROM.svelte";
 import PulishTiming from "./pulishTiming/PulishTiming.svelte";
 import UnPulishTiming from "./pulishTiming/UnPulishTiming.svelte";
 import Nav from '$lib/nav/Nav.svelte';
@@ -64,16 +63,16 @@ onMount(async ()=>{
 
 <Nav/>
 
- 
+
 {#if quiz}
 <ToolBar    {toggleShowSettings}
 {showSettings} />
 {/if}
 
 
-
 <div class="wrapper bg-gray-800 text-white m-0 px-8  min-h-screen w-full">
 
+ <HdgWithIcon title="Edit Test" , icon ="🧪"/>
 
 
 
@@ -91,7 +90,7 @@ onMount(async ()=>{
       {#if showSettings}
       <QuizBlock  />
       {/if}
-{/if}
+
 
 <br>
 <Teams />
@@ -100,6 +99,7 @@ onMount(async ()=>{
 <br>
 <UnPulishTiming />
 <br>
+<QuestionsROM />
 
 <br>
 
@@ -115,6 +115,7 @@ onMount(async ()=>{
 <br> 
 <br>
 <br> 
+{/if} 
 </div><!--app-->
 
 

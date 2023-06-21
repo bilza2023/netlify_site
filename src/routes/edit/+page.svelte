@@ -1,7 +1,7 @@
 <script>
 
 import Questions from './showQuestions/Questions.svelte';
-
+import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';  
 import QuizBlock from "./settings/QuizBlock.svelte";
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
@@ -94,7 +94,7 @@ const save = async ()=>{
 
 <div class="wrapper bg-gray-800 text-white m-0 px-8  min-h-screen w-full">
 
-
+<HdgWithIcon title="Edit Template" , icon ="📜"/>
 
 
 {#if !quiz}
