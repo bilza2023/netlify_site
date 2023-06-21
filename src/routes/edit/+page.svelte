@@ -102,9 +102,6 @@ const save = async ()=>{
 {/if}
 
 {#if quiz}
-<br>
-<br>
-
 
 <br>
 
@@ -114,7 +111,7 @@ const save = async ()=>{
 {/if}
 
 <br>
-<div class="w-full p-2 m-2 text-center bg-gray-700 rounded-md border-2 border-gray-500">
+<div class="w-full p-2 m-2 text-center bg-stone-700 rounded-md border-2 border-gray-500">
 <h1>Questions</h1>
 </div>
 <br>
