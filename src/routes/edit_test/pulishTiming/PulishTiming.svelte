@@ -30,6 +30,10 @@ membersStore.subscribe(value => members = value);
 </select>
 </FormRow>
 
+
+{#if quiz.publishObj.publishTechnique == 'at'}
+
+<div in:fade={{ delay: 300 }} out:fade={{ delay: 300 }}>
 <FormRow title="Publish Date"  >
 <input type="date" class="bg-gray-800 w-full text-center m-2 p-2 rounded-2xl"
 bind:value={quiz.publishObj.publishDate}
@@ -46,7 +50,8 @@ bind:value={quiz.publishObj.publishDate}
 >minutes
 </FormRow>
 
-
+</div>
+{/if}
 
 
 

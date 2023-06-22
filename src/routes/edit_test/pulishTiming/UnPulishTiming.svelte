@@ -30,8 +30,12 @@ membersStore.subscribe(value => members = value);
 </select>
 </FormRow>
 
+{#if quiz.publishObj.unpublishTechnique == 'after'}
+
+<div in:fade={{ delay: 300 }} out:fade={{ delay: 300 }}>
 <FormRow title="Un Publish Hour" >
 <input class="bg-gray-700 m-2 p-2 rounded-2xl text-center" type="number" bind:value={quiz.publishObj.unpublishHour} min=0 max=23  
+
 >hours
 </FormRow>
 
@@ -39,8 +43,8 @@ membersStore.subscribe(value => members = value);
 <input class="bg-gray-700 m-2 p-2 rounded-2xl text-center" type="number" bind:value={quiz.publishObj.unpublishMin} min=0 max=60
 >minutes
 </FormRow>
-
-
+</div>
+{/if}
 
 
 

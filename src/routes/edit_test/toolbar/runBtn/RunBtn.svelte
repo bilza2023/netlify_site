@@ -1,7 +1,4 @@
 <script>
-// import { toast } from '@zerodevx/svelte-toast';
-// import ajaxPost from '$lib/js/ajaxPost';
-// import { BASE_URL } from '$lib/js/config.js';
 import checkBeforePub from './check/checkBeforePub.js';
 import {errorsArrayStore,showErrorsStore,showRunStore} from "./store.js";
 
@@ -29,8 +26,6 @@ async function toogle(){
 }
 
 </script>
-
-
 
 <div class="w-20">
   <button class="w-full flex flex-col items-center p-2 bg-gray-800 rounded hover:bg-gray-700 active:bg-gray-900"
