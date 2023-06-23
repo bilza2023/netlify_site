@@ -13,7 +13,7 @@ hover:border-red-800"><!--outer -div-->
 
     <div class="flex flex-col"><!--inner -div-->
                 <div class="mb-2">
-                <span class="text-4xl">📝</span>
+                <span class="text-4xl">📜</span>
                 </div>
    <div class="p-1 m-1 bg-gray-700 text-sm rounded-md">
     {quiz.title}

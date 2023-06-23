@@ -11,8 +11,8 @@ import { quizStore } from '../store';
 //--we need these only if we want to react to them
 $: quiz = $quizStore;
 
-// let showOutroFinal;
-// const setShowOutroFinal = ()=> showOutroFinal=true;
+let showOutroFinal;
+const setShowOutroFinal = ()=> showOutroFinal=true;
 
 
 onMount(async () => {

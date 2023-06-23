@@ -9,7 +9,7 @@ export let logoutFn;
 <Card url={'/tests'} icon='🧪'; title="Tests" />
 <Card url={'/running'} icon='🏃‍♂️'; title="Running" />
 
-<Card url={'/teams'} icon=&#x1F46C; title="Teams" />
+<Card url={'/system'} icon='🔧' title="System" />
 
 
 <Card url={'/docs'} icon=&#x1F4D6; title="Help" />

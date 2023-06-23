@@ -21,8 +21,8 @@ let hideSaveBtn = false;
 
 async function saveResults  (){
 
+  debugger;
  setWaiting();
-  // debugger;
   hideSaveBtn = true;  
   let quizResult = {};
   quizResult.answers = await transformQ2R(quiz);
@@ -42,7 +42,9 @@ quizResult.userId = quiz.userId;
   quizResult.countryCode = countryCode;
 
   quizResult.id = uuid(); 
-  quizResult.quizId = quiz._id; 
+  // quizResult.quizId = quiz._id; 
+  quizResult.runId = quiz._id; 
+  quizResult.runTitle = quiz.title; 
   quizResult.email = email;
   
   console.log("quizResult after check before save" ,quizResult);
