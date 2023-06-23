@@ -11,7 +11,7 @@ import { toast } from "@zerodevx/svelte-toast";
 import ajaxPost from "$lib/js/ajaxPost.js";
   // Update the value of the store
   // storeMembers.set(['Alice', 'Bob', 'Charlie']);
-  
+   
 let dirty;
 storeDirty.subscribe(value => {dirty = value});
 storeDirty.set(true);
