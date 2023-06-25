@@ -31,10 +31,10 @@ onMount(async ()=>{
 
  const populate = async () =>{
  try {
-  const resp = await ajaxGet( `${BASE_URL}/survey/pagetest/10/0`);
+  const resp = await ajaxGet( `${BASE_URL}/test/read`);
   if(resp.ok){
     const data = await resp.json();
-    tests = data.surveys; 
+    tests = data.items; 
   }else {
     toast.push("failed to load Tests");
   }

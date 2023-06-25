@@ -40,16 +40,18 @@ const populate = async () =>{
  try {
  //  debugger;
 
-  const resp = await ajaxGet( `${BASE_URL}/survey/pagetemplate/10/0`);
+  const resp = await ajaxGet( `${BASE_URL}/template/read`);
   if(resp.ok){
     const data = await resp.json();
-    templatesStore.set(data.surveys); 
+    // console.log( "Read - Date" , data);
+    templatesStore.set(data.items); 
   }else {
     toast.push("failed to load Templates");
   }
  } catch (error) {
     // console.error(error);
-    toast.push("failed to load..");
+    toast.push(error.message);
+    // toast.push("failed to load..");
  }
 }
 </script>

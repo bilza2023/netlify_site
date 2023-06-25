@@ -15,20 +15,19 @@ const handler = async( )=>{
       return;
   }
   // debugger;
-  const response = await ajaxPost( `${BASE_URL}/template/new` , {title :newPRojectName} );
+  const response = await ajaxPost( `${BASE_URL}/template/create` , {title :newPRojectName} );
 
   if (response.ok) {
       newPRojectName = "";
       // debugger;
       const data = await response.json();
-      templatesStore.update( curr =>{return [...curr,data.template]})
+      //the item that was updated is returned as item
+      templatesStore.update( curr =>{return [...curr,data.item]})
       showNewTemplStore.set(false);
       toast.push( "New Template Created" );
 
   }else {
-      //  debugger;
-      const data = await response.json();
-       console.log(data);
+       const data = await response.json();
       toast.push( data.message );
   }
 

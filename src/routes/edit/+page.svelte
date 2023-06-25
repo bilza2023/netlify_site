@@ -1,5 +1,5 @@
 <script>
-
+ 
 import Questions from './showQuestions/Questions.svelte';
 import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';  
 import QuizBlock from "./settings/QuizBlock.svelte";
@@ -38,15 +38,12 @@ onMount(async ()=>{
       const quizId = new URLSearchParams(location.search).get("quizId");
              //----------------------------------
 
-      const resp = await ajaxPost(`${BASE_URL}/survey/find`,{quizId});
+      const resp = await ajaxPost(`${BASE_URL}/template/readOne`,{id:quizId});
             // debugger;
                 if (resp.ok == true) {
                 const data = await resp.json();
-                const {incommingQuiz, incommingMembers } = data;
-            // debugger;
+                   const incommingQuiz =  data.item;
                   quizStore.set(incommingQuiz);
-                  membersStore.set(incommingMembers);
-                  //--these are user members and not quiz members
                 }else {
                       toast.push("failed to open");
                 }  

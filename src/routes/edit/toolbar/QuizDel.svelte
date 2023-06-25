@@ -15,13 +15,13 @@ export let quiz;
 const deleteQuiz = async ()=>{
   // debugger;
   // const token = localStorage.getItem('token');
-  const resp = await ajaxPost(`${BASE_URL}/template/delete`,{quizId : quiz._id});
+  const resp = await ajaxPost(`${BASE_URL}/template/delete`,{id : quiz._id});
  // debugger;
       if (resp.ok == true){
       const data = await resp.json();
         toast.push('deleted');
         showQuizDelStore.set(false);
-        goto("/dashboard");
+        goto("/templetes");
       }else {
       const data = await resp.json();
       // debugger;

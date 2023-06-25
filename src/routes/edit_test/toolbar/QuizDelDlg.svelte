@@ -31,11 +31,11 @@ const deleteQuiz = async ()=>{
   // debugger;
   // const token = localStorage.getItem('token');
   const resp = await ajaxPost(`${BASE_URL}/test/delete`,{id : quiz._id});
- // debugger;
       if (resp.ok == true){
-      // const data = await resp.json();
+ debugger;
+      const data = await resp.json();
         toast.push('deleted'); 
-        goto("/dashboard");
+        goto("/tests");
       }else {
       const data = await resp.json();
         toast.push(data.message );

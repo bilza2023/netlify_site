@@ -43,7 +43,7 @@ showErrorsStore.set(false);
 <ToolBarBtn  icon={"💾"} title="Save" tf={true} trueColor={"text-white"} clk={save}  />
 
 
-<ToolBarBtn  icon={"🚀"} title="Test"  tf={showTest} trueColor={"text-white"}  
+<ToolBarBtn  icon={"🧪"} title="Test"  tf={showTest} trueColor={"text-white"}  
 clk={()=> showTestStore.set(!$showTestStore) } falseColor={"text-gray-600"}/>
 
 <ToolBarBtn  icon={"🐑"} title="Clone" tf={showClone} trueColor={"text-white"}  falseColor={"text-gray-600"}

@@ -1,3 +1,4 @@
+
 export default async function ajaxGet(url) {
   try {
   const token = localStorage.getItem("token");
@@ -10,6 +11,6 @@ export default async function ajaxGet(url) {
 
     return resp;
   } catch (error) {
-    return error;
+    return error; // should this be throw error ???
   }
 }

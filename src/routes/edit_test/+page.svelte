@@ -36,11 +36,15 @@ onMount(async ()=>{
   try {
       const quizId = new URLSearchParams(location.search).get("quizId");
       //----------------------------------
-      const resp = await ajaxPost(`${BASE_URL}/test/find`,{quizId});
+      // debugger;
+      const resp = await ajaxPost(`${BASE_URL}/test/readOne`,{id:quizId});
             // debugger;
                 if (resp.ok == true) {
                 const data = await resp.json();
-                const {incommingQuiz, incommingMembers } = data;
+                // const {incommingQuiz, incommingMembers } = data;
+                const incommingQuiz = data.item;
+                const incommingMembers = {};
+
             // debugger;
                   quizStore.set(incommingQuiz);
                   membersStore.set(incommingMembers);
