@@ -12,22 +12,23 @@ import Form from "$lib/form/Form.svelte";
 import FormRow from "$lib/form/FormRow.svelte";
 import ajaxPost from "$lib/js/ajaxPost.js";
 
-let tag = {
-      name : "",
-      description : ""
-}
+let name = "";
+let description = "";
+
+
 async function save(){
-  // try {
-  // debugger;
-  // student.id = uuid();
-      const resp = await ajaxPost(`${BASE_URL}/tag/save`,{tag});
-            // debugger;
+
+      const resp = await ajaxPost(`${BASE_URL}/tag/create`,{name ,
+      description});
+
                 if (resp.ok == true) {
                 const data = await resp.json();
-                tag.name = '';
-                tag.description = '';
+                  name = '';
+                  description = '';
                       toast.push("Tag saved");
                 }else {
+            //     const data = await resp.json(); //--for debug  
+            //           toast.push(data.message);//--for debug
                       toast.push("failed to save");
                 }  
 //     } catch (error) {
@@ -57,12 +58,12 @@ onMount(async ()=>{
 <Form title="New Tags" visible={true} icon={'✏️'}>
 <FormRow title="Tag Name">
 <input type="text" class="w-full bg-gray-700 color-white"
-bind:value={tag.name} >
+bind:value={name} >
 <div class="m-1 p-2 rounded-md bg-gray-900 text-yellow-400 text-xs">Tag name must be unique, two tags can not have the same name. You can use numbers and text. The Tags are available throught out the app.</div>
 </FormRow>
 
 <FormRow title="Description">
-<textarea class="w-full bg-gray-700 color-white" bind:value={tag.description}/>
+<textarea class="w-full bg-gray-700 color-white" bind:value={description}/>
 <div class="m-1 p-2 rounded-md bg-gray-900 text-yellow-400 text-xs">Add some description for the tag.</div>
 </FormRow>
 

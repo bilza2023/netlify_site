@@ -11,31 +11,65 @@ this.args = args;
 this.sendDataObjInResponse = false;
 }
 
-async create(payload = {errorMessage:''}){  
+async create(inload = {errorMessage:''}){  
   try{
   // debugger;
-  const resp = await ajaxPost( `${BASE_URL}/${this.assetPath}/create` , payload );
-// console.log("resp",resp.json());
-// return resp;
-   return await  processResp(resp,['item'],payload.errorMessage,this.sendDataObjInResponse);
+  const resp = await ajaxPost( `${BASE_URL}/${this.assetPath}/create` , inload );
+   return await  processResp(resp,['item'],inload.errorMessage,this.sendDataObjInResponse);
 
   }catch(err){
-    console.log("resp",resp.json());
-    return resp;
+    // console.log("resp",resp.json());
+    throw err;
   }
 }
 /////////////////////////////////////////////////////
-async  read(payload = {errorMessage:''}){ //keep payload for later
+async  read(inload = {errorMessage:''}){ //keep inload for later
  try {
         const resp = await ajaxGet( `${BASE_URL}/${this.assetPath}/read`);
         
-        return await  processResp(resp,['items'],payload.errorMessage,this.sendDataObjInResponse);
+        return await  processResp(resp,['items'],inload.errorMessage,this.sendDataObjInResponse);
 
    } catch (error) {
       throw error;
    }
 } 
 /////////////////////////////////////////////////////
+async  readone(inload = {errorMessage:''}){ //keep inload for later
+ try {
+  const resp = await ajaxPost( `${BASE_URL}/${this.assetPath}/readone`,inload);
+        
+  return await  processResp(resp,['item'],inload.errorMessage,this.sendDataObjInResponse);
+
+   } catch (error) {
+      throw error;
+   }
+} 
+/////////////////////////////////////////////////////
+async  update(inload = {errorMessage:'', item}){  
+// debugger;
+ try{
+  const resp = await ajaxPost(`${BASE_URL}/${this.assetPath}/update` ,inload);
+   
+  return await  processResp(resp,['item'],inload.errorMessage,this.sendDataObjInResponse);
+
+ } catch (error) {
+      throw error;
+ }
+
+}
+
+async  delete(inload = {errorMessage:'', id}){  
+// debugger;
+ try{
+  const resp = await ajaxPost(`${BASE_URL}/${this.assetPath}/delete` ,inload);
+   
+  return await  processResp(resp,['item'],inload.errorMessage,this.sendDataObjInResponse);
+
+ } catch (error) {
+      throw error;
+ }
+
+}
 
 /////////////////////////////////////////////////////
 
