@@ -1,7 +1,7 @@
 
 import AgentAjax from "../AgentAjax/AgentAjax";
 
-export default async function testone(){
+export default async function testone(excludeDelete=false){
 try{
 
   const agentAjax = new AgentAjax('template');
@@ -9,15 +9,15 @@ try{
   //====================CREATE
     const createResult = await agentAjax.create({title: 'AgentAjax-2',errorMessage:''});
         if (createResult.message == null){
-            console.log("Created new Template:",createResult.payload.item)
+            console.log("Created new :",createResult.payload.item)
         }else {
             console.log(createResult.message);
         }
     const id = createResult.payload.item._id;
 
-// //====================READONE
-const resultReadone = await agentAjax.readone({id,errorMessage:''});
-// console.log(rez);
+ //====================READONE----||
+ const resultReadone = await agentAjax.readone({id,errorMessage:''});
+ // console.log(rez);
     if (resultReadone.message == null){
           console.log("readone",resultReadone.payload.item)
     }else {
@@ -41,17 +41,16 @@ const readResult = await agentAjax.read();
       console.log(readResult.message);
     }
 
-
-//====================DELETE
-// debugger;
-const deleteResult = await agentAjax.delete({id, errorMessage:''});
-// console.log(rez);
+ //====================DELETE
+ // debugger;
+ if (!excludeDelete){
+ const deleteResult = await agentAjax.delete({id, errorMessage:''});
     if (deleteResult.message == null){
           console.log("deleted",deleteResult)
     }else {
        console.log(deleteResult.message);
     }
-
+ }
   
 ////////////////////////////////////////////////////////      
 } catch (e) {

@@ -1,14 +1,14 @@
 
 import AgentAjax from "../AgentAjax/AgentAjax";
 
-export default async function tagsTest(name,description){
+export default async function studentsTest(incommingId,name){
 try{
 
-  const agentAjax = new AgentAjax('tag');
+  const agentAjax = new AgentAjax('student');
   agentAjax.sendDataObjInResponse = true;
   //====================CREATE
-    const createResult = await agentAjax.create({name ,
-      description});
+    const createResult = await agentAjax.create({ id:incommingId ,
+      name});
         if (createResult.message == null){
             console.log("Created new:",createResult.payload.item)
         }else {

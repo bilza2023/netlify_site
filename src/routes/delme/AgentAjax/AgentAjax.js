@@ -9,7 +9,7 @@ constructor(assetPath,args={}) {
 this.assetPath = assetPath;
 this.args = args;
 this.sendDataObjInResponse = false;
-}
+} 
 
 async create(inload = {errorMessage:''}){  
   try{

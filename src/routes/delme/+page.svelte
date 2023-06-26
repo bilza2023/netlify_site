@@ -8,14 +8,37 @@ import { toast } from '@zerodevx/svelte-toast';
 import baseTemplateTest from "./testone/baseTemplateTest.js";
 import tagsTest from "./testone/tagsTest";
 import classesTest from "./testone/classesTest";
+import studentsTest from "./testone/studentsTest";
+import testTest from "./testone/testTest";
+// import surveyTest from "./testone/testSurvey";
 import { onMount } from 'svelte';
+
+import AgentAjax from "./AgentAjax/AgentAjax";
+const agentAjax = new AgentAjax('student');
+agentAjax.sendDataObjInResponse = true;
 
 let entriesArray = [];
 onMount(async ()=>{
   try {
-    // await baseTemplateTest();
+    // await baseTemplateTest(false);
+    // await surveyTest("The name");
+    // await testTest();
+    
     // await tagsTest("The name" , "dd dd dd");
-    await classesTest("The name" , "dd dd dd");
+    // await classesTest("The name" , "dd dd dd");
+    // await studentsTest("345434" , "Agent Ajax");
+
+    // const readResult = await agentAjax.read();
+    // if (readResult.message == null){
+    //       console.log("read",readResult.payload.items)
+    // }else {
+    //   console.log(readResult.message);
+    // }
+    
+
+
+
+
     } catch (error) {
       console.error(error);
     }
