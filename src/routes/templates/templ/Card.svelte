@@ -6,7 +6,7 @@ export let urlTag;
  
 <div class="w-full bg-gray-600 rounded-md p-2 m-1 
 border-4 max-h-32 border-blue-700 text-center 
-hover:border-red-800"><!--outer -div-->
+hover:border-blue-200"><!--outer -div-->
 
 <a  class="hover:bg-gray-300  rounded-lg" 
  href={`/${urlTag}?quizId=${quiz._id}`} >

@@ -4,7 +4,7 @@ import {showNewTemplStore} from "../dashboardStore";
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="w-full bg-gray-600 rounded-md p-2 m-1 
 border-4 max-h-32 border-white text-center 
-hover:border-green-500 hover:cursor-pointer"
+hover:border-green-700 hover:cursor-pointer"
 on:click={()=>showNewTemplStore.set(!$showNewTemplStore)}
 ><!--outer -div-->
 

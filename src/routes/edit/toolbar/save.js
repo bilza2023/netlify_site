@@ -13,7 +13,7 @@ const unsubscribe = quizStore.subscribe((value) => {
 export default async function save(){
 // debugger;
 //////////////////////////////////////
-const resp = await ajaxPost(`${BASE_URL}/template/save` ,{survey: quiz});
+const resp = await ajaxPost(`${BASE_URL}/template/update` ,{item: quiz});
 // quizStore.update(currentQuiz => ({ ...currentQuiz, published: false }));
   if (resp.ok) {
       toast.push( "saved" );

@@ -10,22 +10,27 @@ export let quiz;
   let newPRojectName = "";
 
 const handler = async(quizType)=>{
-// showCloneStore.set(false);
-// return;
-  // debugger;
-    const resp = await ajaxPost(`${BASE_URL}/template/clone` , { id : quiz._id ,title :newPRojectName});
+
+    const resp = await ajaxPost(`${BASE_URL}/template/create` , { title:"demo"});
   
   if (resp.ok) {
-      newPRojectName = "";
       const data = await resp.json();
-      // debugger;
-      toast.push( "Cloned" );
-      showCloneStore.set(false);
-
+      const item = {...quiz};
+      item._id = data.item._id;
+      item.title = newPRojectName;
+      item.isNew = true;
+      //----------------------
+      const resp2 = await ajaxPost(`${BASE_URL}/template/update` , { item});
+              if (resp2.ok){
+              toast.push( "Cloned" );
+              showCloneStore.set(false);
+              newPRojectName = "";
+              }else {
+              toast.push( "failed to clone" );        
+              }
   }else {
-      const data = await resp.json();
-
-      toast.push( data.errormsg );
+      // const data = await resp.json();
+      toast.push( "failed to clone" );
   }
 
 }

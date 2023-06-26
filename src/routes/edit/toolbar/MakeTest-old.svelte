@@ -22,15 +22,14 @@ const handler = async(quizType)=>{
   }
   
   //  // userId is already set
-  const item = {...quiz}; 
-    item._id = undefined;
-    item.published = false; //important
-    item.members = []; //important
-    item.isNew = true;
-    item.title = newPRojectName; //--new title
-    item.createdAt = Date.now();
+  //   survey._id = undefined;
+  //   survey.published = false; //important
+  //   survey.members = []; //important
+  //   survey.isNew = true;
+  //   survey.title = title; //--new title
+  //   survey.createdAt = Date.now();
   
-  const resp = await ajaxPost(`${BASE_URL}/test/create` , { item});
+  const resp = await ajaxPost(`${BASE_URL}/test/create` , { id : quiz._id ,title :newPRojectName});
   
   if (resp.ok) { 
       newPRojectName = "";

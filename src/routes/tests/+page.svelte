@@ -48,7 +48,7 @@ onMount(async ()=>{
 <Nav />
 
  
-<HdgWithIcon title="Tests" , icon ="🧪"/>
+<HdgWithIcon title="Tests" , icon ="🧪" bgColor='bg-green-800'/>
 {#if isLogin}
             
 <div class="bg-gray-800 w-full">            

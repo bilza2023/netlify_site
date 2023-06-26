@@ -21,7 +21,7 @@ const deleteQuiz = async ()=>{
       const data = await resp.json();
         toast.push('deleted');
         showQuizDelStore.set(false);
-        goto("/templetes");
+        goto("/templates");
       }else {
       const data = await resp.json();
       // debugger;
