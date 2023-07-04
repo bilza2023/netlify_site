@@ -37,8 +37,8 @@ onMount(async ()=>{
   try {
       const quizId = new URLSearchParams(location.search).get("quizId");
              //----------------------------------
-
-      const resp = await ajaxPost(`${BASE_URL}/template/readOne`,{id:quizId});
+ 
+      const resp = await ajaxPost(`${BASE_URL}/template/readone`,{data:{id:quizId}});
             // debugger;
                 if (resp.ok == true) {
                 const data = await resp.json();

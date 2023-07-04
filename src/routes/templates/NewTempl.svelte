@@ -39,7 +39,7 @@ const handler = async( )=>{
 
 
 <div class=" border-2 border-white p-2 m-2  text-center rounded-lg ">
-    <h1 class="m-1 text-slate-200 text-2xl underline">Create New Test</h1>
+    <h1 class="m-1 text-slate-200 text-2xl underline">Create New Template</h1>
     <input class="bg-gray-700 text-white  w-10/12 m-1 rounded-lg"  type="text" bind:value={newPRojectName} >
 
 <div class="flex flex-col sm:flex-row justify-center w-full">

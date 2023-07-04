@@ -30,7 +30,7 @@ const handler = async(quizType)=>{
     item.title = newPRojectName; //--new title
     item.createdAt = Date.now();
   
-  const resp = await ajaxPost(`${BASE_URL}/test/create` , { item});
+  const resp = await ajaxPost(`${BASE_URL}/test/create` , {data:{ item}});
   
   if (resp.ok) { 
       newPRojectName = "";

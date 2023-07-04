@@ -4,7 +4,7 @@ import Footer from '$lib/cmp/Footer.svelte';
 import Cards from "./templ/Cards.svelte";
 import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';
 import { BASE_URL } from '$lib/js/config.js';
-import ajaxGet from "$lib/js/ajaxGet.js";
+import ajaxPost from "$lib/js/ajaxPost.js";
 import { toast } from '@zerodevx/svelte-toast';
 import getRunning from "./getRunning";
 import NewTempl from './NewTempl.svelte';
@@ -42,16 +42,16 @@ onMount(async ()=>{
 
 const populate = async () =>{
  try {
- //  debugger;
+    const resp = await ajaxPost(`${BASE_URL}/template/read`,{data:{}});
+    // debugger;
+                const data = await resp.json();
+                if (resp.ok == true) {
+                   const incommingTemplates =  data.items;
+                  templatesStore.set(incommingTemplates);
+                }else {
+                      toast.push(data.message);
+                }  
 
-  const resp = await ajaxGet( `${BASE_URL}/template/read`);
-  if(resp.ok){
-    const data = await resp.json();
-    // console.log( "Read - Date" , data);
-    templatesStore.set(data.items); 
-  }else {
-    toast.push("failed to load Templates");
-  }
  } catch (error) {
     // console.error(error);
     toast.push(error.message);

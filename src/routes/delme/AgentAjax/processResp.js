@@ -1,25 +1,15 @@
 
 
-export default async function processResp(resp ,demands=[],
-sendDataObjInResponse=false){
+export default async function processResp(resp ){
 try{
-  const data = await resp.json();
-    // debugger;
-    if (resp.ok) {
-      // const data = await resp.json();
-        const payload = {};
-            for (let i = 0; i < demands.length; i++) {
-                const demand = demands[i];
-                payload[demand] = data[demand];
-            }
-                if (sendDataObjInResponse == true){
-                    return {payload , message: null,data};
-                }else {
-                    return {payload , message: null};
-                }
-  }else {
-      return {payload : null ,message: data.message,data};
-  }
+      if (resp.ok){
+      const item = await resp.json();
+      return item;
+      // console.log("created");
+      }else {
+      throw new Error("failed to create")
+      // console.log(data.message || "Error Message not recieved");
+      }
     }catch(e){
       throw e;
     }

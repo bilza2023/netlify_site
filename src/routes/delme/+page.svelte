@@ -1,7 +1,7 @@
 <script>
 import { BASE_URL } from '$lib/js/config.js';
 import ajaxGet from "$lib/js/ajaxGet.js";
-import ajaxPost from "$lib/js/ajaxPost.js";
+import ajaxPost from "$lib/js/ajaxPost.js"; 
 import Entries from "./Entries.svelte";
 import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';
 import { toast } from '@zerodevx/svelte-toast';
@@ -10,7 +10,7 @@ import tagsTest from "./testone/tagsTest";
 import classesTest from "./testone/classesTest";
 import studentsTest from "./testone/studentsTest";
 import testTest from "./testone/testTest";
-// import surveyTest from "./testone/testSurvey";
+import surveyTest from "./testone/testSurvey";
 import { onMount } from 'svelte';
 
 import AgentAjax from "./AgentAjax/AgentAjax";
@@ -24,20 +24,9 @@ onMount(async ()=>{
     // await surveyTest("The name");
     // await testTest();
     
-    // await tagsTest("The name" , "dd dd dd");
+    await tagsTest("The name" , "dd dd dd");
     // await classesTest("The name" , "dd dd dd");
     // await studentsTest("345434" , "Agent Ajax");
-
-    // const readResult = await agentAjax.read();
-    // if (readResult.message == null){
-    //       console.log("read",readResult.payload.items)
-    // }else {
-    //   console.log(readResult.message);
-    // }
-    
-
-
-
 
     } catch (error) {
       console.error(error);

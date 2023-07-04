@@ -17,19 +17,20 @@ let description = "";
 
 
 async function save(){
-
-      const resp = await ajaxPost(`${BASE_URL}/tag/create`,{name ,
-      description});
+  debugger;
+      const resp = await ajaxPost(`${BASE_URL}/tag/create`,{data:{name ,
+      description}});
 
                 if (resp.ok == true) {
                 const data = await resp.json();
                   name = '';
                   description = '';
-                      toast.push("Tag saved");
+                      // toast.push("Tag saved");
                 }else {
-            //     const data = await resp.json(); //--for debug  
+                const data = await resp.json(); //--for debug  
+                console.log(data);
             //           toast.push(data.message);//--for debug
-                      toast.push("failed to save");
+                      // toast.push("failed to save");
                 }  
 //     } catch (error) {
 //         toast.push("failed to save");

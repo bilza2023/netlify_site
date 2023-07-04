@@ -15,7 +15,7 @@ export let quiz;
 const deleteQuiz = async ()=>{
   // debugger;
   // const token = localStorage.getItem('token');
-  const resp = await ajaxPost(`${BASE_URL}/template/delete`,{id : quiz._id});
+  const resp = await ajaxPost(`${BASE_URL}/template/delete`,{data:{id : quiz._id}});
  // debugger;
       if (resp.ok == true){
       const data = await resp.json();
