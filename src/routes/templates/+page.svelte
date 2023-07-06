@@ -6,11 +6,23 @@ import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';
 import { BASE_URL } from '$lib/js/config.js';
 import ajaxPost from "$lib/js/ajaxPost.js";
 import { toast } from '@zerodevx/svelte-toast';
-import getRunning from "./getRunning";
+// import getRunning from "./getRunning";
 import NewTempl from './NewTempl.svelte';
 
-import {templatesStore,showNewTemplStore} from "./dashboardStore";
-$: templates = $templatesStore;
+//-----------------------------------------------
+import { templatesStore,testsStore,runsStore,studentsStore ,classStore,appStateStore} from '../mainStore.js';
+
+$: templates = $templatesStore; 
+$: tests = $testsStore; 
+$: runs = $runsStore; 
+$: students = $studentsStore; 
+$: classObj = $classStore; 
+$: appState = $appStateStore; 
+
+
+//-----------------------------------------------
+
+import {showNewTemplStore} from "./dashboardStore";
 $: showNewTempl = $showNewTemplStore;
 
 
@@ -27,7 +39,7 @@ onMount(async ()=>{
               isLogin = false;
           }else {
               isLogin = true;
-                    populate();
+                    // populate();
           }
     } catch (error) {
       // console.error(error);
@@ -70,7 +82,7 @@ const populate = async () =>{
             {/if}
 
 <div class="bg-gray-800 w-full">            
-<Cards quizzes={templates} urlTag={"edit"} />
+<Cards quizzes={templates} urlTag={"editTemplate"} />
 </div>          
 {/if}
 

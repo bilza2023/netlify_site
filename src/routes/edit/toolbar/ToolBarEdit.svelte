@@ -1,8 +1,6 @@
 <script>
 ////////////-store variables--///////
 
-////////////-store variables--///////
-
 import Clone from "./Clone.svelte";
 import MakeTest from "./MakeTest.svelte";
 import { fade } from 'svelte/transition';

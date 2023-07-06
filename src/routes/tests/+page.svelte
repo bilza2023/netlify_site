@@ -29,19 +29,22 @@ onMount(async ()=>{
 // console.log("isLogin" , isLogin);    
 });
 
- const populate = async () =>{
- try {
-  const resp = await ajaxGet( `${BASE_URL}/test/read`);
-  if(resp.ok){
-    const data = await resp.json();
-    tests = data.items; 
-  }else {
-    toast.push("failed to load Tests");
+ import Agent from "$lib/common/Agent";
+
+  const populate = async () =>{
+  try {
+  const resp = await Agent.read('test');
+    // const resp = await ajaxGet( `${BASE_URL}/test/read`);
+    if(resp.ok){
+      const data = await resp.json();
+      tests = data.items; 
+    }else {
+      toast.push("failed to load Tests");
+    }
+  } catch (error) {
+      toast.push("failed to load..");
   }
- } catch (error) {
-    toast.push("failed to load..");
- }
-}
+  }
 
 </script>
 <div class="bg-gray-800"><!--page div-->

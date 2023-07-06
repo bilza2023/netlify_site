@@ -1,11 +1,9 @@
 <script>
 
 import { toast } from '@zerodevx/svelte-toast';
-import { BASE_URL } from '$lib/js/config.js';
-import ajaxPost from "$lib/js/ajaxPost.js";
-
+import Agent from "../../lib/common/Agent";
 import {templatesStore,showNewTemplStore} from "./dashboardStore";
-
+////////////////////////////////////////////
 
 let newPRojectName = "";
 
@@ -14,8 +12,8 @@ const handler = async( )=>{
       toast.push( "Project name can not be empty" );
       return;
   }
-  // debugger;
-  const response = await ajaxPost( `${BASE_URL}/template/create` , {title :newPRojectName} );
+ 
+const response = await Agent.create('template',{title :newPRojectName});
 
   if (response.ok) {
       newPRojectName = "";

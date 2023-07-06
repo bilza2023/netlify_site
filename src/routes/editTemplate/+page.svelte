@@ -1,12 +1,9 @@
 <script>
-import { SvelteToast } from '@zerodevx/svelte-toast'
-import './styles.css';
-
 import { templatesStore,testsStore,runsStore,studentsStore ,classStore,appStateStore} 
-from './mainStore.js';
+from '../mainStore.js';
 import { toast } from '@zerodevx/svelte-toast';
 
-import loadApp from "../lib/common/loadApp.js";
+import loadApp from "../../lib/common/loadApp.js";
 
 $: templates = $templatesStore; 
 $: tests = $testsStore; 
@@ -40,6 +37,12 @@ onMount(async ()=>{
 
 
 </script>
-<SvelteToast />
 
-<slot></slot>
+<div class="bg-gray-800 w-full h-screen text-white">
+
+<h1>Edit Template</h1>
+
+
+
+
+</div>

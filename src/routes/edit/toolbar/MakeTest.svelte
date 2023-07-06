@@ -1,10 +1,12 @@
 <script>
+
 import { toast } from '@zerodevx/svelte-toast';
 import { BASE_URL } from '$lib/js/config.js';
 import { fade } from 'svelte/transition';
 import ajaxPost from '$lib/js/ajaxPost';
 import checkBeforePub from "../check/checkBeforePub";
 export let quiz;
+
 // export let openDivFn;
 // import {errorsArrayStore,showErrorsStore} from "../store.js";
 import {showErrorsStore,errorsArrayStore,showTestStore} from "../store";
@@ -42,7 +44,7 @@ const handler = async(quizType)=>{
   }else {
       const data = await resp.json();
 
-      toast.push( data.errormsg );
+      toast.push( data.message );
   }
 
 }

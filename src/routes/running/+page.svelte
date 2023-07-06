@@ -3,7 +3,7 @@ import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 import RunningCards from "./running/RunningCards.svelte";
 import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';
-import getRunning from "./getRunning";
+import Agent from "$lib/common/Agent";
 
 import {runningStore} from "./dashboardStore";
 $: running = $runningStore;
@@ -18,8 +18,16 @@ onMount(async ()=>{
           if (token == null || token.length == 0) {
               isLogin = false;
           }else {
-              isLogin = true;
-                    getRunning();
+                    isLogin = true;
+                    const resp = await Agent.read('test');
+
+                    if(resp.ok){
+                        const data = await resp.json();
+                        runningStore.set(data.items); 
+                    
+                    }else {
+                        toast.push("failed to load Tests");
+                    }
           }
     } catch (error) {
     }

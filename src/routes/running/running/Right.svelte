@@ -2,28 +2,32 @@
 import ajaxPost from "$lib/js/ajaxPost.js";
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
-import getRunning from "../getRunning";
+// import getRunning from "../getRunning";
+import Agent from "$lib/common/Agent";
+
+
+
 export let quiz;
     let isPaused = false;
     function togglePause() {
         isPaused = !isPaused;
     }
+
 const deleteFn = async ()=>{
-    const resp = await ajaxPost(`${BASE_URL}/survey/delete`,{quizId : quiz._id});
- // debugger;
-      if (resp.ok == true){
-      const data = await resp.json();
+    const resp = await Agent.del('run',{id :quiz._id});
+
+    if (resp.ok == true){
+        const data = await resp.json();
         toast.push('deleted'); 
-        getRunning();
-      }else {
-      const data = await resp.json();
+        // getRunning();
+    }else {
+        const data = await resp.json();
         toast.push("failed to delete" );
-      }
+    }
 }
 </script>
 
 <div class="flex space-x-4 justify-end">
-
 
     <a
     href= {`/show?quizId=${quiz._id}`} 

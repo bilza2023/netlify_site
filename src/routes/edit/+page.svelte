@@ -5,7 +5,7 @@ import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';
 import QuizBlock from "./settings/QuizBlock.svelte";
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
-// import { page } from '$app/stores';
+
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
 import ToolBarEdit from './toolbar/ToolBarEdit.svelte';
@@ -36,8 +36,7 @@ onMount(async ()=>{
 
   try {
       const quizId = new URLSearchParams(location.search).get("quizId");
-             //----------------------------------
- 
+      //----------------------------------
       const resp = await ajaxPost(`${BASE_URL}/template/readone`,{data:{id:quizId}});
             // debugger;
                 if (resp.ok == true) {
@@ -52,16 +51,11 @@ onMount(async ()=>{
       // console.error(error);
     }
 });
-///////////////////////////////////////////////////
-
-/////////////////////////////////////
-
 /////////////////////////////////////////
-
 const save = async ()=>{
 
     isLoading = true; 
- //  debugger;
+  debugger;
     const resp = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz});
       if (resp.ok == true) {
             const data = await resp.json();
@@ -75,7 +69,6 @@ const save = async ()=>{
       }// if ends
 
 }
-
 
 </script>
 
