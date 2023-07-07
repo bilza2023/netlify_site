@@ -32,7 +32,7 @@ $: showNewTempl = $showNewTemplStore;
             <NewTempl />
             {/if}
 
-  <Cards quizzes={templates}  urlTag={"editTemplate"} />
+  <Cards quizzes={templates}  urlTag={"edit"} />
      
 {:else}
   <Loading />

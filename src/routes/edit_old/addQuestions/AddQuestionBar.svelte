@@ -1,10 +1,6 @@
 <script>
-// import { templatesStore , appLoadedStore} from '../../mainStore.js';
-export let addMCQ;
-//-----------------------------------------------
-// let template;
-// import { quizStore  } from '../store';
-// import InputTypes from './InputTypes.svelte';
+import { quizStore  } from '../store';
+import InputTypes from './InputTypes.svelte';
 import McqTypes from './MCQTypes.svelte';
 import Btn from "./BtnNav.svelte";
 
@@ -33,7 +29,13 @@ import { getDataUrl,getDataPassword,getDataParagraph,getDataNumber,getDataInput,
 
   }
 
- 
+const addMCQ = () => {
+  const newMCQ = getDataBaseMCQ();
+  quizStore.update(curr => {
+    const questions = [...curr.questions, newMCQ];
+    return { ...curr, questions };
+  });
+}
 
 </script>
 

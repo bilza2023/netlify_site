@@ -1,47 +1,101 @@
-i am report object which has an array of objects called "answers".
-The "answers" contain answer objects collection; each question is in following format:
-answers
-: 
-Array(2)
-0
-: 
-content
-: 
-"Single Select"
-correctOptions
-: 
-['d066f294-db67-4fae-8a03-f59a438d7cf1']
-id
-: 
-"be5acb18-1f54-4b73-9157-14b0a2ddc6d7"
-marksObtained
-: 
-10
-multiSelect
-: 
-false
-payload
-: 
-""
-questionId
-: 
-"761b42c3-78be-4899-8c25-bddf11fc8242"
-questionType
-: 
-"SurveyMCQ"
-required
-: 
-false
-selectedOptions
-: 
-['d066f294-db67-4fae-8a03-f59a438d7cf1']
-totalMarks
-: 
-10
 
-Write me a function (calcGTotal)that takes the report object. it should loop through each report and then loop throught their answers array of objects.
+I have a problem regarding using array of objects as svelte store variables.
 
-For each report item it should add the following items to the report object
-    "examTotalMarks" : this to be the total of all the answer.totalMarks with in this report.  
-    "TotalMarksObtained" : this to be the total of all the answer.marksObtained with in this report.  
-    "percentage" : (TotalMarksObtained/examTotalMarks)*100
+I have an array of objects called "templatesStore" in svelte store. I take out one item from this array of objects and then try to edit it BUT the edited part is not diplayed (i add question)
+
+
+<script>
+
+import Nav from '$lib/nav/Nav.svelte';
+import Footer from '$lib/cmp/Footer.svelte';
+import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';  
+import QuizBlock from './QuizBlock.svelte';  
+import { toast } from '@zerodevx/svelte-toast';
+import { onMount } from 'svelte';
+import Questions from './showQuestions/Questions.svelte';
+import AddQuestionBar from './addQuestions/AddQuestionBar.svelte';
+
+// import ToolBarEdit from './toolbar/ToolBarEdit.svelte';
+// import Loading from '$lib/cmp/Loading.svelte';
+
+import { templatesStore , appLoadedStore} from '../mainStore.js';
+//-----------------------------------------------
+let template;
+let quizId;
+  //===================== 
+$: appLoaded = $appLoadedStore; 
+ //===================== 
+import { getDataUrl,getDataPassword,getDataParagraph,getDataNumber,getDataInput,getDataEmail,getDataMCQ,getDataBaseMCQ, getMcqWOption, getSurvey} from "$lib/globals/questionTypesData";
+
+onMount(async ()=>{
+  try {
+    //   debugger;
+      if (appLoaded==false){
+        toast.push('App Data Not loaded')
+      }
+        quizId = new URLSearchParams(location.search).get("quizId");
+      template = await $templatesStore.find(item => item._id === quizId);
+      console.log(template);
+      //----------------------------------
+    } catch (error) {
+      // console.error(error);
+    }
+});
+/////////////////////////////////////////
+
+const save = async ()=>{
+
+    // isLoading = true; 
+  debugger;
+    const resp = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz});
+      if (resp.ok == true) {
+            const data = await resp.json();
+            isLoading = false; 
+            toast.push("Quiz Saved"); 
+        }else {
+            const data = await resp.json();
+      //     console.log(data);
+            isLoading = false;
+            toast.push("failed to save");
+      }// if ends
+
+}
+
+</script>
+
+<Nav/>
+
+<div class="wrapper bg-gray-800 text-white m-0 px-8  min-h-screen w-full">
+
+
+<HdgWithIcon title="Edit Template" , icon ="📜"/>
+
+{#if template}
+<br>
+<QuizBlock  {template}/>
+<!-- <Questions questions={template.questions}/> -->
+{#each  template.questions as question }
+  <h1>{question.content}</h1>
+{/each}
+  
+<br/>
+<!-- <AddQuestionBar  {template}/> -->
+
+{/if} 
+
+<button on:click={addMCQ} class='bg-gray-600 border-2 border-white p-2 m-2 rounded-md'>Add Question</button>
+
+<br>
+<br> 
+<br>
+<br> 
+<br>
+<br> 
+<br>
+<br> 
+<br>
+<br> 
+</div><!--app-->
+
+
+<Footer /> 

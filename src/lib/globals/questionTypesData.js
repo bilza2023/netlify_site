@@ -6,7 +6,7 @@ const getDataBaseMCQ = ()=>{
     return {
     id : uuid(),
     required : false,
-    content : "",
+    content : "Insert content here...",
     explanation : "",
     multiSelect: false,
     selectedOptions :[],

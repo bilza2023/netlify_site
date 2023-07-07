@@ -1,5 +1,5 @@
 <script>
-
+import { quizStore  } from '../../store';
 export let bool_prop;
 export let question;
 // export let runFn = ()=>{};

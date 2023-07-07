@@ -4,7 +4,15 @@ export let question;
 export let deleteOption;
 export let mark_correct;
 
+
+//--instead of using index use id
+
+
+
 </script>
+
+
+
 
    <div class="flex mb-1 border-2 border-gray-400 mx-10">    
           

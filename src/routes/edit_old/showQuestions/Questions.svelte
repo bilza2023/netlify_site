@@ -1,15 +1,20 @@
 <script>
-export let questions;
- 
-import Question from "./mcqs/MCQ.svelte";
-// import InputText from "./inputQuestions/InputText.svelte";
-// import InputEmail from "./inputQuestions/InputEmail.svelte";
-// import InputPassword from "./inputQuestions/InputPassword.svelte";
-// import InputNumber from "./inputQuestions/InputNumber.svelte";
-// import InputUrl from "./inputQuestions/InputUrl.svelte";
-// import InputParagraph from "./inputQuestions/InputParagraph.svelte";
+////////////-store variables--///////
+import { quizStore  } from '../store';
+quizStore.subscribe(value => quiz = value);
+$: quiz = $quizStore; 
+$: questions = $quizStore.questions;
+////////////-store variables--///////
 
-// debugger;
+import Question from "./mcqs/MCQ.svelte";
+import InputText from "./inputQuestions/InputText.svelte";
+import InputEmail from "./inputQuestions/InputEmail.svelte";
+import InputPassword from "./inputQuestions/InputPassword.svelte";
+import InputNumber from "./inputQuestions/InputNumber.svelte";
+import InputUrl from "./inputQuestions/InputUrl.svelte";
+import InputParagraph from "./inputQuestions/InputParagraph.svelte";
+
+
 </script>
 
 
@@ -29,7 +34,7 @@ import Question from "./mcqs/MCQ.svelte";
                 />
             {/if}
                     <!--Inputs-->
-            <!-- {#if question.questionType == "SurveyInput" }
+            {#if question.questionType == "SurveyInput" }
                 <InputText 
                  {question}  
                     ser={index}
@@ -69,7 +74,7 @@ import Question from "./mcqs/MCQ.svelte";
                  {question}  
                     ser={index}
                 />
-            {/if}         -->
+            {/if}        
 
 <br>
 {/each}
