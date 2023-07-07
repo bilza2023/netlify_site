@@ -1,49 +1,30 @@
 <script>
+
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 import RunningCards from "./running/RunningCards.svelte";
 import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';
-import Agent from "$lib/common/Agent";
+import { runsStore , appLoadedStore} from '../mainStore.js';
 
-import {runningStore} from "./dashboardStore";
-$: running = $runningStore;
-
-import { onMount } from 'svelte';
-let isLogin=false;
-onMount(async ()=>{
-
-  try {
-      const token = await localStorage.getItem("token");
-      // debugger;
-          if (token == null || token.length == 0) {
-              isLogin = false;
-          }else {
-                    isLogin = true;
-                    const resp = await Agent.read('test');
-
-                    if(resp.ok){
-                        const data = await resp.json();
-                        runningStore.set(data.items); 
-                    
-                    }else {
-                        toast.push("failed to load Tests");
-                    }
-          }
-    } catch (error) {
-    }
-});
-
+//---------------------------------------------|
+$: runs = $runsStore;            //============| 
+$: appLoaded = $appLoadedStore; //=============| 
+//---------------------------------------------|
 </script>
 <div class="bg-gray-800"><!--page div-->
 <Nav />
 
 <HdgWithIcon title="Running" , icon ="🏃‍♂️"/>
-{#if isLogin}
+{#if appLoaded}
 
-<div class="bg-gray-800 w-full">
-            
-<RunningCards quizzes={running} urlTag={"show"} />
-
+<div class="bg-gray-800 w-full text-white">
+    {#if runs}       
+     <!-- {#each runs as run }
+        <h1>{run.title}</h1>
+      {/each}     -->
+  <!-- <div>{runs}</div>   -->
+<RunningCards {runs} urlTag={"show"} />
+    {/if}
 </div>          
 {/if}
 

@@ -3,61 +3,38 @@ import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 import Cards from "./tests/Cards.svelte";
 import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';
-import { BASE_URL } from '$lib/js/config.js';
-import ajaxGet from "$lib/js/ajaxGet.js";
+import Loading from '../../lib/cmp/Loading.svelte';
 import { toast } from '@zerodevx/svelte-toast';
+import { testsStore , appLoadedStore} from '../mainStore.js';
 
-
-let tests = null;
-
-import { onMount } from 'svelte';
-let isLogin=false;
-onMount(async ()=>{
-
-  try {
-      const token = await localStorage.getItem("token");
-      // debugger;
-          if (token == null || token.length == 0) {
-              isLogin = false;
-          }else {
-              isLogin = true;
-                    populate();
-          }
-    } catch (error) {
-      // console.error(error);
-    }
-// console.log("isLogin" , isLogin);    
-});
-
- import Agent from "$lib/common/Agent";
-
-  const populate = async () =>{
-  try {
-  const resp = await Agent.read('test');
-    // const resp = await ajaxGet( `${BASE_URL}/test/read`);
-    if(resp.ok){
-      const data = await resp.json();
-      tests = data.items; 
-    }else {
-      toast.push("failed to load Tests");
-    }
-  } catch (error) {
-      toast.push("failed to load..");
-  }
-  }
-
+//---------------------------------------------|
+$: tests = $testsStore;          //============| 
+$: appLoaded = $appLoadedStore; //=============| 
+//---------------------------------------------|
 </script>
+
+
 <div class="bg-gray-800"><!--page div-->
 <Nav />
 
  
 <HdgWithIcon title="Tests" , icon ="🧪" bgColor='bg-green-800'/>
-{#if isLogin}
+{#if appLoaded}
             
 <div class="bg-gray-800 w-full">            
 <Cards quizzes={tests} urlTag={"edit"} />
-</div>          
+</div>  
+{:else}
+<Loading />        
 {/if}
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <Footer />
 </div>

@@ -9,8 +9,9 @@ export const runsStore = writable([]);
 export const studentsStore = writable([]);
 export const classStore = writable([]);
 //--App State
+export const appLoadedStore = writable(false);
+
 export const appStateStore = writable({
-    initialDataLoad : false,
     isLogin : false
 });
 

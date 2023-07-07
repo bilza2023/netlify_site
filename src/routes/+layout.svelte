@@ -2,18 +2,18 @@
 import { SvelteToast } from '@zerodevx/svelte-toast'
 import './styles.css';
 
-import { templatesStore,testsStore,runsStore,studentsStore ,classStore,appStateStore} 
+import { templatesStore,testsStore,runsStore,studentsStore ,classStore,appStateStore,appLoadedStore} 
 from './mainStore.js';
 import { toast } from '@zerodevx/svelte-toast';
 
 import loadApp from "../lib/common/loadApp.js";
 
-$: templates = $templatesStore; 
-$: tests = $testsStore; 
-$: runs = $runsStore; 
-$: students = $studentsStore; 
-$: classObj = $classStore; 
-$: appState = $appStateStore; 
+// $: templates = $templatesStore; 
+// $: tests = $testsStore; 
+// $: runs = $runsStore; 
+// $: students = $studentsStore; 
+// $: classObj = $classStore; 
+$: appLoaded = $appLoadedStore; 
 
 
 import { onMount } from 'svelte';
@@ -28,7 +28,7 @@ onMount(async ()=>{
         // console.log("students",students );
         // console.log("classes",classObj );
         // console.log("appState",appState );
-        if (appState.initialDataLoad == true){
+        if (appLoaded == true){
         toast.push('app data loaded');
         }
     
