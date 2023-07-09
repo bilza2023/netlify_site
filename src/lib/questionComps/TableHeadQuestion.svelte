@@ -2,6 +2,7 @@
 export let title;
 export let id;
 export let ser;
+export let deleteQuestion;
 export let icon="";
 export let visible = false; //why export?
 import QDel from "./QDel.svelte";
@@ -28,7 +29,7 @@ const  toggleVisibility = ()=> visible = !visible;
     </div>
 
 
-    <QDel {id}/>
+    <QDel {id} {deleteQuestion}/>
     
     
     <!-- svelte-ignore a11y-click-events-have-key-events -->

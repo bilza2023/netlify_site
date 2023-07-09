@@ -3,10 +3,10 @@ import { SvelteToast } from '@zerodevx/svelte-toast'
 import './styles.css';
 
 import { templatesStore,testsStore,runsStore,studentsStore ,classStore,appStateStore,appLoadedStore} 
-from './mainStore.js';
+from './appStore.js';
 import { toast } from '@zerodevx/svelte-toast';
 
-import loadApp from "../lib/common/loadApp.js";
+import { loadApp } from "../lib/communicator/communicator";
 
 // $: templates = $templatesStore; 
 // $: tests = $testsStore; 
@@ -29,12 +29,11 @@ onMount(async ()=>{
         // console.log("classes",classObj );
         // console.log("appState",appState );
         if (appLoaded == true){
-        toast.push('app data loaded');
+        toast.push('App data loaded' ,{ duration: 600 });
         }
     
     } catch(err){
         toast.push('Failed to load data');
-    
     } 
 });
 

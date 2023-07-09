@@ -1,5 +1,5 @@
-
 <script>
+
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 import Cards from "./templ/Cards.svelte";
@@ -9,7 +9,7 @@ import { toast } from '@zerodevx/svelte-toast';
 import NewTempl from './NewTempl.svelte';
 import Loading from '../../lib/cmp/Loading.svelte';
 
-import { templatesStore , appLoadedStore} from '../mainStore.js';
+import { templatesStore , appLoadedStore} from '../appStore.js';
 //-----------------------------------------------
 $: templates = $templatesStore; //===================== 
 $: appLoaded = $appLoadedStore; //===================== 

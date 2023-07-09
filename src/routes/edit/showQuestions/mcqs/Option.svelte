@@ -26,7 +26,7 @@ export let mark_correct;
           {/if}
           
 <button class="w-2/12 bg-gray-600 rounded-sm focus:outline-none active:bg-red-900 hover:bg-red-500 hover:cursor-pointer mx-2 my-1"
-          on:click={()=>deleteOption(question.id,option.id)}>
+          on:click={()=>deleteOption(option.id)}>
           <span class="text-xl">🗑️</span>
 </button>
 

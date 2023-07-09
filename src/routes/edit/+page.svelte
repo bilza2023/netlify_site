@@ -9,17 +9,21 @@ import { onMount } from 'svelte';
 import Questions from './showQuestions/Questions.svelte';
 import AddQuestionBar from './addQuestions/AddQuestionBar.svelte';
 
-// import ToolBarEdit from './toolbar/ToolBarEdit.svelte';
+import ToolBarEdit from './toolbar/ToolBarEdit.svelte';
 // import Loading from '$lib/cmp/Loading.svelte';
 
-import { templatesStore , appLoadedStore} from '../mainStore.js';
+import { templatesStore , appLoadedStore} from '../appStore.js';
 //-----------------------------------------------
 let template;
 let quizId;
   //===================== 
 $: appLoaded = $appLoadedStore; 
  //===================== 
+
+
+
 import { getDataUrl,getDataPassword,getDataParagraph,getDataNumber,getDataInput,getDataEmail,getDataMCQ,getDataBaseMCQ, getMcqWOption, getSurvey} from "$lib/globals/questionTypesData";
+
 
 onMount(async ()=>{
   try {
@@ -28,8 +32,8 @@ onMount(async ()=>{
         toast.push('App Data Not loaded')
       }
         quizId = new URLSearchParams(location.search).get("quizId");
-      const tmp  = await $templatesStore.find(item => item._id === quizId);
-      template = {...tmp};
+      template  = await $templatesStore.find(item => item._id === quizId);
+      // template = {...tmp};
 
       console.log(template);
       //----------------------------------
@@ -39,32 +43,17 @@ onMount(async ()=>{
 });
 /////////////////////////////////////////
 const addMCQ = () => {
-  const qs = getDataBaseMCQ();
+  const qs = getDataMCQ();
   template.questions  = [...template.questions,qs];
 }
 
 
-const save = async ()=>{
-
-    // isLoading = true; 
-  debugger;
-    const resp = await ajaxPost(`${BASE_URL}/quiz/update`,{quiz});
-      if (resp.ok == true) {
-            const data = await resp.json();
-            isLoading = false; 
-            toast.push("Quiz Saved"); 
-        }else {
-            const data = await resp.json();
-      //     console.log(data);
-            isLoading = false;
-            toast.push("failed to save");
-      }// if ends
-
-}
 
 </script>
 
 <Nav/>
+<div class="bg-gray-800">
+<ToolBarEdit {template} />
 
 <div class="wrapper bg-gray-800 text-white m-0 px-8  min-h-screen w-full">
 
@@ -74,13 +63,12 @@ const save = async ()=>{
 {#if template}
 <br>
 <QuizBlock  {template}/>
-<Questions questions={template.questions}/>
+<Questions {template}/>
   
 <br/>
 <AddQuestionBar  {addMCQ}/>
 
 {/if} 
-
 <br>
 <br> 
 <br>
@@ -95,3 +83,4 @@ const save = async ()=>{
 
 
 <Footer /> 
+</div> <!--just the gray div-->

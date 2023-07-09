@@ -1,6 +1,5 @@
 
 import ajaxPost from "./ajaxPost";
-import { toast } from '@zerodevx/svelte-toast';
 import { BASE_URL } from '$lib/js/config.js';
 
 /////////////////////////////////////////////////

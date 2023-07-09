@@ -1,31 +1,38 @@
 <script>
-export let questions;
- 
-import Question from "./mcqs/MCQ.svelte";
+export let template;
+import MCQ from "./mcqs/MCQ.svelte";
+
+function deleteQuestion(id){
+// debugger;
+     template.questions = template.questions.filter(q => q.id !== id);
+     
+}
+
 // import InputText from "./inputQuestions/InputText.svelte";
 // import InputEmail from "./inputQuestions/InputEmail.svelte";
 // import InputPassword from "./inputQuestions/InputPassword.svelte";
 // import InputNumber from "./inputQuestions/InputNumber.svelte";
 // import InputUrl from "./inputQuestions/InputUrl.svelte";
 // import InputParagraph from "./inputQuestions/InputParagraph.svelte";
-
 // debugger;
+
 </script>
 
 
 <div class=""><!--miana -->
 
-    {#if questions}
-    {#if questions.length > 0}
+    {#if template}
+    {#if template.questions.length > 0}
     <br>
 
-    {#each questions as question, index }
+    {#each template.questions as question, index }
                     <!--MCQ-->
             
             {#if question.questionType == "SurveyMCQ"}
-                <Question 
+                <MCQ 
                     {question}  
                     ser={index}
+                    {deleteQuestion}
                 />
             {/if}
                     <!--Inputs-->
@@ -70,14 +77,10 @@ import Question from "./mcqs/MCQ.svelte";
                     ser={index}
                 />
             {/if}         -->
-
 <br>
 {/each}
 {/if}
 {/if}
-
-
-
 
 
 </div><!--miana flex-->
