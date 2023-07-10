@@ -1,21 +1,18 @@
 <script>
-
 import { toast } from '@zerodevx/svelte-toast';
-import { BASE_URL } from '$lib/js/config.js';
+import LocalStorage from "../../lib/communicator/localStorage";
 import { fade } from 'svelte/transition';
-import ajaxPost from '$lib/js/ajaxPost';
-import checkBeforePub from "../check/checkBeforePub";
-export let quiz;
+import Agent from '../../lib/communicator/Agent';
+import checkBeforePub from "./check/checkBeforePub";
+export let template;
 
-// export let openDivFn;
-// import {errorsArrayStore,showErrorsStore} from "../store.js";
-import {showErrorsStore,errorsArrayStore,showTestStore} from "../store";
+import {showErrorsStore,errorsArrayStore,showTestStore} from "./store";
   let newPRojectName = "";
 
 const handler = async(quizType)=>{
 // debugger;
   // showTestStore.set(false);return;
-  const errorsArray = checkBeforePub(quiz);
+  const errorsArray = checkBeforePub(template);
   if (errorsArray.length > 0){
   errorsArrayStore.set(errorsArray);
   showErrorsStore.set(true);
@@ -24,7 +21,7 @@ const handler = async(quizType)=>{
   }
   
   //  // userId is already set
-  const item = {...quiz}; 
+  const item = {...template}; 
     item._id = undefined;
     item.published = false; //important
     item.members = []; //important
@@ -32,18 +29,16 @@ const handler = async(quizType)=>{
     item.title = newPRojectName; //--new title
     item.createdAt = Date.now();
   
-  const resp = await ajaxPost(`${BASE_URL}/test/create` , {data:{ item}});
-  
+const resp = await Agent.create('test',{item});
+
   if (resp.ok) { 
       newPRojectName = "";
+      LocalStorage.updateTests();
       showTestStore.set(false);
-      const data = await resp.json();
-      // debugger;
       toast.push( "New Test Created" );
 
   }else {
       const data = await resp.json();
-
       toast.push( data.message );
   }
 

@@ -1,28 +1,28 @@
 <script>
 import { toast } from '@zerodevx/svelte-toast';
-import { BASE_URL } from '$lib/js/config.js';
-import ajaxPost from "$lib/js/ajaxPost.js";
+
 import { fade } from 'svelte/transition';
 import {goto} from '$app/navigation';
 //  import { blur } from 'svelte/transition';
 //   import { scale } from 'svelte/transition';
 	// import { fly } from 'svelte/transition';
-import {showQuizDelStore} from "../store";
+import {showQuizDelStore} from "./store";
 
-export let quiz;
+export let template;
 import Agent from "$lib/common/Agent";
-
+import LocalStorage from '../../lib/communicator/localStorage';
 
 const deleteQuiz = async ()=>{
   // debugger;
   // const token = localStorage.getItem('token');
-const resp = await Agent.del('template',{id : quiz._id});
+const resp = await Agent.del('template',{id : template._id});
 
  // debugger;
       if (resp.ok == true){
       const data = await resp.json();
         toast.push('deleted');
         showQuizDelStore.set(false);
+        LocalStorage.updateTests();
         goto("/templates");
       }else {
       const data = await resp.json();

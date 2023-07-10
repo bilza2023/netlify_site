@@ -1,19 +1,22 @@
 <script>
-
-import Nav from '$lib/nav/Nav.svelte';
-import Footer from '$lib/cmp/Footer.svelte';
-import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';  
-import QuizBlock from './QuizBlock.svelte';  
-import { toast } from '@zerodevx/svelte-toast';
-import { onMount } from 'svelte';
-import Questions from './showQuestions/Questions.svelte';
-import AddQuestionBar from './addQuestions/AddQuestionBar.svelte';
-
+ 
+import  Nav from '$lib/nav/Nav.svelte';
+import  Footer from '$lib/cmp/Footer.svelte';
+import  HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';  
+import  QuizBlock from './QuizBlock.svelte';  
+import  { toast } from '@zerodevx/svelte-toast';
+import  { onMount } from 'svelte';
+import  Questions from './showQuestions/Questions.svelte';
+import  AddQuestionBar from './addQuestions/AddQuestionBar.svelte';
 import ToolBarEdit from './toolbar/ToolBarEdit.svelte';
+import ShowOne from './ShowOne.svelte';
+
 // import Loading from '$lib/cmp/Loading.svelte';
 import { loadApp } from "$lib/communicator/communicator";
 
 import { templatesStore , appLoadedStore} from '../appStore.js';
+// import { showTest,showClone,showQuizDel,showErrors,errorsArrayStore} from './store';
+
 //-----------------------------------------------
 let template;
 let quizId;
@@ -35,8 +38,8 @@ onMount(async ()=>{
         quizId = new URLSearchParams(location.search).get("quizId");
       template  = await $templatesStore.find(item => item._id === quizId);
       // template = {...tmp};
-
-      console.log(template);
+ 
+      // console.log(template);
       //----------------------------------
     } catch (error) {
       // console.error(error);
@@ -52,7 +55,11 @@ const addMCQ = () => {
 
 <Nav/>
 <div class="bg-gray-800">
-<ToolBarEdit {template} />
+
+<ToolBarEdit {template}   />
+<ShowOne  {template}/>
+
+
 
 <div class="wrapper bg-gray-800 text-white m-0 px-8  min-h-screen w-full">
 
