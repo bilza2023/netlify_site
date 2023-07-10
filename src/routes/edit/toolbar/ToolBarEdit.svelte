@@ -1,7 +1,8 @@
 <script>
 ////////////-store variables--///////
-
+import Agent from "../../../lib/communicator/Agent";
 import { fade } from 'svelte/transition';
+import { toast } from '@zerodevx/svelte-toast';
 // import Clone from "./Clone.svelte";
 // import MakeTest from "./MakeTest.svelte";
 // import QuizDel from "./QuizDel.svelte";
@@ -12,18 +13,26 @@ import ToolBar from '$lib/toolbar/ToolBar.svelte';
 import ToolBarBtn from '$lib/toolbar/ToolBarBtn.svelte';
 import HideIfNot from '$lib/cmp/HideIfNot.svelte';
 export let template;
-
+import LocalStorage from "../../../lib/communicator/localStorage";
 
 import { templatesStore} from '../../appStore.js';
 $: templates = $templatesStore; 
+
 const save = async ()=>{
-  console.log('====save===:');
-  console.log('template:' ,  template);
-  console.log('templates:' ,  templates);
-// localStorage.setItem('templates', JSON.stringify(templates));
- await localStorage.setItem('templates', JSON.stringify({}));
- await localStorage.setItem('templates', JSON.stringify(templates));
-  // console.log('templates' , templates);
+  debugger;
+ const resp = await Agent.update('template',{item: template});
+
+  if (resp.ok) {
+      const data = await resp.json();
+      LocalStorage.updateTemplates();
+
+      toast.push( "saved" );
+  }else {
+      const data = await resp.json();
+
+      toast.push( data.message );
+  }
+
 }
 
 let showTest = true;

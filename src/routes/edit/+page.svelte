@@ -11,6 +11,7 @@ import AddQuestionBar from './addQuestions/AddQuestionBar.svelte';
 
 import ToolBarEdit from './toolbar/ToolBarEdit.svelte';
 // import Loading from '$lib/cmp/Loading.svelte';
+import { loadApp } from "$lib/communicator/communicator";
 
 import { templatesStore , appLoadedStore} from '../appStore.js';
 //-----------------------------------------------
@@ -21,16 +22,16 @@ $: appLoaded = $appLoadedStore;
  //===================== 
 
 
-
 import { getDataUrl,getDataPassword,getDataParagraph,getDataNumber,getDataInput,getDataEmail,getDataMCQ,getDataBaseMCQ, getMcqWOption, getSurvey} from "$lib/globals/questionTypesData";
 
 
 onMount(async ()=>{
   try {
-    //   debugger;
+        // debugger;
+         await loadApp();
       if (appLoaded==false){
         toast.push('App Data Not loaded')
-      }
+      } 
         quizId = new URLSearchParams(location.search).get("quizId");
       template  = await $templatesStore.find(item => item._id === quizId);
       // template = {...tmp};
@@ -46,8 +47,6 @@ const addMCQ = () => {
   const qs = getDataMCQ();
   template.questions  = [...template.questions,qs];
 }
-
-
 
 </script>
 
