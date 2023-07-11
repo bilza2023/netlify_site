@@ -1,22 +1,23 @@
 <script>
-import {showErrorsStore,showRunStore,errorsArrayStore} from "./store";
+
 import RunErrors from "./RunErrors.svelte";
 import { fade } from 'svelte/transition';
 import ajaxPost from "$lib/js/ajaxPost.js";
-import {quizStore} from "../../store";
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
+
+import {showErrorsStore,showRunStore,errorsArrayStore} from "./store";
 
 let newName = "New Process";
 $:  showErrors = $showErrorsStore;
 $:  showRun = $showRunStore;
 $:  errorsArray = $errorsArrayStore;
-$:  quiz = $quizStore;
 
+export let test;
 const run  = async ()=>{
 // debugger;
 // quizStore.update(currentQuiz => ({ ...currentQuiz, title: true }));
-const survey = {...quiz };
+const survey = {...test };
 survey.title = newName;
 survey.published = true;
 survey.createdAt =  new Date();

@@ -5,7 +5,7 @@
 // import QuizDelDlg from "./QuizDelDlg.svelte";
 // import RunErrors from './runBtn/RunErrors.svelte';
 import RunBtn from './runBtn/RunBtn.svelte';
-// import RunBtnDivs from './runBtn/RunBtnDivs.svelte';
+import RunBtnDivs from './runBtn/RunBtnDivs.svelte';
 import SaveBtn from './SaveBtn.svelte';
 import AnalyticsBtn from './AnalyticsBtn.svelte';
 import DeleteBtn from './DeleteBtn.svelte';
@@ -47,7 +47,7 @@ function toggleshowQuizDel(){
 <div class="w-full bg-gray-800">
 
 
-<!-- <RunBtnDivs /> -->
+<RunBtnDivs  {test}/>
 
 
 

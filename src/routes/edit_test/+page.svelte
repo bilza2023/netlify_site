@@ -1,7 +1,7 @@
 <script>
 import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';  
 import QuizBlock from "./QuizBlock.svelte"; 
-import Teams from "./settings/Teams.svelte";
+import Teams from "./Teams.svelte";
 import QuestionsROM from "./QuestionsROM.svelte";
 import PulishTiming from "./PulishTiming.svelte";
 import UnPulishTiming from "./UnPulishTiming.svelte";
@@ -30,12 +30,9 @@ onMount(async ()=>{
     }
 });
 /////////////////////////////////////////
-
-
 </script>
 
 <Nav/>
-
 
 <ToolBar  {test}/>
 
