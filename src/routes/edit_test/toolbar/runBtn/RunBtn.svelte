@@ -5,7 +5,7 @@ $:errorsArray = $errorsArrayStore;
 
 //////////////////\\\\\\\\\\\\\\\\\
 
-async function toogle(){
+async function toogle( ) {
     showErrorsStore.set(false);
     showRunStore.set(false);
       // debugger;

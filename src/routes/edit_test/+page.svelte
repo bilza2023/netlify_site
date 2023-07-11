@@ -1,10 +1,10 @@
 <script>
 import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';  
 import QuizBlock from "./QuizBlock.svelte"; 
-// import Teams from "./settings/Teams.svelte";
+import Teams from "./settings/Teams.svelte";
 import QuestionsROM from "./QuestionsROM.svelte";
-// import PulishTiming from "./PulishTiming.svelte";
-// import UnPulishTiming from "./UnPulishTiming.svelte";
+import PulishTiming from "./PulishTiming.svelte";
+import UnPulishTiming from "./UnPulishTiming.svelte";
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
 import { toast } from '@zerodevx/svelte-toast';
@@ -54,11 +54,11 @@ onMount(async ()=>{
 <QuizBlock quiz={test}  />
 
 <br>
-<!-- <Teams /> -->
+<Teams />
 <br>
-<!-- <PulishTiming  quiz={test} /> -->
+<PulishTiming  quiz={test} />
 <br>
-<!-- <UnPulishTiming  quiz={test} /> -->
+<UnPulishTiming  quiz={test} />
 <br>
 <QuestionsROM  quiz={test}/>
 <br>

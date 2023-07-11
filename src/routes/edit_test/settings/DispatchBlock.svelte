@@ -1,10 +1,10 @@
 <script>
-import { quizStore , membersStore } from '../store';
-let quiz;
-let members;
+import { testsStore , studentsStore } from '../../appStore';
+$:quiz = $testsStore;
+$: members = $studentsStore;
+
 let memWOquizMems;
-quizStore.subscribe(value => quiz = value);
-membersStore.subscribe(value => members = Object.values(value));
+
 /////////////////////////////////////////////////////////////
 const doesMemExistInQuiz = (email)=>{
  let yesExist = false;
