@@ -2,9 +2,9 @@
 import ajaxPost from '$lib/js/ajaxPost';
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
-import { quizStore } from '../store';
+import { testsStore } from '../../appStore';
 
-$: quiz = $quizStore;
+$: quiz = $testsStore;
 
 async function save( ){
   // debugger;

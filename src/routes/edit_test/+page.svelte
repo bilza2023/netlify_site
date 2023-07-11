@@ -1,60 +1,30 @@
 <script>
 import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';  
-import QuizBlock from "./settings/QuizBlock.svelte";
-import Teams from "./settings/Teams.svelte";
+import QuizBlock from "./QuizBlock.svelte"; 
+// import Teams from "./settings/Teams.svelte";
 import QuestionsROM from "./QuestionsROM.svelte";
-import PulishTiming from "./pulishTiming/PulishTiming.svelte";
-import UnPulishTiming from "./pulishTiming/UnPulishTiming.svelte";
+// import PulishTiming from "./PulishTiming.svelte";
+// import UnPulishTiming from "./UnPulishTiming.svelte";
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
-// import { page } from '$app/stores';
-import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
 import ToolBar from './toolbar/ToolBar.svelte';
 import { onMount } from 'svelte';
-import ajaxPost from "$lib/js/ajaxPost.js";
 import Loading from '$lib/cmp/Loading.svelte';
+import loadApp from "../../lib/communicator/loadApp";
 
+import { testsStore } from '../appStore.js';
 
-////////////-store variables--///////
-import { quizStore , membersStore } from './store';
-quizStore.subscribe(value => quiz = value);
-membersStore.subscribe(value => members = Object.values(value));
-$: quiz = $quizStore; 
-$: members = $membersStore;
-////////////-store variables--///////
-let isLoading = false;
-let showSettings = true;
-
-
-function toggleShowSettings(){
-      showSettings = !showSettings;
-}
-
-
+let test;
+//========
 onMount(async ()=>{
   try {
+         await loadApp();
+       
       const quizId = new URLSearchParams(location.search).get("quizId");
-      //----------------------------------
-      // debugger;
-      const resp = await ajaxPost(`${BASE_URL}/test/readOne`,{id:quizId});
-            // debugger;
-                if (resp.ok == true) {
-                const data = await resp.json();
-                // const {incommingQuiz, incommingMembers } = data;
-                const incommingQuiz = data.item;
-                const incommingMembers = {};
+      test  = await $testsStore.find(item => item._id === quizId);
+    // debugger; 
 
-            // debugger;
-                  quizStore.set(incommingQuiz);
-                  membersStore.set(incommingMembers);
-
-                  
-                  //--these are user members and not quiz members
-                }else {
-                      toast.push("failed to open");
-                }  
-          
     } catch (error) {
       // console.error(error);
     }
@@ -67,45 +37,32 @@ onMount(async ()=>{
 <Nav/>
 
 
-{#if quiz}
-<ToolBar    {toggleShowSettings}
-{showSettings} />
-{/if}
+<ToolBar  {test}/>
 
 
 <div class="wrapper bg-gray-800 text-white m-0 px-8  min-h-screen w-full">
 
  <HdgWithIcon title="Edit Test" , icon ="🧪"/>
+<br/>
 
-
-
-{#if !quiz}
-<Loading  />
+{#if !test}
+<Loading />
 {/if}
 
-{#if quiz}
-<br>
-<br>
 
-
-<br>
-
-      {#if showSettings}
-      <QuizBlock  />
-      {/if}
-
+{#if test}
+<QuizBlock quiz={test}  />
 
 <br>
-<Teams />
+<!-- <Teams /> -->
 <br>
-<PulishTiming  />
+<!-- <PulishTiming  quiz={test} /> -->
 <br>
-<UnPulishTiming />
+<!-- <UnPulishTiming  quiz={test} /> -->
 <br>
-<QuestionsROM />
-
+<QuestionsROM  quiz={test}/>
 <br>
-
+{/if}
 
 
 <br>
@@ -118,7 +75,6 @@ onMount(async ()=>{
 <br> 
 <br>
 <br> 
-{/if} 
 </div><!--app-->
 
 

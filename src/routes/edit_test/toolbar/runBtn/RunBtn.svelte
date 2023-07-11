@@ -1,13 +1,10 @@
 <script>
 import checkBeforePub from './check/checkBeforePub.js';
 import {errorsArrayStore,showErrorsStore,showRunStore} from "./store.js";
+$:errorsArray = $errorsArrayStore;
 
-import {quizStore} from "../../store.js";
-$: quiz = $quizStore;
-$: errorsArray = $errorsArrayStore;
+//////////////////\\\\\\\\\\\\\\\\\
 
-////////////////////////////////////////////
-////////////////////////////////////////////
 async function toogle(){
     showErrorsStore.set(false);
     showRunStore.set(false);
@@ -16,7 +13,7 @@ async function toogle(){
     if (errors_Array.length !==0) {
           errorsArrayStore.set(errors_Array);
           showErrorsStore.set( true); //here
-          console.log("errorsArray" ,  errorsArray)
+          // console.log("errorsArray" ,  errorsArray)
           showRunStore.set(false);
           return;
     }else {

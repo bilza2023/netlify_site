@@ -1,15 +1,10 @@
 <script>
-import Tf from "../Tf.svelte";
+import Tf from "./Tf.svelte";
 import Th from "$lib/cmp/Th.svelte";
-import FormRow from "../FormRow.svelte";
+import FormRow from "./FormRow.svelte";
 import { fade } from 'svelte/transition';
 
-import { quizStore , membersStore } from '../store';
-let quiz;
-let members;
-quizStore.subscribe(value => quiz = value);
-membersStore.subscribe(value => members = value);
-
+export let quiz;
 
 let visible = true;
 

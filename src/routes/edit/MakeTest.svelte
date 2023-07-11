@@ -4,8 +4,8 @@ import LocalStorage from "../../lib/communicator/localStorage";
 import { fade } from 'svelte/transition';
 import Agent from '../../lib/communicator/Agent';
 import checkBeforePub from "./check/checkBeforePub";
+import {testsStore} from "../appStore";
 export let template;
-
 import {showErrorsStore,errorsArrayStore,showTestStore} from "./store";
   let newPRojectName = "";
 
@@ -33,6 +33,8 @@ const resp = await Agent.create('test',{item});
 
   if (resp.ok) { 
       newPRojectName = "";
+      const data = await resp.json();
+      await testsStore.update( curr =>{return [...curr,data.item]});
       LocalStorage.updateTests();
       showTestStore.set(false);
       toast.push( "New Test Created" );

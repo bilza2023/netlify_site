@@ -13,7 +13,7 @@ const createMCQwOpt = (opt=[])=>{
 }
 </script>
 
-
+ 
 <div class="flex flex-wrap">
 
 <Btn bgColor={btnBg} title = "Yes/No" 

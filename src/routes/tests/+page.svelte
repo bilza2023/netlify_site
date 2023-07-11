@@ -5,12 +5,22 @@ import Cards from "./tests/Cards.svelte";
 import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';
 import Loading from '../../lib/cmp/Loading.svelte';
 import { toast } from '@zerodevx/svelte-toast';
-import { testsStore , appLoadedStore} from '../mainStore.js';
+import { testsStore , appLoadedStore} from '../appStore';
+import { onMount } from 'svelte';
+import { loadApp } from "$lib/communicator/communicator";
 
 //---------------------------------------------|
 $: tests = $testsStore;          //============| 
 $: appLoaded = $appLoadedStore; //=============| 
 //---------------------------------------------|
+onMount(async ()=>{
+  try {
+         await loadApp();
+  } catch (err){
+  toast.push('Failed to load app');
+  }
+  });         
+
 </script>
 
 

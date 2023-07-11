@@ -1,34 +1,20 @@
 <script>
-////////////-store variables--///////
-import { quizStore , membersStore } from '../store';
-
-quizStore.subscribe(value => quiz = value);
-membersStore.subscribe(value => members = Object.values(value));
-$: quiz = $quizStore; 
-$: members = $membersStore;
 
 ////////////-store variables--///////
 
-import Clone from "./Clone.svelte";
-import QuizDelDlg from "./QuizDelDlg.svelte";
+// import QuizDelDlg from "./QuizDelDlg.svelte";
 // import RunErrors from './runBtn/RunErrors.svelte';
 import RunBtn from './runBtn/RunBtn.svelte';
-import RunBtnDivs from './runBtn/RunBtnDivs.svelte';
+// import RunBtnDivs from './runBtn/RunBtnDivs.svelte';
 import SaveBtn from './SaveBtn.svelte';
-import SettingsBtn from './SettingsBtn.svelte';
 import AnalyticsBtn from './AnalyticsBtn.svelte';
 import DeleteBtn from './DeleteBtn.svelte';
+// import {showQuizDel} from "../store";
 
 
-export let toggleShowSettings;
-export let showSettings;
-
-
-let showClone = false;
-function toggleShowClone(){
-  showClone = !showClone;
-}
-
+//-----------------
+export let test;
+//-----------------
 let showQuizDel = false;
 function toggleshowQuizDel(){
   showQuizDel = !showQuizDel;
@@ -39,7 +25,6 @@ function toggleshowQuizDel(){
  
 <div class="flex gap-1">
   <SaveBtn />  
-  <SettingsBtn  {toggleShowSettings} {showSettings}/> 
   <DeleteBtn {toggleshowQuizDel} />
   
 </div>
@@ -47,7 +32,10 @@ function toggleshowQuizDel(){
 
 <div class="flex gap-1">
   <RunBtn />
-  <AnalyticsBtn id={quiz._id} />
+
+{#if test}  
+  <AnalyticsBtn id={test._id} />
+{/if}  
 </div>
 
 </div>
@@ -59,15 +47,9 @@ function toggleshowQuizDel(){
 <div class="w-full bg-gray-800">
 
 
-<RunBtnDivs />
+<!-- <RunBtnDivs /> -->
 
-{#if showClone == true}
-<Clone  {quiz} {toggleShowClone}/>
-{/if}
 
-{#if showQuizDel == true}
-<QuizDelDlg  {quiz} {toggleshowQuizDel}/>
-{/if}
 
 </div>
 

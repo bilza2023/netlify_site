@@ -10,8 +10,8 @@ import  Questions from './showQuestions/Questions.svelte';
 import  AddQuestionBar from './addQuestions/AddQuestionBar.svelte';
 import ToolBarEdit from './toolbar/ToolBarEdit.svelte';
 import ShowOne from './ShowOne.svelte';
-
-// import Loading from '$lib/cmp/Loading.svelte';
+ 
+import Loading from '$lib/cmp/Loading.svelte';
 import { loadApp } from "$lib/communicator/communicator";
 
 import { templatesStore , appLoadedStore} from '../appStore.js';
@@ -37,9 +37,6 @@ onMount(async ()=>{
       } 
         quizId = new URLSearchParams(location.search).get("quizId");
       template  = await $templatesStore.find(item => item._id === quizId);
-      // template = {...tmp};
- 
-      // console.log(template);
       //----------------------------------
     } catch (error) {
       // console.error(error);
@@ -57,6 +54,8 @@ const addMCQ = () => {
 <div class="bg-gray-800">
 
 <ToolBarEdit {template}   />
+
+
 <ShowOne  {template}/>
 
 

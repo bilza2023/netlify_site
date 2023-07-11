@@ -3,10 +3,7 @@ import Th from "$lib/cmp/Th.svelte";
 // import FormRow from "../FormRow.svelte";
 import { fade } from 'svelte/transition';
 
-import { quizStore } from './store';
-quizStore.subscribe(value => quiz = value);
-$: quiz = $quizStore;
-
+export let quiz;
 </script>
 
 {#if quiz}

@@ -6,7 +6,6 @@ import { toast } from '@zerodevx/svelte-toast';
 
 import PublishErrors from './PublishErrors.svelte';
 
-// import save from "./save";
 import ToolBar from '$lib/toolbar/ToolBar.svelte';
 import ToolBarBtn from '$lib/toolbar/ToolBarBtn.svelte';
 import LocalStorage from "../../../lib/communicator/localStorage";
@@ -20,17 +19,15 @@ export let template;
 
 
 const save = async ()=>{
-  // debugger;
+  console.log(template)
+  debugger;
  const resp = await Agent.update('template',{item: template});
 
   if (resp.ok) {
       const data = await resp.json();
       LocalStorage.updateTemplates();
-
       toast.push( "saved" );
   }else {
-      const data = await resp.json();
-
       toast.push( data.message );
   }
 
