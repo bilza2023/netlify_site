@@ -1,39 +1,47 @@
 <script>
 import { toast } from '@zerodevx/svelte-toast';
-import { BASE_URL } from '$lib/js/config.js';
+import Agent from "../../lib/communicator/Agent";
+import LocalStorage from '../../lib/communicator/localStorage';
 import { fade } from 'svelte/transition';
-import ajaxPost from '$lib/js/ajaxPost';
-import {showCloneStore} from "../store";
+import {templatesStore} from "../appStore";
+import {showCloneStore} from "./store.js";
+//////////////////////////////////////////////////
 
-export let quiz;
+export let template;
+let newPRojectName = "";
 
-  let newPRojectName = "";
+//////////////////////////////////////////////////
+const handler = async( )=>{
 
-const handler = async(quizType)=>{
+//////////////////////////////////////
 
-    const resp = await ajaxPost(`${BASE_URL}/template/create` , { title:"demo"});
+const resp = await Agent.create('template' , {title : 'clone'});
+  // debugger;
+  if (resp.ok){
+  const data  = await resp.json();
+  const item = {...template};
+  item._id = data.item._id;
+  item.title = newPRojectName;
+  // item.isNew = true;
+
+  const resp2 = await Agent.update('template' , {item});
   
-  if (resp.ok) {
-      const data = await resp.json();
-      const item = {...quiz};
-      item._id = data.item._id;
-      item.title = newPRojectName;
-      item.isNew = true;
-      //----------------------
-      const resp2 = await ajaxPost(`${BASE_URL}/template/update` , { item});
-              if (resp2.ok){
-              toast.push( "Cloned" );
-              showCloneStore.set(false);
-              newPRojectName = "";
-              }else {
-              toast.push( "failed to clone" );        
-              }
-  }else {
-      // const data = await resp.json();
-      toast.push( "failed to clone" );
-  }
+      if (resp2.ok){
+        const data = await resp2.json();
+        await templatesStore.update( curr =>{return [...curr,data.item]});
+        await LocalStorage.updateTemplates();
+        toast.push( "Cloned" );
 
-}
+        showCloneStore.set(false);
+        newPRojectName = "";
+
+      }else {
+      toast.push( "failed to clone" );        
+      }
+  }else {
+    toast.push( "failed to clone" );        
+  }
+}////function
 
 </script>
 <br/>
@@ -49,7 +57,7 @@ rounded-md border-2 border-white ">
 
 <br/>
 
-<button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={()=>handler("quiz")}>Clone</button>
+<button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 text-white font-bold py-2 px-4 rounded w-4/12 m-1" on:click={handler}>Clone</button>
 
 </div>
 </div>

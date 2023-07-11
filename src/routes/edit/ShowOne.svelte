@@ -2,7 +2,7 @@
 import { fade } from 'svelte/transition';
 import PublishErrors from './toolbar/PublishErrors.svelte';
 import {get} from 'svelte/store'
-// import Clone from "./Clone.svelte";
+import Clone from "./Clone.svelte";
 import MakeTest from "./MakeTest.svelte";
 import QuizDel from "./QuizDel.svelte";
 
@@ -34,7 +34,7 @@ $: showQuizDel = $showQuizDelStore;
 
 
 {#if showClone == true}
-  <h1>Clone</h1>
+  <Clone  {template}  />
 {/if}
 
 {#if showTest == true}
@@ -44,7 +44,6 @@ $: showQuizDel = $showQuizDelStore;
 
 {#if showQuizDel == true}
   <QuizDel  {template} />
-  <!-- <h1>QuizDel</h1> -->
 {/if}
 
 </div>

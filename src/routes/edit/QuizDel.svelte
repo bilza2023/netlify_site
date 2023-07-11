@@ -6,10 +6,11 @@ import {goto} from '$app/navigation';
 //  import { blur } from 'svelte/transition';
 //   import { scale } from 'svelte/transition';
 	// import { fly } from 'svelte/transition';
+import {templatesStore} from "../appStore";
 import {showQuizDelStore} from "./store";
 
 export let template;
-import Agent from "$lib/common/Agent";
+import Agent from "$lib/communicator/Agent";
 import LocalStorage from '../../lib/communicator/localStorage';
 
 const deleteQuiz = async ()=>{
@@ -19,14 +20,17 @@ const resp = await Agent.del('template',{id : template._id});
 
  // debugger;
       if (resp.ok == true){
-      const data = await resp.json();
-        toast.push('deleted');
+      // const data = await resp.json();
+      templatesStore.update(currentArray => {
+      return currentArray.filter(item => item._id !== template._id);
+      });
+
+      LocalStorage.updateTemplates();
         showQuizDelStore.set(false);
-        LocalStorage.updateTests();
         goto("/templates");
+        toast.push('deleted');
       }else {
       const data = await resp.json();
-      // debugger;
         toast.push(data.message);
       }
 }//del fn

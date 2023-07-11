@@ -2,6 +2,8 @@
 
 import { toast } from '@zerodevx/svelte-toast';
 import Agent from "../../lib/communicator/Agent";
+import LocalStorage from '$lib/communicator/localStorage';
+
 import {showNewTemplStore} from "./dashboardStore";
 import {templatesStore} from "../appStore";
 ////////////////////////////////////////////
@@ -22,12 +24,8 @@ const response = await Agent.create('template',{title :newPRojectName});
       // debugger;
       const data = await response.json();
       //the item that was updated is returned as item
-      await templatesStore.update( curr =>{return [...curr,data.item]})
-      //----update the localStorage
-      console.log( "updated" , templates);
-
-       localStorage.setItem('templates',{});
-       localStorage.setItem('templates', JSON.stringify( templates  ));
+      await templatesStore.update( curr =>{return [...curr,data.item]});
+      await LocalStorage.updateTemplates();
 
       showNewTemplStore.set(false);
       toast.push( "New Template Created" );
