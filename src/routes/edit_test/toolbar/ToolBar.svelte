@@ -24,7 +24,7 @@ function toggleshowQuizDel(){
 <div class="flex justify-between   items-center bg-gray-400 px-2  py-2 gap-2  ">
  
 <div class="flex gap-1">
-  <SaveBtn />  
+  <SaveBtn {test}/>  
   <DeleteBtn {toggleshowQuizDel} />
   
 </div>

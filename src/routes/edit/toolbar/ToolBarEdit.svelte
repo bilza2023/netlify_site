@@ -25,6 +25,7 @@ const save = async ()=>{
 
   if (resp.ok) {
       const data = await resp.json();
+      //The store is already updated just update localstorage
       LocalStorage.updateTemplates();
       toast.push( "saved" );
   }else {

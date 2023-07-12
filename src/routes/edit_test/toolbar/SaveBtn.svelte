@@ -1,28 +1,27 @@
 <script>
-import ajaxPost from '$lib/js/ajaxPost';
-import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
-import { testsStore } from '../../appStore';
+import Agent from '../../../lib/communicator/Agent';
+import LocalStorage from '../../../lib/communicator/localStorage';
 
-$: quiz = $testsStore;
+export let test;
 
 async function save( ){
-  // debugger;
-  //////////////////////////////////////
-    quizStore.update((currentQuiz) => {
-currentQuiz.publishObj.runStartTime = new Date();
-currentQuiz.publishObj.publishDate = new Date(currentQuiz.publishObj.publishDate);
-currentQuiz.publishObj.publishDate.setHours(currentQuiz.publishObj.hour);
-currentQuiz.publishObj.publishDate.setMinutes(currentQuiz.publishObj.min);
-    return currentQuiz;
-});
 
-  
-  // console.log("quiz",quiz);
-  // return;
-  const resp = await ajaxPost(`${BASE_URL}/test/save` ,{test : quiz} );
+  const item = {...test};
+
+  item.publishObj.runStartTime = new Date();
+  item.publishObj.publishDate = new Date(item.publishObj.publishDate);
+  item.publishObj.publishDate.setHours(item.publishObj.hour);
+  item.publishObj.publishDate.setMinutes(item.publishObj.min);
+
+  //================
+  // const resp = await ajaxPost(`${BASE_URL}/test/update` ,{item} );
+  const resp = await Agent.update('test',{item});
 
     if (resp.ok) {
+        const data = await resp.json();
+        //The store is already updated just update localstorage
+          LocalStorage.updateTests();
         toast.push( "Test saved" );
     }else {
         const data = await resp.json();

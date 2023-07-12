@@ -18,7 +18,7 @@ return item.name;
 <div class="flex flex-col w-full  justify-center">
 {#each members as member }
     <div class="flex w-full justify-center ">
-        <div class="w-10/12 p-1 m-1 text-center border-gray-500   bg-greenkw-900 border-b-2">{getName(member)}</div>
+        <div class="w-10/12 p-1 m-1 text-center border-gray-500   bg-green-900  border-b-2">{getName(member)}</div>
         <button on:click={()=>deSelectTeam(member)}
         class="border-2 border-gray-500 rounded-md p-1 m-1">
             <span>🗑️</span>
