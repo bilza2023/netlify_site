@@ -1,7 +1,7 @@
 <script>
 import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';  
 import QuizBlock from "./QuizBlock.svelte"; 
-import Teams from "./Teams.svelte";
+import Teams from "./teams/Teams.svelte";
 import QuestionsROM from "./QuestionsROM.svelte";
 import PulishTiming from "./PulishTiming.svelte";
 import UnPulishTiming from "./UnPulishTiming.svelte";
@@ -21,8 +21,9 @@ onMount(async ()=>{
   try {
          await loadApp();
        
-      const quizId = new URLSearchParams(location.search).get("quizId");
-      test  = await $testsStore.find(item => item._id === quizId);
+     const quizId = new URLSearchParams(location.search).get("quizId");
+     test  = await $testsStore.find(item => item._id === quizId);
+      //  console.log("test", test);
     // debugger; 
 
     } catch (error) {
@@ -51,7 +52,7 @@ onMount(async ()=>{
 <QuizBlock quiz={test}  />
 
 <br>
-<Teams />
+<Teams  {test}/>
 <br>
 <PulishTiming  quiz={test} />
 <br>
