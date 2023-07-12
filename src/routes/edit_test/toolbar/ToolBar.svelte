@@ -2,14 +2,14 @@
 
 ////////////-store variables--///////
 
-// import QuizDelDlg from "./QuizDelDlg.svelte";
-// import RunErrors from './runBtn/RunErrors.svelte';
+import QuizDelDlg from "./QuizDelDlg.svelte";
+import RunErrors from './runBtn/RunErrors.svelte';
 import RunBtn from './runBtn/RunBtn.svelte';
 import RunBtnDivs from './runBtn/RunBtnDivs.svelte';
 import SaveBtn from './SaveBtn.svelte';
 import AnalyticsBtn from './AnalyticsBtn.svelte';
 import DeleteBtn from './DeleteBtn.svelte';
-// import {showQuizDel} from "../store";
+import {showErrorsStore,showRunStore} from "../store";
 
 
 //-----------------
@@ -19,6 +19,7 @@ let showQuizDel = false;
 function toggleshowQuizDel(){
   showQuizDel = !showQuizDel;
 }
+
 </script>
 
 <div class="flex justify-between   items-center bg-gray-400 px-2  py-2 gap-2  ">
@@ -31,7 +32,7 @@ function toggleshowQuizDel(){
 
 
 <div class="flex gap-1">
-  <RunBtn />
+  <RunBtn {test}/>
 
 {#if test}  
   <AnalyticsBtn id={test._id} />
@@ -55,3 +56,14 @@ function toggleshowQuizDel(){
 
 
 <!-- 📱 -->
+
+{#if showQuizDel}
+<QuizDelDlg  {test}   {toggleshowQuizDel}/>
+{/if}
+{#if showErrorsStore}
+<RunErrors   />
+{/if}
+
+{#if showRunStore}
+<RunBtnDivs   />
+{/if}

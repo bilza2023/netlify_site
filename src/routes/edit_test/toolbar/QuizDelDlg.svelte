@@ -7,22 +7,29 @@ import {goto} from '$app/navigation';
 //  import { blur } from 'svelte/transition';
 //   import { scale } from 'svelte/transition';
 	// import { fly } from 'svelte/transition';
-export let quiz;
+import { testsStore } from "../../appStore";  
+import Agent from '../../../lib/communicator/Agent';
+import LocalStorage from '../../../lib/communicator/localStorage';
+
+export let test; 
 let visible = false;
 export let toggleshowQuizDel;
 
+/**
+ * deleting all results are not implemented nor have at the back end i stopped it from preventing deletion of results exist
+ */
 async function deleteAllResults (){
 //  const token = await localStorage.getItem("token");
-  const resp = await ajaxPost(`${BASE_URL}/result/deleteAll`,
-            {quizId : quiz._id} );
- if (resp.ok == true){
-      // const data = await resp.json();
-        toast.push("All responses were deleted"); 
-        // goto("/dashboard");
-      }else {
-      // const data = await resp.json();
-        toast.push("failed to delete responses");
-      }
+//   const resp = await ajaxPost(`${BASE_URL}/result/deleteAll`,
+//             {quizId : quiz._id} );
+//  if (resp.ok == true){
+//       // const data = await resp.json();
+//         toast.push("All responses were deleted"); 
+//         // goto("/dashboard");
+//       }else {
+//       // const data = await resp.json();
+//         toast.push("failed to delete responses");
+//       }
 
 
 }
@@ -30,12 +37,19 @@ async function deleteAllResults (){
 const deleteQuiz = async ()=>{
   // debugger;
   // const token = localStorage.getItem('token');
-  const resp = await ajaxPost(`${BASE_URL}/test/delete`,{id : quiz._id});
+  // const resp = await ajaxPost(`${BASE_URL}/test/delete`,{id : quiz._id});
+    const resp = await Agent.del('test',{id : test._id});
+
       if (resp.ok == true){
- debugger;
+        debugger;
       const data = await resp.json();
-        toast.push('deleted'); 
+       testsStore.update(currentArray => {
+      return currentArray.filter(item => item._id !== test._id);
+      });
+
+      LocalStorage.updateTests();
         goto("/tests");
+        toast.push('deleted'); 
       }else {
       const data = await resp.json();
         toast.push(data.message );
@@ -44,6 +58,8 @@ const deleteQuiz = async ()=>{
 
 
 </script>
+
+<br/>
 
 <div class="w-full p-2  text-center  bg-red-900 
 rounded-md border-2 border-gray-500   "

@@ -5,6 +5,9 @@ import { fade } from 'svelte/transition';
 import ajaxPost from "$lib/js/ajaxPost.js";
 import { BASE_URL } from '$lib/js/config.js';
 import { toast } from '@zerodevx/svelte-toast';
+import Agent from "$lib/communicator/Agent";
+import LocalStorage from '../../../../lib/communicator/localStorage';
+import { runsStore  } from "../../../appStore";
 
 import {showErrorsStore,showRunStore,errorsArrayStore} from "./store";
 
@@ -17,14 +20,20 @@ export let test;
 const run  = async ()=>{
 // debugger;
 // quizStore.update(currentQuiz => ({ ...currentQuiz, title: true }));
-const survey = {...test };
-survey.title = newName;
-survey.published = true;
-survey.createdAt =  new Date();
+const item = {...test };
+item.testId = test._id;
+item._id = null;
+item.title = newName;
+item.published = true;
+item.createdAt =  new Date();
 //////////////////////////////////////
-const resp = await ajaxPost(`${BASE_URL}/survey/save` ,{survey});
-  
+// const resp = await ajaxPost(`${BASE_URL}/survey/save` ,{survey});
+  const resp = await Agent.create('run',{item});
   if (resp.ok) {
+      const data = await response.json();
+      //the item that was updated is returned as item
+        runsStore.update( curr =>{return [...curr,data.item]});
+      LocalStorage.updateRuns(); 
       toast.push( "Test is Running now" );
   }else {
       // const data = await resp.json();

@@ -1,12 +1,7 @@
 <script>
   export let runs; 
   export let urlTag;
-  import Card from "./Card.svelte";
-// function ok(){
-//     debugger;
-// }
-// ok();
-
+  // import Card from "./Card.svelte";
 
 </script>
 
@@ -15,7 +10,8 @@
   <!-- {#if runs} -->
     <div class="px-28 ">
       {#each runs as run, index}
-        <Card {run} key={index} {urlTag} />
+        <!-- <Card {run} key={index} {urlTag} /> -->
+        <h1>{runs._id}</h1>
       {/each}
     </div>
     <br/>

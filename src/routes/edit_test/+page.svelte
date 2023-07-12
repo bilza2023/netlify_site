@@ -32,7 +32,7 @@ onMount(async ()=>{
 });
 /////////////////////////////////////////
 </script>
-
+<div class="w-full bg-gray-800">
 <Nav/>
 
 <ToolBar  {test}/>
@@ -77,7 +77,8 @@ onMount(async ()=>{
 
 
 <Footer />
-
+<!-- bg div just for gray color -->
+</div>
 
 <style>
 @media screen and (max-width: 640px) {

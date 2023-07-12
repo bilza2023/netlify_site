@@ -2,32 +2,37 @@
 
 import Nav from '$lib/nav/Nav.svelte';
 import Footer from '$lib/cmp/Footer.svelte';
-import RunningCards from "./running/RunningCards.svelte";
-import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';
-import { runsStore , appLoadedStore} from '../mainStore.js';
+import { onMount } from 'svelte';
+import loadApp from "../../lib/communicator/loadApp";
 
-//---------------------------------------------|
-$: runs = $runsStore;            //============| 
-$: appLoaded = $appLoadedStore; //=============| 
-//---------------------------------------------|
+// import RunningCards from "./running/RunningCards.svelte";
+import HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';
+import { runsStore } from '../appStore';
+
+$: runs = $runsStore;
 </script>
 <div class="bg-gray-800"><!--page div-->
 <Nav />
 
 <HdgWithIcon title="Running" , icon ="🏃‍♂️"/>
-{#if appLoaded}
 
+ 
 <div class="bg-gray-800 w-full text-white">
-    {#if runs}       
-     <!-- {#each runs as run }
-        <h1>{run.title}</h1>
-      {/each}     -->
-  <!-- <div>{runs}</div>   -->
-<RunningCards {runs} urlTag={"show"} />
-    {/if}
-</div>          
-{/if}
+  <div class="w-full bg-gray-800 text-white py-6  min-h-screen  justify-center">
 
+  <!-- {#if runs} -->
+    <div class="px-28 ">
+      {#each runs as run, index}
+        <!-- <Card {run} key={index} {urlTag} /> -->
+        <h1 class="text-white">{run.title}</h1>
+      {/each}
+    </div>
+    <br/>
+  <!-- {/if} -->
+
+</div>
+
+</div>          
 
 <Footer />
 </div>

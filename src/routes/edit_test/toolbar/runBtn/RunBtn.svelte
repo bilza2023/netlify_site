@@ -3,13 +3,14 @@ import checkBeforePub from './check/checkBeforePub.js';
 import {errorsArrayStore,showErrorsStore,showRunStore} from "./store.js";
 $:errorsArray = $errorsArrayStore;
 
+export let test;
 //////////////////\\\\\\\\\\\\\\\\\
 
 async function toogle( ) {
     showErrorsStore.set(false);
     showRunStore.set(false);
       // debugger;
-    const errors_Array =  checkBeforePub(quiz);
+    const errors_Array =  checkBeforePub(test);
     if (errors_Array.length !==0) {
           errorsArrayStore.set(errors_Array);
           showErrorsStore.set( true); //here
