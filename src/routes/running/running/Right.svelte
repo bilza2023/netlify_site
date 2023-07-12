@@ -1,9 +1,8 @@
 <script>
-import ajaxPost from "$lib/js/ajaxPost.js";
-import { BASE_URL } from '$lib/js/config.js';
+
+
 import { toast } from '@zerodevx/svelte-toast';
-// import getRunning from "../getRunning";
-import Agent from "$lib/common/Agent";
+import Agent from "../../../lib/communicator/Agent";
 
 
 

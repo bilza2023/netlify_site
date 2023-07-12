@@ -3,8 +3,6 @@ import Left from "./Left.svelte";
 import Right from "./Right.svelte";
 import Title from "./Title.svelte";
 export let run;
-export let urlTag;
-
 
 </script>
 <div class="flex w-full bg-gray-600 rounded-md p-2 m-1 

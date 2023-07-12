@@ -30,7 +30,7 @@ item.createdAt =  new Date();
 // const resp = await ajaxPost(`${BASE_URL}/survey/save` ,{survey});
   const resp = await Agent.create('run',{item});
   if (resp.ok) {
-      const data = await response.json();
+      const data = await resp.json();
       //the item that was updated is returned as item
         runsStore.update( curr =>{return [...curr,data.item]});
       LocalStorage.updateRuns(); 
