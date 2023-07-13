@@ -2,6 +2,7 @@
 
 import Loading from '$lib/cmp/Loading.svelte';
 import { onMount } from 'svelte';
+
 import { BASE_URL } from '../../lib/js/config.js';
 import {pageStateStore} from "./store";
 ///////////////////////////////////////////////////
@@ -30,7 +31,7 @@ onMount(async () => {
       });
   
     if (resp.ok) {
-        pageStateStore.set('showQuiz');
+        pageStateStore.set('loaded');
         const data = await resp.json();
         quiz = data.quiz;
         students = data.students;
@@ -46,7 +47,6 @@ onMount(async () => {
 }); 
 
 </script>
-
 
 <div class="wrapper w-full p-2 bg-gray-800 min-h-screen text-white ">
 

@@ -13,10 +13,10 @@ export let quiz;
 let cq = 0;
 
 const next = ()=>{
-  if (cq < questions.length-1){ // This is correct
+  if (cq < quiz.questions.length-1){ // This is correct
     cq += 1;
   }else {
-  cq = ( questions.length-1 );
+  cq = ( quiz.questions.length-1 );
   }
 }
 const prev = ()=>{
@@ -46,12 +46,7 @@ const prev = ()=>{
     {quiz.questions[cq].content}
   </h1>
 <br>
-
-         
-
-           <ShowQuestions  questions={quiz.questions} {cq}  />
-  
-
+      <ShowQuestions  questions={quiz.questions} {cq} />
   
 <Btns   questions={quiz.questions} {cq}  {quiz}  saveResponse={quiz.saveResponse} {next} {prev} />
 </div><!--flex box ends--->

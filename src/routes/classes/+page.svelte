@@ -12,7 +12,7 @@ import Loading from '$lib/cmp/Loading.svelte';
 
 
 
-import { classStore , appLoadedStore} from '../mainStore.js';
+import { classStore , appLoadedStore} from '../appStore';
 //-----------------------------------------------
 $: classObjs = $classStore; //===================== 
 $: appLoaded = $appLoadedStore; //===================== 
