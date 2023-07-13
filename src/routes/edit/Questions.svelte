@@ -1,7 +1,8 @@
 
 <script>
-import Mcq from "./showQuestions/mcqs/Mcq.svelte";
 
+
+import Mcq from "./showQuestions/mcqs/Mcq.svelte";
 function deleteQuestion(id){
 template.questions = template.questions.filter(q => q.id !== id);
 }
