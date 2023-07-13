@@ -9,27 +9,35 @@ import CardTitle from "$lib/flexPage/CardTitle.svelte";
 import CardIcon from "$lib/flexPage/CardIcon.svelte";
 import FlexBoxCard from "$lib/flexPage/FlexBoxCard.svelte";
 import FlexBoxDiv from "$lib/flexPage/FlexBoxDiv.svelte";
-import Loading from '$lib/cmp/Loading.svelte';
+// import Loading from '$lib/cmp/Loading.svelte';
+import { onMount } from 'svelte';
+import { loadApp } from "$lib/communicator/communicator";
 
-
-import { studentsStore , appLoadedStore} from '../mainStore.js';
+import { studentsStore } from '../appStore';
 //-----------------------------------------------
 $: students = $studentsStore; //===================== 
-$: appLoaded = $appLoadedStore; //===================== 
 //-----------------------------------------------
-
+ 
+onMount(async ()=>{
+  try {
+        // debugger;
+         await loadApp();
+  } catch (err){
+  toast.push('Failed to load app');
+  }
+  });         
 
 </script>
 
 <Nav/>
-
 
 <div class="wrapper bg-gray-800 text-white m-0 px-8  min-h-screen w-full">
 
 <HdgWithIcon title="Students"  icon ="👨‍🎓"/>
 
 <FlexBoxDiv>
-{#if appLoaded}
+
+
 {#each students as student }
 
   <FlexBoxCard bgColor='bg-blue-900' borderColor="border-blue-400" >
@@ -46,9 +54,6 @@ $: appLoaded = $appLoadedStore; //=====================
 </FlexBoxCard> 
 {/each}
 
-{:else}
-<Loading/> 
-{/if}
 </FlexBoxDiv>
 </div><!--wrapper-->
 <Footer />
