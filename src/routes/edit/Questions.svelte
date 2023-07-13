@@ -1,20 +1,12 @@
+
 <script>
-export let template;
 import Mcq from "./showQuestions/mcqs/Mcq.svelte";
 
 function deleteQuestion(id){
-// debugger;
-     template.questions = template.questions.filter(q => q.id !== id);
-     
+template.questions = template.questions.filter(q => q.id !== id);
 }
 
-// import InputText from "./inputQuestions/InputText.svelte";
-// import InputEmail from "./inputQuestions/InputEmail.svelte";
-// import InputPassword from "./inputQuestions/InputPassword.svelte";
-// import InputNumber from "./inputQuestions/InputNumber.svelte";
-// import InputUrl from "./inputQuestions/InputUrl.svelte";
-// import InputParagraph from "./inputQuestions/InputParagraph.svelte";
-// debugger;
+export let template;
 
 </script>
 
@@ -32,7 +24,7 @@ function deleteQuestion(id){
                 <Mcq 
                     {question}  
                     ser={index}
-                    {deleteQuestion}
+                    deleteQuestion={deleteQuestion}
                 />
             {/if}
                     <!--Inputs-->
