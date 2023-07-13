@@ -7,7 +7,7 @@ import {pageStateStore} from "./store";
 ///////////////////////////////////////////////////
 import LoginForm from './loginForm/LoginForm.svelte';
 import Goodbye from './goodbye/Goodbye.svelte';
-import ShowQuiz from './showQuiz/showQuiz.svelte';
+import ShowQuiz from './showQuiz/ShowQuiz.svelte';
 import Result from './result/Result.svelte';
 
 $: pageState = $pageStateStore;
