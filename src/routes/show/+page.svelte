@@ -2,7 +2,6 @@
 
 import Loading from '$lib/cmp/Loading.svelte';
 import { onMount } from 'svelte';
-
 import { BASE_URL } from '../../lib/js/config.js';
 import {pageStateStore} from "./store";
 ///////////////////////////////////////////////////

@@ -10,7 +10,7 @@ import {showErrorsStore,errorsArrayStore,showTestStore} from "./store";
   let newPRojectName = "";
 
 const handler = async(quizType)=>{
-// debugger;
+debugger;
   // showTestStore.set(false);return;
   const errorsArray = checkBeforePub(template);
   if (errorsArray.length > 0){
