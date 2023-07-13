@@ -1,6 +1,6 @@
 <script>
 export let template;
-import MCQ from "./mcqs/Mcq.svelte";
+import Mcq from "./showQuestions/mcqs/Mcq.svelte";
 
 function deleteQuestion(id){
 // debugger;
@@ -29,7 +29,7 @@ function deleteQuestion(id){
                     <!--MCQ-->
             
             {#if question.questionType == "SurveyMCQ"}
-                <MCQ 
+                <Mcq 
                     {question}  
                     ser={index}
                     {deleteQuestion}

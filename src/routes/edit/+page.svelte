@@ -6,7 +6,7 @@ import  HdgWithIcon from '$lib/cmp/HdgWithIcon.svelte';
 import  QuizBlock from './QuizBlock.svelte';  
 import  { toast } from '@zerodevx/svelte-toast';
 import  { onMount } from 'svelte';
-import  Questions from './showQuestions/Questions.svelte';
+import  Questions from './Questions.svelte';
 import  AddQuestionBar from './addQuestions/AddQuestionBar.svelte';
 import ToolBarEdit from './toolbar/ToolBarEdit.svelte';
 import ShowOne from './ShowOne.svelte';
