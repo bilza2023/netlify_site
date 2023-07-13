@@ -7,7 +7,7 @@ import {pageStateStore} from "./store";
 ///////////////////////////////////////////////////
 import LoginForm from './loginForm/LoginForm.svelte';
 import Goodbye from './goodbye/Goodbye.svelte';
-import ShowQuiz from './showQuiz/ShowQuiz.svelte';
+import ShowQuiz from './showQuiz/showQuiz.svelte';
 import Result from './result/Result.svelte';
 
 $: pageState = $pageStateStore;
@@ -30,7 +30,7 @@ onMount(async () => {
       });
   
     if (resp.ok) {
-        pageStateStore.set('loaded');
+        pageStateStore.set('showQuiz');
         const data = await resp.json();
         quiz = data.quiz;
         students = data.students;
@@ -59,8 +59,8 @@ onMount(async () => {
           
           <!-- //==showQuiz======-->    
             {#if pageState == 'showQuiz'}
-              <!-- <ShowQuiz {quiz} /> -->
-              <h1>ShowQuiz</h1>
+              <ShowQuiz {quiz} />
+              <!-- <h1>ShowQuiz</h1> -->
             {/if}
 
             <!-- //==result======-->  

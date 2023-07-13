@@ -1,7 +1,5 @@
 <script>
-import { quizStore  } from '../../store';
-
-$: questions = $quizStore.questions;
+export let  questions;
 
 export let cq;
 
@@ -26,14 +24,6 @@ const mark_selected = (option_id) => {
           questions[cq].selectedOptions.push(option_id);
         }
     }
-       // Update the store variable
-    quizStore.update(currentQuiz => ({
-      ...currentQuiz,
-      questions: [...currentQuiz.questions]
-    }));
-
-    // console.log(questions[cq].selectedOptions);  
-    // return currentQuiz;
 } 
 
 
