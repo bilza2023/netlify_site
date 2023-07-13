@@ -1,6 +1,6 @@
 <script>
 export let template;
-import MCQ from "./mcqs/MCQ.svelte";
+import MCQ from "./mcqs/Mcq.svelte";
 
 function deleteQuestion(id){
 // debugger;

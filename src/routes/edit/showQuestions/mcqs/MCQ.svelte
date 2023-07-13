@@ -1,7 +1,5 @@
 <script>
       
-      
-
 import FormRow from "$lib/form/FormRow.svelte";
 import TableHeadQuestion from "$lib/questionComps/TableHeadQuestion.svelte";
 import { fade } from 'svelte/transition';
@@ -9,7 +7,6 @@ import MultiSelectToggle from "./MultiSelectToggle.svelte";
 import Options from "./Options.svelte";
 
 ////---export
-
 export let question;
 export let deleteQuestion;
 export let ser;
