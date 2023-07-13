@@ -40,6 +40,7 @@ export default async function loadApp(){
  * @param {*} storeVariable : Variable where it is stored in store
  * @param {*} updateFn : Update local storage
  */
+ 
 async function uploadStore( itemName ,itemSlug, storeVariable , updateFn ){
 const stored = JSON.parse( localStorage.getItem( itemSlug ));
       if( stored == null || stored.length == 0 ){
